@@ -1,0 +1,61 @@
+{{!-- <link rel="stylesheet" href="/css/bootstrap.css"> --}}
+<link rel="stylesheet" href="/bootstrap-4.3.1/css/bootstrap.css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="/css/estilo1.css">
+
+<br><br><br>
+<div class="container p-4">
+{{!-- <link rel="stylesheet" href="/css/bootstrap.min.css"> --}}
+  {{#if message}}
+
+    <div class="row">
+        <div class="col-md-4 mx-auto">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{message}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+{{/if}}
+
+  <div class="row">
+
+    <div class="col-md-5 mx-auto">
+      <div class="card text-center">
+        <div class="card-header">
+          <h3 style="color:black">Recuperar Contraseña</h3>
+        </div>
+     
+        <div class="card-header">
+           <form action="/recuperar_contrasena" method="POST" onsubmit="return validar_correo();">
+             <img height="150" width="150" src="/img/correo.png" class="center ms">
+
+            <div class="inputWithIcon jorge4">
+                <input type="email" id="correo" name="correo" placeholder="Ingrese su correo electrónico" class="form-control" >
+                <i class="icon-email" aria-hidden="true"></i>
+            </div>
+
+            <button class="btn btn-warning btn-block  my-3">
+              Enviar
+            </button>
+             <a href="signin">Volver a Iniciar Sesión</a>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{{!-- <script>
+  alert(Math.)
+</script> --}}
+
+
+
+         
+
+        
+         

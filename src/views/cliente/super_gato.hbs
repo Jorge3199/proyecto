@@ -1,0 +1,943 @@
+   <link rel="stylesheet" href="css/bootstrap.css">
+		
+	<!-- CSS Files -->	
+	<link rel="stylesheet" href="css/reset.css" />
+	<link rel="stylesheet" href="css/animate.min.css" />
+	<link rel="stylesheet" href="css/grid.css" />
+	<link rel="stylesheet" href="css/base.css" />
+	<link rel="stylesheet" href="css/layout.css" />
+	<link rel="stylesheet" href="css/flexslider.css" />
+	<link rel="stylesheet" href="css/font-awesome.css" />
+	<link rel="stylesheet" href="css/prettyPhoto.css" />
+	<link rel="stylesheet" href="css/player/YTPlayer.css" />
+	<link rel="stylesheet" href="css/media-queries.css" />
+	
+
+	<!-- Color Options -->
+	<link id="color-options" rel="stylesheet" href="css/colors/green.css" />
+
+	<!-- Theme Options -->
+	<link id="theme-options" rel="stylesheet" href="css/theme/dark.css" />
+
+	<link rel="stylesheet" href="css/ventana.css" />
+
+<script>
+	var id_cliente = `{{user.id}}`;
+		
+</script>	
+    
+
+<!-- Page Loader -->
+	<section id="preloader">
+		<div class="loader fa fa-spin"></div>
+	</section>
+
+	<!-- Navigation -->
+	<section id="navigation" class="hide-nav">
+		<!-- Navigation Container -->
+		<div class="nav-container">
+
+			<!-- Site Logo -->
+			<a href="#home" class="site-logo scroll">Super Gato</a>
+
+			<a class="mobile-nav-button"><i class="fa fa-bars"></i></a>
+
+			<!-- Navigation Menu -->
+			<div class="nav-menu">
+				<ul class="nav">
+					<li><a href="#home" class="scroll link">Home</a></li>
+					<li><a href="#about" class="scroll link">About</a></li>
+					<li><a href="#services" class="scroll link">Services</a></li>
+					<li><a href="#portfolio" class="scroll link">Portfolio</a></li>
+					<li><a href="#pricing" class="scroll link">Pricing</a></li>
+					<li><a href="#team" class="scroll link">Team</a></li>
+					<li>
+						<a href="#blog" class="scroll link">Blog <i class="fa fa-chevron-down"></i></a>
+						<ul>
+							{{!-- <li><a href="blog-main.html">Blog Main</a></li>
+							<li><a href="blog-single.html">Blog Single</a></li> --}}
+							<li><a href="/pago">Pago</a></li>
+							<li><a href="/links/add">Agregar nuevo producto</a></li>
+							<li><a href="/signup">Agregar nuevo administrador</a></li>
+							<li><a href="/links/lista_de_producto">Lista de producto</a></li>
+							<li><a href="/cliente_logout">Cerrar Sesion</a></li>
+						</ul>
+					</li><!-- end drop down -->
+					<!--<li><a href="features.html" class="scroll link">Features</a></li>-->
+					<li><a href="#contact" class="scroll link">Contact</a></li>
+				</ul>
+			</div><!-- end nav menu -->
+		</div><!-- end nav container -->
+	</section><!-- end navigation section -->
+
+
+
+	<!-- Home Section -->
+	<section id="home" class="home parallax6"> 
+		<div id="slides" class="container header">
+			<!-- Site Logo -->
+			<span class="logo animated" data-animate="fadeInDown" data-animate-delay="300">Andare</span>
+			<!-- Text Slider -->
+			<div class="header-text">
+				<ul class="text-slider">
+					<li class="text-slides">CREEMOS EN EL <span class="color normal">BUEN DISEÑO</span></li>
+					<li class="text-slides">SOMOS <span class="color normal">BUENOS DISEÑADORES</span></li>
+					<li class="text-slides">HACEMOS <span class="color normal">DISEÑOS INCREÍBLES</span></li>
+				</ul>
+			</div><!-- end text slider -->
+			<!-- Social Media Links -->
+			<div class="social-media">
+				<h4>DIFUNDIR LA PALABRA</h4>
+				<ul class="social-links">
+					<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+					<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+					<li><a href="#"><i class="fa fa-vimeo-square"></i></a></li>
+					<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+					<li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+				</ul>
+			</div><!-- end social media links -->
+			<a href="#about" class="header-down-arrow scroll link"></a>
+		</div><!-- end header container -->
+	</section><!-- end home section -->
+
+
+
+	<!-- About Section -->
+	<section id="about" class="section">
+		<div class="container">
+			<h2 class="title">SOBRE EL TEMA ANDARE</h2>
+			<h4 class="subtitle">TODO LO QUE NECESITAS PARA TENER ESTILO EN UN LUGAR CONVENIENTE.</h4>
+				<div class="one-third column animated" data-animate="fadeInLeft" data-animate-delay="400">
+					<div class="icon-box"><i class="fa fa-eye fa-4x"></i></div>
+					<h5>DISEÑO LISTO PARA LA RETINA</h5>
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit, nihil, libero, tenetur perspiciatis eos provident laborum eum dignissimos est consectetur cupiditate tempore culpa adipisci nostrum incidunt obcaecati voluptatem architecto fuga.</div>
+				<div class="one-third column animated" data-animate="fadeIn" data-animate-delay="400">
+					<div class="icon-box"><i class="fa fa-mobile fa-4x"></i></div>
+					<h5>RESPONSIVE MOBILE FRIENDLY</h5>
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi, tenetur, culpa necessitatibus quibusdam quia assumenda fugiat eos dolores repudiandae voluptatem libero minus numquam cupiditate inventore excepturi. Temporibus accusantium fugiat optio!</div>
+				<div class="one-third column animated" data-animate="fadeInRight" data-animate-delay="400">
+					<div class="icon-box"><i class="fa fa-heart fa-4x"></i></div>
+					<h5>HAZLO TUYO</h5>
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo, eos ipsa quia laboriosam voluptatibus sit labore. Rerum, in temporibus. Dolor, ducimus, voluptas quidem ea laudantium doloribus quisquam doloremque fuga accusamus.</div>
+		</div><!-- end container -->
+	</section><!-- end about section -->
+
+	
+	
+	<!-- Testimonials -->
+	<section class="testimonials parallax1">
+
+	<!-- Callout Title -->
+	<section class="callout">
+		<div class="container">
+			<h3 class="animated" data-animate="fadeInDown" data-animate-delay="300">¡ESTO ES LO QUE DICEN NUESTROS <span class="color">CLIENTES !</span> </h3>
+		</div><!-- end container -->
+	</section><!-- end callout title -->
+
+		<div class="container">
+			<ul class="testimonial-slider">
+				<!-- Testimonial 1 -->
+				<li class="t-slide">
+					<h4>TODOS DISEÑAN QUIENES DISEÑAN <span class="color">CURSOS DE ACCIÓN</span> DIRIGIDOS A CAMBIAR LAS SITUACIONES EXISTENTES EN LAS PREFERIDAS. </h4>
+					<p>Herbert Simon</p>
+				</li>
+				<!-- Testimonial 2 -->
+				<li class="t-slide">
+					<h4>EL DISEÑO FUNCIONA SI ES AUTÉNTICO, ESTÁ INSPIRADO Y TIENE UN <span class="color">PUNTO DE VISTA</span> CLARO . NO PUEDE SER UNA COLECCIÓN DE ENTRADA.</h4>
+					<p>Ron Johnson</p>
+				</li>
+				<!-- Testimonial 3 -->
+				<li class="t-slide">
+					<h4>EL DISEÑO DE CADA ELEMENTO DEBE <span class="color">SER PENSADO</span> PARA QUE SEA FÁCIL DE HACER Y FÁCIL DE REPARAR.</h4>
+					<p>Leo Fender</p>
+				</li>
+			</ul><!-- end testimonials list -->
+		</div><!-- end container -->
+	</section><!-- end testimonials -->
+
+
+
+	<!-- Services Section -->
+	<section id="services" class="section">
+		<div class="container">
+			<h2 class="title">LO QUE ANDARE OFRECE</h2>
+			<h4 class="subtitle">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero, enim.</h4>
+			<div class="animated" data-animate="fadeInUp" data-animate-delay="400">
+				<img src="images/super_gato.png"  alt="Monitor Image" class="scale-with-grid mockup" title="There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which"  />
+			</div>
+		</div><!-- end container -->
+		
+		<section class="services-list parallax2">
+			<div class="container">
+				<div class="row">
+					<div class="four columns animated service-item" data-animate="fadeInLeft" data-animate-delay="300">
+						<i class="fa fa-wrench fa-3x tipped" data-title="An Awesome Tooltip!"></i>
+						<h5>FÁCIL DE PERSONALIZAR</h5>
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat, praesentium iure tenetur officia quisquam architecto ullam facere optio inventore rem.
+					</div>
+					<div class="four columns animated service-item" data-animate="fadeIn" data-animate-delay="300">
+						<i class="fa fa-tablet fa-3x tipped" data-title="An Awesome Tooltip!"></i>
+						<h5>TOTALMENTE RECEPTIVO</h5>
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa magnam provident delectus perspiciatis ut cumque quos maiores quae officiis magni.
+					</div>
+					<div class="four columns animated service-item" data-animate="fadeIn" data-animate-delay="300">
+						<i class="fa fa-table fa-3x tipped" data-title="An Awesome Tooltip!"></i>
+						<h5>DISEÑO BASADO EN CUADRÍCULA</h5>
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae, nam quaerat sit! Quasi magni esse fuga modi ex libero deserunt.
+					</div>
+					<div class="four columns animated service-item" data-animate="fadeInRight" data-animate-delay="300">
+						<i class="fa fa-html5 fa-3x tipped" data-title="An Awesome Tooltip!"></i>
+						<h5>HTML5 & CSS3</h5>
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa, ex nam dolorem nesciunt corporis quisquam saepe omnis sunt natus nostrum!
+					</div>
+				</div><!-- end row -->
+				<div class="row">
+					<div class="four columns animated service-item" data-animate="fadeInLeft" data-animate-delay="300">
+						<i class="fa fa-tint fa-3x tipped" data-title="An Awesome Tooltip!"></i>
+						<h5>CAMBIO DE COLOR FÁCIL</h5>
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat, praesentium iure tenetur officia quisquam architecto ullam facere optio inventore rem.
+					</div>
+					<div class="four columns animated service-item" data-animate="fadeIn" data-animate-delay="300">
+						<i class="fa fa-file-text fa-3x tipped" data-title="An Awesome Tooltip!"></i>
+						<h5>DISEÑO DE UNA PÁGINA</h5>
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa magnam provident delectus perspiciatis ut cumque quos maiores quae officiis magni.
+					</div>
+					<div class="four columns animated service-item" data-animate="fadeIn" data-animate-delay="300">
+						<i class="fa fa-code fa-3x tipped" data-title="An Awesome Tooltip!"></i>
+						<h5>CÓDIGO COMENTADO</h5>
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae, nam quaerat sit! Quasi magni esse fuga modi ex libero deserunt.
+					</div>
+					<div class="four columns animated service-item" data-animate="fadeInRight" data-animate-delay="300">
+						<i class="fa fa-rocket fa-3x tipped" data-title="An Awesome Tooltip!"></i>
+						<h5>TE HARÁ IMPRESIONANTE</h5>
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa, ex nam dolorem nesciunt corporis quisquam saepe omnis sunt natus nostrum!
+					</div>
+				</div><!-- end row -->
+			</div><!-- end container -->
+		</section><!-- end parallax section -->	
+	</section><!-- end services section-->
+
+         <script>
+                
+                
+				
+
+            </script>
+   
+
+{{!-- ///////////////////////////////////////////////////////////// --}}
+<script>
+   const productos = []
+   var n=0;
+</script>   
+{{!-- <div id="resultado">
+
+</div> --}}
+{{#each productos}}
+      
+         <script>
+           
+           productos[n] = { id: `{{id}}`, nombre: `{{nombre}}`, precio:`{{precio}}`, cantidad: `{{cantidad}}`, imagen:`{{imagen}}`};
+           n +=1;
+
+           
+         </script>
+     
+{{/each}}
+
+
+
+
+	<!-- Portfolio Section -->
+	<section id="portfolio" class="section">
+        
+		<div class="container" id="portfolio-title">
+			<h2 class="title">NUESTRO TRABAJO RECIENTE</h2>
+			<h4 class="subtitle">ECHA UN VISTAZO A UNA LISTA DE NUESTROS PROYECTOS FAVORITOS.</h4>
+		</div><!-- end portfolio title container -->
+
+			<!-- Project Expander -->
+			<div class="item-expander">
+				<div id="item-expander">
+					<p class="close-btn"><a class="close"></a></p>
+					<div class="expander-container"></div>
+				</div>
+			</div>
+		
+		<div class="container" id="portfolio-container">
+
+			<!-- Portfolio Filters -->
+			<div id="options" class="filter-menu">
+				<ul id="filters" class="option-set" data-option-key="filter">
+					<li><a href="#filter" data-option-value="*" class="selected">All</a></li>
+					<li><a href="#filter" data-option-value=".illustration">Illustration</a></li>
+					<li><a href="#filter" data-option-value=".photography">Photography</a></li>
+					<li><a href="#filter" data-option-value=".motion">Motion</a></li>
+					<li><a href="#filter" data-option-value=".web">Web</a></li>
+				</ul>
+			</div>
+
+           
+			<!-- Portfolio Items -->
+			{{!-- <div class="portfolio-items"> --}}
+                    {{!-- {{#each links}}  --}}
+
+					<div class="cart">
+                        <p ><a href="#openModal" onclick="carrito()"><img height="30" width="27" src="/img/carrito.png"></a><sup id="cantidad_producto" style="color:white">0</sup>RD&#36;&nbsp;&nbsp;<a href="#openModal" onclick="carrito()" id="total" class="total">0.00</a></p>
+                    </div>
+
+					      <div id="resultado22">
+							 
+						  </div>
+					 
+						  <div id="resultado">
+							 
+						  </div>
+						
+					 
+					{{!-- <div class="ventana" id="vent" >
+						 	
+					</div> --}}
+
+
+					{{!-- {{else}}
+						<div class="col-md-4 mx-auto">
+							<div class="card card-body text-center">
+								<a href="/img/logo.jpg"><img height="75" width="140" src="/img/logo.jpg"></a>
+								<h5>No hay ningun producto publicado todavia.</h5>
+								<a href="/links/add">!Crear uno!</a>
+							</div>
+						</div>
+					{{/each}} --}}
+
+
+                   
+
+					{{!-- <!-- Item 1 -->
+					<div class="item four columns illustration">
+						<a href="project-1.html" class="expander">
+							<img height="200" width="270" src="images/portfolio/project-1.jpg" alt="" />
+							<div class="mask"></div>
+							<h5>Poster Design</h5>
+						</a>
+					</div>
+					
+					<!-- Item 2 -->
+					<div class="item four columns photography">
+						<a href="project-2.html" class="expander">
+							<img height="200" width="270" src="images/portfolio/project-2.jpg" alt="" />
+							<div class="mask"></div>
+							<h5>Logo Illustration</h5>
+						</a>
+					</div>
+
+					<!-- Item 3 -->
+					<div class="item four columns web">
+						<a href="images/portfolio/project-3.jpg" data-rel="prettyPhoto">
+							<img height="200" width="270" src="images/portfolio/project-3.jpg" alt="" />
+							<div class="mask"></div>
+							<h5>Client Work</h5>
+						</a>
+					</div>
+
+					<!-- Item 4 -->
+					<div class="item four columns photography">
+						<a href="project-1.html" class="expander">
+							<img height="200" width="270" src="images/portfolio/project-4.jpg" alt="" />
+							<div class="mask"></div>
+							<h5>Personal Design</h5>
+						</a>
+					</div>
+
+					<!-- Item 5 -->
+					<div class="item four columns motion">
+						<a href="project-2.html" class="expander">
+							<img height="200" width="270" src="images/portfolio/project-5.jpg" alt="" />
+							<div class="mask"></div>
+							<h5>Poster Illustration</h5>
+						</a>
+					</div>
+
+					<!-- Item 6 -->
+					<div class="item four columns illustration">
+						<a href="images/portfolio/project-6.jpg" data-rel="prettyPhoto">
+							<img height="200" width="270" src="images/portfolio/project-6.jpg" alt="" />
+							<div class="mask"></div>
+							<h5>Logo Concept</h5>
+						</a>
+					</div>
+
+					<!-- Item 7 -->
+					<div class="item four columns web">
+						<a href="project-1.html" class="expander">
+							<img height="200" width="270" src="images/portfolio/project-7.jpg" alt="" />
+							<div class="mask"></div>
+							<h5>Lettering Work</h5>
+						</a>
+					</div>
+
+					<!-- Item 8 -->
+					<div class="item four columns illustration">
+						<a href="project-2.html" class="expander">
+							<img height="200" width="270" src="images/portfolio/project-8.jpg" alt="" />
+							<div class="mask"></div>
+							<h5>Personal Work</h5>
+						</a>
+					</div>
+
+					<!-- Item 9 -->
+					<div class="item four columns motion">
+						<a href="images/portfolio/project-9.jpg" data-rel="prettyPhoto">
+							<img height="200" width="270" src="images/portfolio/project-9.jpg" alt="" />
+							<div class="mask"></div>
+							<h5>Poster Illustration</h5>
+						</a>
+					</div>
+
+					<!-- Item 10 -->
+					<div class="item four columns illustration">
+						<a href="project-1.html" class="expander">
+							<img height="200" width="270" src="images/portfolio/project-10.jpg" alt="" />
+							<div class="mask"></div>
+							<h5>Logo Concept</h5>
+						</a>
+					</div>
+
+					<!-- Item 11 -->
+					<div class="item four columns web">
+						<a href="project-2.html" class="expander">
+							<img height="200" width="270" src="images/portfolio/project-11.jpg" alt="" />
+							<div class="mask"></div>
+							<h5>Lettering Work</h5>
+						</a>
+					</div>
+
+					<!-- Item 12 -->
+					<div class="item four columns illustration">
+						<a href="images/portfolio/project-12.jpg" data-rel="prettyPhoto">
+							<img height="200" width="270" src="images/portfolio/project-12.jpg" alt="" />
+							<div class="mask"></div>
+							<h5>Personal Work</h5>
+						</a>
+					</div> --}}
+
+			{{!-- </div><!-- end portfolio items --> --}}
+		</div><!-- end container -->
+	</section><!-- end portfolio section -->
+
+   
+	<section class="paginacion">
+		 <div id="options1" class="filter-menu">
+				<ul class="option-set" >
+					<ul id="paginacion" class="pagination pagination-md">
+			
+					</ul>	
+				</ul>
+			</div>
+		
+	</section>
+
+   
+
+	<!-- Counter -->
+	<section  class="counter parallax3">
+
+	<!-- Callout Title -->
+	<section class="callout">
+		<div class="container">
+			<h3 class="animated" data-animate="fadeInDown" data-animate-delay="300">ANDARE POR LOS <span class="color">NÚMEROS!</span></h3>
+		</div><!-- end container -->
+	</section><!-- end callout title -->
+
+		<div class="container">
+
+				<!-- Counter Column -->
+				<div class="four columns">
+					<div class="icon-box"><i class="fa fa-flag-o fa-4x"></i></div>
+					<div class="count" data-to="354">
+						<h1 class="count-number"></h1>
+						<h5>PROYECTOS <span class="color">COMPLETADOS</span></h5>
+					</div><!-- end counter data -->
+				</div><!-- end counter column -->
+
+				<!-- Counter Column -->
+				<div class="four columns">
+					<div class="icon-box"><i class="fa fa-smile-o fa-4x"></i></div>
+					<div class="count" data-to="203">
+						<h1 class="count-number"></h1>
+						<h5><span class="color">CLIENTES</span> FELICES</h5>
+					</div><!-- end counter data -->
+				</div><!-- end counter column -->
+
+				<!-- Counter Column -->
+				<div class="four columns">
+					<div class="icon-box"><i class="fa fa-comments-o fa-4x"></i></div>
+					<div class="count" data-to="467">
+						<h1 class="count-number"></h1>
+						<h5><span class="color">SESIONES DE</span> LLUVIA DE IDEAS</h5>
+					</div><!-- end counter data -->
+				</div><!-- end counter column -->
+
+				<!-- Counter Column -->
+				<div class="four columns">
+					<div class="icon-box"><i class="fa fa-envelope-o fa-4x"></i></div>
+					<div class="count" data-to="647">
+						<h1 class="count-number"></h1>
+						<h5>CORREOS ELECTRÓNICOS <span class="color">INTERCAMBIADOS</span></h5>
+					</div><!-- end counter data -->
+				</div><!-- end counter column -->
+
+		</div><!-- end container -->
+	</section><!-- end counter -->
+
+
+
+	<!-- Pricing Section -->
+	<section id="pricing" class="section">
+		<div class="container">
+			<h2 class="title">TENEMOS UN PRECIO ADECUADO PARA USTED</h2>
+			<h4 class="subtitle">NUESTROS PLANES SON VERSÁTILES Y ASEQUIBLES.</h4>
+				
+				<!-- Pricing Table -->
+				<div class="one-third column price-table animated" data-animate="fadeInLeft" data-animate-delay="400">
+					<h4>ESTÁNDAR</h4>
+					<div class="price-table-container">
+						<div class="price"><span class="dollar">$</span>9.95</div>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia, vel, veritatis porro praesentium iste vero.</p>
+						<ul>
+							<li class="tipped" data-title="Lorem ipsum dolor sit amet">REVISIÓN DE <span class="color">MARCA</span></li>
+							<li class="tipped" data-title="Mollitia vel veritatis porro">DISEÑO DE <span class="color">INTERFCE</span></li>
+							<li class="tipped" data-title="Lorem ipsum dolor sit amet">TABLEROS DE LA <span class="color">HISTORIA</span></li>
+							<li class="tipped" data-title="Mollitia vel veritatis porro">Marketing <span class="color">Social</span></li>
+							<li class="tipped" data-title="Lorem ipsum dolor sit amet">PLANES DE <span class="color">ALOJAMIENTO</span></li>
+						</ul>
+					</div><!-- end price table container -->
+					<a href="#" class="price-button">Regístrate Ahora</a>
+				</div><!-- end price table -->
+				
+				<!-- Pricing Table -->
+				<div class="one-third column price-table animated" data-animate="fadeIn" data-animate-delay="400">
+					<h4 class="selected">PROFESIONAL</h4>
+					<div class="price-table-container">
+						<div class="price"><span class="dollar">$</span>19.95</div>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia, vel, veritatis porro praesentium iste vero.</p>
+						<ul>
+							<li class="tipped" data-title="Lorem ipsum dolor sit amet">REVISIÓN DE <span class="color">MARCA</span></li>
+							<li class="tipped" data-title="Mollitia vel veritatis porro">DISEÑO DE <span class="color">INTERFCE</span></li>
+							<li class="tipped" data-title="Lorem ipsum dolor sit amet">TABLEROS DE LA <span class="color">HISTORIA</span></li>
+							<li class="tipped" data-title="Mollitia vel veritatis porro">Marketing <span class="color">Social</span></li>
+							<li class="tipped" data-title="Lorem ipsum dolor sit amet">PLANES DE <span class="color">ALOJAMIENTO</span></li>
+						</ul>
+					</div><!-- end price table container -->
+					<a href="#" class="price-button selected">Regístrate Ahora</a>
+				</div><!-- end price table -->
+				
+				<!-- Pricing Table -->
+				<div class="one-third column price-table animated" data-animate="fadeInRight" data-animate-delay="400">
+					<h4>NEGOCIO</h4>
+					<div class="price-table-container">
+						<div class="price"><span class="dollar">$</span>29.95</div>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia, vel, veritatis porro praesentium iste vero.</p>
+						<ul>
+							<li class="tipped" data-title="Lorem ipsum dolor sit amet">REVISIÓN DE <span class="color">MARCA</span></li>
+							<li class="tipped" data-title="Mollitia vel veritatis porro">DISEÑO DE <span class="color">INTERFCE</span></li>
+							<li class="tipped" data-title="Lorem ipsum dolor sit amet">TABLEROS DE LA <span class="color">HISTORIA</span></li>
+							<li class="tipped" data-title="Mollitia vel veritatis porro">Marketing <span class="color">Social</span></li>
+							<li class="tipped" data-title="Lorem ipsum dolor sit amet">PLANES DE <span class="color">ALOJAMIENTO</span></li>
+						</ul>
+					</div><!-- end price table container -->
+					<a href="#" class="price-button">Regístrate Ahora</a>
+				</div><!-- end price table -->
+
+		</div><!-- end container -->
+	</section><!-- end pricing section -->
+
+	<section id="accordion" class="section accordion parallax4" style="background-size: 100% 110%">
+		<div class="container">
+
+			<div class="eight columns animated" data-animate="fadeInLeft" data-animate-delay="400">
+				<img src="images/imonitor-2.png" alt="iPad Image" class="scale-with-grid mockup" />
+			</div><!-- end ipad mockup -->
+
+			<div class="eight columns accordion-container">
+				<h2 class="title">VAS A CAVAR ANDARE</h2>
+				<h4 class="subtitle">HE AQUÍ POR QUÉ PENSAMOS ESO</h4>
+
+				<div class="accordion-button"><i class="fa fa-arrow-circle-o-down fa-lg"></i>ANDARE ES FLEXIBLE</div>
+				<div class="accordion-content active">
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto, fugit, dolores, ea non harum molestias tempore earum obcaecati omnis praesentium corrupti recusandae assumenda molestiae autem?</p>
+
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi, quos, porro consectetur nobis officia sequi voluptate eveniet hic quam minima ex soluta repellendus laboriosam molestias nam ratione culpa sunt error ad inventore repudiandae amet quasi illo neque blanditiis! Totam, architecto.</p>
+				</div>
+
+				<div class="accordion-button"><i class="fa fa-arrow-circle-o-right fa-lg"></i>UN TEMA SIMPLEMENTE INCREÍBLE</div>
+				<div class="accordion-content">
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi, quos, porro consectetur nobis officia sequi voluptate eveniet hic quam minima ex soluta repellendus laboriosam molestias nam ratione culpa sunt error ad inventore repudiandae amet quasi illo neque blanditiis! Totam, architecto.
+				</div>
+
+				<div class="accordion-button"><i class="fa fa-arrow-circle-o-right fa-lg"></i>MUCHAS OPCIONES DE DONDE ESCOGER</div>
+				<div class="accordion-content">
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt, explicabo, impedit, aliquid inventore quia fugiat et illo doloribus illum beatae provident temporibus dicta eligendi quod soluta labore quaerat cupiditate magni repellendus incidunt veniam aspernatur eius?
+				</div>
+
+				<div class="accordion-button"><i class="fa fa-arrow-circle-o-right fa-lg"></i>CLIENTES FELICES HACEN LA VIDA MÁS FÁCIL</div>
+				<div class="accordion-content">
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda, vitae, natus illo officia inventore et tempora eum at nisi pariatur beatae earum temporibus unde ipsum quae odio blanditiis dolorum voluptatum eligendi porro accusantium nesciunt doloribus quo aut qui. Iste, soluta beatae dolore repellat deserunt eligendi in impedit eius recusandae dolorem magni cupiditate ad commodi laboriosam corporis atque ullam quod dolor!
+				</div>
+			</div><!-- end eight col accordion section -->
+
+		</div><!-- end container -->
+	</section><!-- end accordion section -->
+
+
+
+	<section id="team" class="section">
+		<div class="container">
+			<h2 class="title">NUESTRO EQUIPO CREATIVO</h2>
+			<h4 class="subtitle">DISEÑAMOS CÍRCULOS A NUESTRO ALREDEDOR</h4>
+
+			<div class="four columns team">
+				<div class="team-photo">
+					<img src="images/team-1.jpg" alt="" class="scale-with-grid">
+					<div class="mask"></div>
+					<h5>Connet with Jane</h5>
+					<ul class="team-social-links">
+						<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+						<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+						<li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+						<li><a href="#"><i class="fa fa-instagram"></i></a></li>
+						<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+					</ul>
+				</div><!-- end team photo -->
+
+				<h4>Jane Donaven</h4>
+				<h6>DESARROLLADOR UI</h6>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem, adipisci quasi quod fugiat obcaecati! Mollitia amet ducimus ipsa consequuntur similique.</p>
+
+				<div class="skillbar clearfix " data-percent="80%">
+					<div class="skillbar-title"><span>HTML5</span></div>
+					<div class="skillbar-bar"></div>
+					<div class="skill-bar-percent">80%</div>
+				</div> <!-- end skill bar -->
+
+				<div class="skillbar clearfix " data-percent="95%">
+					<div class="skillbar-title"><span>CSS3</span></div>
+					<div class="skillbar-bar"></div>
+					<div class="skill-bar-percent">95%</div>
+				</div> <!-- end skill bar -->
+
+				<div class="skillbar clearfix " data-percent="63%">
+					<div class="skillbar-title"><span>Photoshop</span></div>
+					<div class="skillbar-bar"></div>
+					<div class="skill-bar-percent">63%</div>
+				</div> <!-- end skill bar -->
+
+			</div><!-- end team column -->
+
+			<div class="four columns team">
+				<div class="team-photo">
+					<img src="images/team-2.jpg" alt="" class="scale-with-grid">
+					<div class="mask"></div>
+					<h5>Connect with Jonathan</h5>
+					<ul class="team-social-links">
+						<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+						<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+						<li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+						<li><a href="#"><i class="fa fa-instagram"></i></a></li>
+						<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+					</ul>
+				</div><!-- end team photo -->
+
+				<h4>Jonathan Smith</h4>
+				<h6>DISEÑADOR</h6>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem, adipisci quasi quod fugiat obcaecati! Mollitia amet ducimus ipsa consequuntur similique.</p>
+
+				<div class="skillbar clearfix " data-percent="60%">
+					<div class="skillbar-title"><span>HTML5</span></div>
+					<div class="skillbar-bar"></div>
+					<div class="skill-bar-percent">60%</div>
+				</div> <!-- end skill bar -->
+
+				<div class="skillbar clearfix " data-percent="75%">
+					<div class="skillbar-title"><span>CSS3</span></div>
+					<div class="skillbar-bar"></div>
+					<div class="skill-bar-percent">75%</div>
+				</div> <!-- end skill bar -->
+
+				<div class="skillbar clearfix " data-percent="84%">
+					<div class="skillbar-title"><span>Photoshop</span></div>
+					<div class="skillbar-bar"></div>
+					<div class="skill-bar-percent">84%</div>
+				</div> <!-- end skill bar -->
+
+			</div><!-- end team column -->
+
+			<div class="four columns team">
+				<div class="team-photo">
+					<img src="images/team-3.jpg" alt="" class="scale-with-grid">
+					<div class="mask"></div>
+					<h5>Connect with Sam</h5>
+					<ul class="team-social-links">
+						<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+						<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+						<li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+						<li><a href="#"><i class="fa fa-instagram"></i></a></li>
+						<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+					</ul>
+				</div><!-- end team photo -->
+
+				<h4>Sam Davidson</h4>
+				<h6>PROGRAMADOR</h6>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem, adipisci quasi quod fugiat obcaecati! Mollitia amet ducimus ipsa consequuntur similique.</p>
+
+				<div class="skillbar clearfix " data-percent="87%">
+					<div class="skillbar-title"><span>HTML5</span></div>
+					<div class="skillbar-bar"></div>
+					<div class="skill-bar-percent">87%</div>
+				</div> <!-- end skill bar -->
+
+				<div class="skillbar clearfix " data-percent="54%">
+					<div class="skillbar-title"><span>Javascript</span></div>
+					<div class="skillbar-bar"></div>
+					<div class="skill-bar-percent">54%</div>
+				</div> <!-- end skill bar -->
+
+				<div class="skillbar clearfix " data-percent="72%">
+					<div class="skillbar-title"><span>PHP</span></div>
+					<div class="skillbar-bar"></div>
+					<div class="skill-bar-percent">72%</div>
+				</div> <!-- end skill bar -->
+
+			</div><!-- end team column -->
+
+			<div class="four columns team">
+				<div class="team-photo">
+					<img src="images/team-4.jpg" alt="" class="scale-with-grid">
+					<div class="mask"></div>
+					<h5>Connect with Kelly</h5>
+					<ul class="team-social-links">
+						<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+						<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+						<li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+						<li><a href="#"><i class="fa fa-instagram"></i></a></li>
+						<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+					</ul>
+				</div><!-- end team photo -->
+
+				<h4>Kelly Johnson</h4>
+				<h6>DESARROLLADOR UX</h6>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem, adipisci quasi quod fugiat obcaecati! Mollitia amet ducimus ipsa consequuntur similique.</p>
+
+				<div class="skillbar clearfix " data-percent="54%">
+					<div class="skillbar-title"><span>HTML5</span></div>
+					<div class="skillbar-bar"></div>
+					<div class="skill-bar-percent">54%</div>
+				</div> <!-- end skill bar -->
+
+				<div class="skillbar clearfix " data-percent="62%">
+					<div class="skillbar-title"><span>CSS3</span></div>
+					<div class="skillbar-bar"></div>
+					<div class="skill-bar-percent">62%</div>
+				</div> <!-- end skill bar -->
+
+				<div class="skillbar clearfix " data-percent="63%">
+					<div class="skillbar-title"><span>Javascript</span></div>
+					<div class="skillbar-bar"></div>
+					<div class="skill-bar-percent">63%</div>
+				</div> <!-- end skill bar -->
+
+			</div><!-- end team column -->
+
+		</div><!-- end container -->
+	</section><!-- end team section -->
+
+
+
+	{{!-- <section id="video" class="full-video">
+		<div class="video-msg">
+			<h1>SOMOS INCREIBLES</h1>
+			<a href="#about" class="button scroll">AVERIGUA PORQUE</a>
+		</div><!-- end video message -->
+
+		<div id="P1" class="player video-container" data-property="{videoURL:'https://www.youtube.com/watch?v=xe3e5tv7xNM',containment:'#video', autoPlay:true, showControls:false, mute:true, startAt:0, opacity:1}"></div><!-- end video container -->
+	</section><!-- end video section --> --}}
+
+
+
+	<section id="blog" class="section">
+		<div class="container">
+			<h2 class="title">SIEMPRE ESTAMOS HACIENDO ALGO GENIAL</h2>
+			<h4 class="subtitle">MIRA LO ÚLTIMO DE NUESTRO BLOG</h4>
+
+			<div class="one-third column post-preview animated" data-animate="fadeInLeft" data-animate-delay="400">
+				<a href="#" class="post-img">
+					<img src="images/blog-1.jpg" alt="" class="scale-with-grid">
+					<div class="mask"></div>
+					<h5>LEE EL ARTICULO COMPLETO</h5>
+				</a><!-- end post image -->
+				<a href="#" class="post-title">Un día en la vida de un diseñador tiene mucha libertad</a>
+				<ul class="post-meta">
+					<li><i class="fa fa-user"></i> <a href="#">John Doe</a></li>
+					<li><i class="fa fa-calendar"></i> 10/15/2015</li>
+					<li><i class="fa fa-comments"></i> <a href="#">3</a> comments</li>
+				</ul><!-- end post meta -->
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga, deserunt ut consequuntur est ea dolore accusantium illo consequatur quos laudantium eum doloribus reprehenderit at? Veniam, obcaecati, facilis, ad, nihil sit eaque minus fugiat magnam perspiciatis quia rem quae consequuntur sint cumque iste.</p>
+				<a href="#">Lee mas &raquo;</a>
+			</div><!-- end post preview -->
+
+			<div class="one-third column post-preview animated" data-animate="fadeIn" data-animate-delay="400">
+				<a href="#" class="post-img">
+					<img src="images/blog-2.jpg" alt="" class="scale-with-grid">
+					<div class="mask"></div>
+					<h5>LEE EL ARTICULO COMPLETO</h5>
+				</a><!-- end post image -->
+				<a href="#" class="post-title">Subir la escalera de la vida es de lo que se trata</a>
+				<ul class="post-meta">
+					<li><i class="fa fa-user"></i> <a href="#">John Doe</a></li>
+					<li><i class="fa fa-calendar"></i> 10/15/2015</li>
+					<li><i class="fa fa-comments"></i> <a href="#">3</a> comments</li>
+				</ul><!-- end post meta -->
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga, deserunt ut consequuntur est ea dolore accusantium illo consequatur quos laudantium eum doloribus reprehenderit at? Veniam, obcaecati, facilis, ad, nihil sit eaque minus fugiat magnam perspiciatis quia rem quae consequuntur sint cumque iste.</p>
+				<a href="#">Lee mas &raquo;</a>
+			</div><!-- end post preview -->
+
+			<div class="one-third column post-preview animated" data-animate="fadeInRight" data-animate-delay="400">
+				<a href="#" class="post-img">
+					<img src="images/blog-3.jpg" alt="" class="scale-with-grid">
+					<div class="mask"></div>
+					<h5>LEE EL ARTICULO COMPLETO</h5>
+				</a><!-- end post image -->
+				<a href="#" class="post-title">Las llamadas de los clientes son siempre una prioridad principal No importa qué</a>
+				<ul class="post-meta">
+					<li><i class="fa fa-user"></i> <a href="#">John Doe</a></li>
+					<li><i class="fa fa-calendar"></i> 10/15/2015</li>
+					<li><i class="fa fa-comments"></i> <a href="#">3</a> comments</li>
+				</ul><!-- end post meta -->
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga, deserunt ut consequuntur est ea dolore accusantium illo consequatur quos laudantium eum doloribus reprehenderit at? Veniam, obcaecati, facilis, ad, nihil sit eaque minus fugiat magnam perspiciatis quia rem quae consequuntur sint cumque iste.</p>
+				<a href="#">Lee mas &raquo;</a>
+			</div><!-- end post preview -->
+
+			<div class="row full-blog-link">
+				<a href="#" class="button">Lee nuestro blog completo</a> 
+			</div>
+			
+		</div><!-- end container -->
+	</section><!-- end blog section -->
+
+
+
+	<section class="static-testimonial parallax5" style="background-size: 100% 100%">
+		<div class="container">
+			<blockquote>
+				<i class="fa fa-quote-left"></i>
+				<i class="fa fa-quote-right"></i>
+				El color no agrega una calidad agradable al diseño, lo refuerza.
+				<span>Pierre Bonnard</span>
+			</blockquote><!-- end quote -->
+		</div><!-- end container -->
+
+		<section class="client-logos">
+			<div class="container clients">
+				<ul>
+					<li class="two columns"><img src="images/client-logo-1.png" alt="" class="scale-with-grid"></li>
+					<li class="two columns"><img src="images/client-logo-2.png" alt="" class="scale-with-grid"></li>
+					<li class="two columns"><img src="images/client-logo-3.png" alt="" class="scale-with-grid"></li>
+					<li class="two columns"><img src="images/client-logo-4.png" alt="" class="scale-with-grid"></li>
+					<li class="two columns"><img src="images/client-logo-5.png" alt="" class="scale-with-grid"></li>
+					<li class="two columns"><img src="images/client-logo-6.png" alt="" class="scale-with-grid"></li>
+					<li class="two columns"><img src="images/client-logo-7.png" alt="" class="scale-with-grid"></li>
+					<li class="two columns"><img src="images/client-logo-8.png" alt="" class="scale-with-grid"></li>
+				</ul>
+			</div>
+		</section><!-- end client logo section -->
+	</section><!-- end static testimonial section -->
+
+
+
+
+	<section id="contact" class="section">
+		<div class="container">
+
+			<h2 class="title">NO HAY MEJOR MOMENTO QUE AHORA</h2>
+			<h4 class="subtitle">PÓNGASE EN CONTACTO, TRABAJEMOS JUNTOS</h4>
+			
+			<div class="contact-form">
+				
+				<div class="error-container">
+					<span class="error" id="error-name">Please enter your name</span>
+					<span class="error" id="error-email">Please enter your email</span>
+					<span class="error" id="error-valid-email">Your e-mail is not a valid format</span>
+					<span class="error" id="error-valid-phone">Your phone number is not a valid format</span>
+					<span class="error" id="error-timedout">The email submission timed out. Please try again.</span>
+					<span class="error" id="error-state">Oops! An error occurred. Please try again later.</span>
+					<span class="success" id="email-success">Message received! Thank you.</span>
+				</div><!-- end error messages -->
+
+				<form id="contact-us" method="post" action="php/mail.php">
+					
+					<div class="eight columns animated" data-animate="fadeInLeft" data-animate-delay="400">
+						<input type="text" name="name" id="name" required="required" placeholder="Name" />
+						<input type="email" name="email" id="email" required="required" placeholder="Email" />
+						<input type="text" name="phone" id="phone" placeholder="Phone" />
+					</div>
+
+					<div class="eight columns animated" data-animate="fadeInRight" data-animate-delay="400">
+					<textarea name="message" id="message" placeholder="Message"></textarea>
+					</div>
+
+					<button type="submit" id="submit" name="submit">ENVIAR MENSAJE</button> 
+				</form>
+			</div><!-- end contact form -->
+
+		</div><!-- end container -->
+	</section><!-- end contact section -->
+
+		
+	<!-- Google Map -->
+	{{!-- <section id="map" class="section">
+
+		<!-- Callout Title -->
+		<section class="callout">
+		<div class="container">
+			<h3 class="animated" data-animate="fadeInDown" data-animate-delay="300">¡VEN A <span class="color">VERNOS!</span></h3>
+		</div><!-- end container -->
+		</section><!-- end callout title -->
+
+		<div id="google-map"></div>
+	</section><!-- end map section --> --}}
+
+
+
+	<section id="footer-top" class="section">
+		<div class="container">
+			<ul class="social-links">
+					<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+					<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+					<li><a href="#"><i class="fa fa-vimeo-square"></i></a></li>
+					<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+					<li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+				</ul><!-- end social links -->
+			800.123.4567 | <a href="#">info@andaredomain.com</a><br />
+			123 East Main Austin, Texas 12345
+		</div><!-- end container -->
+	</section><!-- end footer top section -->
+
+	<section id="footer-bottom" class="section">
+		<div class="container">
+			<a href="#home" class="scroll button-to-top">
+					<i class="fa fa-angle-double-up"></i>
+				</a>
+			<h2>Andare</h2>
+			<p><span class="color">Hecho en los Estados Unidos.</span><br /> 
+				&copy; 2018 Todos los derechos reservados.</p>
+		</div><!-- end container -->
+	</section><!-- end footer bottom section -->
+
+{{!-- ///////////////////////////////////////////////////////////////////////////////////////// --}}
+
+<script type="text/javascript" src="js/paginacion.js"></script>
+{{!-- <script type="text/javascript" src="js/cliente.js"></script> --}}
+<script type="text/javascript" src="js/super_gato.js"></script>
+<script type="text/javascript" src="js/ventana.js"></script>
+{{!-- <a href="javascript:cerrar()"><img width="20" height="20" src="img/cancel.png" ></a> --}}
+

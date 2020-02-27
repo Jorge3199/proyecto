@@ -1,0 +1,284 @@
+body{
+    background: rgb(24, 25, 31);
+}
+
+/* a img {
+    width: 90px;
+    height: 80px;
+} */
+
+.imagen{
+  width: 481px;
+  height: 294px;
+  
+}
+
+
+/* //////////////////[type=text]//////////////// */
+input[type=text]:focus{
+    border-color: dodgerblue;
+    box-shadow: 0 0 8px 0 dodgerblue;
+}
+
+.inputWithIcon input[type=text]{
+    padding-left: 40px;
+}
+
+.inputWithIcon{
+    position: relative;
+}
+
+.inputWithIcon i{
+    position: absolute;
+    left: 0;
+    top: 1px;
+    padding: 9px 8px;
+    color: #aaa;
+    transition: .3s;
+}
+
+.inputWithIcon input[type=text]:focus + i{
+    color:dodgerblue;
+}
+
+.inputWithIcon.jorge i{
+    background-color: #aaa;
+    color: #fff;
+    padding: 10px 8px;
+    border-radius: 4px 0 0 4px;
+}
+
+.inputWithIcon.jorge input[type=text]:focus + i{
+    color:#fff;
+    background-color: dodgerblue;
+}
+/* ///////////////////select[name="sexo"]/////////////// */
+select[name="sexo"]:focus{
+    border-color: dodgerblue;
+    box-shadow: 0 0 8px 0 dodgerblue;
+}
+
+.inputWithIcon select[name="sexo"]{
+    padding-left: 37px;
+}
+
+.inputWithIcon{
+    position: relative;
+}
+
+.inputWithIcon i{
+    position: absolute;
+    left: 0;
+    top: 1px;
+    padding: 9px 8px;
+    color: #aaa;
+    transition: .3s;
+}
+
+.inputWithIcon select[name="sexo"]:focus + i{
+    color:dodgerblue;
+}
+
+.inputWithIcon.jorge1 i{
+    background-color: #aaa;
+    color: #fff;
+    padding: 9px 8px;
+    border-radius: 4px 0 0 4px;
+}
+
+.inputWithIcon.jorge1 select[name="sexo"]:focus + i{
+    color:#fff;
+    background-color: dodgerblue;
+}
+/* ///////////////////select[name="direccion"]/////////////// */
+select[name="direccion"]:focus{
+    border-color: dodgerblue;
+    box-shadow: 0 0 8px 0 dodgerblue;
+}
+
+.inputWithIcon select[name="direccion"]{
+    padding-left: 37px;
+}
+
+.inputWithIcon{
+    position: relative;
+}
+
+.inputWithIcon i{
+    position: absolute;
+    left: 0;
+    top: 1px;
+    padding: 9px 8px;
+    color: #aaa;
+    transition: .3s;
+}
+
+.inputWithIcon select[name="direccion"]:focus + i{
+    color:dodgerblue;
+}
+
+.inputWithIcon.jorge2 i{
+    background-color: #aaa;
+    color: #fff;
+    padding: 9px 8px;
+    border-radius: 4px 0 0 4px;
+}
+
+.inputWithIcon.jorge2 select[name="direccion"]:focus + i{
+    color:#fff;
+    background-color: dodgerblue;
+}
+/* //////////////////[type=date]//////////////// */
+input[type=date]:focus{
+    border-color: dodgerblue;
+    box-shadow: 0 0 8px 0 dodgerblue;
+}
+
+.inputWithIcon input[type=date]{
+    padding-left: 40px;
+}
+
+.inputWithIcon{
+    position: relative;
+}
+
+.inputWithIcon i{
+    position: absolute;
+    left: 0;
+    top: 1px;
+    padding: 9px 8px;
+    color: #aaa;
+    transition: .3s;
+}
+
+.inputWithIcon input[type=date]:focus + i{
+    color:dodgerblue;
+}
+
+.inputWithIcon.jorge3 i{
+    background-color: #aaa;
+    color: #fff;
+    padding: 9px 8px;
+    border-radius: 4px 0 0 4px;
+}
+
+.inputWithIcon.jorge3 input[type=date]:focus + i{
+    color:#fff;
+    background-color: dodgerblue;
+}
+/* //////////////////[type=email]//////////////// */
+input[type=email]:focus{
+    border-color: dodgerblue;
+    box-shadow: 0 0 8px 0 dodgerblue;
+}
+
+.inputWithIcon input[type=email]{
+    padding-left: 40px;
+}
+
+.inputWithIcon{
+    position: relative;
+}
+
+.inputWithIcon i{
+    position: absolute;
+    left: 0;
+    top: 1px;
+    padding: 9px 8px;
+    color: #aaa;
+    transition: .3s;
+}
+
+.inputWithIcon input[type=email]:focus + i{
+    color:dodgerblue;
+}
+
+.inputWithIcon.jorge4 i{
+    background-color: #aaa;
+    color: #fff;
+    padding: 10px 8px;
+    border-radius: 4px 0 0 4px;
+}
+
+.inputWithIcon.jorge4 input[type=email]:focus + i{
+    color:#fff;
+    background-color: dodgerblue;
+}
+/* //////////////////[type=password]//////////////// */
+input[type=password]:focus{
+    border-color: dodgerblue;
+    box-shadow: 0 0 8px 0 dodgerblue;
+}
+
+.inputWithIcon input[type=password]{
+    padding-left: 40px;
+}
+
+.inputWithIcon{
+    position: relative;
+}
+
+.inputWithIcon i{
+    position: absolute;
+    left: 0;
+    top: 1px;
+    padding: 9px 8px;
+    color: #aaa;
+    transition: .3s;
+}
+
+.inputWithIcon input[type=password]:focus + i{
+    color:dodgerblue;
+}
+
+
+.inputWithIcon.jorge5 i{
+    background-color: #aaa;
+    color: #fff;
+    padding: 10px 8px;
+    border-radius: 4px 0 0 4px;
+}
+
+.inputWithIcon.jorge5 input[type=password]:focus + i{
+    color:#fff;
+    background-color: dodgerblue;
+}
+/* //////////////////[type=file]//////////////// */
+input[type=file]:focus{
+    border-color: dodgerblue;
+    box-shadow: 0 0 8px 0 dodgerblue;
+}
+
+.inputWithIcon input[type=file]{
+    padding-left: 40px;
+}
+
+.inputWithIcon{
+    position: relative;
+}
+
+.inputWithIcon i{
+    position: absolute;
+    left: 0;
+    top: 1px;
+    padding: 9px 8px;
+    color: #aaa;
+    transition: .3s;
+}
+
+.inputWithIcon input[type=file]:focus + i{
+    color:dodgerblue;
+}
+
+
+.inputWithIcon.jorge6 i{
+    background-color: #aaa;
+    color: #fff;
+    padding: 10px 8px;
+    border-radius: 4px 0 0 4px;
+}
+
+.inputWithIcon.jorge6 input[type=file]:focus + i{
+    color:#fff;
+    background-color: dodgerblue;
+}

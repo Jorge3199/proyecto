@@ -1,0 +1,408 @@
+body{
+    background: rgb(24, 25, 31);
+}
+
+/* a img {
+    width: 90px;
+    height: 80px;
+} */
+
+.imagen{
+  width: 303px;
+  height: 204px;
+  
+}
+
+body{
+    background: rgb(24, 25, 31);
+    /* background-color: #2ecc71; */
+}
+html, body {
+	/* font-family: 'Lato', sans-serif;
+	color:#2f2f2f; */
+	font-size: 16px;
+	font-weight: 300;
+	line-height: 24px;
+	/* background: #fff; */
+	width:100%;
+	height:100%;
+	padding:0;
+	margin-left:0;
+	margin-right:0;
+	-webkit-font-smoothing: antialiased;
+}
+
+/* //////////////////[type=text]//////////////// */
+input[type=text]:focus{
+    border-color: #FFC312;
+    box-shadow: 0 0 8px 0 #FFC312;
+
+}
+
+.inputWithIcon input[type=text]{
+    padding-left: 40px;
+}
+
+.inputWithIcon{
+    position: relative;
+}
+
+.inputWithIcon i{
+    position: absolute;
+    left: 0;
+    top: 1px;
+    padding: 9px 8px;
+    color: #aaa;
+    transition: .3s;
+}
+
+.inputWithIcon input[type=text]:focus + i{
+    color:#FFC312;
+}
+
+.inputWithIcon.jorge i{
+    background-color: #FFC312;
+    color: black;
+    padding: 8px 8px;
+    border-radius: 4px 0 0 4px;
+}
+
+.inputWithIcon.jorge input[type=text]:focus + i{
+    color:white;
+    background-color: #FFC312;
+}
+/* ///////////////////select[name="sexo"]/////////////// */
+select[name="sexo"]:focus{
+    border-color: #FFC312;
+    box-shadow: 0 0 8px 0 #FFC312;
+}
+
+.inputWithIcon select[name="sexo"]{
+    padding-left: 37px;
+}
+
+.inputWithIcon{
+    position: relative;
+}
+
+.inputWithIcon i{
+    position: absolute;
+    left: 0;
+    top: 1px;
+    padding: 9px 8px;
+    color: #aaa;
+    transition: .3s;
+}
+
+.inputWithIcon select[name="sexo"]:focus + i{
+    color:#FFC312;
+}
+
+.inputWithIcon.jorge1 i{
+    background-color:#FFC312;
+    color: black;
+    padding: 8px 8px;
+    border-radius: 4px 0 0 4px;
+}
+
+.inputWithIcon.jorge1 select[name="sexo"]:focus + i{
+    color:white;
+    background-color:#FFC312;
+}
+/* ///////////////////select[name="direccion"]/////////////// */
+select[name="direccion"]:focus{
+    border-color:#FFC312;
+    box-shadow: 0 0 8px 0 #FFC312;
+}
+
+.inputWithIcon select[name="direccion"]{
+    padding-left: 37px;
+}
+
+.inputWithIcon{
+    position: relative;
+}
+
+.inputWithIcon i{
+    position: absolute;
+    left: 0;
+    top: 1px;
+    padding: 9px 8px;
+    color: #aaa;
+    transition: .3s;
+}
+
+.inputWithIcon select[name="direccion"]:focus + i{
+    color:#FFC312;
+}
+
+.inputWithIcon.jorge2 i{
+    background-color: #FFC312;
+    color: black;
+    padding: 8px 8px;
+    border-radius: 4px 0 0 4px;
+}
+
+.inputWithIcon.jorge2 select[name="direccion"]:focus + i{
+    color:white;
+    background-color:#FFC312;
+}
+/* ///////////////////select[name="modelo"]/////////////// */
+select[name="modelo"]:focus{
+    border-color:#FFC312;
+    box-shadow: 0 0 8px 0 #FFC312;
+}
+
+.inputWithIcon select[name="modelo"]{
+    padding-left: 37px;
+}
+
+.inputWithIcon{
+    position: relative;
+}
+
+.inputWithIcon i{
+    position: absolute;
+    left: 0;
+    top: 1px;
+    padding: 9px 8px;
+    color: #aaa;
+    transition: .3s;
+}
+
+.inputWithIcon select[name="modelo"]:focus + i{
+    color:#FFC312;
+}
+
+.inputWithIcon.jorge2 i{
+    background-color:#FFC312;
+    color:black;
+    padding: 8px 8px;
+    border-radius: 4px 0 0 4px;
+}
+
+.inputWithIcon.jorge2 select[name="modelo"]:focus + i{
+    color:white;
+    background-color:#FFC312;
+}
+
+/* //////////////////[type=date]//////////////// */
+input[type=date]:focus{
+    border-color:#FFC312;
+    box-shadow: 0 0 8px 0 #FFC312;
+}
+
+.inputWithIcon input[type=date]{
+    padding-left: 40px;
+}
+
+.inputWithIcon{
+    position: relative;
+}
+
+.inputWithIcon i{
+    position: absolute;
+    left: 0;
+    top: 1px;
+    padding: 9px 8px;
+    color: #aaa;
+    transition: .3s;
+}
+
+.inputWithIcon input[type=date]:focus + i{
+    color:#FFC312;
+}
+
+.inputWithIcon.jorge3 i{
+    background-color: #FFC312;
+    color:black;
+    padding: 8px 8px;
+    border-radius: 4px 0 0 4px;
+}
+
+.inputWithIcon.jorge3 input[type=date]:focus + i{
+    color:white;
+    background-color:#FFC312;
+}
+/* //////////////////[type=email]//////////////// */
+input[type=email]:focus{
+    border-color:#FFC312;
+    box-shadow: 0 0 8px 0 #FFC312;
+}
+
+.inputWithIcon input[type=email]{
+    padding-left: 40px;
+}
+
+.inputWithIcon{
+    position: relative;
+}
+
+.inputWithIcon i{
+    position: absolute;
+    left: 0;
+    top: 1px;
+    padding: 9px 8px;
+    color: #aaa;
+    transition: .3s;
+}
+
+.inputWithIcon input[type=email]:focus + i{
+    color:#FFC312;
+}
+
+.inputWithIcon.jorge4 i{
+    background-color:#FFC312;
+    color:black;
+    padding: 8px 8px;
+    border-radius: 4px 0 0 4px;
+}
+
+.inputWithIcon.jorge4 input[type=email]:focus + i{
+    color:white;
+    background-color:#FFC312;
+}
+/* //////////////////[type=password]//////////////// */
+input[type=password]:focus{
+    border-color: #FFC312;
+    box-shadow: 0 0 8px 0 #FFC312;
+}
+
+.inputWithIcon input[type=password]{
+    padding-left: 40px;
+}
+
+.inputWithIcon{
+    position: relative;
+}
+
+.inputWithIcon i{
+    position: absolute;
+    left: 0;
+    top: 1px;
+    padding: 9px 8px;
+    color: #aaa;
+    transition: .3s;
+}
+
+.inputWithIcon input[type=password]:focus + i{
+    color:#FFC312;
+}
+
+
+.inputWithIcon.jorge5 i{
+    background-color:#FFC312;
+    color:black;
+    padding: 8px 8px;
+    border-radius: 4px 0 0 4px;
+}
+
+.inputWithIcon.jorge5 input[type=password]:focus + i{
+    color:white;
+    background-color:#FFC312;
+}
+/* //////////////////[type=file]//////////////// */
+input[type=file]:focus{
+    border-color:#FFC312;
+    box-shadow: 0 0 8px 0 #FFC312;
+}
+
+.inputWithIcon input[type=file]{
+    padding-left: 40px;
+}
+
+.inputWithIcon{
+    position: relative;
+}
+
+.inputWithIcon i{
+    position: absolute;
+    left: 0;
+    top: 1px;
+    padding: 9px 8px;
+    color: #aaa;
+    transition: .3s;
+}
+
+.inputWithIcon input[type=file]:focus + i{
+    color:#FFC312;
+}
+
+
+.inputWithIcon.jorge6 i{
+    background-color:#FFC312;
+    color:black;
+    padding: 8px 8px;
+    border-radius: 4px 0 0 4px;
+}
+
+.inputWithIcon.jorge6 input[type=file]:focus + i{
+    color:white;
+    background-color:#FFC312;
+}
+
+.form-control:focus{
+    background: white;
+}
+
+.form-control:hover{
+    background: white;
+}
+
+/* ////////////SIGNIN//////[type=password]//////////////// */
+/* input[type=password]:focus{
+    border-color: dodgerblue;
+    box-shadow: 0 0 8px 0 dodgerblue;
+}
+
+.jorge49 input[type=password]{
+    padding-left: 40px;
+}
+
+.jorge49{
+    position: relative;
+} */
+
+/* .icon-eye{
+    position: absolute;
+   
+    padding: 13px 335px;
+    color: #000000;
+    transition: .3s;
+    cursor: pointer;
+
+}
+
+.color{
+    background: orange;
+    cursor: pointer;
+} */
+/* .jorge49 input[type=password]:focus + i{
+    color:dodgerblue;
+}
+
+
+.jorge49.jorge50 i{
+    background-color: #aaa;
+    color: #fff;
+    padding: 8px 8px;
+    border-radius: 4px 0 0 4px;
+}
+
+.jorge49.jorge50 input[type=password]:focus + i{
+    color:#fff;
+    background-color: dodgerblue;
+} */
+
+/* .input-group-text{
+    width: 40px;
+    height: 38px;
+    border: none;
+    border-radius: 0px;
+}
+
+.form-control{
+    border: none;
+    border-radius: 123px;
+} */
+

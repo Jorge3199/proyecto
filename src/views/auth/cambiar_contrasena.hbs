@@ -1,0 +1,85 @@
+<link rel="stylesheet" href="/bootstrap-4.3.1/css/bootstrap.css">
+<link rel="stylesheet" href="/css/estilo1.css">
+<link rel="stylesheet" href="/icono/style.css">
+<script src="/js/validar.js"></script>
+
+<link rel="stylesheet" href="/js/AlertifyJS/css/alertify.min.css" />
+<link rel="stylesheet" href="/js/AlertifyJS/css/themes/semantic.min.css" />
+<script src="/js/AlertifyJS/alertify.min.js"></script>
+
+<script src="/js/sweetalert2/sweetalert2.min.js"></script>
+<link rel="stylesheet" href="/js/sweetalert2/sweetalert2.css" />
+
+
+<div class="container p-4">
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-sx-6 col-lg-6 mx-auto">
+            <div class="card">
+            
+                <div class="card-header">
+                {{!-- <div class="col-lg-4">
+                     <a href="/img/facebook.png"><img height="75" width="100" src="/img/logo.jpg"  ></a>
+                </div> 
+          --}}
+                 <div class="col-md-12 col-lg-12">
+                    <a><img height="75" width="100" src="/img/logo.png"> CAMBIAR CONTRASEÑA</a> 
+                </div> 
+                {{!-- <div class="col-md-12 col-lg-12">
+                     <h2>EDITAR PRODUCTO</h2>
+                </div> 
+                 --}}
+            </div>
+            {{!-- <div class="card"> --}}
+                <div class="card-body">
+                    <form action="/cambiar_contrasena/{{link.aleatorio}}"  method="POST" onsubmit="return validar_contrasena();">
+                        <div class="row">
+
+                             <div class="col-md-12">
+                                <h2>Nueva contraseña<span style="color:red">*</span></h2>
+                                <div class="inputWithIcon jorge5">
+                                <input type="password" id="contrasena" name="contrasena" placeholder="Ingrese contraseña" class="form-control" required autofocus>
+                                <i class="icon-lock" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        
+                            <div class="col-md-12">
+                                <h2>Confirmar contraseña<span style="color:red">*</span></h2>
+                                <div class="inputWithIcon jorge5">
+                                <input type="password" id="confirmar" name="confirmar" placeholder="Ingrese de nuevo su contraseña" class="form-control"  required >
+                                <i class="icon-key" aria-hidden="true"></i>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        <br>
+                       
+                        <div class="row">
+                             <div class="col-lg-6">
+                               <a class="btn btn-danger btn-block" href="/administrador">Atras</a>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <button class="btn btn-warning btn-block" onclick="confirmar({{id}})">Save</button>
+                            </div>
+                        </div>
+
+
+                    </form>
+
+                     {{!-- <div id="imagenPreview">
+
+                     </div> --}}
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+

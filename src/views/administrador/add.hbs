@@ -1,0 +1,210 @@
+<script>
+   const modelo = []
+   var n=0;
+</script>   
+
+{{#each modelo}}
+      
+         <script>
+           
+           modelo[n] = { modelo: `{{modelo}}` };
+           n +=1;
+
+           
+         </script>
+     
+{{/each}}
+
+
+{{!-- <style>
+   /*body{
+        background: #020202;
+    }*/
+
+   a img {
+        width: 90px;
+        height: 80px;
+    }
+   
+   img{
+      width: 481px;
+      height: 294px;
+      
+   }
+
+</style> --}}
+<link rel="stylesheet" href="/bootstrap-4.3.1/css/bootstrap.css">
+<link rel="stylesheet" href="/css/bootstrap.css">
+<link rel="stylesheet" href="/css/estilo.css">
+<link rel="stylesheet" href="/icono/style.css">
+{{!-- <link rel="stylesheet" href="/bootstrap-4.3.1/css/bootstrap.min.css"> --}}
+<div class="container p-4">
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-sx-6 col-lg-12 lg-auto">
+            <div class="card">
+            
+                <div class="card-header">
+                {{!-- <div class="col-lg-4">
+                     <a href="/img/facebook.png"><img height="75" width="100" src="/img/logo.jpg"  ></a>
+                </div>  --}}
+              
+                <div class="col-md-12 col-lg-12">
+                    <a><img height="75" width="100" src="/img/logo.png"> AGREGAR PRODUCTO</a> 
+                </div> 
+                
+            </div>
+            {{!-- <div class="card"> --}}
+                <div class="card-body">
+                    <form action="/administrador/add" method="POST" enctype="multipart/form-data" >
+                      
+                        <div class="row">
+
+                             <div class="col-md-4">
+                                <h2>Nombre<span style="color:red">*</span></h2>
+                                <div class="inputWithIcon jorge">
+                                <input type="text" id="nombre" name="nombre" placeholder="Nombre del producto" class="form-control" required autofocus>
+                                <i class="icon-pencil" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        
+                            <div class="col-md-4">
+                                <h2>Precio<span style="color:red">*</span></h2>
+                                <div class="inputWithIcon jorge">
+                                <input type="text" id="precio" name="precio" placeholder="RD$0.00" class="form-control" required autofocus>
+                                <i class="icon-attach_money" aria-hidden="true"></i>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <h2>Modelo<span style="color:red">*</span></h2>
+                                <div class="inputWithIcon jorge2">
+                                    <select name="direccion" id="selectModelo" placeholder="Modelo" class="form-control">
+                                        <option disabled selected>Modelo</option>
+                                    </select> 
+                                    <i class="icon-attach_money" aria-hidden="true"></i>
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-4">
+                                <h2>Cantidad<span style="color:red">*</span></h2>
+                                <div class="inputWithIcon jorge">
+                                <input type="text" id="cantidad" name="cantidad" placeholder="Cantidad" class="form-control" required autofocus>
+                                <i class="icon-attach_money" aria-hidden="true"></i>
+                                </div>
+                            </div> 
+
+
+                            <div class="col-md-8">
+                                <h2>Imagen<span style="color:red">*</span></h2>
+                                <div class="inputWithIcon jorge6">
+                                <input type="file" name="imagen" id="imagen" class="form-control" required>
+                                <i class="icon-camera" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                             
+                            <div class="col-md-12">
+                                 <br>
+                                    {{!-- <h2>Imagen</h2> --}}
+                                <table>
+                                    <tr><td><div id="imagenPreview" class="imagen" style="width:513px; height:300px; border:dashed blue" > </div></td></tr>
+                                    
+                                    
+                                   {{!-- <div id="imagenPreview" style="width:250px; height:300px; border:dashed blueviolet" >
+
+                                   </div> --}}
+
+                                </table> 
+                                {{!-- <br>   --}}
+                                    {{!-- <input type="file" name="imagen" id="imagen" class="form-control" required> --}}
+                                    
+                                    {{!-- <a href="imagen1/{{imagen}}"><img height="235" width="230" src="/imagen1/{{imagen}}"></a> --}}
+                                   
+                            </div>
+
+                           
+                        </div>
+
+                        <br>
+                       
+                        <div class="row">
+                            <div class="col-lg-6">
+                               <a class="btn btn-danger btn-block" href="/administrador">Atras</a>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <button class="btn btn-warning btn-block">Save</button>
+                            </div>
+                        </div>
+
+
+                    </form>
+
+                     {{!-- <div id="imagenPreview">
+
+                     </div> --}}
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<script type="text/javascript">
+$('#imagenPreview').html("<img src='/img/camara1.png' class='imagen'/>"); 
+   (function(){
+       function filePreview(input){
+           if(input.files && input.files[0]){
+               var reader = new FileReader();
+
+               reader.onload = function(e){
+                   $('#imagenPreview').html("<img src='"+e.target.result+"' class='imagen'/>");
+               }
+
+               reader.readAsDataURL(input.files[0]);
+           }
+       }
+       $('#imagen').change(function(){
+          filePreview(this);
+       });
+   }) ();
+
+</script>
+
+<script>
+    const modelo1 = document.querySelector('#selectModelo');
+
+    for(let n = modelo.length-1; n >= 0; n--) {
+        let opcion = document.createElement('option');
+        opcion.value = modelo[n].modelo;
+        opcion.innerText = modelo[n].modelo;
+        modelo1.appendChild(opcion);
+    }
+    
+</script>
+
+
+{{!-- <script>
+    function jorge(){
+
+        var preview=document.querySelector('img');
+        var file=document.querySelector('input[type=file]').file[0];
+
+        var leer= new FileReader();
+        
+        if(file){
+
+            leer.readAsDataURL(file);
+            leer.onloadend=function(){
+                preview.src=leer.result;
+            }
+            ;
+        }
+        else{
+            preview.src="";
+        }
+    }
+</script> --}}

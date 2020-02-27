@@ -1,0 +1,290 @@
+.paginacion{
+    margin: 20px 0;
+    text-align: center;
+}
+
+.paginacion ul{
+    list-style: none;
+    text-align: center;
+}
+/* .pagination{
+    list-style: none;
+    text-align: center;
+} */
+
+.paginacion ul li{
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.paginacion ul li a{
+    display: block;
+    padding: 10px 20px;
+    color: #000;
+    /* background: #024959; */
+    text-decoration: none;
+}
+
+/* .paginacion ul li a:hover {
+    background: #037E8C;
+}
+
+.paginacion ul li .active {
+    background: #037E8C;
+    font-weight: bold;
+} */
+
+
+
+.option-set li{
+	display: inline-block;
+	margin: 0 8px 32px 0;
+}
+.option-set li a{
+	padding: 4px 8px;
+	color: #000;
+	font-size: 12px;
+	font-weight: 400;
+	text-transform: uppercase;
+	border:1px solid #a4a4a4;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+    background:#ddac1b;
+    cursor: pointer;
+}
+
+.option-set li a:hover{
+	/* color:#000;
+	background:rgb(241, 181, 0); 
+    border:1px solid #6c6c6c; */
+    color: black;
+    background-color: white; 
+}
+
+.option-set li a.selected{
+    color:#000;
+    background:#ffffff;
+    cursor: default;
+}
+
+.option-set li a.selected:hover{
+    color:#000;
+    background:#ffffff;
+    cursor: default;
+    font-size: 12px;
+	font-weight: 400;
+	text-transform: uppercase;
+	border:1px solid #a4a4a4;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
+
+
+
+/* ////////////////////////////////////////////////////////////////// */
+.color{
+    color:#FFC312;
+}
+
+.title{
+    color:#FFC312;  
+}
+
+body{
+    background: #FFC312;  
+}
+
+.scroll{
+    color:#FFC312;
+}
+
+/* .scroll .link .selected{
+    color: red;
+} */
+/* ///////////////////////////////////////////////// */
+.ventana{
+    background: rgba(255,255,255, 1);
+    /* background-size: 400px 100px; */
+    
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    /* text-align: right; */
+    padding: 20px;
+    /* min-height: 250px; */
+    /* max-height: 100px; */
+    /* min-width: 400px; */
+    max-width: 700px;
+    border-radius: 22px;
+    position: absolute;
+    left: 23%;
+    top: 20%;
+    z-index: 2;
+    display: none;
+
+}
+
+.ventana #lista img{
+    cursor: pointer;
+}
+
+#cerrar{
+    position: absolute;
+    right: 3px;
+    top: 10px;
+   
+}
+
+.imagen{
+    position: absolute;
+    text-align: start;
+   
+}
+.texto{
+    /* position: absolute;
+    left: 290px; */
+    font-family: Arial, Helvetica, sans-serif;
+    color: #000;
+    font-size: 18px;
+    text-align: start;
+}
+
+.texto1{
+    /* position: absolute; */
+    /* left: 5px; */
+    /* font-family: Arial, Helvetica, sans-serif; */
+    color: #000;
+    font-size: 14px;
+    text-align: start !important;
+    
+}
+
+.row {
+    margin-right: 0.1px !important;
+    margin-left: 0.1px !important;
+    display: inline;  
+    text-align: start !important;
+}
+p.col-xs-1, .col-sm-1, .col-md-1, .col-md-2, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
+position: relative;
+min-height: 1px;
+padding-right: 4px !important;
+padding-left: 4px !important;
+text-align: start !important;
+cursor:context-menu !important;
+}
+
+#lppresults{
+    text-align: center !important; 
+     
+}
+
+/* ////////////////////////////////////////////////////////////////////////// */
+/* .modalDialog{
+	position: fixed;
+	font-family: Arial, Helvetica, sans-serif;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: rgba(0,0,0,0.8);
+	z-index: 101;
+	opacity:0;
+	-webkit-transition: opacity 400ms ease-in;
+	-moz-transition: opacity 400ms ease-in;
+	transition: opacity 400ms ease-in;
+    pointer-events: none;
+    overflow: auto;
+}
+.modalDialog:target {
+	opacity:1;
+	pointer-events: auto;
+}
+.modalDialog > div {
+	width: 400px;
+	position: relative;
+	margin: 10% auto;
+	padding: 5px 20px 13px 20px;
+	border-radius: 10px;
+	background: #fff;
+	background: -moz-linear-gradient(#fff, #999);
+	background: -webkit-linear-gradient(#fff, #999);
+	background: -o-linear-gradient(#fff, #999);
+  -webkit-transition: opacity 400ms ease-in;
+-moz-transition: opacity 400ms ease-in;
+transition: opacity 400ms ease-in;
+top: -10px;
+} */
+/* .close {
+	background: red;
+	color: #FFFFFF;
+	line-height: 25px;
+	position: absolute;
+	right: -12px;
+	text-align: center;
+	top: -10px;
+	width: 24px;
+	text-decoration: none;
+	font-weight: bold;
+	-webkit-border-radius: 12px;
+	-moz-border-radius: 12px;
+	border-radius: 12px;
+	-moz-box-shadow: 1px 1px 3px #000;
+	-webkit-box-shadow: 1px 1px 3px #000;
+	box-shadow: 1px 1px 3px #000;
+}
+.close:hover { background: red; } */
+
+.negro{
+    color: black;
+}
+
+/* div.ex1 {
+    overflow: auto;
+} */
+
+
+/* ///////////////////////////////////////////////////////////////// */
+.modalContainer {
+    display: none; 
+    position: fixed; 
+    font-family: Arial, Helvetica, sans-serif;
+    z-index: 101;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modalContainer .modal-content {
+    margin: auto;
+    padding: 20px;
+    width: 100%;
+    background: #fff;
+    background: -moz-linear-gradient(#fff, #999);
+    background: -webkit-linear-gradient(#fff, #999);
+    background: -o-linear-gradient(#fff, #999);
+-webkit-transition: opacity 400ms ease-in;
+-moz-transition: opacity 400ms ease-in;
+transition: opacity 400ms ease-in;
+}
+
+.modalContainer .close1 {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.modalContainer .close1:hover,
+.modalContainer .close1:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
