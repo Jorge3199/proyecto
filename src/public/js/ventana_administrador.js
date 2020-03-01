@@ -1,3 +1,60 @@
+// var prod = [];
+// var n10 = 0;
+const formulario =  document.querySelector('#formulario');
+       
+const filtrar = (llamar)=>{
+   
+        prod = [];
+        n10=0;
+    
+        const texto = formulario.value.toLowerCase();
+
+        for (var i=0; i<productos.length;i++) { 
+                
+                let id = productos[i].id.toString().toLowerCase();
+                let nombre = productos[i].nombre.toLowerCase();
+                let precio = productos[i].precio.toString().toLowerCase();
+                let cantidad = productos[i].cantidad.toString().toLowerCase();
+                let modelo = productos[i].modelo.toLowerCase();
+                
+        
+                if( (id.indexOf(texto) !== -1) || (nombre.indexOf(texto) !== -1) || (precio.indexOf(texto) !== -1) || (cantidad.indexOf(texto) !== -1) || (modelo.indexOf(texto) !== -1) ){ 
+                    
+                    prod[n10] = { id: productos[i].id, nombre: productos[i].nombre, precio:productos[i].precio, cantidad: productos[i].cantidad, modelo: productos[i].modelo, imagen: productos[i].imagen};
+                    n10 +=1;
+                    
+                }
+                    
+        } 
+
+	if( (llamar != 'edito') && (llamar != 'elimino') ){
+        valor(0);
+		paginacion();
+	}
+		
+
+
+    const id = [...document.querySelectorAll('#options1 .selected')].map(el => el.id);
+	if(llamar == 'edito'){
+		paginacion();
+		paginacion_editar(id); 
+	}
+
+	if(llamar == 'elimino'){
+	    paginacion();
+        paginacion_eliminar(id);
+	}
+    
+    
+
+}
+     
+formulario.addEventListener('keyup', filtrar);
+filtrar();
+
+
+/////////////////////////////////////////////////////////////////////
+
 function abrir_productos(){
     
     const ventana = document.querySelector('#vent');
@@ -314,13 +371,13 @@ function abrir_modelo(){
                 <img height="150" width="150" src="/images/super_gato.png" class="center ms">
 
                 <div class="inputWithIcon jorge">
-                    <input type="text" id="modelo" name="modelo" placeholder="Ingrese el nuevo modelo" class="form-control" >
+                    <input type="text" id="modelo" name="modelo" placeholder="Ingrese el nuevo modelo" class="form-control" required autofocus>
                     <i class="icon-cogs" aria-hidden="true"></i>
                 </div>
                 
                 <div class="row">
                     <div class="col-lg-6">
-                        <a class="btn btn-warning btn-block" href="#close" onclick="modelo()"> Guardar </a>
+                        <a class="btn btn-warning btn-block" onclick="modelo()"> Guardar </a>
                     </div> 
                     <div class="col-lg-6">
                         <a class="btn btn-danger btn-block" onclick="cerrar()">Cancelar</a>
@@ -552,16 +609,17 @@ function abrir_administrador(){
     abrir();
 
     var intro = document.getElementById('tamaño');
-    // var intro1 = document.getElementById ('openModal');
+  
    
-    // intro1.style.top= "-70px";
+  
     intro.style.width="65%";
     intro.style.top="-15%";
 }
-
+var prod2 = [];
+var n5=0;
 function abrir_lista_producto(){
-    abrir();
-    const ventana = document.querySelector('#vent');
+   
+    const ventana = document.querySelector('#vent2');
     ventana.innerHTML = `
     <div class="row">
         <div class="col-lg-6">
@@ -575,12 +633,13 @@ function abrir_lista_producto(){
 
         <div class="col-lg-3">
             
-            <input type="text" id="formulario" class="form-control ">
+            <input type="text" id="formulario2" class="form-control ">
         </div>
 
     </div> 
-
-    <table id="lppresults" class="table display DataTables" class="table table-bordered order-table" class="card-header" style="color: white">
+    <button id="generatereport">Download Report</button> 
+    <div id="lppresults">
+    <table  class="table display DataTables" class="table table-bordered order-table" class="card-header" style="color: white">
 
         <thead style="background-color:#ddac1b; color:black" align="center">
             <tr>
@@ -597,68 +656,81 @@ function abrir_lista_producto(){
         <tbody id="lista" style="color:black" align="center" class="card-header">
 
         </tbody>
-
+         
+        
 
     </table>
+    </div>
+
+    <section class="paginacion">
+		 <div id="options2" class="filter-menu">
+				<ul class="option-set" >
+					<ul id="paginacion2" class="pagination pagination-md">
+			            
+					</ul>	
+				</ul>
+        </div>
+    
+    </section>
     `
-    const lista = document.querySelector('#lista');
-
-    const formulario =  document.querySelector('#formulario');
-    //const boton = document.querySelector('#boton');
     
-
-const filtrar = ()=>{
-
-    lista.innerHTML = '';
-
-    const texto = formulario.value.toLowerCase();
-      
-
-            for (j=0;j<productos.length;j++) { 
-                
-               
-                    
-                    let nombre = productos[j].nombre.toLowerCase();
-                   
-                    let modelo = productos[j].modelo.toLowerCase();
-                    if( (nombre.indexOf(texto) !== -1) || (modelo.indexOf(texto) !== -1) ){   
-                        lista.innerHTML += `
-                        <td>${productos[j].cantidad}</td> <td>${productos[j].nombre}</td> <td>${productos[j].precio}</td> <td>${productos[j].modelo}</td>
-                        <td> <a onclick="imagenes('${productos[j].imagen}')"><img height="50" width="50" src="/imagen1/${productos[j].imagen}"></a></td> 
-                        <td> 
-                            <a class="btn btn-warning mx-1" onclick="abrir(${productos[j].id},'${productos[j].imagen}','${productos[j].nombre}',${productos[j].precio},'${productos[j].modelo}',${productos[j].cantidad})">
-                            <img height="25" width="20" src="/img/carrito.png"></a>  
-
-                            <a class="btn btn-danger" onclick="borrar_favorito(${productos[j].id})"> 
-                            <img height="25" width="20" src="/img/borrar.png"></a> 
-                        </td>
-                        `
-                    }
-                        
-                
-
-                // document.write("|" + i + ":" + j + "| ");
-            } 
-            // document.write("<BR>");
-        
-        
-
-      
-
-    }
-
-
-    // boton.addEventListener('click', filtrar)
-    formulario.addEventListener('keyup', filtrar)
-
-    filtrar();
+    formulario2.addEventListener('keyup', filtrar2);
+    filtrar2();
     
-
-    var intro = document.getElementById('tamaño');
+    var intro = document.getElementById('tamaño2');
     
     intro.style.width="65%";
     intro.style.top="-15%";
+    abrir2();
+    var doc = new jsPDF();
+    $('#generatereport').click(function() {
+        doc.fromHTML($('#lppresults')[0], 15, 15, {
+            width: 170
+        }, function() {
+            doc.save('sample-file.pdf');
+        });
+    });
 }
+
+
+//const boton = document.querySelector('#boton');
+
+
+const filtrar2 = ()=>{
+    const lista = document.querySelector('#lista');
+
+    const formulario2 =  document.querySelector('#formulario2');
+        lista.innerHTML = '';
+        prod2 = [];
+        n5=0;
+        
+        const texto = formulario2.value.toLowerCase();
+
+        for (var i=0; i<productos.length;i++) { 
+                
+                let id = productos[i].id.toString().toLowerCase();
+                let nombre = productos[i].nombre.toLowerCase();
+                let precio = productos[i].precio.toString().toLowerCase();
+                let cantidad = productos[i].cantidad.toString().toLowerCase();
+                let modelo = productos[i].modelo.toLowerCase();
+                
+        
+                if( (id.indexOf(texto) !== -1) || (nombre.indexOf(texto) !== -1) || (precio.indexOf(texto) !== -1) || (cantidad.indexOf(texto) !== -1) || (modelo.indexOf(texto) !== -1) ){ 
+                    
+                    prod2[n5] = { id: productos[i].id, nombre: productos[i].nombre, precio:productos[i].precio, cantidad: productos[i].cantidad, modelo: productos[i].modelo, imagen: productos[i].imagen};
+                    n5 +=1;
+                    
+                }
+                    
+        } 
+        
+    valor2(0);
+    paginacion2();   
+    // alert('jorge');
+
+}
+    
+
 
 function agregar_producto(){
     // var file = e.target.files[0];
@@ -673,8 +745,10 @@ function agregar_producto(){
         success:function(producto){
                 // console.log(producto);
                 for (var n = 0; n < producto.length; n++) {
-                     productos[n] = { id: producto[n].id, nombre: producto[n].nombre, precio:producto[n].precio, cantidad: producto[n].cantidad, imagen:producto[n].imagen};
+                     productos[n] = { id: producto[n].id, nombre: producto[n].nombre, precio:producto[n].precio, cantidad: producto[n].cantidad, modelo: producto[n].modelo, imagen:producto[n].imagen};
                 }
+                prod=productos;
+                guardado();
                 valor(0);
                 paginacion();
         }
@@ -694,14 +768,14 @@ function editar_producto(id){
             type:"POST",
             url:"/administrador/edit/"+id,
             data: datos,
-            async: true,
+            async: false,
             success:function(producto){
                     // console.log(producto);
+                   
                     for (var n = 0; n < producto.length; n++) {
-                         productos[n] = { id: producto[n].id, nombre: producto[n].nombre, precio:producto[n].precio, cantidad: producto[n].cantidad, imagen:producto[n].imagen};
+                         productos[n] = { id: producto[n].id, nombre: producto[n].nombre, precio:producto[n].precio, cantidad: producto[n].cantidad, modelo: producto[n].modelo, imagen:producto[n].imagen};
                     }
-                    valor(0);
-                    paginacion();
+    
             }
             
         });
@@ -712,21 +786,25 @@ function editar_producto(id){
             type:"POST",
             url:"/administrador/editar/"+id,
             data: datos,
-            async: true,
+            async: false,
             processData: false,
             contentType: false,
             success:function(producto){
-                    // console.log(producto);
+                     
                     for (var n = 0; n < producto.length; n++) {
-                         productos[n] = { id: producto[n].id, nombre: producto[n].nombre, precio:producto[n].precio, cantidad: producto[n].cantidad, imagen:producto[n].imagen};
+                         productos[n] = { id: producto[n].id, nombre: producto[n].nombre, precio:producto[n].precio, cantidad: producto[n].cantidad, modelo: producto[n].modelo, imagen:producto[n].imagen};
+                         
                     }
-                    valor(0);
-                    paginacion();
+    
             }
+           
             
         });
     }
-     
+    
+    editado();
+    filtrar2();
+    filtrar('edito');
     
 }
 
@@ -750,6 +828,8 @@ function modelo(){
      
   });
 
+  cerrar();
+  guardado();
   
 }
 
@@ -758,18 +838,21 @@ function eliminar_producto(id){
         type:"POST",
         url:"/administrador/delete",
         data: {id : id},
-        async: true,
+        async: false,
         success:function(producto){
                 // console.log(producto);
                 productos = [];
                 for (var n = 0; n < producto.length; n++) {
-                     productos[n] = { id: producto[n].id, nombre: producto[n].nombre, precio:producto[n].precio, cantidad: producto[n].cantidad, imagen:producto[n].imagen};
+                     productos[n] = { id: producto[n].id, nombre: producto[n].nombre, precio:producto[n].precio, cantidad: producto[n].cantidad, modelo: producto[n].modelo, imagen:producto[n].imagen};
                 }
-                valor(0);
-                paginacion();
+            
         }
         
     }); 
+    prod=productos;
+    eliminado();
+    filtrar2();
+    filtrar('elimino');
 }
 
 
@@ -811,4 +894,5 @@ function agregar_administrador(){
         
     });
     cerrar();
+    guardado();
 }

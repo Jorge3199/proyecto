@@ -21,6 +21,8 @@
 
 	<link rel="stylesheet" href="css/ventana.css" />
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
 <script>
 	var id_administrador = `{{user.id}}`;
 	
@@ -106,7 +108,7 @@
       
          <script>
            
-           productos[n] = { id: `{{id}}`, nombre: `{{nombre}}`, precio:`{{precio}}`, cantidad: `{{cantidad}}`, imagen:`{{imagen}}`};
+           productos[n] = { id: `{{id}}`, nombre: `{{nombre}}`, precio:`{{precio}}`, cantidad: `{{cantidad}}`, modelo: `{{modelo}}`, imagen:`{{imagen}}`};
            n +=1;
 
            
@@ -145,6 +147,7 @@
 					<li><a href="#filter" data-option-value=".web">Web</a></li>
 				</ul>
 			</div>
+            
 
            
 			<!-- Portfolio Items -->
@@ -156,6 +159,19 @@
 					      <div id="resultado22">
 							 
 						  </div>
+
+						    <div class="buscar">
+								<div class="row">
+									<div class="col-lg-3">
+									<h5 style="color:white; text-align:right">Buscar:</h5>
+									
+									</div>
+
+									<div class="col-lg-3">
+										<input type="text" id="formulario" class="form-control ">
+									</div>
+								</div>
+					    	</div>
 					 
 						  <div id="resultado">
 							 
@@ -580,12 +596,25 @@
 	</div>
 		
 </div>
+
+<div id="tvesModal2" class="modalContainer2">
+	<div id="tamaño2" class="modal-content">
+		<span class="close2">×</span>
+
+		<div id="vent2">
+			
+		</div>
+	</div>
+		
+</div>
+
 {{!-- ///////////////////////////////////////////////////////////////////////////////////////// --}}
 <script type="text/javascript" src="js/paginacion.js"></script>
 <script type="text/javascript" src="js/administrador.js"></script>
 <script type="text/javascript" src="js/ventana_administrador.js"></script>
-<script src="js/signup.js"></script>
+{{!-- <script src="js/signup.js"></script> --}}
 <script type="text/javascript" src="js/ventana.js"></script>
+<script type="text/javascript" src="js/paginacion2.js"></script>
 
 
 {{!-- <div id="btnModal" class="modalDialog">

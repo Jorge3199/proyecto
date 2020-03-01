@@ -85,11 +85,8 @@ function validar_formulario() {
     //     alert("La contraseña no son iguales");
     //     return  false;
     // }
-    modal.style.display = "none";
-
-    body.style.position = "inherit";
-    body.style.height = "auto";
-    body.style.overflow = "visible";
+   
+    cerrar();
     agregar_producto();
 
       
@@ -128,11 +125,8 @@ function validar_formulario_editar(id) {
     //     alert("La contraseña no son iguales");
     //     return  false;
     // }
-    modal.style.display = "none";
-
-    body.style.position = "inherit";
-    body.style.height = "auto";
-    body.style.overflow = "visible";
+    
+    cerrar();
     editar_producto(id);
 
       
@@ -192,5 +186,62 @@ function confirmar(id){
   //  alertify.error('Ha Cancelado La Eliminacion');
     //window.location = 'http://localhost:4000/links';
   
+}
+
+function guardado(){
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        onOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+      
+      Toast.fire({
+        type: 'success',
+        title: 'Se agregado correctamente'
+      })
+}
+
+function editado(){
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        onOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+      
+      Toast.fire({
+        type: 'success',
+        title: 'Se a editado correctamente'
+      })
+}
+
+function eliminado(){
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        onOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+      
+      Toast.fire({
+        type: 'success',
+        title: 'Se a eliminado correctamente'
+      })
 }
 

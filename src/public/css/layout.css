@@ -1614,3 +1614,10 @@ a.button-to-top:hover {color: #e74c3c;}
 	color: white;
 	cursor: pointer;
 }
+
+.buscar {
+	position: relative;
+    right: 150px;
+	top: 0px;
+	left:-200px;
+}
