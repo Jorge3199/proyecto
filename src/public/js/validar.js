@@ -92,7 +92,8 @@ function validar_formulario() {
       
 }
 /////////////////////////formulario de agregar productos//////////////////////////
-function validar_formulario_editar(id) {
+function validar_formulario_editar(id, opcion) {
+
     var nombre, precio, cantidad;
 
     nombre = document.getElementById("nombre").value;
@@ -126,7 +127,7 @@ function validar_formulario_editar(id) {
     //     return  false;
     // }
     
-    cerrar();
+    cerrar(opcion);
     editar_producto(id);
 
       

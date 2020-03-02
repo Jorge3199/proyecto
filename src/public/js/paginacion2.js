@@ -213,7 +213,7 @@ function valor2(p){
             <td>${prod2[p].id}</td> <td>${prod2[p].nombre}</td> <td>${prod2[p].precio}</td> <td>${prod2[p].cantidad}</td> <td>${prod2[p].modelo}</td>
             <td> <a onclick="imagenes('${prod2[p].imagen}')"><img height="50" width="50" src="/imagen1/${prod2[p].imagen}"></a></td> 
             <td> 
-                <a class="btn btn-warning mx-1" onclick="abrir_editacion_productos(${prod2[p].id},'${prod2[p].imagen}','${prod2[p].nombre}',${prod2[p].precio},'${prod2[p].modelo}',${prod2[p].cantidad})">
+                <a class="btn btn-warning mx-1" onclick="abrir_editacion_productos(${prod2[p].id},'${prod2[p].imagen}','${prod2[p].nombre}',${prod2[p].precio},'${prod2[p].modelo}',${prod2[p].cantidad},'opcion2')">
                 <img height="25" width="20" src="/img/editar2.png"></a>  
 
                 <a class="btn btn-danger" onclick="confirmar(${prod2[p].id})"> 
@@ -225,3 +225,79 @@ function valor2(p){
     }
 }    
 
+////////////////////////////////////////////////
+function paginacion_eliminar2(id){
+  
+    if(prod2.length > 10){
+        if(id!=1){
+            const id2 = document.querySelector('#options2 .selected');
+            id2.classList.replace('selected', 'selected'+1);
+            const disabled1 = document.querySelector('#options2 .disabled');
+            disabled1.classList.replace('disabled', 'disabled1');   
+        }
+
+        if(id==numero2){
+            const id3 = document.querySelector('#options2 .selected'+id);
+            id3.classList.replace('selected'+id, 'selected');
+            const disabled2 = document.querySelector('#options2 .disabled2');
+            disabled2.classList.replace('disabled2', 'disabled');
+            var p= (id-1) * 10;
+            valor2(p);
+        }
+
+        if(id<numero2 && id!=1){
+            const id3 = document.querySelector('#options2 .selected'+id);
+            id3.classList.replace('selected'+id, 'selected');
+            var p= (id-1) * 10;
+            valor2(p);
+        }
+        
+        if(id>numero2){
+            const id3 = document.querySelector('#options2 .selected'+(id-1));
+            id3.classList.replace('selected'+(id-1), 'selected');
+            const disabled2 = document.querySelector('#options2 .disabled2');
+            disabled2.classList.replace('disabled2', 'disabled');
+            var p= (id-2) * 10;
+            valor2(p);
+        }
+
+        if(id==1){
+            var p= (id-1) * 10;
+            valor2(p);
+        }
+    }
+
+    if(prod2.length <= 10){
+        valor2(0);
+    }
+}
+
+function paginacion_editar2(id){
+    if( (id==numero2) && (numero2!=0) ){
+        const id1 = document.querySelector('#options2 .selected');
+        id1.classList.replace('selected', 'selected'+1);
+        const disabled1 = document.querySelector('#options2 .disabled');
+        disabled1.classList.replace('disabled', 'disabled1');
+        const id2 = document.querySelector('#options2 .selected'+id);
+        id2.classList.replace('selected'+id, 'selected');
+        const disabled2 = document.querySelector('#options2 .disabled2');
+        disabled2.classList.replace('disabled2', 'disabled');
+        var p= (id-1) * 10;
+        valor2(p);   
+    }
+
+    if( (id!=numero2) && (id!=1) && (numero2!=1) && (numero2!=0) ){
+        const id1 = document.querySelector('#options2 .selected');
+        id1.classList.replace('selected', 'selected'+1);
+        const disabled1 = document.querySelector('#options2 .disabled');
+        disabled1.classList.replace('disabled', 'disabled1');
+        const id2 = document.querySelector('#options2 .selected'+id);
+        id2.classList.replace('selected'+id, 'selected');
+         var p= (id-1) * 10;
+        valor2(p);
+    }
+     
+    if( (numero2==0) || (id==1) ){
+        valor2(0);
+    }
+}

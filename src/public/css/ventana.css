@@ -240,7 +240,9 @@ top: -10px;
 .negro{
     color: black;
 }
-
+.scroll .link li a{
+    cursor: pointer;
+}
 /* div.ex1 {
     overflow: auto;
 } */
@@ -288,6 +290,21 @@ transition: opacity 400ms ease-in;
     text-decoration: none;
     cursor: pointer;
 }
+
+.modalContainer .close11 {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.modalContainer .close11:hover,
+.modalContainer .close11:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
 
 /* ///////////////////////////////////////////////////// */
 .modalContainer2 {

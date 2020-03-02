@@ -203,7 +203,7 @@ function abrir_productos(){
 
 }
 //////////////////////////////////////////////////////////////////////////
-function abrir_editacion_productos(id, imagen, nombre, precio, modelo, cantidad){
+function abrir_editacion_productos(id, imagen, nombre, precio, modelo, cantidad, opcion){
     
     const ventana = document.querySelector('#vent');
     ventana.innerHTML = ` 
@@ -297,11 +297,11 @@ function abrir_editacion_productos(id, imagen, nombre, precio, modelo, cantidad)
                     <div class="row">
                         <div class="col-lg-8" style="text-align:right">
                             <div class="col-lg-3" id="cambiar">
-                                <a class="btn btn-warning btn-block" onclick="validar_formulario_editar(${id})" >Guardar</a>
+                                <a class="btn btn-warning btn-block" onclick="validar_formulario_editar(${id}, '${opcion}')" >Guardar</a>
                             </div>
 
                             <div class="col-lg-3" style="text-align:right">
-                                <a class="btn btn-danger btn-block" onclick="cerrar()">Cancelar</a>
+                                <a class="btn btn-danger btn-block" onclick="cerrar('${opcion}')">Cancelar</a>
                             </div>
 
                         </div>
@@ -618,7 +618,15 @@ function abrir_administrador(){
 var prod2 = [];
 var n5=0;
 function abrir_lista_producto(){
-   
+    const tamano = document.querySelector('#tamaño');
+    tamano.innerHTML = `
+        <span class="close1" onclick="span('${"true"}')">×</span>
+
+        <div id="vent">
+            
+        </div>
+    `
+
     const ventana = document.querySelector('#vent2');
     ventana.innerHTML = `
     <div class="row">
@@ -681,7 +689,12 @@ function abrir_lista_producto(){
     
     intro.style.width="65%";
     intro.style.top="-15%";
+    body2='true';
+ 
     abrir2();
+
+
+
     var doc = new jsPDF();
     $('#generatereport').click(function() {
         doc.fromHTML($('#lppresults')[0], 15, 15, {
@@ -696,7 +709,7 @@ function abrir_lista_producto(){
 //const boton = document.querySelector('#boton');
 
 
-const filtrar2 = ()=>{
+const filtrar2 = (llamar)=>{
     const lista = document.querySelector('#lista');
 
     const formulario2 =  document.querySelector('#formulario2');
@@ -724,9 +737,25 @@ const filtrar2 = ()=>{
                     
         } 
         
-    valor2(0);
-    paginacion2();   
-    // alert('jorge');
+
+
+    if( (llamar != 'edito') && (llamar != 'elimino') ){
+        valor2(0);
+		paginacion2();
+	}
+		
+
+
+    const id = [...document.querySelectorAll('#options2 .selected')].map(el => el.id);
+	if(llamar == 'edito'){
+		paginacion2();
+		paginacion_editar2(id); 
+	}
+
+	if(llamar == 'elimino'){
+	    paginacion2();
+        paginacion_eliminar2(id);
+	}
 
 }
     
@@ -803,7 +832,9 @@ function editar_producto(id){
     }
     
     editado();
-    filtrar2();
+    if(prod2.length != 0){
+        filtrar2('edito');
+    }
     filtrar('edito');
     
 }
@@ -851,7 +882,7 @@ function eliminar_producto(id){
     }); 
     prod=productos;
     eliminado();
-    filtrar2();
+    filtrar2('elimino');
     filtrar('elimino');
 }
 
