@@ -51,7 +51,7 @@ resultado22.innerHTML = `
 `
 const resultado11 = document.querySelector('#resultado11');
 var n, r;  
-for (n = 0; n < 4; n++) {
+for (n = 0; n < 8; n++) {
     
     
     resultado11.innerHTML += `
@@ -94,9 +94,9 @@ resultado.innerHTML = `
  </div>		
 `
 const resultado10 = document.querySelector('#resultado10');	
-const s= productos.length - p;
+const s= prod.length - p;
 p = s - 1;
-if(s < 4){
+if(s < 8){
     var n;
     for (n = 0; n < s; n++) {
         
@@ -105,15 +105,15 @@ if(s < 4){
         <div class="item four columns illustration" >
         
             <a href="project-1.html" class="expander">
-                <img height="200" width="270" src="imagen1/${productos[p].imagen}" alt="" />
+                <img height="200" width="270" src="imagen1/${prod[p].imagen}" alt="" />
                 <div class="mask"></div>
                 <div class="icon">
-                    <a class="btn btn-success mx-1" onclick="imagenes('${productos[p].imagen}')"> <img height="30" width="25" src="/img/imagen.png"></a>
-                    <a class="btn btn-warning mx-1" onclick="abrir_compra(${productos[p].id},'${productos[p].imagen}','${productos[p].nombre}',${productos[p].precio},'${productos[n].modelo}',${productos[p].cantidad})"> <img height="30" width="25" src="/img/carrito.png"></a>
-                    <a class="btn btn-danger" onclick="lista_favoritos(${productos[p].id})"> <img height="30" width="25" src="/img/heart1.png"></a>
+                    <a class="btn btn-success mx-1" onclick="imagenes('${prod[p].imagen}')"> <img height="30" width="25" src="/img/imagen.png"></a>
+                    <a class="btn btn-warning mx-1" onclick="abrir_compra(${prod[p].id},'${prod[p].imagen}','${prod[p].nombre}',${prod[p].precio},'${prod[n].modelo}',${prod[p].cantidad})"> <img height="30" width="25" src="/img/carrito.png"></a>
+                    <a class="btn btn-danger" onclick="lista_favoritos(${prod[p].id})"> <img height="30" width="25" src="/img/heart1.png"></a>
                 </div>
-                <h5>${productos[p].nombre}</h5> 
-                <h6>${productos[p].precio}</h6>
+                <h5>${prod[p].nombre}</h5> 
+                <h6>${prod[p].precio}</h6>
             </a>
             
         </div>
@@ -123,24 +123,24 @@ if(s < 4){
     }; 
 }
 
-if(s >= 4){
+if(s >= 8){
     var n;
-    for (n = 0; n < 4; n++) {
+    for (n = 0; n < 8; n++) {
         
     
         resultado10.innerHTML += `
         <div class="item four columns illustration" >
         
             <a href="project-1.html" class="expander">
-                <img height="200" width="270" src="imagen1/${productos[p].imagen}" alt="" />
+                <img height="200" width="270" src="imagen1/${prod[p].imagen}" alt="" />
                 <div class="mask"></div>
                 <div class="icon">
-                    <a class="btn btn-success mx-1" onclick="imagenes('${productos[p].imagen}')"> <img height="30" width="25" src="/img/imagen.png"></a>
-                    <a class="btn btn-warning mx-1" onclick="abrir_compra(${productos[p].id},'${productos[p].imagen}','${productos[p].nombre}',${productos[p].precio},'${productos[n].modelo}',${productos[p].cantidad})"> <img height="30" width="25" src="/img/carrito.png"></a>
-                    <a class="btn btn-danger" onclick="lista_favoritos(${productos[p].id})"> <img height="30" width="25" src="/img/heart1.png"></a>
+                    <a class="btn btn-success mx-1" onclick="imagenes('${prod[p].imagen}')"> <img height="30" width="25" src="/img/imagen.png"></a>
+                    <a class="btn btn-warning mx-1" onclick="abrir_compra(${prod[p].id},'${prod[p].imagen}','${prod[p].nombre}',${prod[p].precio},'${prod[n].modelo}',${prod[p].cantidad})"> <img height="30" width="25" src="/img/carrito.png"></a>
+                    <a class="btn btn-danger" onclick="lista_favoritos(${prod[p].id})"> <img height="30" width="25" src="/img/heart1.png"></a>
                 </div>
-                <h5>${productos[p].nombre}</h5> 
-                <h6>${productos[p].precio}</h6>
+                <h5>${prod[p].nombre}</h5> 
+                <h6>${prod[p].precio}</h6>
             </a>
             
         </div>

@@ -1,3 +1,40 @@
+const formulario1 =  document.querySelector('#formulario1');
+var n10;       
+const filtrar1 = ()=>{
+   
+        prod = [];
+        n10=0;
+    
+        const texto = formulario1.value.toLowerCase();
+
+        for (var i=0; i<productos.length;i++) { 
+                
+                let nombre = productos[i].nombre.toLowerCase();
+                let precio = productos[i].precio.toString().toLowerCase();
+                let cantidad = productos[i].cantidad.toString().toLowerCase();
+                let modelo = productos[i].modelo.toLowerCase();
+                
+        
+                if( (nombre.indexOf(texto) !== -1) || (precio.indexOf(texto) !== -1) || (cantidad.indexOf(texto) !== -1) || (modelo.indexOf(texto) !== -1) ){ 
+                    
+                    prod[n10] = { id: productos[i].id, nombre: productos[i].nombre, precio:productos[i].precio, cantidad: productos[i].cantidad, modelo: productos[i].modelo, imagen: productos[i].imagen};
+                    n10 +=1;
+                    
+                }
+                    
+        } 
+
+        valor(0);
+		paginacion();
+		 
+
+}
+     
+formulario1.addEventListener('keyup', filtrar1);
+filtrar1();
+///////////////////////////////////////////////////////////
+
+
 function abrir_compra(id, imagen, nombre, precio, modelo, cantidad){
     const ventana = document.querySelector('#vent');
     ventana.innerHTML = `
@@ -125,7 +162,16 @@ function compra(id,nombre,precio,modelo,cantidad,imagen){
 }
 
 function carrito(){
-    const ventana = document.querySelector('#vent');
+    const tamano = document.querySelector('#tamaño');
+    tamano.innerHTML = `
+        <span class="close1" onclick="span('${"true"}')">×</span>
+
+        <div id="vent">
+            
+        </div>
+    `
+
+    const ventana = document.querySelector('#vent2');
     ventana.innerHTML = `
         
         <div class="row">
@@ -196,7 +242,7 @@ function carrito(){
                     <td> <a onclick="imagenes('${lista_comprar[i].imagen}')"><img height="50" width="50" src="/imagen1/${lista_comprar[i].imagen}"></a></td>
                     <td>${lista_comprar[i].cantidad * lista_comprar[i].precio}</td>
                     <td> 
-                            <a class="btn btn-warning mx-1" onclick="abrir(${lista_comprar[i].id},'${lista_comprar[i].imagen}','${lista_comprar[i].nombre}',${lista_comprar[i].precio},'${lista_comprar[i].modelo}',${lista_comprar[i].cant_disp})">
+                            <a class="btn btn-warning mx-1" onclick="abrir_compra(${lista_comprar[i].id},'${lista_comprar[i].imagen}','${lista_comprar[i].nombre}',${lista_comprar[i].precio},'${lista_comprar[i].modelo}',${lista_comprar[i].cant_disp})">
                             <img height="25" width="20" src="/img/editar2.png"></a>
                     
                             <a class="btn btn-danger" onclick="lista_borrar(${lista_comprar[i].id},${lista_comprar[i].precio},${lista_comprar[i].cantidad})"> 
@@ -227,12 +273,11 @@ function carrito(){
     formulario.addEventListener('keyup', filtrar)
 
     filtrar();
-
-    abrir();
-    var intro = document.getElementById('tamaño');
+     body2='true';
+    abrir2();
+    var intro = document.getElementById('tamaño2');
   
     intro.style.width="75%";  
-    intro1.style.top= "-45px";
 
   
 }
@@ -385,7 +430,7 @@ function lista_favoritos(id){
                         <td>${productos[j].cantidad}</td> <td>${productos[j].nombre}</td> <td>${productos[j].precio}</td> <td>${productos[j].modelo}</td>
                         <td> <a onclick="imagenes('${productos[j].imagen}')"><img height="50" width="50" src="/imagen1/${productos[j].imagen}"></a></td> 
                         <td> 
-                            <a class="btn btn-warning mx-1" onclick="abrir(${productos[j].id},'${productos[j].imagen}','${productos[j].nombre}',${productos[j].precio},'${productos[j].modelo}',${productos[j].cantidad})">
+                            <a class="btn btn-warning mx-1" onclick="abrir_compra(${productos[j].id},'${productos[j].imagen}','${productos[j].nombre}',${productos[j].precio},'${productos[j].modelo}',${productos[j].cantidad})">
                             <img height="25" width="20" src="/img/carrito.png"></a>  
 
                             <a class="btn btn-danger" onclick="borrar_favorito(${productos[j].id})"> 
@@ -421,7 +466,6 @@ function lista_favoritos(id){
     var intro = document.getElementById('tamaño');
    
    
-    intro1.style.top= "-45px";
     intro.style.width="75%";
 }
 

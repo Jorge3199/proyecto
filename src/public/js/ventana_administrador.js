@@ -616,8 +616,10 @@ function abrir_administrador(){
     intro.style.top="-15%";
 }
 var prod2 = [];
+var prod3 = [];
 var n5=0;
 function abrir_lista_producto(){
+    prod3= [];
     const tamano = document.querySelector('#tamaño');
     tamano.innerHTML = `
         <span class="close1" onclick="span('${"true"}')">×</span>
@@ -646,6 +648,9 @@ function abrir_lista_producto(){
 
     </div> 
     <button id="generatereport">Download Report</button> 
+    <div>
+        <a onclick="producto_eliminado('${"true"}')"><img src="/img/trash.png" width="30" height="30"> </a>
+     </div>
     <div id="lppresults">
     <table  class="table display DataTables" class="table table-bordered order-table" class="card-header" style="color: white">
 
@@ -786,6 +791,175 @@ function agregar_producto(){
     // console.log(form);
 }
 
+var productos_eliminado=[];
+function producto_eliminado(opcion){
+    productos_eliminado=[];
+    $.ajax({
+        type:"POST",
+        url:"/administrador/productos_eliminado",
+        async: false,
+        success:function(producto){
+               //  console.log(producto);
+               
+                for (var n = 0; n < producto.length; n++) {
+                     productos_eliminado[n] = { id: producto[n].id, nombre: producto[n].nombre, precio:producto[n].precio, cantidad: producto[n].cantidad, modelo: producto[n].modelo, imagen:producto[n].imagen};
+                }
+
+        }
+        
+    });
+    if(opcion == 'true'){
+        prod_eliminado();
+    }
+}
+
+function prod_eliminado(){
+    prod2= [];
+    const tamano = document.querySelector('#tamaño');
+    tamano.innerHTML = `
+        <span class="close1" onclick="span('${"true"}')">×</span>
+
+        <div id="vent">
+            
+        </div>
+    `
+
+    const ventana = document.querySelector('#vent2');
+    ventana.innerHTML = `
+    <ol class="breadcrumb">
+        <li><a onclick="abrir_lista_producto()">Lista de producto</a></li>
+        <li><a class="active" style="color:black">Productos Eliminado</a></li>
+    </ol> 
+
+    <div class="row">
+        <div class="col-lg-6">
+            <h5 style="color:black">Productos Eliminado</h5>
+        </div>
+        
+        <div class="col-lg-3">
+            <h5 style="color:black; text-align:right">Buscar:</h5>
+            
+        </div>
+
+        <div class="col-lg-3">
+            
+            <input type="text" id="formulario3" class="form-control ">
+        </div>
+
+    </div> 
+    <button id="generatereport">Download Report</button> 
+
+    <div id="lppresults">
+    <table  class="table display DataTables" class="table table-bordered order-table" class="card-header" style="color: white">
+
+        <thead style="background-color:#ddac1b; color:black" align="center">
+            <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Cantidad</th>
+            <th>Modelo</th>
+            <th>Imagen</th>
+            <th>Opciones</th>
+            </tr>
+        </thead>
+
+        <tbody id="lista" style="color:black" align="center" class="card-header">
+
+        </tbody>
+         
+        
+
+    </table>
+    </div>
+
+    <section class="paginacion">
+		 <div id="options3" class="filter-menu">
+				<ul class="option-set" >
+					<ul id="paginacion3" class="pagination pagination-md">
+			            
+					</ul>	
+				</ul>
+        </div>
+    
+    </section>
+    `
+    
+    formulario3.addEventListener('keyup', filtrar3);
+    filtrar3();
+    
+    var intro = document.getElementById('tamaño2');
+    
+    intro.style.width="65%";
+    intro.style.top="-15%";
+    body2='true';
+ 
+    abrir2();
+
+
+
+    var doc = new jsPDF();
+    $('#generatereport').click(function() {
+        doc.fromHTML($('#lppresults')[0], 15, 15, {
+            width: 170
+        }, function() {
+            doc.save('sample-file.pdf');
+        });
+    });
+}
+
+
+const filtrar3 = (llamar)=>{
+    const lista = document.querySelector('#lista');
+
+    const formulario3 =  document.querySelector('#formulario3');
+        lista.innerHTML = '';
+        prod3 = [];
+        n5=0;
+        const texto = formulario3.value.toLowerCase();
+
+        for (var i=0; i<productos_eliminado.length;i++) { 
+                
+                let id = productos_eliminado[i].id.toString().toLowerCase();
+                let nombre = productos_eliminado[i].nombre.toLowerCase();
+                let precio = productos_eliminado[i].precio.toString().toLowerCase();
+                let cantidad = productos_eliminado[i].cantidad.toString().toLowerCase();
+                let modelo = productos_eliminado[i].modelo.toLowerCase();
+                
+        
+                if( (id.indexOf(texto) !== -1) || (nombre.indexOf(texto) !== -1) || (precio.indexOf(texto) !== -1) || (cantidad.indexOf(texto) !== -1) || (modelo.indexOf(texto) !== -1) ){ 
+                    
+                    prod3[n5] = { id: productos_eliminado[i].id, nombre: productos_eliminado[i].nombre, precio:productos_eliminado[i].precio, cantidad: productos_eliminado[i].cantidad, modelo: productos_eliminado[i].modelo, imagen: productos_eliminado[i].imagen};
+                    n5 +=1;
+                    
+                }
+                    
+        } 
+        
+
+
+    if( (llamar != 'edito') && (llamar != 'activo') ){
+        valor3(0);
+		paginacion3();
+	}
+		
+
+
+    const id = [...document.querySelectorAll('#options3 .selected')].map(el => el.id);
+	if(llamar == 'edito'){
+		paginacion3();
+		paginacion_editar3(id); 
+	}
+
+	if(llamar == 'activo'){
+	    paginacion3();
+        paginacion_eliminar3(id);
+        valor(0);
+        paginacion();
+	}
+
+}
+
 function editar_producto(id){
   
     var imagen = document.getElementById("imagen").value;
@@ -835,6 +1009,10 @@ function editar_producto(id){
     if(prod2.length != 0){
         filtrar2('edito');
     }
+    if(prod3.length != 0){
+        producto_eliminado();
+        filtrar3('edito');
+    }
     filtrar('edito');
     
 }
@@ -882,7 +1060,9 @@ function eliminar_producto(id){
     }); 
     prod=productos;
     eliminado();
-    filtrar2('elimino');
+    if(prod2.length != 0){
+        filtrar2('elimino');
+    }
     filtrar('elimino');
 }
 
@@ -926,4 +1106,40 @@ function agregar_administrador(){
     });
     cerrar();
     guardado();
+}
+
+function activar_producto(id){
+    var a=0;
+    var b=0;
+    $.ajax({
+        type:"POST",
+        url:"/administrador/activar_producto",
+        data: {id : id},
+        async: false,
+        success:function(producto){
+                // console.log(producto);
+                productos = [];
+                productos_eliminado = [];
+                for (var n = 0; n < producto.length; n++) {
+                    if(producto[n].estado == 'A'){
+                        productos[a] = { id: producto[n].id, nombre: producto[n].nombre, precio:producto[n].precio, cantidad: producto[n].cantidad, modelo: producto[n].modelo, imagen:producto[n].imagen};
+                        a+=1;
+                    }
+
+                    if(producto[n].estado == 'I'){
+                        productos_eliminado[b] = { id: producto[n].id, nombre: producto[n].nombre, precio:producto[n].precio, cantidad: producto[n].cantidad, modelo: producto[n].modelo, imagen:producto[n].imagen};
+                        b+=1;
+                    }
+                     
+                }
+            
+        }
+        
+    }); 
+
+    activado();
+    prod = productos;
+    filtrar3('activo');
+    // valor(0);
+    // paginacion();
 }

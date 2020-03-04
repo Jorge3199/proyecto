@@ -168,7 +168,19 @@ router.post('/modelo', isLoggedIn, async (req, res) => {
    
 });
 
+router.post('/productos_eliminado', isLoggedIn, async (req, res) => {
+     
+    const producto = await pool.query('SELECT * FROM producto WHERE estado="I" ');
+    res.json(producto);
+});
 
+router.post('/activar_producto', isLoggedIn, async (req, res) => {
+    const { id } = req.body;
+    await pool.query('UPDATE producto SET estado="A" WHERE id = ?', [id]);
+    
+    const producto = await pool.query('SELECT * FROM producto');
+    res.json(producto);
+});
 
 
 
