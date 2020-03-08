@@ -26,7 +26,14 @@ router.get('/signup', isLoggedIn, (req, res) => {
     res.render('auth/signup');
 });
 
-router.post('/signup', isLoggedIn, passport.authenticate('local.signup', {
+router.post('/administrador_signup', isLoggedIn, passport.authenticate('local.signup', {
+    
+    // successRedirect: '/administrador',
+    // failureRedirect: '/signup',
+    // failureFlash: true
+}));
+
+router.post('/cliente_signup', isLoggedIn, passport.authenticate('local.cliente_signup', {
     
     // successRedirect: '/administrador',
     // failureRedirect: '/signup',

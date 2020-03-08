@@ -5,6 +5,34 @@ var btn = document.getElementById("btnModal");
 var body = document.getElementsByTagName("body")[0];
 
 var body2= "false";
+/////////////////////////
+var modal3 = document.getElementById("tvesModal3");
+function span3(){
+    modal3.style.display = "none";
+
+    body.style.position = "inherit";
+    body.style.height = "auto";
+
+
+}
+
+function abrir3(){
+    modal3.style.display = "block";
+
+    body.style.position = "static";
+    body.style.height = "100%";
+    body.style.overflow = "hidden";
+}
+
+function cerrar3(){
+    modal3.style.display = "none";
+
+    body.style.position = "inherit";
+    body.style.height = "auto";
+
+
+}
+/////////////////////////
 
 function span(opcion){
     modal.style.display = "none";
@@ -12,7 +40,7 @@ function span(opcion){
     body.style.position = "inherit";
     body.style.height = "auto";
 
-    if(opcion != 'true'){
+    if(opcion != 'true' && opcion != 'true1'){
         body.style.overflow = "visible";
         body2="false";
     }
@@ -95,6 +123,17 @@ window.onclick = function(event) {
         }
     }
 
+    if (event.target == modal3) {
+        modal3.style.display = "none";
+
+        body.style.position = "inherit";
+        body.style.height = "auto";
+
+        if(body2 == 'false'){
+            body.style.overflow = "visible"; 
+        }
+    }
+
     if (event.target == modal2) {
         modal2.style.display = "none";
 
@@ -114,3 +153,26 @@ window.onclick = function(event) {
     }
 }
 
+function bigImg(n) {
+	var intro = document.getElementById('tamaño'+n);
+	intro.style.width="100%";
+	intro.style.transition= "all .1s ease";
+}
+
+function normalImg(n) {
+	var intro = document.getElementById('tamaño'+n);
+	intro.style.width="96.5%";
+	intro.style.transition= "all .1s ease";
+}
+
+function bigImg5(n) {
+	var intro = document.getElementById('tamaño5'+n);
+	intro.style.width="100%";
+	intro.style.transition= "all .1s ease";
+}
+
+function normalImg5(n) {
+	var intro = document.getElementById('tamaño5'+n);
+	intro.style.width="96.5%";
+	intro.style.transition= "all .1s ease";
+}

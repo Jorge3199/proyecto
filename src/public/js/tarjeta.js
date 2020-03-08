@@ -1,121 +1,72 @@
-const tarjeta = document.querySelector('#tarjeta');
-const tarjeta1 = document.querySelector('#jorge');
-const btnAbrirFormulario = document.querySelector('#btn-abrir-formulario');
-const formulario = document.querySelector('#formulario-tarjeta');
-const numeroTarjeta = document.querySelector('#tarjeta .numero');
-const nombreTarjeta = document.querySelector('#tarjeta .nombre');
-const logoMarca = document.querySelector('#logo-marca');
-const firma = document.querySelector('#tarjeta .firma p');
-const mesExpiracion = document.querySelector('#tarjeta .mes');
-const anosExpiracion = document.querySelector('#tarjeta .anos');
-const ccv = document.querySelector('#tarjeta .ccv');
+// Create a Stripe client.
+var stripe = Stripe('pk_test_xyfaqaLqo26sTsfVJ6kXeiP100Lq94wrRB');
 
-const mostrarFrente = () => {
-    if(tarjeta.classList.contains('active')){
-        tarjeta.classList.remove('active');
+// Create an instance of Elements.
+var elements = stripe.elements();
+
+// Custom styling can be passed to options when creating an Element.
+// (Note that this demo uses a wider set of styles than the guide below.)
+var style = {
+  base: {
+    color: '#32325d',
+    lineHeight: '18px',
+    fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+    fontSmoothing: 'antialiased',
+    fontSize: '16px',
+    '::placeholder': {
+      color: '#aab7c4'
     }
-}
+  },
+  invalid: {
+    color: '#fa755a',
+    iconColor: '#fa755a'
+  }
+};
 
+// Create an instance of the card Element.
+var card = elements.create('card', {style: style});
 
-tarjeta1.addEventListener('click', () => {
-    tarjeta.classList.toggle('active');
+// Add an instance of the card Element into the `card-element` <div>.
+card.mount('#card-element');
+
+// Handle real-time validation errors from the card Element.
+card.addEventListener('change', function(event) {
+  var displayError = document.getElementById('card-errors');
+  if (event.error) {
+    displayError.textContent = event.error.message;
+  } else {
+    displayError.textContent = '';
+  }
 });
 
-btnAbrirFormulario.addEventListener('click', () => {
-    btnAbrirFormulario.classList.toggle('active');
-    formulario.classList.toggle('active');
-});
+// Handle form submission.
+var form = document.getElementById('payment-form');
+form.addEventListener('submit', function(event) {
+  event.preventDefault();
 
-for(let i=1; i <= 12; i++){
-    let opcion = document.createElement('option');
-    opcion.value = i;
-    opcion.innerText = i;
-    formulario.selectMes.appendChild(opcion);
-}
-
-const anosActual = new Date().getFullYear();
-for(let i=anosActual; i <= anosActual + 8; i++){
-    let opcion = document.createElement('option');
-    opcion.value = i;
-    opcion.innerText = i;
-    formulario.selectAnos.appendChild(opcion);
-}
-
-// Input numero de tarjeta
-formulario.inputNumero.addEventListener('keyup', (e) => {
-    let valorInput = e.target.value;
-
-    formulario.inputNumero.value = valorInput
-    //Eliminamos espacios en blanco
-    .replace(/\s/g, '')
-    //Eliminar las letrar
-    .replace(/\D/g, '')
-    //ponemos espacio cada cuatro numeros
-    .replace(/([0-9]{4})/g, '$1 ')
-    //Elimina el ultimo espaciado
-    .trim();
-
-    numeroTarjeta.textContent = valorInput;
-
-    if(valorInput == ''){
-        numeroTarjeta.textContent = '#### #### #### ####';
-        logoMarca.innerHTML =  '';
+  stripe.createToken(card).then(function(result) {
+    if (result.error) {
+      // Inform the user if there was an error.
+      var errorElement = document.getElementById('card-errors');
+      errorElement.textContent = result.error.message;
+    } else {
+      // Send the token to your server.
+      pago(result.token);
     }
-
-    if(valorInput[0] == 4){
-        logoMarca.innerHTML =  '';
-        const imagen = document.createElement('img');
-        imagen.src = 'img/logos/visa.png';
-        logoMarca.appendChild(imagen);
-    }else if(valorInput[0] == 5){
-        logoMarca.innerHTML =  '';
-        const imagen = document.createElement('img');
-        imagen.src = 'img/logos/mastercard.png';
-        logoMarca.appendChild(imagen); 
-    }
-
-    mostrarFrente();
+  });
 });
 
-// input nombre de tarjeta
-formulario.inputNombre.addEventListener('keyup', (e) => {
-   let valorInput = e.target.value;
+// function stripeTokenHandler(token) {
+//   // Insert the token ID into the form so it gets submitted to the server
+//   var form = document.getElementById('payment-form');
+//   var hiddenInput = document.createElement('input');
+//   hiddenInput.setAttribute('type', 'hidden');
+//   hiddenInput.setAttribute('name', 'stripeToken');
+//   hiddenInput.setAttribute('value', token.id);
+//   form.appendChild(hiddenInput);
 
-   formulario.inputNombre.value = valorInput.replace(/[0-9]/g, '');
-   nombreTarjeta.textContent = valorInput;
-   firma.textContent = valorInput;
-
-   if(valorInput == ''){
-       nombreTarjeta.textContent = 'Jorge Hidalgo';
-   }
-
-   mostrarFrente();
-});
-
-// select mes
-formulario.selectMes.addEventListener('change', (e) => {
-   mesExpiracion.textContent = e.target.value;
-   mostrarFrente();
-});
-
-// select anos
-formulario.selectAnos.addEventListener('change', (e) => {
-    anosExpiracion.textContent = e.target.value.slice(2);
-    mostrarFrente();
-});
-
-// ccv
-formulario.inputCCV.addEventListener('keyup', () => {
-    if(!tarjeta.classList.contains('active')){
-        tarjeta.classList.toggle('active');
-    }
-
-    formulario.inputCCV.value = formulario.inputCCV.value
-     //Eliminamos espacios en blanco
-     .replace(/\s/g, '')
-     //Eliminar las letrar
-     .replace(/\D/g, '');
-
-     ccv.textContent = formulario.inputCCV.value;
-});
-
+//   // Submit the form
+//   //form.submit();
+//   cerrar3();
+//   pago(token.id);
+// }  

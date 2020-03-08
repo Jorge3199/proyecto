@@ -348,3 +348,40 @@ transition: opacity 400ms ease-in;
     text-decoration: none;
     cursor: pointer;
 }
+
+#tamaño3{
+    width: 35%;
+}
+/* //////////////////////////////////////// */
+.fondo {
+    background: #fff;
+    background: -moz-linear-gradient(#fff, #999);
+    background: -webkit-linear-gradient(#fff, #999);
+    background: -o-linear-gradient(#fff, #999);
+-webkit-transition: opacity 400ms ease-in;
+-moz-transition: opacity 400ms ease-in;
+transition: opacity 400ms ease-in;
+}
+
+.expander:focus {
+    width: 100%;
+}
+
+.texto3 {
+    position: absolute;
+    color:black;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #000;
+    font-size: 18px;
+    /* text-align: start; */
+}
+
+.texto4{
+    position: absolute;
+    left: -55px;
+    top:1px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #000;
+    font-size: 16px;
+    text-align: start;
+}

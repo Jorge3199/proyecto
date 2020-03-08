@@ -57,9 +57,8 @@
 							{{!-- <li><a href="blog-main.html">Blog Main</a></li>
 							<li><a href="blog-single.html">Blog Single</a></li> --}}
 							<li><a href="/pago">Pago</a></li>
-							<li><a href="/links/add">Agregar nuevo producto</a></li>
-							<li><a href="/signup">Agregar nuevo administrador</a></li>
-							<li><a href="/links/lista_de_producto">Lista de producto</a></li>
+							<li><a onclick="factura()">Factura</a></li>
+							<li><a onclick="tabla_favorito()">Lista de favorito</a></li>
 							<li><a href="/cliente_logout">Cerrar Sesion</a></li>
 						</ul>
 					</li><!-- end drop down -->
@@ -267,7 +266,7 @@
 		<div class="container" id="portfolio-container">
 
 			<!-- Portfolio Filters -->
-			<div id="options" class="filter-menu">
+			{{!-- <div id="options" class="filter-menu">
 				<ul id="filters" class="option-set" data-option-key="filter">
 					<li><a href="#filter" data-option-value="*" class="selected">All</a></li>
 					<li><a href="#filter" data-option-value=".illustration">Illustration</a></li>
@@ -275,38 +274,34 @@
 					<li><a href="#filter" data-option-value=".motion">Motion</a></li>
 					<li><a href="#filter" data-option-value=".web">Web</a></li>
 				</ul>
-			</div>
+			</div> --}}
 
            
 			<!-- Portfolio Items -->
 			{{!-- <div class="portfolio-items"> --}}
                     {{!-- {{#each links}}  --}}
-					<script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>
-					<div class="pago">
-						<form action="/pago" method="POST" >
-							<script
-								src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-								data-key="pk_test_xyfaqaLqo26sTsfVJ6kXeiP100Lq94wrRB"
-								data-amount="100"
-								data-name="Demo Site"
-								data-description="Widget"
-								data-image="/img/logo3.png"
-								data-locale="auto">
-							</script>
-							<script>
-								document.getElementsByClassName('stripe-button-el')[0].style.display='none';
-							</script>
-							<button type="submit" class="btn btn-warning mx-1">Pagar</button>
-						</form> 
-					</div>   
 
-					<div class="cart">
-                        <p ><a onclick="carrito()"><img height="30" width="27" src="/img/carrito.png"></a><sup id="cantidad_producto" style="color:white">0</sup>RD&#36;&nbsp;&nbsp;<a onclick="carrito()" id="total" class="total">0.00</a></p>
-                    </div>
+							{{!-- <script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>
+							<div class="pago">
+								<form action="/pago" method="POST" >
+									<script
+										src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+										data-key="pk_test_xyfaqaLqo26sTsfVJ6kXeiP100Lq94wrRB"
+										data-amount="100"
+										data-name="Demo Site"
+										data-description="Widget"
+										data-image="/img/logo3.png"
+										data-locale="auto">
+									</script>
+									<script>
+										document.getElementsByClassName('stripe-button-el')[0].style.display='none';
+									</script>
+									<button type="submit" class="btn btn-warning mx-1">Pagar</button>
+								</form> 
+							</div> --}}
+					   
 
-					      <div id="resultado22">
-							 
-						  </div>
+					
 
 					        <div class="buscar">
 								<div class="row">
@@ -317,6 +312,12 @@
 
 									<div class="col-lg-3">
 										<input type="text" id="formulario1" class="form-control ">
+									</div>
+
+									<div class="col-lg-6">
+										<div class="cart">
+											<p ><a onclick="carrito()"><img height="30" width="27" src="/img/carrito.png"></a><sup id="cantidad_producto" style="color:white">0</sup>RD&#36;&nbsp;&nbsp;<a onclick="carrito()" id="total" class="total">0.00</a></p>
+										</div>
 									</div>
 								</div>
 					    	</div>
@@ -966,6 +967,36 @@
 
 
 {{!-- ///////////////////////////////////////////////////////////////////////////////////////// --}}
+    <link rel="stylesheet" href="css/tarjeta.css" />
+    <script src="https://js.stripe.com/v3/"></script>
+  
+  
+  {{!-- <button onclick="abrir()">Pagar</button> --}}
+	<div id="tvesModal3" class="modalContainer">
+		<div id="tamaño3" class="modal-content">
+			<span class="close" onclick="span3()">×</span>
+
+			<form method="post" id="payment-form">
+				<div class="form-row">
+					<label for="card-element">
+					Tarjeta de Credito o Debito
+					</label>
+					<div id="card-element">
+					<!-- A Stripe Element will be inserted here. -->
+					</div>
+
+					<!-- Used to display form errors. -->
+					<div id="card-errors" role="alert"></div>
+				</div>
+
+				<button >Pagar</button>
+			</form>
+
+		</div>
+			
+	</div>
+    <script type="text/javascript" src="js/tarjeta.js"></script>
+
 <div id="tvesModal" class="modalContainer">
 	<div id="tamaño" class="modal-content">
 		<span class="close1" onclick="span()">×</span>
@@ -988,9 +1019,15 @@
 		
 </div>
 
+
 <script type="text/javascript" src="js/paginacion_cliente.js"></script>
 <script type="text/javascript" src="js/cliente.js"></script>
 <script type="text/javascript" src="js/ventana_cliente.js"></script>
+<script type="text/javascript" src="js/paginacion_cliente2.js"></script>
+<script type="text/javascript" src="js/paginacion_cliente3.js"></script>
+<script type="text/javascript" src="js/validar_cliente.js"></script>
+<script type="text/javascript" src="js/alerta.js"></script>
 <script type="text/javascript" src="js/ventana.js"></script>
+
 
 

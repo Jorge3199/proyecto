@@ -9,7 +9,8 @@ const pool = require('../database');
 const passport = require('passport');
 const helpers = require('../lib/helpers');
 const { isLoggedIn1, isNotLoggedIn1 } = require('../lib/auth1');
-const jwt = require('jsonwebtoken');
+const stripe = require('stripe')('sk_test_sWHCKBiXFFGfdGLtpjK4KgDT00ibQv3arz');
+
 require('dotenv').config();
 
 app.use(session({
@@ -20,25 +21,11 @@ app.use(session({
 
 app.use(flash());
 
-router.get('/', async (req, res) => {
-    const productos = await pool.query('SELECT * FROM producto WHERE estado="A" ');
-    // console.log(links);
-    // const token1= (process.env.token1)
-    var a=req.user;
-    if(typeof a !== "undefined"){
-        const datos = await pool.query('SELECT * FROM cliente WHERE id = ?', [a.id]);        
-        console.log('hola');
-        if(datos.length === 1){
-            res.render('cliente/cliente', { productos });
-            return false;
-        }
-        console.log(a);
-    }
-
-
-
-    res.render('cliente/super_gato', { productos, a });
-    // res.send('lista iran aqui');
+router.get('/', isLoggedIn1, async (req, res) => {
+    const productos = await pool.query('SELECT * FROM producto WHERE estado="A" ');       
+       
+    res.render('cliente/cliente', { productos });
+         
 });
 
 
@@ -208,24 +195,112 @@ router.post('/c_cambiar_contrasena/:aleatorio', isNotLoggedIn1, async (req, res)
 });
 
 //////////////////pago////////////////////////
-
 router.post('/pago', isLoggedIn1, async (req, res) => {
-    console.log(req.body);
+    var cliente=req.user;
+    const { comprar } = req.body;
+    // console.log(req.body);
+    var lista_comprar = JSON.parse(comprar);
+    //console.log(lista_comprar[0].nombre);
 
-    // const customer = await stripe.customers.create({
-    //     email: req.body.stripeEmail,
-    //     source: req.body.stripeToken
-    // });
-    // const charge = await stripe.charges.create({
-    //     amount: '3000',
-    //     currency: 'usd',
-    //     customer: customer.id,
-    //     description: 'Compra De Producto'
-    // });
+ 
+
+    const customer = await stripe.customers.create({
+        email: cliente.correo,
+        source: req.body.stripeToken
+    });
+    const charge = await stripe.charges.create({
+        amount: '2000',
+        currency: 'usd',
+        customer: customer.id,
+        description: 'Compra De Producto'
+    });
 
     // console.log(charge.id);
-    res.redirect('/cliente');
+    //res.redirect('/cliente');
+    var smtpTransport= nodemailer.createTransport({
+        service: 'gmail',
+        auth:{
+            type: 'login',
+            user: 'supergato3199@gmail.com',
+            pass: 'supergato2020'
+        }
+    });
+
+
+    contentHTML = `
+        Hola, ${nombre}:
+        </br></br>
+        Recibimos una solicitud para restablecer tu contraseña de Super Gato.
+        </br>
+        <a href="http://localhost:4000/c_cambiar_contrasena/${aleatorio}">
+                <button style="background-color:#ffab02">Restablecer Contraseña</button>
+        </a>
+    `;
+    
+    var mailOptions={
+    from:'jose',
+    to: cliente.correo,
+    subject: 'Factura de producto',
+    text: 'Hola_Mundo',
+    html: contentHTML      
+    }
+
+    //res.send(lista[0]);
+    await smtpTransport.sendMail(mailOptions,function(error,res){
+        if(error){
+        console.log(error);
+        }else{
+           
+           res.send('Mensaje Enviado');
+        }
+    });
+    //res.render('cliente/mensaje');
+    res.json('pago03');
     
 });
 
+router.post('/factura', isLoggedIn1, async (req, res) => {
+    var cliente=req.user;
+    
+    var smtpTransport= nodemailer.createTransport({
+        service: 'gmail',
+        auth:{
+            type: 'login',
+            user: 'supergato3199@gmail.com',
+            pass: 'supergato2020'
+        }
+    });
+
+
+    contentHTML = `
+        Hola, jorge
+        <br/><br/>
+        Recibimos una solicitud para restablecer tu contraseña de Super Gato.
+        </br>
+        <a href="http://localhost:4000/c_cambiar_contrasena/344">
+                <button style="background-color:#ffab02">Restablecer Contraseña</button>
+        </a>
+    `;
+    
+    var mailOptions={
+    from:'jose',
+    to: cliente.correo,
+    subject: 'Factura de producto',
+    text: 'Hola_Mundo',
+    html: contentHTML      
+    }
+
+  
+    await smtpTransport.sendMail(mailOptions,function(error,res){
+        if(error){
+        console.log(error);
+        }else{
+           
+           res.send('Mensaje Enviado');
+        }
+    });
+    //res.render('cliente/mensaje');
+    res.json('pago03');
+    
+});
 module.exports = router;

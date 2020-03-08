@@ -1,4 +1,4 @@
-function validar_administrador() {
+function validar_registro(opcion) {
     
     var nombre, apellido, sexo, nacimiento, direccion, telefono, correo, usuario, contrasena, confirmar, expresion;
 
@@ -45,7 +45,15 @@ function validar_administrador() {
         return  false;
     }
 
-    agregar_administrador();
+    if(opcion == 31){
+        agregar_administrador();
+    }
+
+    if(opcion == 07){
+        agregar_cliente();
+    }
+
+    //agregar_administrador();
       
 }
 
@@ -208,43 +216,7 @@ function guardado(){
       })
 }
 
-function editado(){
-    const Toast = Swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-        onOpen: (toast) => {
-          toast.addEventListener('mouseenter', Swal.stopTimer)
-          toast.addEventListener('mouseleave', Swal.resumeTimer)
-        }
-      })
-      
-      Toast.fire({
-        type: 'success',
-        title: 'Se a editado correctamente'
-      })
-}
 
-function eliminado(){
-    const Toast = Swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-        onOpen: (toast) => {
-          toast.addEventListener('mouseenter', Swal.stopTimer)
-          toast.addEventListener('mouseleave', Swal.resumeTimer)
-        }
-      })
-      
-      Toast.fire({
-        type: 'success',
-        title: 'Se a eliminado correctamente'
-      })
-}
 
 function activado(){
     const Toast = Swal.mixin({

@@ -1,9 +1,10 @@
+var lista1 = [];
 const formulario1 =  document.querySelector('#formulario1');
-var n10;       
+var n5;       
 const filtrar1 = ()=>{
    
         prod = [];
-        n10=0;
+        n5=0;
     
         const texto = formulario1.value.toLowerCase();
 
@@ -17,8 +18,8 @@ const filtrar1 = ()=>{
         
                 if( (nombre.indexOf(texto) !== -1) || (precio.indexOf(texto) !== -1) || (cantidad.indexOf(texto) !== -1) || (modelo.indexOf(texto) !== -1) ){ 
                     
-                    prod[n10] = { id: productos[i].id, nombre: productos[i].nombre, precio:productos[i].precio, cantidad: productos[i].cantidad, modelo: productos[i].modelo, imagen: productos[i].imagen};
-                    n10 +=1;
+                    prod[n5] = { id: productos[i].id, nombre: productos[i].nombre, precio:productos[i].precio, cantidad: productos[i].cantidad, modelo: productos[i].modelo, imagen: productos[i].imagen};
+                    n5 +=1;
                     
                 }
                     
@@ -108,15 +109,31 @@ function abrir_compra(id, imagen, nombre, precio, modelo, cantidad){
     var intro = document.getElementById('tamaño');
     intro.style.width="50%";
 
+    const comprar = document.querySelector('#comprar');
+
+
+    comprar.addEventListener('keyup', (e) => {
+        let valorInput = e.target.value;
+    
+        comprar.value = valorInput
+
+        //Eliminamos espacios en blanco
+        .replace(/\s/g, '')
+        //Eliminar las letrar
+        .replace(/\D/g, '')
+
+        .trim();
+        
+    });
+
     
 }
 
 
 
-const lista_comprar = []
+var lista_comprar = []
 var total_compra=0;
 var mult;
-var nulo=0;
 function compra(id,nombre,precio,modelo,cantidad,imagen){
     comprar = document.getElementById("comprar").value;
     if(comprar > cantidad){
@@ -147,7 +164,7 @@ function compra(id,nombre,precio,modelo,cantidad,imagen){
         
         const cantidad_producto = document.querySelector('#cantidad_producto');
         cantidad_producto.innerHTML = `
-        ${lista_comprar.length - nulo}
+        ${lista_comprar.length}
         `
 
         mult= comprar * precio;
@@ -158,7 +175,24 @@ function compra(id,nombre,precio,modelo,cantidad,imagen){
         `
   
     }
-    cerrar();
+
+    if(body2!='true' && body2!='true1'){
+        agrego_carrito();
+        cerrar();
+    }
+
+
+    if(body2=='true'){
+        editado();
+        cerrar('opcion2');
+        filtrar2('edito');
+    }
+
+    if(body2=='true1'){
+        agrego_carrito();
+        cerrar('opcion2');
+    }
+    
 }
 
 function carrito(){
@@ -173,6 +207,7 @@ function carrito(){
 
     const ventana = document.querySelector('#vent2');
     ventana.innerHTML = `
+     <button onclick="abrir3()">Pagar</button>
         
         <div class="row">
             <div class="col-lg-6">
@@ -211,76 +246,96 @@ function carrito(){
         
 
         </table>
+
+        <section class="paginacion">
+            <div id="options2" class="filter-menu">
+                    <ul class="option-set" >
+                        <ul id="paginacion2" class="pagination pagination-md">
+                            
+                        </ul>	
+                    </ul>
+            </div>
+        
+        </section>
         
     ` 
 
-    const lista = document.querySelector('#lista');
+    
 
     const formulario =  document.querySelector('#formulario');
     //const boton = document.querySelector('#boton');
     
 
-    const filtrar = ()=>{
     
-        lista.innerHTML = '';
+    formulario.addEventListener('keyup', filtrar2)
 
-        const texto = formulario.value.toLowerCase();
-    
-        for(i=lista_comprar.length-1; i>=0 ;i--){
-
-            if(lista_comprar[i].id != ''){
-                
-                let cantidad = lista_comprar[i].cantidad.toLowerCase();
-                let nombre = lista_comprar[i].nombre.toLowerCase();
-                let precio = lista_comprar[i].precio.toString().toLowerCase();
-                let modelo = lista_comprar[i].modelo.toLowerCase();
-                let total = (lista_comprar[i].cantidad*lista_comprar[i].precio).toString().toLowerCase();
-            
-                if( (cantidad.indexOf(texto) !== -1) || (nombre.indexOf(texto) !== -1) || (precio.indexOf(texto) !== -1) || (modelo.indexOf(texto) !== -1) || (total.indexOf(texto) !== -1) ){
-                    lista.innerHTML += `
-                    <td>${lista_comprar[i].cantidad}</td> <td>${lista_comprar[i].nombre}</td> <td>${lista_comprar[i].precio}</td> <td>${lista_comprar[i].modelo}</td>
-                    <td> <a onclick="imagenes('${lista_comprar[i].imagen}')"><img height="50" width="50" src="/imagen1/${lista_comprar[i].imagen}"></a></td>
-                    <td>${lista_comprar[i].cantidad * lista_comprar[i].precio}</td>
-                    <td> 
-                            <a class="btn btn-warning mx-1" onclick="abrir_compra(${lista_comprar[i].id},'${lista_comprar[i].imagen}','${lista_comprar[i].nombre}',${lista_comprar[i].precio},'${lista_comprar[i].modelo}',${lista_comprar[i].cant_disp})">
-                            <img height="25" width="20" src="/img/editar2.png"></a>
-                    
-                            <a class="btn btn-danger" onclick="lista_borrar(${lista_comprar[i].id},${lista_comprar[i].precio},${lista_comprar[i].cantidad})"> 
-                            <img height="25" width="20" src="/img/borrar.png"></a> 
-                            
-                    </td>
-                    `
-                }    
-            }
-        
-        }
-
-        if(lista.innerHTML === ''){
-            lista.innerHTML += `
-            <td>Producto no encontrado..</td>
-            `
-        }
-
-        lista.innerHTML += `
-        <td></td>
-        <td></td>
-        <td></td>
-        <td>TOTAL RD$</td>
-        <td>${total_compra}</td>
-        <td></td>
-        `
-    }
-    formulario.addEventListener('keyup', filtrar)
-
-    filtrar();
-     body2='true';
-    abrir2();
+    filtrar2();
     var intro = document.getElementById('tamaño2');
-  
-    intro.style.width="75%";  
-
+    intro.style.width="75%"; 
+    intro.style.top="-15%";
+    body2='true';
+    abrir2();
   
 }
+
+var prod2 = [];
+const filtrar2 = (llamar)=>{
+    const lista = document.querySelector('#lista');
+    lista.innerHTML = '';
+
+    prod2 = [];
+    n5=0;
+    const texto = formulario.value.toLowerCase();
+
+    for(var i=0; i<lista_comprar.length;i++){
+       
+            let cantidad = lista_comprar[i].cantidad.toLowerCase();
+            let nombre = lista_comprar[i].nombre.toLowerCase();
+            let precio = lista_comprar[i].precio.toString().toLowerCase();
+            let modelo = lista_comprar[i].modelo.toLowerCase();
+            let total = (lista_comprar[i].cantidad*lista_comprar[i].precio).toString().toLowerCase();
+        
+            if( (cantidad.indexOf(texto) !== -1) || (nombre.indexOf(texto) !== -1) || (precio.indexOf(texto) !== -1) || (modelo.indexOf(texto) !== -1) || (total.indexOf(texto) !== -1) ){
+                prod2[n5] = { id: lista_comprar[i].id, nombre: lista_comprar[i].nombre, precio: lista_comprar[i].precio, modelo: lista_comprar[i].modelo, cantidad: lista_comprar[i].cantidad, imagen: lista_comprar[i].imagen, cant_disp: lista_comprar[i].cant_disp};
+                n5 +=1;
+            }        
+    }
+
+    if( (llamar != 'edito') && (llamar != 'elimino') ){
+        valor2(0);
+		paginacion2();
+	}
+		
+
+
+    const id = [...document.querySelectorAll('#options2 .selected')].map(el => el.id);
+	if(llamar == 'edito'){
+		paginacion2();
+		paginacion_editar2(id); 
+	}
+
+	if(llamar == 'elimino'){
+        eliminado();
+	    paginacion2();
+        paginacion_eliminar2(id);
+	}
+
+    if(lista.innerHTML === ''){
+        lista.innerHTML += `
+        <td>Producto no encontrado..</td>
+        `
+    }
+
+    lista.innerHTML += `
+    <td></td>
+    <td></td>
+    <td></td>
+    <td>TOTAL RD$</td>
+    <td>${total_compra}</td>
+    <td></td>
+    `
+}
+
 
 function lista_borrar(id,precio,cantidad){
                 
@@ -295,16 +350,20 @@ function lista_borrar(id,precio,cantidad){
     confirmButtonText: 'Confirmar'
     }).then((result) => {
     if (result.value) {
+        lista1 = [];
+         n5= 0;
         for(var n=0; n < lista_comprar.length; n++){
-            if(lista_comprar[n].id == id){
-                lista_comprar[n].id='';
+            if(lista_comprar[n].id != id){
+                lista1[n5]= { id: lista_comprar[n].id, nombre: lista_comprar[n].nombre, precio: lista_comprar[n].precio, modelo: lista_comprar[n].modelo, cantidad: lista_comprar[n].cantidad, imagen: lista_comprar[n].imagen, cant_disp: lista_comprar[n].cant_disp};
+                n5+=1; 
             }
         }
-        
-        nulo+=1;
+       // console.log(lista1);
+        lista_comprar = lista1;
+
         const cantidad_producto = document.querySelector('#cantidad_producto');
         cantidad_producto.innerHTML = `
-            ${lista_comprar.length - nulo}
+            ${lista_comprar.length}
         `
 
         mult= cantidad * precio;
@@ -313,7 +372,7 @@ function lista_borrar(id,precio,cantidad){
         total.innerHTML = `
             ${total_compra}
         `
-        carrito();
+        filtrar2('elimino');
     }
 
     })
@@ -321,7 +380,7 @@ function lista_borrar(id,precio,cantidad){
 } 
 
 /////////////////////////////////PRODUCTO_FAVORITO///////////////////////////////
-const favorito = []
+var favorito = []
 function lista_favoritos(id){
     var encontrado=0;
     for (i=0;i<favorito.length;i++){
@@ -342,26 +401,41 @@ function lista_favoritos(id){
     }
     if(encontrado==0){
         favorito[favorito.length]=id;
+        agrego_favorito();
     
-        var id_producto = id;
-        $(document).ready(function(){
-            $.ajax({
-                type:"POST",
-                url:"/lista_favorito/"+id_cliente+"/"+id_producto,
-                data: id_producto,
-                success:function(r){
-                    if(r==1){
-                        alert("agregado con exito");
-                    }else{
-                        alert("Fallo del servidor");
-                    }
-                }
-            }); 
-        });
+        // var id_producto = id;
+        // $(document).ready(function(){
+        //     $.ajax({
+        //         type:"POST",
+        //         url:"/lista_favorito/"+id_cliente+"/"+id_producto,
+        //         data: id_producto,
+        //         success:function(r){
+        //             if(r==1){
+        //                 alert("agregado con exito");
+        //             }else{
+        //                 alert("Fallo del servidor");
+        //             }
+        //         }
+        //     }); 
+        // });
     
     }
     
-    const ventana = document.querySelector('#vent');
+    
+   
+}
+
+function tabla_favorito(){
+    const tamano = document.querySelector('#tamaño');
+    tamano.innerHTML = `
+        <span class="close1" onclick="span('${"true1"}')">×</span>
+
+        <div id="vent">
+            
+        </div>
+    `
+
+    const ventana = document.querySelector('#vent2');
     ventana.innerHTML = `  
         <div class="row">
             <div class="col-lg-6">
@@ -401,74 +475,97 @@ function lista_favoritos(id){
         
 
         </table>
+
+        <section class="paginacion">
+            <div id="options3" class="filter-menu">
+                <ul class="option-set" >
+                    <ul id="paginacion3" class="pagination pagination-md">
+                        
+                    </ul>	
+                </ul>
+            </div>
+        
+        </section>
         
     ` 
     
-    const lista = document.querySelector('#lista');
+   
 
     const formulario =  document.querySelector('#formulario');
     //const boton = document.querySelector('#boton');
     
 
-    const filtrar = ()=>{
-
-        lista.innerHTML = '';
-
-        const texto = formulario.value.toLowerCase();
-
-        for (i=favorito.length;i>=0;i--){ 
-
-            for (j=0;j<productos.length;j++) { 
-                
-                if(productos[j].id==favorito[i]){
-                    let cantidad = productos[j].cantidad.toLowerCase();
-                    let nombre = productos[j].nombre.toLowerCase();
-                    let precio = productos[j].precio.toLowerCase();
-                    let modelo = productos[j].modelo.toLowerCase();
-                    if( (cantidad.indexOf(texto) !== -1) || (nombre.indexOf(texto) !== -1) || (precio.indexOf(texto) !== -1) || (modelo.indexOf(texto) !== -1) ){   
-                        lista.innerHTML += `
-                        <td>${productos[j].cantidad}</td> <td>${productos[j].nombre}</td> <td>${productos[j].precio}</td> <td>${productos[j].modelo}</td>
-                        <td> <a onclick="imagenes('${productos[j].imagen}')"><img height="50" width="50" src="/imagen1/${productos[j].imagen}"></a></td> 
-                        <td> 
-                            <a class="btn btn-warning mx-1" onclick="abrir_compra(${productos[j].id},'${productos[j].imagen}','${productos[j].nombre}',${productos[j].precio},'${productos[j].modelo}',${productos[j].cantidad})">
-                            <img height="25" width="20" src="/img/carrito.png"></a>  
-
-                            <a class="btn btn-danger" onclick="borrar_favorito(${productos[j].id})"> 
-                            <img height="25" width="20" src="/img/borrar.png"></a> 
-                        </td>
-                        `
-                    }
-                        
-                }
-
-                // document.write("|" + i + ":" + j + "| ");
-            } 
-            // document.write("<BR>");
-        
-        }
-
-        if(lista.innerHTML === ''){
-            lista.innerHTML += `
-            <td>Producto no encontrado..</td>
-            `
-        }
-
-    }
+  
 
 
     // boton.addEventListener('click', filtrar)
-    formulario.addEventListener('keyup', filtrar)
+    formulario.addEventListener('keyup', filtrar3)
 
-    filtrar();
+    filtrar3();
     
-    
-     abrir();
-    var intro = document.getElementById('tamaño');
-   
-   
-    intro.style.width="75%";
+    var intro = document.getElementById('tamaño2');
+    intro.style.width="75%"; 
+    intro.style.top="-15%";
+    body2='true1';
+    abrir2();
 }
 
+var prod3 = [];
+const filtrar3 = (llamar)=>{
+    const lista = document.querySelector('#lista'); 
+    lista.innerHTML = '';
+
+    prod3 = [];
+    n5=0;
+
+    const texto = formulario.value.toLowerCase();
+
+    for (var i = 0; i < favorito.length; i++){ 
+
+        for (j=0;j<productos.length;j++) { 
+            
+            if(productos[j].id==favorito[i]){
+                let cantidad = productos[j].cantidad.toLowerCase();
+                let nombre = productos[j].nombre.toLowerCase();
+                let precio = productos[j].precio.toLowerCase();
+                let modelo = productos[j].modelo.toLowerCase();
+                if( (cantidad.indexOf(texto) !== -1) || (nombre.indexOf(texto) !== -1) || (precio.indexOf(texto) !== -1) || (modelo.indexOf(texto) !== -1) ){   
+                    prod3[n5] = { id: productos[j].id , nombre: productos[j].nombre, precio: productos[j].precio, modelo:productos[j].modelo, cantidad: productos[j].cantidad, imagen: productos[j].imagen};
+                    n5 +=1;
+                }
+                    
+            }
+
+            // document.write("|" + i + ":" + j + "| ");
+        } 
+        // document.write("<BR>");
+    
+    }
+
+    if( (llamar != 'edito') && (llamar != 'elimino') ){
+        valor3(0);
+		paginacion3();
+    }
+    
+    const id = [...document.querySelectorAll('#options3 .selected')].map(el => el.id);
+	if(llamar == 'edito'){
+		paginacion3();
+		paginacion_editar3(id); 
+	}
+
+	if(llamar == 'elimino'){
+        eliminado();
+	    paginacion3();
+        paginacion_eliminar3(id);
+	}
+
+    if(lista.innerHTML === ''){
+        lista.innerHTML += `
+        <td>Producto no encontrado..</td>
+        `
+    }
+
+}
 
 function borrar_favorito(id){
                 
@@ -483,16 +580,55 @@ function borrar_favorito(id){
     confirmButtonText: 'Confirmar'
     }).then((result) => {
     if (result.value) {
+        lista1 = [];
+        n5= 0;
         for(var n=0; n < favorito.length; n++){
-            if(favorito[n] == id){
-                favorito[n] = '';
+            if(favorito[n] != id){
+                lista1[n5]= favorito[n];
+                n5+=1; 
             }
         }
+        // console.log(lista1);
+        favorito = lista1;
+        //console.log(favorito);
         
-        lista_favoritos();
+        filtrar3('elimino');
     }
 
     })
     
 }
-    
+/////////////////////////////////////////////////////////  
+function pago(token){
+    cerrar3();
+   // alert(token);
+   var comprar = JSON.stringify(lista_comprar);
+   
+    $.ajax({
+        type:"POST",
+        url:"pago",
+        data: {stripeToken : token.id, comprar},
+        async: false,
+        success:function(pago){
+                console.log(pago);
+               
+            
+        }
+        
+    });
+}
+
+function factura(){
+  
+    $.ajax({
+        type:"POST",
+        url:"factura",
+        async: false,
+        success:function(pago){
+                console.log(pago);
+               
+            
+        }
+        
+    });
+}

@@ -99,7 +99,7 @@ function abrir_productos(){
                         <div class="col-md-6">
                             <h3 style="color:black">Modelo<span style="color:red">*</span></h3>
                             <div class="inputWithIcon jorge2">
-                                <select name="modelo" id="selectModelo" placeholder="Modelo" class="form-control">
+                                <select name="modelo" id="selectModelo" placeholder="Modelo" class="form-control" multiple>
                                     <option disabled selected>Modelo</option>
                                 </select> 
                                 <i class="icon-attach_money" aria-hidden="true"></i>
@@ -247,8 +247,8 @@ function abrir_editacion_productos(id, imagen, nombre, precio, modelo, cantidad,
                         <div class="col-md-6">
                             <h3 style="color:black">Modelo<span style="color:red">*</span></h3>
                             <div class="inputWithIcon jorge2">
-                                <select name="modelo" id="selectModelo" placeholder="Modelo" class="form-control" value="${modelo}">
-                                    <option disabled selected>Modelo</option>
+                                <select name="modelo" id="selectModelo" placeholder="Modelo" class="form-control" value="${modelo}" multiple>
+                                    <option disabled>Modelo</option>
                                 </select> 
                                 <i class="icon-attach_money" aria-hidden="true"></i>
                             </div>
@@ -398,7 +398,7 @@ function abrir_modelo(){
      intro.style.top="-3%";
 }
 ////////////////////////////////////////////////////
-function abrir_administrador(){
+function abrir_cliente(){
     const ventana = document.querySelector('#vent');
     ventana.innerHTML = `
         <div class="row">
@@ -406,13 +406,13 @@ function abrir_administrador(){
             <div class="card ">
             <ol class="breadcrumb">
                 <li><a href="/administrador">Inicio</a></li>
-                <li><a class="active" style="color:black">Registrar Administrador</a></li>
+                <li><a class="active" style="color:black">Registrar Cliente</a></li>
             </ol>
             <div class="card-header">
-                <h2 align="center" style="color:black">Registrar Administrador</h2>
+                <h2 align="center" style="color:black">Registrar Cliente</h2>
             </div>
             <div class="card-body">
-                <form id="signup" onsubmit="return validar_administrador();">
+                <form id="cliente_signup" onsubmit="return validar_administrador();">
     
                 <div class="row">
     
@@ -572,7 +572,7 @@ function abrir_administrador(){
                 <div class="row">
     
                     <div class="col-lg-3">
-                    <a id="check" class="btn btn-warning btn-block my-3" onclick="validar_administrador()">
+                    <a id="check" class="btn btn-warning btn-block my-3" onclick="validar_registro(07)">
                         Registrar
                     </a>
                     
@@ -609,12 +609,309 @@ function abrir_administrador(){
     abrir();
 
     var intro = document.getElementById('tamaño');
-  
-   
+
+    intro.style.width="65%";
+    intro.style.top="-15%";
+
+    const nombre = document.querySelector('#nombre');
+    const apellido = document.querySelector('#apellido');
+    const telefono = document.querySelector('#telefono');
+
+    nombre.addEventListener('keyup', (e) => {
+        let valorInput = e.target.value;
+    
+        nombre.value = valorInput
+
+        //Elimina los numero
+        .replace(/([0-9])/g, '')
+        //Elimina el primer espaciado
+        .replace(/^\s+/,"");
+        
+    });    
+
+
+
+    apellido.addEventListener('keyup', (e) => {
+        let valorInput = e.target.value;
+    
+        apellido.value = valorInput
+        .replace(/([0-9])/g, '')   
+        .replace(/^\s+/,"");
+        
+    }); 
+
+    telefono.addEventListener('keyup', (e) => {
+        let valorInput = e.target.value;
+    
+        telefono.value = valorInput
+        
+        //Eliminamos espacios en blanco
+        .replace(/\s/g, '')
+        //Eliminar las letrar
+        .replace(/\D/g, '')
+
+        .trim();
+        
+    });
+}
+////////////////////////////////////////////////////
+function abrir_administrador(){
+    const ventana = document.querySelector('#vent');
+    ventana.innerHTML = `
+        <div class="row">
+        <div class="col-md-10 mx-auto">
+            <div class="card ">
+            <ol class="breadcrumb">
+                <li><a href="/administrador">Inicio</a></li>
+                <li><a class="active" style="color:black">Registrar Administrador</a></li>
+            </ol>
+            <div class="card-header">
+                <h2 align="center" style="color:black">Registrar Administrador</h2>
+            </div>
+            <div class="card-body">
+                <form id="administrador_signup" onsubmit="return validar_administrador();">
+    
+                <div class="row">
+    
+                    <div class="col-lg-6">
+                    <h3 class="negro">Nombre<span style="color:red">*</span></h3>
+                    <div class="inputWithIcon jorge">
+                        <input type="text" id="nombre" name="nombre" placeholder="Nombre" class="form-control" required autofocus>
+                        <i class="icon-user" aria-hidden="true"></i>
+                    </div>
+                    </div>
+    
+                
+                    <div class="col-lg-6">
+                    <h3 class="negro">Apellido<span style="color:red">*</span></h3>
+                    <div class="inputWithIcon jorge">
+                        <input type="text" id="apellido" name="apellido" placeholder="Apellido" class="form-control" >
+                        <i class="icon-pencil" aria-hidden="true"></i>
+                    </div>
+                    </div>
+    
+                </div>
+    
+                <div class="row">
+    
+                    <div class="col-lg-6">
+                    <h3 class="negro">Sexo<span style="color:red">*</span></h3>
+                    <div class="inputWithIcon jorge1">
+                        <select id="sexo" name="sexo" placeholder="Sexo" class="form-control">
+                            <option value="N" disabled selected>Selecciona sexo</option>
+                            <option value="F">Femenino</option> 
+                            <option value="M">Masculino</option> 
+                        </select>
+                        <i class="icon-man-woman" aria-hidden="true"></i>
+                    </div>
+                    </div>
+    
+                
+                    <div class="col-lg-6">
+                    <h3 class="negro">Nacimiento<span style="color:red">*</span></h3>
+                    <div class="inputWithIcon jorge3">
+                        <input type="date" id="nacimiento" name="nacimiento" placeholder="Nacimiento" class="form-control" >
+                        <i class="icon-date" aria-hidden="true"></i>
+                    </div>
+                    </div>
+    
+                </div>
+    
+                <div class="row">
+    
+                    <div class="col-lg-6">
+                    <h3 class="negro">Dirección<span style="color:red">*</span></h3>
+                    <div class="inputWithIcon jorge2">
+                        <select id="direccion" name="direccion" placeholder="Direccion" class="form-control">
+                            <option value="N" disabled selected>Selecciona Provincia</option>
+                            <option value="Azua">Azua</option> 
+                            <option value="Bahoruco">Bahoruco</option> 
+                            <option value="Barahona">Barahona</option>
+                            <option value="Dajabón">Dajabón</option> 
+                            <option value="Distrito Nacional">Distrito Nacional</option> 
+                            <option value="San Francisco de Macorís">San Francisco de Macorís</option>
+                            <option value="El Seibo">El Seibo</option> 
+                            <option value="Elías Piña">Elías Piña</option> 
+                            <option value="Moca">Moca</option>
+                            <option value="Hato Mayor">Hato Mayor</option> 
+                            <option value="Salcedo">Salcedo</option> 
+                            <option value="Jimaní">Jimaní</option>
+                            <option value="Higüey">Higüey</option> 
+                            <option value="La Romana">La Romana</option> 
+                            <option value="La Vega">La Vega</option>
+                            <option value="Nagua">Nagua</option> 
+                            <option value="Bonao">Bonao</option> 
+                            <option value="Monte Cristi">Monte Cristi</option>
+                            <option value="Monte Plata">Monte Plata</option> 
+                            <option value="Pedernales">Pedernales</option> 
+                            <option value="Baní">Baní</option>
+                            <option value="Puerto Plata">Puerto Plata</option> 
+                            <option value="Samaná">Samaná</option> 
+                            <option value="San Cristóbal">San Cristóbal</option>
+                            <option value="San José de Ocoa">San José de Ocoa</option> 
+                            <option value="San Juan">San Juan</option> 
+                            <option value="San Pedro de Macorís">San Pedro de Macorís</option>
+                            <option value="Cotuí">Cotuí</option> 
+                            <option value="Santiago">Santiago</option> 
+                            <option value="Santiago Rodríguez">Santiago Rodríguez</option>
+                            <option value="Santo Domingo">Santo Domingo</option> 
+                            <option value="Valverde">Valverde</option>  
+                        </select>
+                        <i class="icon-location" aria-hidden="true"></i>
+                    </div>
+                    </div>
+    
+                
+                    <div class="col-lg-6">
+                    <h3 class="negro">Teléfono<span style="color:red">*</span></h3>
+                    <div class="inputWithIcon jorge">
+                        <input type="text" id="telefono" name="telefono" placeholder="Telefono" class="form-control" >
+                        <i class="icon-phone" aria-hidden="true"></i>
+                    </div>
+                    </div>
+    
+                </div>
+    
+                <div class="row">
+    
+                    <div class="col-lg-6">
+                    <h3 class="negro">Correo<span style="color:red">*</span></h3>
+                    <div class="inputWithIcon jorge4">
+                        <input type="email" id="correo" name="correo" placeholder="Correo" class="form-control" >
+                        <i class="icon-email" aria-hidden="true"></i>
+                    </div>
+                    </div>
+    
+                
+                    <div class="col-lg-6">
+                    <h3 class="negro">Usuario<span style="color:red">*</span></h3>
+                    <div class="inputWithIcon jorge">
+                        <input type="text" id="usuario" name="usuario" placeholder="Usuario" class="form-control" >
+                        <i class="icon-user-tie" aria-hidden="true"></i>
+                    </div>
+                    </div>
+    
+                </div>
+    
+                <div class="row">
+    
+                    <div class="col-lg-6">
+                    <h3 class="negro">Contraseña<span style="color:red">*</span></h3>
+                    <div class="inputWithIcon jorge5">
+                        <input type="password" id="contrasena" name="contrasena" placeholder="Contraseña" class="form-control" >
+                        <i class="icon-lock" aria-hidden="true"></i>
+                    </div>
+                    </div>
+    
+                
+                    <div class="col-lg-6">
+                    <h3 class="negro">Confirmar<span style="color:red">*</span></h3>
+                    <div class="inputWithIcon jorge5">
+                        <input type="password" id="confirmar" name="confirmar" placeholder="Confirmar" class="form-control" >
+                        <i class="icon-key" aria-hidden="true"></i>
+                    </div>
+                    </div>
+    
+                </div>
+                
+                <br>
+
+                <div class="col-lg-12">
+                    <div class="col-lg-1">
+                        <input type="checkbox" name="acepto" >
+                    </div>
+
+                    <div class="col-lg-6">
+                        <a class="negro">Acepto ternimos y condiciones </a>
+                    </div>
+                </div>
+
+                <div class="row">
+    
+                    <div class="col-lg-3">
+                    <a id="check" class="btn btn-warning btn-block my-3" onclick="validar_registro(31)">
+                        Registrar
+                    </a>
+                    
+                    </div>
+    
+                    <div class="col-lg-3">
+                    <a class="btn btn-danger btn-block my-3" onclick="cerrar()">
+                        Cancelar
+                    </a>
+                    
+                    </div>
+    
+                </div>
+    
+                </div>
+                </form>
+            </div>
+            </div>
+        </div>
+        </div>
+    
+    `
+  //  alert(administrador);
+    var c = () => Array.from(document.getElementsByTagName("INPUT")).filter(cur => cur.type === 'checkbox' && cur.checked).length > 0;
+
+    check.addEventListener("click", () => {
+    if(!c()) { 
+        alert("Debes aceptar ternimos y condiciones");
+        //alertify.alert("HEADER","Esto es un mensaje").set('label', 'Aceptar'); 
+    } 
+    });
+
+
+    abrir();
+
+    var intro = document.getElementById('tamaño');
   
     intro.style.width="65%";
     intro.style.top="-15%";
+
+    const nombre = document.querySelector('#nombre');
+    const apellido = document.querySelector('#apellido');
+    const telefono = document.querySelector('#telefono');
+
+    nombre.addEventListener('keyup', (e) => {
+        let valorInput = e.target.value;
+    
+        nombre.value = valorInput
+
+        //Elimina los numero
+        .replace(/([0-9])/g, '')
+        //Elimina el primer espaciado
+        .replace(/^\s+/,"");
+        
+    });    
+
+
+
+    apellido.addEventListener('keyup', (e) => {
+        let valorInput = e.target.value;
+    
+        apellido.value = valorInput
+        .replace(/([0-9])/g, '')   
+        .replace(/^\s+/,"");
+        
+    }); 
+
+    telefono.addEventListener('keyup', (e) => {
+        let valorInput = e.target.value;
+    
+        telefono.value = valorInput
+        
+        //Eliminamos espacios en blanco
+        .replace(/\s/g, '')
+        //Eliminar las letrar
+        .replace(/\D/g, '')
+
+        .trim();
+        
+    });
 }
+
 var prod2 = [];
 var prod3 = [];
 var n5=0;
@@ -1091,11 +1388,29 @@ function consulta_Real_Modelo(){
 }
 
 function agregar_administrador(){
-    var datos=$('#signup').serialize();
+    var datos=$('#administrador_signup').serialize();
         
     $.ajax({
         type:"POST",
-        url:"signup",
+        url:"administrador_signup",
+        data: datos,
+        async: true,
+        success:function(administrador){
+                console.log(administrador);
+                
+        }
+        
+    });
+    cerrar();
+    guardado();
+}
+
+function agregar_cliente(){
+    var datos=$('#cliente_signup').serialize();
+        
+    $.ajax({
+        type:"POST",
+        url:"cliente_signup",
         data: datos,
         async: true,
         success:function(administrador){

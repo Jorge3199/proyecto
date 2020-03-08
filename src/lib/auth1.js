@@ -1,15 +1,29 @@
+const pool = require('../database');
 module.exports = {
-    isLoggedIn1 (req, res, next) {
+    async isLoggedIn1 (req, res, next) {
+        
         if (req.isAuthenticated()) {
-            return next();
+            var a=req.user;
+
+            const lista = await pool.query('SELECT * FROM cliente WHERE id = ?', [a.id]);
+
+            if(lista.length === 0){
+                return res.redirect('/administrador');
+            }
+
+            if(lista.length === 1){
+                return next();
+            }
         }
         return res.redirect('/cliente_signin');
     },
 
     isNotLoggedIn1(req, res, next) {
+
         if (!req.isAuthenticated()) {
+           
             return next();
         }
-        return res.redirect('/administrador');
+        return res.redirect('/cliente');
     }
 };
