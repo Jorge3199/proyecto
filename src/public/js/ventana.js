@@ -93,6 +93,24 @@ function abrir2(){
     body.style.overflow = "hidden";
 }
 
+function cerrar2() {
+    modal2.style.display = "none";
+
+    body.style.position = "inherit";
+    body.style.height = "auto";
+    body.style.overflow = "visible";
+
+    body2="false";
+    const tamano = document.querySelector('#tamaño');
+    tamano.innerHTML = `
+        <span class="close1" onclick="span()">×</span>
+
+        <div id="vent">
+            
+        </div>
+    `
+}
+
 span2.onclick = function() {
     modal2.style.display = "none";
 

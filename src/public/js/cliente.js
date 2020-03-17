@@ -109,7 +109,7 @@ if(s < 8){
                 <div class="mask"></div>
                 <div class="icon">
                     <a class="btn btn-success mx-1" onclick="imagenes('${prod[p].imagen}')"> <img height="30" width="25" src="/img/imagen.png"></a>
-                    <a class="btn btn-warning mx-1" onclick="abrir_compra(${prod[p].id},'${prod[p].imagen}','${prod[p].nombre}',${prod[p].precio},'${prod[n].modelo}',${prod[p].cantidad})"> <img height="30" width="25" src="/img/carrito.png"></a>
+                    <a class="btn btn-warning mx-1" onclick="abrir_compra(${prod[p].id},'${prod[p].imagen}','${prod[p].nombre}',${prod[p].precio},'${prod[p].modelo}',${prod[p].cantidad})"> <img height="30" width="25" src="/img/carrito.png"></a>
                     <a class="btn btn-danger" onclick="lista_favoritos(${prod[p].id})"> <img height="30" width="25" src="/img/heart1.png"></a>
                 </div>
               
@@ -168,7 +168,6 @@ if(s >= 8){
     var n;
     for (n = 0; n < 8; n++) {
         
-    
         resultado10.innerHTML += `
         <div class="item four columns illustration" onmouseover="bigImg5(${n})" onmouseout="normalImg5(${n})">
         
@@ -177,7 +176,7 @@ if(s >= 8){
                 <div class="mask"></div>
                 <div class="icon">
                     <a class="btn btn-success mx-1" onclick="imagenes('${prod[p].imagen}')"> <img height="30" width="25" src="/img/imagen.png"></a>
-                    <a class="btn btn-warning mx-1" onclick="abrir_compra(${prod[p].id},'${prod[p].imagen}','${prod[p].nombre}',${prod[p].precio},'${prod[n].modelo}',${prod[p].cantidad})"> <img height="30" width="25" src="/img/carrito.png"></a>
+                    <a class="btn btn-warning mx-1" onclick="abrir_compra(${prod[p].id},'${prod[p].imagen}','${prod[p].nombre}',${prod[p].precio},'${prod[p].modelo}',${prod[p].cantidad})"> <img height="30" width="25" src="/img/carrito.png"></a>
                     <a class="btn btn-danger" onclick="lista_favoritos(${prod[p].id})"> <img height="30" width="25" src="/img/heart1.png"></a>
                 </div>
             </a>

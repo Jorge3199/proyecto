@@ -226,18 +226,42 @@
 
 {{!-- ///////////////////////////////////////////////////////////// --}}
 <script>
-   const productos = []
-   var n=0;
+   var productos = [];
+   var favorito = [];
+   var categoria = [];
 </script>   
 {{!-- <div id="resultado">
 
 </div> --}}
+{{#each favorito}}
+      
+         <script>
+           
+           favorito[favorito.length] = { id_producto: `{{id_producto}}` };
+          
+           
+         </script>
+     
+{{/each}}
+
+{{#each categoria}}
+      
+         <script>
+           
+           categoria[categoria.length] = { id: `{{id}}`, id_administrador: `{{id_administrador}}`, modelo:`{{modelo}}` };
+
+
+           
+         </script>
+     
+{{/each}}
+
 {{#each productos}}
       
          <script>
            
-           productos[n] = { id: `{{id}}`, nombre: `{{nombre}}`, precio:`{{precio}}`, modelo:`{{modelo}}`, cantidad: `{{cantidad}}`, imagen:`{{imagen}}`};
-           n +=1;
+           productos[productos.length] = { id: `{{id}}`, nombre: `{{nombre}}`, precio:`{{precio}}`, id_modelo:`{{id_modelo}}`, cantidad: `{{cantidad}}`, imagen:`{{imagen}}`};
+           
 
            
          </script>
@@ -978,6 +1002,9 @@
 
 			<form method="post" id="payment-form">
 				<div class="form-row">
+					<div align="center">
+					   <img height="250" width="330" src="/img/gold.png">
+					</div>
 					<label for="card-element">
 					Tarjeta de Credito o Debito
 					</label>
@@ -989,7 +1016,14 @@
 					<div id="card-errors" role="alert"></div>
 				</div>
 
-				<button >Pagar</button>
+				<div class="row" align="center">
+					<div class="col-lg-12" align="center">
+                        <div align="center">
+		
+                              <button class="btn btn-warning mx-1" align="center">RD$ 0.00 Pagar</button>
+						</div>
+					</div>
+				</div>
 			</form>
 
 		</div>

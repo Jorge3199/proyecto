@@ -9,7 +9,6 @@ const pool = require('../database');
 const passport = require('passport');
 const helpers = require('../lib/helpers');
 const { isLoggedIn, isNotLoggedIn } = require('../lib/auth');
-const stripe = require('stripe')('sk_test_sWHCKBiXFFGfdGLtpjK4KgDT00ibQv3arz');
 
 
 app.use(session({
@@ -28,17 +27,12 @@ router.get('/signup', isLoggedIn, (req, res) => {
 
 router.post('/administrador_signup', isLoggedIn, passport.authenticate('local.signup', {
     
-    // successRedirect: '/administrador',
-    // failureRedirect: '/signup',
-    // failureFlash: true
+    successRedirect: '/logout',
+    failureRedirect: '/administrador',
+    failureFlash: true
 }));
 
-router.post('/cliente_signup', isLoggedIn, passport.authenticate('local.cliente_signup', {
-    
-    // successRedirect: '/administrador',
-    // failureRedirect: '/signup',
-    // failureFlash: true
-}));
+
 
 // SIGNIN
 router.get('/signin', isNotLoggedIn, (req, res) => {
@@ -206,20 +200,6 @@ router.post('/pago1', isLoggedIn, async (req, res) => {
     // console.log(charge.id);
     res.redirect('/links');
     
-});
-
-router.post('/agregar_modelo/:id_administrador', isLoggedIn, async (req, res) => {
-    // console.log(req.body);
-    const { id_administrador} = req.params;
-    const { modelo } = req.body;
-
-    const newModelo = {
-        id_administrador,
-        modelo
-    };
-    // console.log(newModelo);
-    await pool.query('INSERT INTO categoria set ?', [newModelo]);
-  
-});       
+});      
 
 module.exports = router;

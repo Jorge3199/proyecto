@@ -1621,3 +1621,56 @@ a.button-to-top:hover {color: #e74c3c;}
 	top: 0px;
 	left:-200px;
 }
+
+.imgRedonda {
+    width:300px;
+    height:300px;
+	border-radius:150px;
+	border:10px solid #f39c12;
+}
+
+.imgRedonda2 {
+	position: relative;
+	top: -10px;
+    width:50px;
+    height:50px;
+	border-radius:100px;
+	border:1px solid #000;
+}
+
+.encambezado {
+	position: relative;
+	top: -28px;
+	color: black;
+}
+
+.datos {
+	text-align: start;
+	position: absolute;
+	top: -10px;
+	color: black;
+	font-family:'Helvetica','Verdana','Monaco',sans-serif;
+	/* text-transform: lowercase; */
+}
+
+.total5 {
+	font-weight:bold;
+	position: relative;
+	color: #000;
+	text-align: right;
+
+}
+
+.total6 {
+	/* font-weight:bold; */
+	position: relative;
+	color: #000;
+	text-align: center;
+
+}
+
+.piez {
+	position: relative;
+	color: #000;
+	text-align: center;
+}

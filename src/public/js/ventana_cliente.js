@@ -4,7 +4,7 @@ var n5;
 const filtrar1 = ()=>{
    
         prod = [];
-        n5=0;
+        var modelo;
     
         const texto = formulario1.value.toLowerCase();
 
@@ -13,13 +13,17 @@ const filtrar1 = ()=>{
                 let nombre = productos[i].nombre.toLowerCase();
                 let precio = productos[i].precio.toString().toLowerCase();
                 let cantidad = productos[i].cantidad.toString().toLowerCase();
-                let modelo = productos[i].modelo.toLowerCase();
+                for (n = 0; n < categoria.length; n++){
+                    if(productos[i].id_modelo == categoria[n].id){
+                         modelo = categoria[n].modelo.toLowerCase();
+                    }
+                }
                 
         
                 if( (nombre.indexOf(texto) !== -1) || (precio.indexOf(texto) !== -1) || (cantidad.indexOf(texto) !== -1) || (modelo.indexOf(texto) !== -1) ){ 
                     
-                    prod[n5] = { id: productos[i].id, nombre: productos[i].nombre, precio:productos[i].precio, cantidad: productos[i].cantidad, modelo: productos[i].modelo, imagen: productos[i].imagen};
-                    n5 +=1;
+                    prod[prod.length] = { id: productos[i].id, nombre: productos[i].nombre, precio:productos[i].precio, cantidad: productos[i].cantidad, modelo: modelo, imagen: productos[i].imagen};
+                   
                     
                 }
                     
@@ -171,7 +175,7 @@ function compra(id,nombre,precio,modelo,cantidad,imagen){
         total_compra+= mult;
         const total = document.querySelector('#total');
         total.innerHTML = `
-        ${total_compra}
+        ${total_compra.toFixed(2)}
         `
   
     }
@@ -331,7 +335,7 @@ const filtrar2 = (llamar)=>{
     <td></td>
     <td></td>
     <td>TOTAL RD$</td>
-    <td>${total_compra}</td>
+    <td>${total_compra.toFixed(2)}</td>
     <td></td>
     `
 }
@@ -380,11 +384,11 @@ function lista_borrar(id,precio,cantidad){
 } 
 
 /////////////////////////////////PRODUCTO_FAVORITO///////////////////////////////
-var favorito = []
+// var favorito = []
 function lista_favoritos(id){
     var encontrado=0;
     for (i=0;i<favorito.length;i++){
-        if(favorito[i]==id){
+        if(favorito[i].id_producto==id){
             encontrado=1;
         
         }
@@ -400,8 +404,7 @@ function lista_favoritos(id){
     
     }
     if(encontrado==0){
-        favorito[favorito.length]=id;
-        agrego_favorito();
+        agregar_favorito(id);
     
         // var id_producto = id;
         // $(document).ready(function(){
@@ -516,7 +519,7 @@ const filtrar3 = (llamar)=>{
     lista.innerHTML = '';
 
     prod3 = [];
-    n5=0;
+    var modelo;
 
     const texto = formulario.value.toLowerCase();
 
@@ -524,14 +527,19 @@ const filtrar3 = (llamar)=>{
 
         for (j=0;j<productos.length;j++) { 
             
-            if(productos[j].id==favorito[i]){
+            if(productos[j].id==favorito[i].id_producto){
                 let cantidad = productos[j].cantidad.toLowerCase();
                 let nombre = productos[j].nombre.toLowerCase();
                 let precio = productos[j].precio.toLowerCase();
-                let modelo = productos[j].modelo.toLowerCase();
+                for (n = 0; n < categoria.length; n++){
+                    if(productos[j].id_modelo == categoria[n].id){
+                         modelo = categoria[n].modelo.toLowerCase();
+                    }
+                }
+
                 if( (cantidad.indexOf(texto) !== -1) || (nombre.indexOf(texto) !== -1) || (precio.indexOf(texto) !== -1) || (modelo.indexOf(texto) !== -1) ){   
-                    prod3[n5] = { id: productos[j].id , nombre: productos[j].nombre, precio: productos[j].precio, modelo:productos[j].modelo, cantidad: productos[j].cantidad, imagen: productos[j].imagen};
-                    n5 +=1;
+                    prod3[prod3.length] = { id: productos[j].id , nombre: productos[j].nombre, precio: productos[j].precio, modelo: modelo, cantidad: productos[j].cantidad, imagen: productos[j].imagen};
+                    
                 }
                     
             }
@@ -548,10 +556,6 @@ const filtrar3 = (llamar)=>{
     }
     
     const id = [...document.querySelectorAll('#options3 .selected')].map(el => el.id);
-	if(llamar == 'edito'){
-		paginacion3();
-		paginacion_editar3(id); 
-	}
 
 	if(llamar == 'elimino'){
         eliminado();
@@ -567,36 +571,41 @@ const filtrar3 = (llamar)=>{
 
 }
 
+function agregar_favorito(id){
+                
+    $.ajax({
+        type:"POST",
+        url:"agregar_favorito",
+        data: {id_producto: id},
+        async: false,
+        success:function(favorit){
+                
+                favorito = favorit;
+                agrego_favorito();
+   
+        }
+        
+    });
+  
+}
+
 function borrar_favorito(id){
                 
-    Swal.fire({
-    title: '¿Estás seguro?',
-    text: "¡No podrás revertir esto!",
-    type: 'warning',
-    showCancelButton: true,
-    confirmButtonColor: '#3085d6',
-    cancelButtonColor: '#d33',
-    cancelButtonText: 'Cancelar',
-    confirmButtonText: 'Confirmar'
-    }).then((result) => {
-    if (result.value) {
-        lista1 = [];
-        n5= 0;
-        for(var n=0; n < favorito.length; n++){
-            if(favorito[n] != id){
-                lista1[n5]= favorito[n];
-                n5+=1; 
-            }
+    $.ajax({
+        type:"POST",
+        url:"delete_favorito",
+        data: {id_producto: id},
+        async: false,
+        success:function(favorit){
+                
+                favorito = favorit;
+                
+                filtrar3('elimino');
+   
         }
-        // console.log(lista1);
-        favorito = lista1;
-        //console.log(favorito);
         
-        filtrar3('elimino');
-    }
-
-    })
-    
+    });
+  
 }
 /////////////////////////////////////////////////////////  
 function pago(token){
@@ -609,9 +618,24 @@ function pago(token){
         url:"pago",
         data: {stripeToken : token.id, comprar},
         async: false,
-        success:function(pago){
-                console.log(pago);
-               
+        success:function(producto){
+
+            lista_comprar = [];
+            const cantidad_producto = document.querySelector('#cantidad_producto');
+            cantidad_producto.innerHTML = `
+                ${lista_comprar.length}
+            `
+
+            total_compra= 0;
+            const total = document.querySelector('#total');
+            total.innerHTML = `
+                ${total_compra.toFixed(2)}
+            `
+            cerrar2();
+            productos=producto;
+            filtrar1();
+            // paginacion();
+            // valor(0);     
             
         }
         

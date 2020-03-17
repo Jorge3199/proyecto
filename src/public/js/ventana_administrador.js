@@ -5,7 +5,7 @@ const formulario =  document.querySelector('#formulario');
 const filtrar = (llamar)=>{
    
         prod = [];
-        n10=0;
+        var modelo;
     
         const texto = formulario.value.toLowerCase();
 
@@ -15,13 +15,17 @@ const filtrar = (llamar)=>{
                 let nombre = productos[i].nombre.toLowerCase();
                 let precio = productos[i].precio.toString().toLowerCase();
                 let cantidad = productos[i].cantidad.toString().toLowerCase();
-                let modelo = productos[i].modelo.toLowerCase();
+                for (n = 0; n < categoria.length; n++){
+                    if(productos[i].id_modelo == categoria[n].id){
+                         modelo = categoria[n].modelo.toLowerCase();
+                    }
+                }
                 
         
                 if( (id.indexOf(texto) !== -1) || (nombre.indexOf(texto) !== -1) || (precio.indexOf(texto) !== -1) || (cantidad.indexOf(texto) !== -1) || (modelo.indexOf(texto) !== -1) ){ 
                     
-                    prod[n10] = { id: productos[i].id, nombre: productos[i].nombre, precio:productos[i].precio, cantidad: productos[i].cantidad, modelo: productos[i].modelo, imagen: productos[i].imagen};
-                    n10 +=1;
+                    prod[prod.length] = { id: productos[i].id, nombre: productos[i].nombre, precio:productos[i].precio, cantidad: productos[i].cantidad, modelo: modelo, imagen: productos[i].imagen};
+                    
                     
                 }
                     
@@ -78,9 +82,8 @@ function abrir_productos(){
                     <div class="row">
                     <hr color="black" size=3>
                     <br>
-                       <div class="col-md-8">
-
-                         <div class="col-md-6">
+                      
+                         <div class="col-md-4">
                             <h3 style="color:black">Nombre<span style="color:red">*</span></h3>
                             <div class="inputWithIcon jorge">
                             <input type="text" id="nombre" name="nombre" placeholder="Nombre del producto" class="form-control" required autofocus>
@@ -88,7 +91,7 @@ function abrir_productos(){
                             </div>
                         </div>
                     
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <h3 style="color:black">Precio<span style="color:red">*</span></h3>
                             <div class="inputWithIcon jorge">
                             <input type="text" id="precio" name="precio" placeholder="RD$0.00" class="form-control" required >
@@ -96,18 +99,8 @@ function abrir_productos(){
                             </div>
                         </div>
 
-                        <div class="col-md-6">
-                            <h3 style="color:black">Modelo<span style="color:red">*</span></h3>
-                            <div class="inputWithIcon jorge2">
-                                <select name="modelo" id="selectModelo" placeholder="Modelo" class="form-control" multiple>
-                                    <option disabled selected>Modelo</option>
-                                </select> 
-                                <i class="icon-attach_money" aria-hidden="true"></i>
-                            </div>
-                        </div>
-
-
-                        <div class="col-md-6">
+                        
+                        <div class="col-md-4">
                             <h3 style="color:black">Cantidad<span style="color:red">*</span></h3>
                             <div class="inputWithIcon jorge">
                             <input type="text" id="cantidad" name="cantidad" placeholder="Cantidad" class="form-control" required>
@@ -115,22 +108,31 @@ function abrir_productos(){
                             </div>
                         </div> 
 
-                        </div>
-
                         <div class="col-md-4">
-                        <div class="col-md-12">
-                            <h3 style="color:black">Imagen<span style="color:red">*</span></h3>
-                            <div class="inputWithIcon jorge6">
-                            <input type="file" name="imagen" id="imagen" class="form-control" required>
-                            <i class="icon-camera" aria-hidden="true"></i>
+                            <h3 style="color:black">Modelo<span style="color:red">*</span></h3>
+                            <div class="inputWithIcon jorge2">
+                                <select id="id_modelo" name="id_modelo" placeholder="Modelo" class="form-control">
+                                  
+                                </select> 
+                                <i class="icon-cogs" aria-hidden="true"></i>
                             </div>
                         </div>
+
+                        <div class="col-md-2">
+                            
+                            <div id="div_file">
+                            <p id="texto"><i class="icon-camera" aria-hidden="true"></i>Add file</p>
+                                <input type="file" name="imagen" id="imagen"  required>
+                            </div>
+                            
+                        </div>
+
                          
-                        <div class="col-md-12">
+                        <div class="col-md-4">
                              <br>
                                
                             <table>
-                                <tr><td><div id="imagenPreview" class="imagen" style="width:310px; height:210px; border:dashed black" > </div></td></tr>
+                                <tr><td><div id="imagenPreview" class="imagen" style="width:461px; height:263px; border:dashed black" > </div></td></tr>
                                 
                                 
                              
@@ -147,16 +149,18 @@ function abrir_productos(){
                     <br>
                    
                     <div class="row">
-                        <div class="col-lg-8" style="text-align:right">
-                            <div class="col-lg-3" >
-                                <a class="btn btn-warning btn-block" onclick="validar_formulario()" >Guardar</a>
-                            </div>
+                       <div id="boton01">
+                            <div class="col-lg-8" style="text-align:right">
+                                <div class="col-lg-3" >
+                                    <a class="btn btn-warning btn-block" onclick="validar_formulario()" >Guardar</a>
+                                </div>
 
-                            <div class="col-lg-3" style="text-align:right">
-                               <a class="btn btn-danger btn-block" onclick="cerrar()">Cancelar</a>
-                            </div>
+                                <div class="col-lg-3" style="text-align:right">
+                                <a class="btn btn-danger btn-block" onclick="cerrar()">Cancelar</a>
+                                </div>
 
-                        </div>
+                            </div>
+                        </div>    
                     </div>
 
 
@@ -178,6 +182,37 @@ function abrir_productos(){
     
     intro.style.width="75%";
     intro.style.top="-12%";
+    const precio = document.querySelector('#precio');
+    const cantidad = document.querySelector('#cantidad');
+
+
+    precio.addEventListener('keyup', (e) => {
+        let valorInput = e.target.value;
+    
+        precio.value = valorInput
+
+        //Eliminamos espacios en blanco
+        .replace(/\s/g, '')
+        //Eliminar las letrar
+        .replace(/\D/g, '')
+
+        .trim();
+        
+    });
+
+    cantidad.addEventListener('keyup', (e) => {
+        let valorInput = e.target.value;
+    
+        cantidad.value = valorInput
+
+        //Eliminamos espacios en blanco
+        .replace(/\s/g, '')
+        //Eliminar las letrar
+        .replace(/\D/g, '')
+
+        .trim();
+        
+    });
   
 
 
@@ -221,14 +256,13 @@ function abrir_editacion_productos(id, imagen, nombre, precio, modelo, cantidad,
         </div>
         
             <div class="card-body">
-                <form id="editar_producto"  enctype="multipart/form-data" >
+            <form id="editar_producto"  enctype="multipart/form-data" >
                   
                     <div class="row">
                     <hr color="black" size=3>
                     <br>
-                       <div class="col-md-8">
-
-                         <div class="col-md-6">
+                    
+                        <div class="col-md-4">
                             <h3 style="color:black">Nombre<span style="color:red">*</span></h3>
                             <div class="inputWithIcon jorge">
                             <input type="text" id="nombre" name="nombre" placeholder="Nombre del producto" class="form-control" value="${nombre}" required autofocus>
@@ -236,26 +270,16 @@ function abrir_editacion_productos(id, imagen, nombre, precio, modelo, cantidad,
                             </div>
                         </div>
                     
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <h3 style="color:black">Precio<span style="color:red">*</span></h3>
                             <div class="inputWithIcon jorge">
-                            <input type="text" id="precio" name="precio" placeholder="RD$0.00" class="form-control" value="${precio}" required autofocus>
+                            <input type="text" id="precio" name="precio" placeholder="RD$0.00" class="form-control" value="${precio}" required >
                             <i class="icon-attach_money" aria-hidden="true"></i>
                             </div>
                         </div>
 
-                        <div class="col-md-6">
-                            <h3 style="color:black">Modelo<span style="color:red">*</span></h3>
-                            <div class="inputWithIcon jorge2">
-                                <select name="modelo" id="selectModelo" placeholder="Modelo" class="form-control" value="${modelo}" multiple>
-                                    <option disabled>Modelo</option>
-                                </select> 
-                                <i class="icon-attach_money" aria-hidden="true"></i>
-                            </div>
-                        </div>
-
-
-                        <div class="col-md-6">
+                        
+                        <div class="col-md-4">
                             <h3 style="color:black">Cantidad<span style="color:red">*</span></h3>
                             <div class="inputWithIcon jorge">
                             <input type="text" id="cantidad" name="cantidad" placeholder="Cantidad" class="form-control" value="${cantidad}" required>
@@ -263,55 +287,63 @@ function abrir_editacion_productos(id, imagen, nombre, precio, modelo, cantidad,
                             </div>
                         </div> 
 
-                        </div>
-
                         <div class="col-md-4">
-                        <div class="col-md-12">
-                            <h3 style="color:black">Imagen<span style="color:red">*</span></h3>
-                            <div class="inputWithIcon jorge6">
-                            <input type="file" name="imagen" id="imagen" class="form-control" value="${imagen}" required>
-                            <i class="icon-camera" aria-hidden="true"></i>
+                            <h3 style="color:black">Modelo<span style="color:red">*</span></h3>
+                            <div class="inputWithIcon jorge2">
+                                <select id="id_modelo" name="id_modelo" placeholder="Modelo" class="form-control" ">
+                                    
+                                </select> 
+                                <i class="icon-cogs" aria-hidden="true"></i>
                             </div>
                         </div>
-                         
-                        <div class="col-md-12">
-                             <br>
-                               
+
+                        <div class="col-md-2">
+                            
+                            <div id="div_file">
+                            <p id="texto"><i class="icon-camera" aria-hidden="true"></i>Add file</p>
+                                <input type="file" name="imagen" id="imagen"  required>
+                            </div>
+                            
+                        </div>
+
+                        
+                        <div class="col-md-4">
+                            <br>
+                            
                             <table>
-                                <tr><td><div id="imagenPreview" class="imagen" style="width:310px; height:210px; border:dashed black" > </div></td></tr>
+                                <tr><td><div id="imagenPreview" class="imagen" style="width:461px; height:263px; border:dashed black" > </div></td></tr>
                                 
                                 
-                             
+                            
 
                             </table> 
-                           
+                        
                         </div>
 
                         </div>
 
-                       
+                    
                     </div>
 
                     <br>
-                   
+                
                     <div class="row">
-                        <div class="col-lg-8" style="text-align:right">
-                            <div class="col-lg-3" id="cambiar">
-                                <a class="btn btn-warning btn-block" onclick="validar_formulario_editar(${id}, '${opcion}')" >Guardar</a>
-                            </div>
+                    <div id="boton01">
+                            <div class="col-lg-8" style="text-align:right">
+                               <div class="col-lg-3" id="cambiar">
+                                    <a class="btn btn-warning btn-block" onclick="validar_formulario_editar(${id}, '${opcion}')" >Guardar</a>
+                                </div>
 
-                            <div class="col-lg-3" style="text-align:right">
-                                <a class="btn btn-danger btn-block" onclick="cerrar('${opcion}')">Cancelar</a>
-                            </div>
+                                <div class="col-lg-3" style="text-align:right">
+                                    <a class="btn btn-danger btn-block" onclick="cerrar('${opcion}')">Cancelar</a>
+                                </div>
 
-                        </div>
+                            </div>
+                        </div>    
                     </div>
 
 
-                </form>
-
-                
-
+             </form>
 
             </div>
         </div>
@@ -327,7 +359,7 @@ function abrir_editacion_productos(id, imagen, nombre, precio, modelo, cantidad,
     intro.style.width="75%";
     intro.style.top="-12%";
     // intro.style.height="78%";
-
+   
 
     $('#imagenPreview').html("<img src='/imagen1/"+imagen+"'  class='imagen'/>"); 
    (function(){
@@ -347,7 +379,7 @@ function abrir_editacion_productos(id, imagen, nombre, precio, modelo, cantidad,
        });
    }) ();
 
-   consulta_Real_Modelo();
+   consulta_Real_Modelo(modelo);
  
 }
 //////////////////////////////////////////////////////
@@ -402,17 +434,30 @@ function abrir_cliente(){
     const ventana = document.querySelector('#vent');
     ventana.innerHTML = `
         <div class="row">
-        <div class="col-md-10 mx-auto">
+        <div class="col-md-12 mx-auto" >
             <div class="card ">
-            <ol class="breadcrumb">
-                <li><a href="/administrador">Inicio</a></li>
-                <li><a class="active" style="color:black">Registrar Cliente</a></li>
-            </ol>
+        
             <div class="card-header">
                 <h2 align="center" style="color:black">Registrar Cliente</h2>
             </div>
+                
+            <hr style="color:black" size=3>
             <div class="card-body">
-                <form id="cliente_signup" onsubmit="return validar_administrador();">
+                <form id="enviar" action="/cliente_signup" method="POST" enctype="multipart/form-data">
+
+                <div align="center">
+                    <div id="imagenPreview">
+                    </div>
+                </div>
+            
+        
+                <div align="center">
+                    <div id="div_file" style="top:-20px; left: 2px;">
+                    <p id="texto"><i class="icon-camera" aria-hidden="true"></i>Add file</p>
+                        <input type="file" name="imagen" id="imagen"  required>
+                    </div>
+                </div>
+                <hr color="black" size=3>
     
                 <div class="row">
     
@@ -516,21 +561,20 @@ function abrir_cliente(){
                 </div>
     
                 <div class="row">
+
+                    <div class="col-lg-6">
+                    <h3 class="negro">Cedula<span style="color:red">*</span></h3>
+                    <div class="inputWithIcon jorge">
+                        <input type="text" id="cedula" name="cedula" placeholder="Cedula" class="form-control" >
+                        <i class="icon-user-tie" aria-hidden="true"></i>
+                    </div>
+                    </div>
     
                     <div class="col-lg-6">
                     <h3 class="negro">Correo<span style="color:red">*</span></h3>
                     <div class="inputWithIcon jorge4">
                         <input type="email" id="correo" name="correo" placeholder="Correo" class="form-control" >
                         <i class="icon-email" aria-hidden="true"></i>
-                    </div>
-                    </div>
-    
-                
-                    <div class="col-lg-6">
-                    <h3 class="negro">Usuario<span style="color:red">*</span></h3>
-                    <div class="inputWithIcon jorge">
-                        <input type="text" id="usuario" name="usuario" placeholder="Usuario" class="form-control" >
-                        <i class="icon-user-tie" aria-hidden="true"></i>
                     </div>
                     </div>
     
@@ -572,7 +616,7 @@ function abrir_cliente(){
                 <div class="row">
     
                     <div class="col-lg-3">
-                    <a id="check" class="btn btn-warning btn-block my-3" onclick="validar_registro(07)">
+                    <a id="check" class="btn btn-warning btn-block my-3" onclick="validar_registro()">
                         Registrar
                     </a>
                     
@@ -605,12 +649,30 @@ function abrir_cliente(){
     } 
     });
 
+    $('#imagenPreview').html("<img src='/img/perfil.jpg' class='imgRedonda'/>"); 
+   (function(){
+       function filePreview(input){
+           if(input.files && input.files[0]){
+               var reader = new FileReader();
+
+               reader.onload = function(e){
+                   $('#imagenPreview').html("<img src='"+e.target.result+"' class='imgRedonda'/>");
+               }
+
+               reader.readAsDataURL(input.files[0]);
+           }
+       }
+       $('#imagen').change(function(){
+          filePreview(this);
+       });
+    }) ();
+
 
     abrir();
 
     var intro = document.getElementById('tamaño');
 
-    intro.style.width="65%";
+    intro.style.width="60%";
     intro.style.top="-15%";
 
     const nombre = document.querySelector('#nombre');
@@ -659,18 +721,31 @@ function abrir_administrador(){
     const ventana = document.querySelector('#vent');
     ventana.innerHTML = `
         <div class="row">
-        <div class="col-md-10 mx-auto">
+        <div class="col-md-12 mx-auto">
             <div class="card ">
-            <ol class="breadcrumb">
-                <li><a href="/administrador">Inicio</a></li>
-                <li><a class="active" style="color:black">Registrar Administrador</a></li>
-            </ol>
+            
             <div class="card-header">
                 <h2 align="center" style="color:black">Registrar Administrador</h2>
             </div>
+
+            <hr color="black" size=3>
             <div class="card-body">
-                <form id="administrador_signup" onsubmit="return validar_administrador();">
-    
+                <form id="enviar" action="/administrador_signup" method="POST" enctype="multipart/form-data">
+                 
+                <div align="center">
+                    <div id="imagenPreview">
+                    </div>
+                </div>
+            
+        
+                <div align="center">
+                    <div id="div_file" style="top:-20px; left: 2px;">
+                    <p id="texto"><i class="icon-camera" aria-hidden="true"></i>Add file</p>
+                        <input type="file" name="imagen" id="imagen"  required>
+                    </div>
+                </div>
+                <hr color="black" size=3>
+
                 <div class="row">
     
                     <div class="col-lg-6">
@@ -773,21 +848,20 @@ function abrir_administrador(){
                 </div>
     
                 <div class="row">
+
+                    <div class="col-lg-6">
+                    <h3 class="negro">Cedula<span style="color:red">*</span></h3>
+                    <div class="inputWithIcon jorge">
+                        <input type="text" id="cedula" name="cedula" placeholder="Cedula" class="form-control" >
+                        <i class="icon-user-tie" aria-hidden="true"></i>
+                    </div>
+                    </div>
     
                     <div class="col-lg-6">
                     <h3 class="negro">Correo<span style="color:red">*</span></h3>
                     <div class="inputWithIcon jorge4">
                         <input type="email" id="correo" name="correo" placeholder="Correo" class="form-control" >
                         <i class="icon-email" aria-hidden="true"></i>
-                    </div>
-                    </div>
-    
-                
-                    <div class="col-lg-6">
-                    <h3 class="negro">Usuario<span style="color:red">*</span></h3>
-                    <div class="inputWithIcon jorge">
-                        <input type="text" id="usuario" name="usuario" placeholder="Usuario" class="form-control" >
-                        <i class="icon-user-tie" aria-hidden="true"></i>
                     </div>
                     </div>
     
@@ -829,7 +903,7 @@ function abrir_administrador(){
                 <div class="row">
     
                     <div class="col-lg-3">
-                    <a id="check" class="btn btn-warning btn-block my-3" onclick="validar_registro(31)">
+                    <a id="check" class="btn btn-warning btn-block my-3" onclick="validar_registro()">
                         Registrar
                     </a>
                     
@@ -862,12 +936,30 @@ function abrir_administrador(){
     } 
     });
 
+    $('#imagenPreview').html("<img src='/img/perfil.jpg' class='imgRedonda'/>"); 
+    (function(){
+        function filePreview(input){
+            if(input.files && input.files[0]){
+                var reader = new FileReader();
+ 
+                reader.onload = function(e){
+                    $('#imagenPreview').html("<img src='"+e.target.result+"' class='imgRedonda'/>");
+                }
+ 
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        $('#imagen').change(function(){
+           filePreview(this);
+        });
+    }) ();
+
 
     abrir();
 
     var intro = document.getElementById('tamaño');
   
-    intro.style.width="65%";
+    intro.style.width="60%";
     intro.style.top="-15%";
 
     const nombre = document.querySelector('#nombre');
@@ -987,7 +1079,7 @@ function abrir_lista_producto(){
     formulario2.addEventListener('keyup', filtrar2);
     filtrar2();
     
-    var intro = document.getElementById('tamaño2');
+    var intro = document.getElementById('tamañ2');
     
     intro.style.width="65%";
     intro.style.top="-15%";
@@ -1017,7 +1109,7 @@ const filtrar2 = (llamar)=>{
     const formulario2 =  document.querySelector('#formulario2');
         lista.innerHTML = '';
         prod2 = [];
-        n5=0;
+        var modelo;
         
         const texto = formulario2.value.toLowerCase();
 
@@ -1027,13 +1119,16 @@ const filtrar2 = (llamar)=>{
                 let nombre = productos[i].nombre.toLowerCase();
                 let precio = productos[i].precio.toString().toLowerCase();
                 let cantidad = productos[i].cantidad.toString().toLowerCase();
-                let modelo = productos[i].modelo.toLowerCase();
+                for (n = 0; n < categoria.length; n++){
+                    if(productos[i].id_modelo == categoria[n].id){
+                         modelo = categoria[n].modelo.toLowerCase();
+                    }
+                }
                 
         
                 if( (id.indexOf(texto) !== -1) || (nombre.indexOf(texto) !== -1) || (precio.indexOf(texto) !== -1) || (cantidad.indexOf(texto) !== -1) || (modelo.indexOf(texto) !== -1) ){ 
                     
-                    prod2[n5] = { id: productos[i].id, nombre: productos[i].nombre, precio:productos[i].precio, cantidad: productos[i].cantidad, modelo: productos[i].modelo, imagen: productos[i].imagen};
-                    n5 +=1;
+                    prod2[prod2.length] = { id: productos[i].id, nombre: productos[i].nombre, precio:productos[i].precio, cantidad: productos[i].cantidad, modelo: modelo, imagen: productos[i].imagen};
                     
                 }
                     
@@ -1075,13 +1170,11 @@ function agregar_producto(){
         contentType: false,
         success:function(producto){
                 // console.log(producto);
-                for (var n = 0; n < producto.length; n++) {
-                     productos[n] = { id: producto[n].id, nombre: producto[n].nombre, precio:producto[n].precio, cantidad: producto[n].cantidad, modelo: producto[n].modelo, imagen:producto[n].imagen};
-                }
-                prod=productos;
+                productos=producto;
                 guardado();
-                valor(0);
-                paginacion();
+                filtrar();
+                // valor(0);
+                // paginacion();
         }
         
     }); 
@@ -1090,17 +1183,14 @@ function agregar_producto(){
 
 var productos_eliminado=[];
 function producto_eliminado(opcion){
-    productos_eliminado=[];
+
     $.ajax({
         type:"POST",
         url:"/administrador/productos_eliminado",
         async: false,
         success:function(producto){
                //  console.log(producto);
-               
-                for (var n = 0; n < producto.length; n++) {
-                     productos_eliminado[n] = { id: producto[n].id, nombre: producto[n].nombre, precio:producto[n].precio, cantidad: producto[n].cantidad, modelo: producto[n].modelo, imagen:producto[n].imagen};
-                }
+               productos_eliminado=producto;
 
         }
         
@@ -1185,7 +1275,7 @@ function prod_eliminado(){
     formulario3.addEventListener('keyup', filtrar3);
     filtrar3();
     
-    var intro = document.getElementById('tamaño2');
+    var intro = document.getElementById('tamañ2');
     
     intro.style.width="65%";
     intro.style.top="-15%";
@@ -1212,7 +1302,8 @@ const filtrar3 = (llamar)=>{
     const formulario3 =  document.querySelector('#formulario3');
         lista.innerHTML = '';
         prod3 = [];
-        n5=0;
+        var modelo;
+
         const texto = formulario3.value.toLowerCase();
 
         for (var i=0; i<productos_eliminado.length;i++) { 
@@ -1221,13 +1312,16 @@ const filtrar3 = (llamar)=>{
                 let nombre = productos_eliminado[i].nombre.toLowerCase();
                 let precio = productos_eliminado[i].precio.toString().toLowerCase();
                 let cantidad = productos_eliminado[i].cantidad.toString().toLowerCase();
-                let modelo = productos_eliminado[i].modelo.toLowerCase();
+                for (n = 0; n < categoria.length; n++){
+                    if(productos_eliminado[i].id_modelo == categoria[n].id){
+                         modelo = categoria[n].modelo.toLowerCase();
+                    }
+                }
                 
         
                 if( (id.indexOf(texto) !== -1) || (nombre.indexOf(texto) !== -1) || (precio.indexOf(texto) !== -1) || (cantidad.indexOf(texto) !== -1) || (modelo.indexOf(texto) !== -1) ){ 
                     
-                    prod3[n5] = { id: productos_eliminado[i].id, nombre: productos_eliminado[i].nombre, precio:productos_eliminado[i].precio, cantidad: productos_eliminado[i].cantidad, modelo: productos_eliminado[i].modelo, imagen: productos_eliminado[i].imagen};
-                    n5 +=1;
+                    prod3[prod3.length] = { id: productos_eliminado[i].id, nombre: productos_eliminado[i].nombre, precio:productos_eliminado[i].precio, cantidad: productos_eliminado[i].cantidad, modelo: modelo, imagen: productos_eliminado[i].imagen};
                     
                 }
                     
@@ -1263,6 +1357,7 @@ function editar_producto(id){
 
     if(imagen == ''){
         var datos=$('#editar_producto').serialize();
+        console.log(datos);
         
         $.ajax({
             type:"POST",
@@ -1272,9 +1367,7 @@ function editar_producto(id){
             success:function(producto){
                     // console.log(producto);
                    
-                    for (var n = 0; n < producto.length; n++) {
-                         productos[n] = { id: producto[n].id, nombre: producto[n].nombre, precio:producto[n].precio, cantidad: producto[n].cantidad, modelo: producto[n].modelo, imagen:producto[n].imagen};
-                    }
+                    productos= producto;
     
             }
             
@@ -1291,10 +1384,7 @@ function editar_producto(id){
             contentType: false,
             success:function(producto){
                      
-                    for (var n = 0; n < producto.length; n++) {
-                         productos[n] = { id: producto[n].id, nombre: producto[n].nombre, precio:producto[n].precio, cantidad: producto[n].cantidad, modelo: producto[n].modelo, imagen:producto[n].imagen};
-                         
-                    }
+                productos= producto;
     
             }
            
@@ -1321,14 +1411,10 @@ function modelo(){
   $(document).ready(function(){
       $.ajax({
           type:"POST",
-          url:"/agregar_modelo/"+id_administrador,
+          url:"/administrador/agregar_modelo",
           data: datos,
-          success:function(r){
-              if(r==1){
-                  alert("agregado con exito");
-              }else{
-                  alert("Fallo del servidor");
-              }
+          success:function(categoria1){
+              categoria=categoria1;
           }
       }); 
      
@@ -1364,63 +1450,32 @@ function eliminar_producto(id){
 }
 
 
-function consulta_Real_Modelo(){
-    $.ajax({
-        type:"POST",
-        url:"/administrador/modelo",
-        async: true,
-        success:function(modelo){
-                // console.log(modelo);
-                const modelo1 = document.querySelector('#selectModelo');
+function consulta_Real_Modelo(sele_modelo){
+    
+    const modelo = document.querySelector('#id_modelo');
+    // <option disabled selected>Modelo</option>
+    modelo.innerHTML += `
+        <option disabled selected>Modelo</option>
+    `;
 
-                for(let n = modelo.length-1; n >= 0; n--) {
-                    let opcion = document.createElement('option');
-                    opcion.value = modelo[n].modelo;
-                    opcion.innerText = modelo[n].modelo;
-                    modelo1.appendChild(opcion);
-                }
-                
-        }
+    for (n = 0; n < categoria.length; n++){
+    
+            //  modelo = categoria[n].modelo.toLowerCase();
+            if( sele_modelo != categoria[n].modelo.toLowerCase() ){
+                modelo.innerHTML += `
+                <option value=${categoria[n].id}>${categoria[n].modelo}</option> 
+                `;
+            }
+
+            if(sele_modelo == categoria[n].modelo.toLowerCase() ){
+                modelo.innerHTML += `
+                <option value=${categoria[n].id} selected>${categoria[n].modelo}</option> 
+                `;
+            }
         
-    });
-
+    }
+                      
    
-}
-
-function agregar_administrador(){
-    var datos=$('#administrador_signup').serialize();
-        
-    $.ajax({
-        type:"POST",
-        url:"administrador_signup",
-        data: datos,
-        async: true,
-        success:function(administrador){
-                console.log(administrador);
-                
-        }
-        
-    });
-    cerrar();
-    guardado();
-}
-
-function agregar_cliente(){
-    var datos=$('#cliente_signup').serialize();
-        
-    $.ajax({
-        type:"POST",
-        url:"cliente_signup",
-        data: datos,
-        async: true,
-        success:function(administrador){
-                console.log(administrador);
-                
-        }
-        
-    });
-    cerrar();
-    guardado();
 }
 
 function activar_producto(id){
@@ -1457,4 +1512,290 @@ function activar_producto(id){
     filtrar3('activo');
     // valor(0);
     // paginacion();
+}
+
+
+var prod4 = [];
+function abrir_lista_compra(){
+    prod4= [];
+    const tamano = document.querySelector('#tamaño');
+    tamano.innerHTML = `
+        <span class="close1" onclick="span('${"true"}')">×</span>
+
+        <div id="vent">
+            
+        </div>
+    `
+
+    const ventana = document.querySelector('#vent2');
+    ventana.innerHTML = `
+    <div class="row">
+        <div class="col-lg-6">
+            <h5 style="color:black">Lista De Compras</h5>
+        </div>
+        
+        <div class="col-lg-3">
+            <h5 style="color:black; text-align:right">Buscar:</h5>
+            
+        </div>
+
+        <div class="col-lg-3">
+            
+            <input type="text" id="formulario4" class="form-control ">
+        </div>
+
+    </div> 
+    
+    <div id="lppresults">
+    <table  class="table display DataTables" class="table table-bordered order-table" class="card-header" style="color: white">
+
+        <thead style="background-color:#ddac1b; color:black" align="center">
+            <tr>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Cedula</th>
+            <th>Imagen</th>
+            <th>Total</th>
+            <th>Fecha</th>
+            <th>Hora</th>
+            <th>Opciones</th>
+            </tr>
+        </thead>
+
+        <tbody id="lista" style="color:black" align="center" class="card-header">
+
+        </tbody>
+         
+        
+
+    </table>
+    </div>
+
+    <section class="paginacion">
+		 <div id="options2" class="filter-menu">
+				<ul class="option-set" >
+					<ul id="paginacion4" class="pagination pagination-md">
+			            
+					</ul>	
+				</ul>
+        </div>
+    
+    </section>
+    `
+    
+    formulario4.addEventListener('keyup', filtrar4);
+    filtrar4();
+    
+    var intro = document.getElementById('tamañ2');
+    
+    intro.style.width="65%";
+    intro.style.top="-15%";
+    body2='true';
+ 
+    abrir2();
+
+
+
+    var doc = new jsPDF();
+    $('#generatereport').click(function() {
+        doc.fromHTML($('#lppresults')[0], 15, 15, {
+            width: 170
+        }, function() {
+            doc.save('sample-file.pdf');
+        });
+    });
+}
+
+
+//const boton = document.querySelector('#boton');
+
+var prod4 =[];
+var venta = [];
+var products = [];
+const filtrar4 = (llamar)=>{
+    $.ajax({
+        type:"POST",
+        url:"/administrador/venta",
+        async: false,
+        success:function(venta1){
+               venta = venta1;
+              
+        }
+        
+    });
+    $.ajax({
+        type:"POST",
+        url:"/administrador/todos_producto",
+        async: false,
+        success:function(products1){
+              
+               products = products1;
+               
+        }
+        
+    });
+    const lista = document.querySelector('#lista');
+
+    const formulario4 =  document.querySelector('#formulario4');
+        lista.innerHTML = '';
+        prod4 = [];
+       
+        const texto = formulario4.value.toLowerCase();
+    
+        for (var i=0; i<venta.length;i++) { 
+                    
+                let nombre = venta[i].nombre.toLowerCase();
+                let apellido = venta[i].apellido.toLowerCase();
+                let cedula = venta[i].cedula.toString().toLowerCase();
+                let total = venta[i].total.toString().toLowerCase();
+                let fecha_hora = venta[i].fecha_hora.split(" ");
+              
+              
+                
+        
+                if( (nombre.indexOf(texto) !== -1) || (apellido.indexOf(texto) !== -1) || (cedula.indexOf(texto) !== -1) || (total.indexOf(texto) !== -1) || (fecha_hora[0].indexOf(texto) !== -1) || (fecha_hora[1].indexOf(texto) !== -1) ){ 
+                    
+                    prod4[prod4.length] = venta[i];
+                   
+                    
+                }
+                    
+        } 
+        
+
+
+    if( (llamar != 'edito') && (llamar != 'elimino') ){
+        valor4(0);
+		paginacion4();
+	}
+		
+
+
+    const id = [...document.querySelectorAll('#options2 .selected')].map(el => el.id);
+	if(llamar == 'edito'){
+		paginacion4();
+		paginacion_editar4(id); 
+	}
+
+	if(llamar == 'elimino'){
+	    paginacion4();
+        paginacion_eliminar4(id);
+	}
+
+}
+
+
+function abrir_factura(id_cliente, nombre, apellido, direccion, telefono, total, fecha_hora){
+    var datos = [];
+
+    $.ajax({
+        type:"POST",
+        url:"/administrador/datos_factura",
+        data: {id_cliente: id_cliente, fecha_hora: fecha_hora},
+        async: false,
+        success:function(datos1){
+               datos = datos1;
+                
+        }
+        
+    });
+    // <button id="generatereport">Download Report</button> 
+    let fecha_hora1 = fecha_hora.split(" ");
+    const ventana = document.querySelector('#vent');
+    ventana.innerHTML = `
+
+    <div id="lppresults">
+    <h3 style="color:black; text-align: center;">Super Gato</h3>
+    <p class="encambezado">Santo Domingo, Km 11/2</p>
+    <p class="encambezado" style="top: -51px">Tel(s):809-573-3711</p>
+    <p class="encambezado" style="top: -72px">RNC: 103003133</p>
+    <h5 class="datos" style="top: 170px; " >Nombre:</h5>
+    <h5 class="datos" style="top: 189px; ">Direccion:</h5>
+    <h5 class="datos" style="top: 208px; ">Telefono:</h5>
+
+    <h5 class="datos" style="top: 170px; left: 105px; font-size: 14px;">${nombre +" "+ apellido}</h5>
+    <h5 class="datos" style="top: 189px; left: 125px; font-size: 14px;">${direccion}</h5>
+    <h5 class="datos" style="top: 208px; left: 123px; font-size: 14px;">${telefono}</h5>
+
+    <h5 class="datos" style="top: 170px; left: 365px; ">Fecha:</h5>
+    <h5 class="datos" style="top: 189px; left: 365px; ">Hora:</h5>
+
+    <h5 class="datos" style="top: 170px; left: 430px; font-size: 16px;">${fecha_hora1[0]}</h5>
+    <h5 class="datos" style="top: 189px; left: 423px; font-size: 16px;">${fecha_hora1[1]}</h5>
+    <br/>
+    <table class="table display DataTables" >
+
+       <tbody style="background-color:#ddac1b; color:black" align="center">
+           
+            <td align="center">Cant.</td>  
+            <td align="center">Nombre</td>
+            <td align="center">Precio</td>
+            <td align="center">Modelo</td>
+            <td align="center">Importe</td>
+           
+       </tbody>
+
+        <tbody id="cuerpo" style="color:black" align="center" class="card-header">
+
+        </tbody>
+        
+        
+        
+
+    </table>
+
+    <p class="piez">Gracias por su compra!!</p>
+    </div>
+    `
+
+    const cuerpo = document.querySelector('#cuerpo');
+    for (var i = 0; i < datos.length; i++){ 
+
+        for (n=0;n<products.length;n++) {
+
+            if(datos[i].id_producto == products[n].id){
+                cuerpo.innerHTML += `
+                <td>${datos[i].unidad}</td> <td>${products[n].nombre}</td> <td>${datos[i].precio}</td>
+                <td>${products[n].modelo}</td> <td>${datos[i].importe}</td>
+                
+                ` 
+            }
+            
+        }
+    } 
+    
+    cuerpo.innerHTML += `
+    <tbody style="align='center'">
+      <th></th> <th></th> <th></th> <th class="total5">Sub-Total:</th> <th class="total6">${total}</th>
+    </tbody>
+    <tbody>
+      <th></th> <th></th> <th></th> <th class="total5">DESCUENTO:</th> <th class="total6">0.00</th>
+    </tbody>
+    <tbody>
+       <th></th> <th></th> <th></th> <th class="total5">ITBIS:</th> <th class="total6">0.00</th>
+    </tbody>
+    <tbody>
+       <th></th> <th></th> <th></th> <th class="total5">TOTAL:</th> <th class="total6">${total}</th>
+    </tbody>
+    <tbody>
+       <th></th> <th></th> <th></th> <th ></th> <th ></th>
+    </tbody>
+    
+    `;
+    
+    abrir();
+    var doc = new jsPDF();
+    $('#generatereport').click(function() {
+        doc.fromHTML($('#lppresults')[0], 15, 15, {
+            width: 170
+        }, function() {
+            doc.save('sample-file.pdf');
+        });
+    });
+
+    var intro = document.getElementById('tamaño');
+    
+    intro.style.width="40%";
+    intro.style.top="-12%";
+    
 }

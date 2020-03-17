@@ -8,8 +8,8 @@ body{
 } */
 
 .imagen{
-  width: 303px;
-  height: 204px;
+  width: 455px;
+  height: 257px;
   
 }
 
@@ -147,13 +147,13 @@ select[name="direccion"]:focus{
     color:white;
     background-color:#FFC312;
 }
-/* ///////////////////select[name="modelo"]/////////////// */
-select[name="modelo"]:focus{
+/* ///////////////////select[name="id_modelo"]/////////////// */
+select[name="id_modelo"]:focus{
     border-color:#FFC312;
     box-shadow: 0 0 8px 0 #FFC312;
 }
 
-.inputWithIcon select[name="modelo"]{
+.inputWithIcon select[name="id_modelo"]{
     padding-left: 37px;
 }
 
@@ -170,7 +170,7 @@ select[name="modelo"]:focus{
     transition: .3s;
 }
 
-.inputWithIcon select[name="modelo"]:focus + i{
+.inputWithIcon select[name="id_modelo"]:focus + i{
     color:#FFC312;
 }
 
@@ -181,7 +181,7 @@ select[name="modelo"]:focus{
     border-radius: 4px 0 0 4px;
 }
 
-.inputWithIcon.jorge2 select[name="modelo"]:focus + i{
+.inputWithIcon.jorge2 select[name="id_modelo"]:focus + i{
     color:white;
     background-color:#FFC312;
 }
@@ -405,4 +405,49 @@ input[type=file]:focus{
     border: none;
     border-radius: 123px;
 } */
+*{
+	margin:0px;
+	padding:0px;
+	font-family: helvetica;
+}
 
+p#texto{
+    position: relative;
+	text-align: center;
+    color:black;
+    top: 5px;
+    cursor: pointer;
+}
+
+div#div_file{
+	position:relative;
+	margin:50px;
+	padding:10px;
+    width:100px;
+    height: 50px;
+    top: 20px;
+    left: -20px;;
+	background-color: #FFC312;
+	-webkit-border-radius:5px;
+    -webkit-box-shadow:0px 3px 0px rgb(204, 155, 8);
+    cursor: pointer;   
+}
+
+input#imagen{
+	position:absolute;
+	top:0px;
+	left:0px;
+	right:0px;
+	bottom:0px;
+	width:100%;
+	height:100%;
+    opacity: 0;
+    cursor: pointer;
+
+}
+
+#boton01{
+    position:relative;
+    top: -40px;
+    right: -25px;
+}

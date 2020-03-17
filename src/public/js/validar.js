@@ -1,4 +1,5 @@
 function validar_registro(opcion) {
+    var form = document.getElementById('enviar');
     
     var nombre, apellido, sexo, nacimiento, direccion, telefono, correo, usuario, contrasena, confirmar, expresion;
 
@@ -9,7 +10,7 @@ function validar_registro(opcion) {
     direccion = document.getElementById("direccion").value;
     telefono = document.getElementById("telefono").value;
     correo = document.getElementById("correo").value;
-    usuario = document.getElementById("usuario").value;
+    cedula = document.getElementById("cedula").value;
     contrasena = document.getElementById("contrasena").value;
     confirmar = document.getElementById("confirmar").value;
     
@@ -45,15 +46,7 @@ function validar_registro(opcion) {
         return  false;
     }
 
-    if(opcion == 31){
-        agregar_administrador();
-    }
-
-    if(opcion == 07){
-        agregar_cliente();
-    }
-
-    //agregar_administrador();
+    form.submit();
       
 }
 
@@ -64,7 +57,7 @@ function validar_formulario() {
     nombre = document.getElementById("nombre").value;
     precio = document.getElementById("precio").value;
     imagen = document.getElementById("imagen").value;
-    modelo = document.getElementById("selectModelo").value;
+    modelo = document.getElementById("id_modelo").value;
     cantidad = document.getElementById("cantidad").value;
     
 
@@ -99,14 +92,15 @@ function validar_formulario() {
 
       
 }
-/////////////////////////formulario de agregar productos//////////////////////////
+/////////////////////////formulario de editar productos//////////////////////////
 function validar_formulario_editar(id, opcion) {
 
-    var nombre, precio, cantidad;
+    var nombre, precio, cantidad, modelo;
 
     nombre = document.getElementById("nombre").value;
     precio = document.getElementById("precio").value;
     cantidad = document.getElementById("cantidad").value;
+    modelo = document.getElementById("id_modelo").value;
     
 
     if( (nombre === "") || (precio === "") || (cantidad === "")  ){

@@ -102,6 +102,11 @@ for (n = 0; n < 4; n++) {
 			</div>
 		</a>	
 		<div id='tamaño${n}' class="fondo" style="width:96.5%; " >
+			<div class="row">
+				<div class="col-lg-12">	 
+					<h8 class="tiempo">${productos[n].tiempo}</h8>
+				</div>	
+			</div> 
 		    <div class="row">
 				<div class="col-lg-6">
 					<h7 class="texto3">ID:</h7> 
@@ -256,7 +261,6 @@ if(s >= 8){
 	var n;
 	for (n = 0; n < 8; n++) {
 		
-	
 		resultado10.innerHTML += `
 		<div class="item four columns illustration" onmouseover="bigImg5(${n})" onmouseout="normalImg5(${n})">
 		

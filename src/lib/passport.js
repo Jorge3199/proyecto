@@ -6,11 +6,11 @@ const helpers = require('../lib/helpers');
 
 
 passport.use('local.signin', new LocalStrategy({
-  usernameField: 'usuario',
+  usernameField: 'correo',
   passwordField: 'contrasena',
   passReqToCallback: true
-}, async (req, usuario, contrasena, done) => {
-  const rows = await pool.query('SELECT * FROM administrador WHERE usuario = ?', [usuario]);
+}, async (req, correo, contrasena, done) => {
+  const rows = await pool.query('SELECT * FROM administrador WHERE correo = ?', [correo]);
   if (rows.length > 0) {
     const admi = rows[0];
     const validPassword = await helpers.matchPassword(contrasena, admi.contrasena);
@@ -19,33 +19,35 @@ passport.use('local.signin', new LocalStrategy({
       //  console.log(admi);
       //  var valor = user.id;
       // req.admi = 'hola';
-      done(null, admi, req.flash('success', 'Welcome ' + admi.usuario));
+      done(null, admi, req.flash('success', 'Welcome ' + admi.correo));
     } else {
       done(null, false, req.flash('message', 'Contraseña incorrecta'));
     }
   } else {
-    return done(null, false, req.flash('message', 'Este nombre de usuario no existe'));
+    return done(null, false, req.flash('message', 'Este correo no esta regidtrado'));
   }
 }));
 
 passport.use('local.signup', new LocalStrategy({
-  usernameField: 'usuario',
+  usernameField: 'correo',
   passwordField: 'contrasena',
   passReqToCallback: true
-}, async (req, usuario, contrasena, done) => {
+}, async (req, correo, contrasena, done) => {
 
-  const { nombre, apellido, sexo, nacimiento, direccion, telefono, correo } = req.body;
+  const { nombre, apellido, sexo, nacimiento, direccion, telefono, cedula } = req.body;
+  var imagen = (req.file['filename']);
   var aleatorio = Math.random();
   const newUser = {
-    usuario,
-    contrasena,
     nombre,
     apellido,
     sexo,
     nacimiento,
     direccion,
     telefono,
+    cedula,
     correo,
+    contrasena,
+    imagen,
     aleatorio
   };
   newUser.contrasena = await helpers.encryptPassword(contrasena);

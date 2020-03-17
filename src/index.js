@@ -48,7 +48,6 @@ app.use(multer({
 }).single('imagen'));
 
 
-
 app.engine('.hbs', exphbs({
   defaultLayout: 'main',
   layoutsDir: path.join(app.get('views'), 'layouts'),

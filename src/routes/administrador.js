@@ -5,47 +5,12 @@ const router = express.Router();
 const pool = require('../database');
 const { isLoggedIn } = require('../lib/auth');
 
-
-router.get('/add', isLoggedIn, async (req, res) => {
-    const modelo = await pool.query('SELECT modelo FROM categoria');
-    // console.log(modelo);
-    res.render('administrador/add', { modelo });
-});
-
-router.post('/add1', isLoggedIn, async (req, res) => {
-    // var imagen = (req.file['filename']);
-    var imagen = (req.file['filename']);
-    console.log(req.file);
-    // console.log(req.file['path']);
-    // console.log("holabg djh");
-    // res.send('hola');
-
-    // imagen = this.documentFileName;
-    var estado='A';
-    const { nombre, precio, modelo, cantidad} = req.body;
-    
-    const newLink = {
-        nombre,
-        imagen,
-        precio,
-        modelo,
-        cantidad,
-        estado
-       
-    };
-    
-    await pool.query('INSERT INTO producto set ?', [newLink]);
-    
-    res.redirect('/administrador');
-    
-});
-
-
 // router.post('/links')
 router.get('/', isLoggedIn, async (req, res) => {
     const productos = await pool.query('SELECT * FROM producto WHERE estado="A" ');
     // const token1= (process.env.token1)
-    res.render('administrador/administrador', { productos });
+    const categoria = await pool.query('SELECT * FROM categoria');
+    res.render('administrador/administrador', { productos, categoria });
     // res.send('lista iran aqui');
 });
 
@@ -57,19 +22,14 @@ router.post('/delete', isLoggedIn, async (req, res) => {
     res.json(producto);
 });
 
-router.get('/edit/:id', isLoggedIn, async (req, res) => {
-    const { id } = req.params;
-    const links = await pool.query('SELECT * FROM producto WHERE id = ?', [id]);
-    // console.log(links);
-    res.render('administrador/edit', {link: links[0]});
-});
-
 router.post('/edit/:id', isLoggedIn, async (req, res) => {
     const { id } = req.params;
-    const { nombre, precio} = req.body;
+    var { nombre, precio, id_modelo} = req.body;
+
     const newLink1 = {
         nombre,
-        precio
+        precio,
+        id_modelo
     };
     await pool.query('UPDATE producto set ? WHERE id = ?', [newLink1, id]);
     // res.send(newLink1);
@@ -85,21 +45,20 @@ router.post('/editar/:id', isLoggedIn, async (req, res) => {
     var imagen = (req.file['filename']);
     // console.log(req.file);
    
-    const { nombre, precio } = req.body; 
+    var { nombre, precio, id_modelo } = req.body; 
+
     const { id } = req.params;
     
     const newLink = {
         nombre,
         precio,
+        id_modelo,
         imagen
     };
 
    
     await pool.query('UPDATE producto set ? WHERE id = ?', [newLink, id]);
       
-    // await pool.query('UPDATE links set ? WHERE id = ?', [newLink, id]);
-    // req.flash('success', 'Link Updated Successfully');
-    //res.redirect('/administrador');
     const producto = await pool.query('SELECT * FROM producto WHERE estado="A" ');
     // console.log(productos);
     res.json(producto);
@@ -123,30 +82,22 @@ router.get('/mi_cuenta', isLoggedIn, async  (req, res) => {
 
 
 router.post('/add', isLoggedIn, async (req, res) => {
-    // const productos = await pool.query('SELECT * FROM producto WHERE estado="A" ');
-    // // console.log(productos);
-    //  res.json(productos);
-
-    console.log(req.file);
-    console.log(req.body);
 
     var imagen = (req.file['filename']);
-    console.log(req.file);
-    // console.log(req.file['path']);
-    // console.log("holabg djh");
-    // res.send('hola');
-
-    // imagen = this.documentFileName;
+   // console.log(req.file);
+   var administrador=req.user;
+   var id_administrador= administrador.id;
     var estado='A';
-    const { nombre, precio, modelo, cantidad} = req.body;
+    var { nombre, precio, id_modelo, cantidad} = req.body;
     
     const newLink = {
         nombre,
         imagen,
         precio,
-        modelo,
+        id_modelo,
         cantidad,
-        estado
+        estado,
+        id_administrador
        
     };
     
@@ -158,7 +109,23 @@ router.post('/add', isLoggedIn, async (req, res) => {
    
 });
 
+router.post('/agregar_modelo', isLoggedIn, async (req, res) => {
+   
+    const { modelo } = req.body;
+    var administrador=req.user;
+    var id_administrador= administrador.id;
 
+    const newModelo = {
+        id_administrador,
+        modelo
+    };
+    // console.log(newModelo);
+    await pool.query('INSERT INTO categoria set ?', [newModelo]);
+
+    const categoria1 = await pool.query('SELECT * FROM categoria');
+    res.json(categoria1);
+  
+}); 
 
 router.post('/modelo', isLoggedIn, async (req, res) => {
     const modelo = await pool.query('SELECT modelo FROM categoria');
@@ -182,8 +149,30 @@ router.post('/activar_producto', isLoggedIn, async (req, res) => {
     res.json(producto);
 });
 
+router.post('/venta', isLoggedIn, async (req, res) => {
+     
+    const venta1 = await pool.query('SELECT * FROM compra INNER JOIN cliente ON compra.id_cliente = cliente.id WHERE estado="P" ');
+    // SELECT * FROM compra INNER JOIN cliente ON compra.id_cliente = cliente.id WHERE estado="P"
+    const products1= await pool.query('SELECT * FROM producto');
 
+    res.json(venta1);
+});
 
+router.post('/todos_producto', isLoggedIn, async (req, res) => {
+     
+   
+    const products1= await pool.query('SELECT * FROM producto');
 
+    res.json(products1);
+});
 
+router.post('/datos_factura', isLoggedIn, async (req, res) => {
+    const { id_cliente, fecha_hora } = req.body;
+     
+    const datos1 = await pool.query('SELECT * FROM detalle WHERE id_cliente = ? AND fecha_hora = ? ', [id_cliente, fecha_hora]);
+    // const products= await pool.query('SELECT * FROM producto');
+    // console.log(products);
+
+    res.json(datos1);
+});
 module.exports = router;
