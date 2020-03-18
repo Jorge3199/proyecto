@@ -90,6 +90,14 @@ function abrir_productos(){
                             <i class="icon-pencil" aria-hidden="true"></i>
                             </div>
                         </div>
+
+                        <div class="col-md-4">
+                            <h3 style="color:black">Cantidad<span style="color:red">*</span></h3>
+                            <div class="inputWithIcon jorge">
+                            <input type="text" id="cantidad" name="cantidad" placeholder="Cantidad" class="form-control" required>
+                            <i class="icon-attach_money" aria-hidden="true"></i>
+                            </div>
+                        </div> 
                     
                         <div class="col-md-4">
                             <h3 style="color:black">Precio<span style="color:red">*</span></h3>
@@ -98,15 +106,6 @@ function abrir_productos(){
                             <i class="icon-attach_money" aria-hidden="true"></i>
                             </div>
                         </div>
-
-                        
-                        <div class="col-md-4">
-                            <h3 style="color:black">Cantidad<span style="color:red">*</span></h3>
-                            <div class="inputWithIcon jorge">
-                            <input type="text" id="cantidad" name="cantidad" placeholder="Cantidad" class="form-control" required>
-                            <i class="icon-attach_money" aria-hidden="true"></i>
-                            </div>
-                        </div> 
 
                         <div class="col-md-4">
                             <h3 style="color:black">Modelo<span style="color:red">*</span></h3>
@@ -269,6 +268,14 @@ function abrir_editacion_productos(id, imagen, nombre, precio, modelo, cantidad,
                             <i class="icon-pencil" aria-hidden="true"></i>
                             </div>
                         </div>
+
+                        <div class="col-md-4">
+                            <h3 style="color:black">Cantidad<span style="color:red">*</span></h3>
+                            <div class="inputWithIcon jorge">
+                            <input type="text" id="cantidad" name="cantidad" placeholder="Cantidad" class="form-control" value="${cantidad}" required>
+                            <i class="icon-attach_money" aria-hidden="true"></i>
+                            </div>
+                        </div> 
                     
                         <div class="col-md-4">
                             <h3 style="color:black">Precio<span style="color:red">*</span></h3>
@@ -277,15 +284,6 @@ function abrir_editacion_productos(id, imagen, nombre, precio, modelo, cantidad,
                             <i class="icon-attach_money" aria-hidden="true"></i>
                             </div>
                         </div>
-
-                        
-                        <div class="col-md-4">
-                            <h3 style="color:black">Cantidad<span style="color:red">*</span></h3>
-                            <div class="inputWithIcon jorge">
-                            <input type="text" id="cantidad" name="cantidad" placeholder="Cantidad" class="form-control" value="${cantidad}" required>
-                            <i class="icon-attach_money" aria-hidden="true"></i>
-                            </div>
-                        </div> 
 
                         <div class="col-md-4">
                             <h3 style="color:black">Modelo<span style="color:red">*</span></h3>
