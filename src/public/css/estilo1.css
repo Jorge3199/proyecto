@@ -1,5 +1,5 @@
 body{
-    background: rgb(24, 25, 31);
+    background-image: url(../images/parallax/max8.jpg);
 }
 
 /* a img {
@@ -16,8 +16,8 @@ body{
 
 /* //////////////////[type=text]//////////////// */
 input[type=text]:focus{
-    border-color: dodgerblue;
-    box-shadow: 0 0 8px 0 dodgerblue;
+    border-color: #FFC312;
+    box-shadow: 0 0 8px 0 #FFC312;
 }
 
 .inputWithIcon input[type=text]{
@@ -38,19 +38,19 @@ input[type=text]:focus{
 }
 
 .inputWithIcon input[type=text]:focus + i{
-    color:dodgerblue;
+    color:#FFC312;
 }
 
 .inputWithIcon.jorge i{
-    background-color: #aaa;
-    color: #fff;
+    background-color: #FFC312;
+    color: black;
     padding: 10px 8px;
     border-radius: 4px 0 0 4px;
 }
 
 .inputWithIcon.jorge input[type=text]:focus + i{
-    color:#fff;
-    background-color: dodgerblue;
+    color:white;
+    background-color: #FFC312;
 }
 /* ///////////////////select[name="sexo"]/////////////// */
 select[name="sexo"]:focus{
@@ -168,8 +168,8 @@ input[type=date]:focus{
 }
 /* //////////////////[type=email]//////////////// */
 input[type=email]:focus{
-    border-color: dodgerblue;
-    box-shadow: 0 0 8px 0 dodgerblue;
+    border-color: #FFC312;
+    box-shadow: 0 0 8px 0 #FFC312;
 }
 
 .inputWithIcon input[type=email]{
@@ -190,19 +190,19 @@ input[type=email]:focus{
 }
 
 .inputWithIcon input[type=email]:focus + i{
-    color:dodgerblue;
+    color:#FFC312;
 }
 
 .inputWithIcon.jorge4 i{
-    background-color: #aaa;
-    color: #fff;
+    background-color: #FFC312;
+    color: black;
     padding: 10px 8px;
     border-radius: 4px 0 0 4px;
 }
 
 .inputWithIcon.jorge4 input[type=email]:focus + i{
-    color:#fff;
-    background-color: dodgerblue;
+    color:white;
+    background-color: #FFC312;
 }
 /* //////////////////[type=password]//////////////// */
 input[type=password]:focus{

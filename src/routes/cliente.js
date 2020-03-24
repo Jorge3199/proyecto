@@ -12,6 +12,7 @@ const { isLoggedIn, isNotLoggedIn } = require('../lib/auth');
 const { isLoggedIn1, isNotLoggedIn1 } = require('../lib/auth1');
 const stripe = require('stripe')('sk_test_sWHCKBiXFFGfdGLtpjK4KgDT00ibQv3arz');
 
+
 require('dotenv').config();
 
 app.use(session({
@@ -292,7 +293,7 @@ router.post('/pago', isLoggedIn1, async (req, res) => {
 
     await pool.query('INSERT INTO compra set ?', [newCompra]);
     
-    var pagar =( (total / 50) * 100 );
+    var pagar = Math.round((total / 50) * 100);
  
 
     const customer = await stripe.customers.create({

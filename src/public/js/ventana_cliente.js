@@ -22,7 +22,7 @@ const filtrar1 = ()=>{
         
                 if( (nombre.indexOf(texto) !== -1) || (precio.indexOf(texto) !== -1) || (cantidad.indexOf(texto) !== -1) || (modelo.indexOf(texto) !== -1) ){ 
                     
-                    prod[prod.length] = { id: productos[i].id, nombre: productos[i].nombre, precio:productos[i].precio, cantidad: productos[i].cantidad, modelo: modelo, imagen: productos[i].imagen};
+                    prod[prod.length] = { id: productos[i].id, nombre: productos[i].nombre, precio:productos[i].precio, cantidad: productos[i].cantidad, modelo: modelo, fecha_hora: productos[i].fecha_hora, imagen: productos[i].imagen};
                    
                     
                 }
@@ -211,15 +211,20 @@ function carrito(){
 
     const ventana = document.querySelector('#vent2');
     ventana.innerHTML = `
-     <button onclick="abrir3()">Pagar</button>
-        
+
         <div class="row">
-            <div class="col-lg-6">
-                <h5 style="color:black">Carrito</h5>
+            <div class="col-lg-3">
+                <h5 class="letra2">Carrito</h5>
+            </div>
+
+            <div class="col-lg-3">
+                <div class="pagar2">
+                   <button class="btn btn-warning" onclick="abrir3()">Pagar</button>
+                </div>  
             </div>
             
             <div class="col-lg-3">
-                <h5 style="color:black; text-align:right">Buscar:</h5>
+                <h5 class="letra2" style="text-align:right">Buscar:</h5>
                 
             </div>
 
@@ -232,17 +237,17 @@ function carrito(){
         
         <table id="lppresults" class="table display DataTables" class="table table-bordered order-table" class="card-header" style="color: white">
         
-            <thead style="background-color:#ddac1b; color:black" align="center">
+            <tbody style="background-color:#ddac1b; color:black" align="center">
                 <tr>
-                <th>Cantidad</th>
-                <th>Nombre</th>
-                <th>Precio</th>
-                <th>Modelo</th>
-                <th>Imagen</th>
-                <th>Total</th>
-                <th>Opciones</th>
+                <td>Cantidad</td>
+                <td>Nombre</td>
+                <td>Precio</td>
+                <td>Modelo</td>
+                <td>Imagen</td>
+                <td>Total</td>
+                <td>Opciones</td>
                 </tr>
-            </thead>
+            </tbody>
 
             <tbody id="lista" style="color:black" align="center" class="card-header">
 
@@ -334,8 +339,9 @@ const filtrar2 = (llamar)=>{
     <td></td>
     <td></td>
     <td></td>
-    <td>TOTAL RD$</td>
-    <td>${total_compra.toFixed(2)}</td>
+    <td></td>
+    <th style="text-align:right">TOTAL RD$</th>
+    <th>${total_compra.toFixed(2)}</th>
     <td></td>
     `
 }
@@ -442,11 +448,11 @@ function tabla_favorito(){
     ventana.innerHTML = `  
         <div class="row">
             <div class="col-lg-6">
-                <h5 style="color:black">Producto favorito</h5>
+                <h5 class="letra2">Producto favorito</h5>
             </div>
             
             <div class="col-lg-3">
-                <h5 style="color:black; text-align:right">Buscar:</h5>
+                <h5 class="letra2" style="text-align:right">Buscar:</h5>
                 
             </div>
 
@@ -461,16 +467,16 @@ function tabla_favorito(){
         
         <table id="lppresults" class="table display DataTables" style="color: white">
         
-            <thead style="background-color:#ddac1b; color:black;  text-align: center !important">
+            <tbody style="background-color:#ddac1b; color:black;  text-align: center !important">
                 <tr>
-                <th>Cantidad</th>
-                <th>Nombre</th>
-                <th>Precio</th>
-                <th>Modelo</th>
-                <th>Imagen</th>
-                <th>Opciones</th>
+                <td>Cantidad</td>
+                <td>Nombre</td>
+                <td>Precio</td>
+                <td>Modelo</td>
+                <td>Imagen</td>
+                <td>Opciones</td>
                 </tr>
-            </thead>
+            </tbody>
 
             <tbody id="lista" style="color:black" align="center" class="card-header">
 

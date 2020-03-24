@@ -47,6 +47,7 @@ function paginacion3(){
 function siguiente3(){
     
     const id = [...document.querySelectorAll('#options3 .selected')].map(el => el.id);
+    
     var a = parseInt(id);
   
     var p= a * 10; 
@@ -200,7 +201,7 @@ function valor3(p){
                 <img height="25" width="20" src="/img/editar2.png"></a>  
 
                 <a class="btn btn-success" onclick="confirmar2(${prod3[p].id})"> 
-                <img height="25" width="20" src="/img/updated.png"></a> 
+                <img height="25" width="20" src="/img/share.png"></a> 
             </td>
             `
             p--;
@@ -217,7 +218,7 @@ function valor3(p){
                 <img height="25" width="20" src="/img/editar2.png"></a>  
 
                 <a class="btn btn-success" onclick="confirmar2(${prod3[p].id})"> 
-                <img height="25" width="20" src="/img/updated.png"></a> 
+                <img height="25" width="20" src="/img/share.png"></a> 
             </td>
             `
             p--;

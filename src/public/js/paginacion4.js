@@ -199,10 +199,10 @@ function valor4(p){
             <td>${prod4[p].total}</td> <td>${fecha_hora[0]}</td> <td>${fecha_hora[1]}</td>
             <td> 
                 <a class="btn btn-warning mx-1" onclick="abrir_factura(${prod4[p].id_cliente},'${prod4[p].nombre}','${prod4[p].apellido}','${prod4[p].direccion}',${prod4[p].telefono},${prod4[p].total},'${prod4[p].fecha_hora}')">
-                <img height="25" width="20" src="/img/editar2.png"></a>  
+                <img height="25" width="20" src="/img/bill.png"></a>  
 
-                <a class="btn btn-danger" onclick="confirmar(${prod4[p].id})"> 
-                <img height="25" width="20" src="/img/borrar.png"></a> 
+                <a class="btn btn-success" onclick="confirmar4(${prod4[p].id_cliente},'${prod4[p].fecha_hora}')"> 
+                <img height="25" width="20" src="/img/updated.png"></a> 
             </td>
             `
             p--;
@@ -211,15 +211,17 @@ function valor4(p){
     
     if(s >= 10){
         for (var n = 0; n < 10; n++) { 
+            let fecha_hora = prod4[p].fecha_hora.split(" ");
             lista.innerHTML += `
-            <td>${prod4[p].id}</td> <td>${prod4[p].nombre}</td> <td>${prod4[p].precio}</td> <td>${prod4[p].cantidad}</td> <td>${prod4[p].modelo}</td>
-            
+            <td>${prod4[p].nombre}</td> <td>${prod4[p].apellido}</td> <td>${prod4[p].cedula}</td> 
+            <td> <a onclick="imagenes('${prod4[p].imagen}')"><img src="/imagen1/${prod4[p].imagen}" class='imgRedonda2'></a></td>
+            <td>${prod4[p].total}</td> <td>${fecha_hora[0]}</td> <td>${fecha_hora[1]}</td>
             <td> 
-                <a class="btn btn-warning mx-1" onclick="abrir_editacion_productos(${prod4[p].id},'${prod4[p].imagen}','${prod4[p].nombre}',${prod4[p].precio},'${prod4[p].modelo}',${prod4[p].cantidad},'opcion2')">
-                <img height="25" width="20" src="/img/editar2.png"></a>  
+                <a class="btn btn-warning mx-1" onclick="abrir_factura(${prod4[p].id_cliente},'${prod4[p].nombre}','${prod4[p].apellido}','${prod4[p].direccion}',${prod4[p].telefono},${prod4[p].total},'${prod4[p].fecha_hora}')">
+                <img height="25" width="20" src="/img/bill.png"></a>  
 
-                <a class="btn btn-danger" onclick="confirmar(${prod4[p].id})"> 
-                <img height="25" width="20" src="/img/borrar.png"></a> 
+                <a class="btn btn-success" onclick="confirmar4(${prod4[p].id_cliente},'${prod4[p].fecha_hora}')"> 
+                <img height="25" width="20" src="/img/updated.png"></a> 
             </td>
             `
             p--;
@@ -227,8 +229,54 @@ function valor4(p){
     }
 }    
 
+function valor04(p){	
+     
+    const lista = document.querySelector('#lista');
+    lista.innerHTML = '';
+    const s= prod4.length - p;
+
+    p = s - 1;
+    if(s < 10){ 
+        for (var n = 0; n < s; n++) { 
+            let fecha_hora = prod4[p].fecha_hora.split(" ");
+            lista.innerHTML += `
+            <td>${prod4[p].nombre}</td> <td>${prod4[p].apellido}</td> <td>${prod4[p].cedula}</td> 
+            <td> <a onclick="imagenes('${prod4[p].imagen}')"><img src="/imagen1/${prod4[p].imagen}" class='imgRedonda2'></a></td>
+            <td>${prod4[p].total}</td> <td>${fecha_hora[0]}</td> <td>${fecha_hora[1]}</td>
+            <td> 
+                <a class="btn btn-warning mx-1" onclick="abrir_factura(${prod4[p].id_cliente},'${prod4[p].nombre}','${prod4[p].apellido}','${prod4[p].direccion}',${prod4[p].telefono},${prod4[p].total},'${prod4[p].fecha_hora}')">
+                <img height="25" width="20" src="/img/bill.png"></a>  
+
+                <a class="btn btn-success" onclick="confirmar04(${prod4[p].id_cliente},'${prod4[p].fecha_hora}')"> 
+                <img height="25" width="20" src="/img/share.png"></a> 
+            </td>
+            `
+            p--;
+        }   
+    }
+    
+    if(s >= 10){
+        for (var n = 0; n < 10; n++) { 
+            let fecha_hora = prod4[p].fecha_hora.split(" ");
+            lista.innerHTML += `
+            <td>${prod4[p].nombre}</td> <td>${prod4[p].apellido}</td> <td>${prod4[p].cedula}</td> 
+            <td> <a onclick="imagenes('${prod4[p].imagen}')"><img src="/imagen1/${prod4[p].imagen}" class='imgRedonda2'></a></td>
+            <td>${prod4[p].total}</td> <td>${fecha_hora[0]}</td> <td>${fecha_hora[1]}</td>
+            <td> 
+                <a class="btn btn-warning mx-1" onclick="abrir_factura(${prod4[p].id_cliente},'${prod4[p].nombre}','${prod4[p].apellido}','${prod4[p].direccion}',${prod4[p].telefono},${prod4[p].total},'${prod4[p].fecha_hora}')">
+                <img height="25" width="20" src="/img/bill.png"></a>  
+
+                <a class="btn btn-success" onclick="confirmar04(${prod4[p].id_cliente},'${prod4[p].fecha_hora}')"> 
+                <img height="25" width="20" src="/img/share.png"></a> 
+            </td>
+            `
+            p--;
+        }  
+    }
+} 
+
 ////////////////////////////////////////////////
-function paginacion_eliminar4(id){
+function paginacion_eliminar4(id, dos){
   
     if(prod4.length > 10){
         if(id!=1){
@@ -244,14 +292,25 @@ function paginacion_eliminar4(id){
             const disabled2 = document.querySelector('#options2 .disabled2');
             disabled2.classList.replace('disabled2', 'disabled');
             var p= (id-1) * 10;
-            valor4(p);
+            if(dos != 2){
+                valor4(p);
+            }
+            if(dos == 2){
+                valor04(p);
+            }
+         
         }
 
         if(id<numero4 && id!=1){
             const id3 = document.querySelector('#options2 .selected'+id);
             id3.classList.replace('selected'+id, 'selected');
             var p= (id-1) * 10;
-            valor4(p);
+            if(dos != 2){
+                valor4(p);
+            }
+            if(dos == 2){
+                valor04(p);
+            }
         }
         
         if(id>numero4){
@@ -260,17 +319,33 @@ function paginacion_eliminar4(id){
             const disabled2 = document.querySelector('#options2 .disabled2');
             disabled2.classList.replace('disabled2', 'disabled');
             var p= (id-2) * 10;
-            valor4(p);
+            if(dos != 2){
+                valor4(p);
+            }
+            if(dos == 2){
+                valor04(p);
+            }
+           
         }
 
         if(id==1){
             var p= (id-1) * 10;
-            valor4(p);
+            if(dos != 2){
+                valor4(p);
+            }
+            if(dos == 2){
+                valor04(p);
+            }
         }
     }
 
     if(prod4.length <= 10){
-        valor4(0);
+        if(dos != 2){
+            valor4(0);
+        }
+        if(dos == 2){
+            valor04(0);
+        }
     }
 }
 

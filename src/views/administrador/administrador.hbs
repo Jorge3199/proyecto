@@ -46,7 +46,7 @@
 					{{!-- <li><a href="#home" class="scroll link">Home</a></li>
 					<li><a href="#about" class="scroll link">About</a></li>
 					<li><a href="#services" class="scroll link">Services</a></li> --}}
-					<li><a href="#portfolio" class="scroll link">Portfolio</a></li>
+					<li><a href="#portfolio" class="scroll link">Producto</a></li>
 					<li><a href="#pricing" class="scroll link">Pricing</a></li>
 					<li><a href="#team" class="scroll link">Team</a></li>
 					<li><a href="#contact" class="scroll link">Contact</a></li>
@@ -55,13 +55,14 @@
 						<ul>
 							{{!-- <li><a href="blog-main.html">Blog Main</a></li>
 							<li><a href="blog-single.html">Blog Single</a></li> --}}
-							<li><a  onclick="abrir_productos()">Agregar nuevo producto</a></li>
-							<li><a  onclick="abrir_modelo()">Agregar nuevo modelo</a></li>
-							<li><a onclick="abrir_cliente()">Agregar nuevo cliente</a></li>
-							<li><a onclick="abrir_administrador()">Agregar nuevo administrador</a></li>
-							<li><a onclick="abrir_lista_producto()">Lista de producto</a></li>
-							<li><a onclick="abrir_lista_compra()">Lista de compra</a></li>
-							<li><a href="/logout">Cerrar Sesion</a></li>
+							<li class="cursor"><a  onclick="abrir_productos()">Agregar nuevo producto</a></li>
+							<li class="cursor"><a  onclick="abrir_modelo()">Agregar nuevo modelo</a></li>
+							<li class="cursor"><a onclick="abrir_cliente()">Agregar nuevo cliente</a></li>
+							<li class="cursor"><a onclick="abrir_administrador()">Agregar nuevo administrador</a></li>
+							<li class="cursor"><a onclick="abrir_lista_producto()">Lista de producto</a></li>
+							<li class="cursor"><a onclick="abrir_lista_venta()">Lista de venta</a></li>
+							<li class="cursor"><a onclick="abrir_lista_cliente()">Lista de Cliente</a></li>
+							<li class="cursor"><a href="/logout">Cerrar Sesion</a></li>
 						</ul>
 					</li>
 					<li>
@@ -74,7 +75,7 @@
 							<li><a onclick="abrir_cliente()">Agregar nuevo cliente</a></li>
 							<li><a onclick="abrir_administrador()">Agregar nuevo administrador</a></li>
 							<li><a onclick="abrir_lista_producto()">Lista de producto</a></li>
-							<li><a onclick="abrir_lista_compra()">Lista de compra</a></li>
+							<li><a onclick="abrir_lista_venta()">Lista de venta</a></li>
 							<li><a href="/logout">Cerrar Sesion</a></li>
 						</ul>
 					</li><!-- end drop down -->
@@ -137,8 +138,8 @@
 	<section id="portfolio" class="section">
         
 		<div class="container" id="portfolio-title">
-			<h2 class="title">NUESTRO TRABAJO RECIENTE</h2>
-			<h4 class="subtitle">ECHA UN VISTAZO A UNA LISTA DE NUESTROS PROYECTOS FAVORITOS.</h4>
+			<h2 class="title">PRODUCTOS MAS VENDIDO</h2>
+			<h4 class="subtitle">ECHA UN VISTAZO A LA LISTA DE PRODUCTOS FAVORITOS.</h4>
 		</div><!-- end portfolio title container -->
 
 			<!-- Project Expander -->
@@ -152,7 +153,7 @@
 		<div class="container" id="portfolio-container">
 
 			<!-- Portfolio Filters -->
-			<div id="options" class="filter-menu">
+			{{!-- <div id="options" class="filter-menu">
 				<ul id="filters" class="option-set" data-option-key="filter">
 					<li><a href="#filter" data-option-value="*" class="selected">All</a></li>
 					<li><a href="#filter" data-option-value=".illustration">Illustration</a></li>
@@ -160,7 +161,7 @@
 					<li><a href="#filter" data-option-value=".motion">Motion</a></li>
 					<li><a href="#filter" data-option-value=".web">Web</a></li>
 				</ul>
-			</div>
+			</div> --}}
             
 
            
@@ -170,14 +171,14 @@
 
 				
 
-					      <div id="resultado22">
+					      {{!-- <div id="resultado22">
 							 
-						  </div>
+						  </div> --}}
 
 						    <div class="buscar">
 								<div class="row">
 									<div class="col-lg-3">
-									<h5 style="color:white; text-align:right">Buscar:</h5>
+									<h5 class="letra2" style="color:white; top:6px; text-align:right">Buscar:</h5>
 									
 									</div>
 
@@ -632,7 +633,7 @@
 <script type="text/javascript" src="js/paginacion2.js"></script>
 <script type="text/javascript" src="js/paginacion3.js"></script>
 <script type="text/javascript" src="js/paginacion4.js"></script>
-
+<script type="text/javascript" src="js/paginacion5.js"></script>
 
 {{!-- <div id="btnModal" class="modalDialog">
 	<div id="tamaño">

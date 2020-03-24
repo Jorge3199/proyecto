@@ -5,6 +5,7 @@ var n10 = 0;
 /* <script>	 */
 var numero=0;
 function paginacion(){
+    console.log(prod);
     const paginacion = document.querySelector('#paginacion');
     numero=0;
     if(prod.length > 8){
@@ -47,6 +48,7 @@ function paginacion(){
    
 // </script>
 paginacion();
+
 //////////////////////////////////////////////////////////////////////////////////////
 function siguiente(){
     

@@ -260,7 +260,7 @@
       
          <script>
            
-           productos[productos.length] = { id: `{{id}}`, nombre: `{{nombre}}`, precio:`{{precio}}`, id_modelo:`{{id_modelo}}`, cantidad: `{{cantidad}}`, imagen:`{{imagen}}`};
+           productos[productos.length] = { id: `{{id}}`, nombre: `{{nombre}}`, precio:`{{precio}}`, id_modelo:`{{id_modelo}}`, cantidad: `{{cantidad}}`, imagen:`{{imagen}}`, fecha_hora: `{{timeago fecha_hora}}`};
            
 
            
@@ -1018,8 +1018,8 @@
 
 				<div class="row" align="center">
 					<div class="col-lg-12" align="center">
-                        <div align="center">
-		
+                        <div id='enviar' align="center">
+		                    
                               <button class="btn btn-warning mx-1" align="center">RD$ 0.00 Pagar</button>
 						</div>
 					</div>
@@ -1054,6 +1054,7 @@
 </div>
 
 
+
 <script type="text/javascript" src="js/paginacion_cliente.js"></script>
 <script type="text/javascript" src="js/cliente.js"></script>
 <script type="text/javascript" src="js/ventana_cliente.js"></script>
@@ -1062,6 +1063,8 @@
 <script type="text/javascript" src="js/validar_cliente.js"></script>
 <script type="text/javascript" src="js/alerta.js"></script>
 <script type="text/javascript" src="js/ventana.js"></script>
+
+
 
 
 

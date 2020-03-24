@@ -10,11 +10,10 @@ passport.use('local.cliente_signin', new LocalStrategy({
   passwordField: 'contrasena',
   passReqToCallback: true
 }, async (req, correo, contrasena, done) => {
-  const rows = await pool.query('SELECT * FROM cliente WHERE correo = ?', [correo]);
+  const rows = await pool.query('SELECT * FROM cliente WHERE estado1="A" AND correo = ?', [correo]);
   if (rows.length > 0) {
     const cliente = rows[0];
     const validPassword = await helpers.matchPassword(contrasena, cliente.contrasena);
-    console.log(validPassword);
     if (validPassword) {
       done(null, cliente, req.flash('success', 'Welcome ' + cliente.correo));
     } else {

@@ -87,9 +87,8 @@ router.post('/recuperar_contrasena', isNotLoggedIn, async(req, res) => {
         // address: '192.168.0.108',
         service: 'gmail',
         auth:{
-            type: 'login',
-            user: 'supergato3199@gmail.com',
-            pass: 'supergato2020'
+            user: 'aamotor18@gmail.com',
+            pass: 'aamotor1234'
         }
         });
 
@@ -174,32 +173,6 @@ router.post('/cambiar_contrasena/:aleatorio', isNotLoggedIn, async (req, res) =>
     res.redirect('/signin');
    
 });
-
-
-
-
-//////////////////pago////////////////////////
-router.get('/pago1', isLoggedIn, (req, res) => {
-    res.render('auth/pago');
-});
-
-router.post('/pago1', isLoggedIn, async (req, res) => {
-    // console.log(req.body);
-
-    // const customer = await stripe.customers.create({
-    //     email: req.body.stripeEmail,
-    //     source: req.body.stripeToken
-    // });
-    // const charge = await stripe.charges.create({
-    //     amount: '3000',
-    //     currency: 'usd',
-    //     customer: customer.id,
-    //     description: 'Compra De Producto'
-    // });
-
-    // console.log(charge.id);
-    res.redirect('/links');
-    
-});      
+     
 
 module.exports = router;

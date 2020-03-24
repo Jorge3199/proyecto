@@ -175,4 +175,68 @@ router.post('/datos_factura', isLoggedIn, async (req, res) => {
 
     res.json(datos1);
 });
+
+router.post('/factura_despachada', isLoggedIn, async (req, res) => {
+    const { id_cliente, fecha_hora } = req.body;
+
+    await pool.query('UPDATE compra SET estado="D" WHERE id_cliente = ? AND fecha_hora = ?', [id_cliente, fecha_hora]);
+     
+    const producto = await pool.query('SELECT * FROM compra WHERE estado="P" ');
+    res.json(producto);
+});
+
+router.post('/vent_despachada', isLoggedIn, async (req, res) => {
+     
+    const venta2 = await pool.query('SELECT * FROM compra INNER JOIN cliente ON compra.id_cliente = cliente.id WHERE estado="D" ');
+    
+
+    res.json(venta2);
+});
+
+router.post('/recuperar_venta', isLoggedIn, async (req, res) => {
+    const { id_cliente, fecha_hora } = req.body;
+
+    await pool.query('UPDATE compra SET estado="P" WHERE id_cliente = ? AND fecha_hora = ?', [id_cliente, fecha_hora]);
+     
+    const venta2 = await pool.query('SELECT * FROM compra WHERE estado="D" ');
+    res.json(venta2);
+});
+
+router.post('/lista_cliente', isLoggedIn, async (req, res) => {
+     
+    const cliente1 = await pool.query('SELECT * FROM cliente WHERE estado1="A" ');
+    
+
+    res.json(cliente1);
+});
+
+router.post('/eliminar_cliente', isLoggedIn, async (req, res) => {
+    const { id} = req.body;
+
+    await pool.query('UPDATE cliente SET estado1="I" WHERE id = ?', [id]);
+     
+    const cliente1 = await pool.query('SELECT * FROM cliente WHERE estado1="A" ');
+    
+    res.json(cliente1);
+});
+
+router.post('/cliente_eliminado', isLoggedIn, async (req, res) => {
+     
+    const cliente1 = await pool.query('SELECT * FROM cliente WHERE estado1="I" ');
+    
+    res.json(cliente1);
+});
+
+router.post('/activar_cliente', isLoggedIn, async (req, res) => {
+    const { id} = req.body;
+
+    await pool.query('UPDATE cliente SET estado1="A" WHERE id = ?', [id]);
+     
+    const cliente1 = await pool.query('SELECT * FROM cliente WHERE estado1="I" ');
+    
+    res.json(cliente1);
+});
+
+
+
 module.exports = router;

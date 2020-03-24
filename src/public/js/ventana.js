@@ -17,6 +17,10 @@ function span3(){
 }
 
 function abrir3(){
+    const enviar = document.querySelector('#enviar');
+        enviar.innerHTML = `
+        <button class="btn btn-warning mx-1" align="center">RD$ ${total_compra.toFixed(2)} Pagar</button>
+        `
     modal3.style.display = "block";
 
     body.style.position = "static";

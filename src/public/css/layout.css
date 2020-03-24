@@ -1674,3 +1674,28 @@ a.button-to-top:hover {color: #e74c3c;}
 	color: #000;
 	text-align: center;
 }
+
+tbody img {
+	cursor: pointer;
+}
+
+.cursor {
+	cursor: pointer;
+}
+
+.modelo {
+	position: relative;
+	left: 46px;
+}
+
+.pagar2 {
+	position: relative;
+	left: -150px;
+}
+
+.letra2 {
+	position: relative;
+	top:7px;
+	color: black;
+}
+

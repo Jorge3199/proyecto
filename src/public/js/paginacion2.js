@@ -10,7 +10,7 @@ function paginacion2(){
         
         paginacion.innerHTML = ``;
         paginacion.innerHTML += `
-            <li class="disabled" ><a onclick="anterior2()" >&laquo;</a></li>
+            <li class="disabled" ><a onclick="anterior02()" >&laquo;</a></li>
 
             `  
         for (var n = 0; n < prod2.length; n+=10) {
@@ -18,7 +18,7 @@ function paginacion2(){
             if(numero2 == 1){
                 paginacion.innerHTML += `
             
-                <li ><a id="${numero2}" class="selected" onclick="numero12(${numero2}) " >${numero2}</a></li>
+                <li ><a id="${numero2}" class="selected" onclick="numero02(${numero2}) " >${numero2}</a></li>
                 
                 `  
             }
@@ -26,13 +26,13 @@ function paginacion2(){
             if(numero2 != 1){
                 paginacion.innerHTML += `
                 
-                <li ><a id="${numero2}" class="selected${numero2}" onclick="numero12(${numero2})" >${numero2}</a></li>
+                <li ><a id="${numero2}" class="selected${numero2}" onclick="numero02(${numero2})" >${numero2}</a></li>
                 
                 `  
             }
         }; 
         paginacion.innerHTML += `
-            <li class="disabled2"><a onclick="siguiente2()" >&raquo;</a></li>
+            <li class="disabled2"><a onclick="siguiente02()" >&raquo;</a></li>
 
             `     
     }
@@ -44,7 +44,7 @@ function paginacion2(){
 // </script>
 // paginacion();
 //////////////////////////////////////////////////////////////////////////////////////
-function siguiente2(){
+function siguiente02(){
     
     const id = [...document.querySelectorAll('#options2 .selected')].map(el => el.id);
     var a = parseInt(id);
@@ -79,7 +79,7 @@ function siguiente2(){
 
 
 
-function anterior2(){
+function anterior02(){
     const id = [...document.querySelectorAll('#options2 .selected')].map(el => el.id);
     var a = parseInt(id);
     var m= a;
@@ -117,7 +117,7 @@ function anterior2(){
    
 };
 
-function numero12(n){
+function numero02(n){
 
     const id = [...document.querySelectorAll('#options2 .selected')].map(el => el.id);
     // var x = n * 10;
@@ -184,7 +184,6 @@ function numero12(n){
 } 
 
 function valor2(p){	
-     
     const lista = document.querySelector('#lista');
     lista.innerHTML = '';
     const s= prod2.length - p;

@@ -6,7 +6,7 @@ const filtrar = (llamar)=>{
    
         prod = [];
         var modelo;
-    
+
         const texto = formulario.value.toLowerCase();
 
         for (var i=0; i<productos.length;i++) { 
@@ -15,16 +15,18 @@ const filtrar = (llamar)=>{
                 let nombre = productos[i].nombre.toLowerCase();
                 let precio = productos[i].precio.toString().toLowerCase();
                 let cantidad = productos[i].cantidad.toString().toLowerCase();
+
                 for (n = 0; n < categoria.length; n++){
                     if(productos[i].id_modelo == categoria[n].id){
                          modelo = categoria[n].modelo.toLowerCase();
+         
                     }
                 }
                 
         
                 if( (id.indexOf(texto) !== -1) || (nombre.indexOf(texto) !== -1) || (precio.indexOf(texto) !== -1) || (cantidad.indexOf(texto) !== -1) || (modelo.indexOf(texto) !== -1) ){ 
                     
-                    prod[prod.length] = { id: productos[i].id, nombre: productos[i].nombre, precio:productos[i].precio, cantidad: productos[i].cantidad, modelo: modelo, imagen: productos[i].imagen};
+                    prod[prod.length] = { id: productos[i].id, nombre: productos[i].nombre, precio:productos[i].precio, cantidad: productos[i].cantidad, modelo: modelo, tiempo: productos[i].tiempo, imagen: productos[i].imagen};
                     
                     
                 }
@@ -42,7 +44,7 @@ const filtrar = (llamar)=>{
 	if(llamar == 'edito'){
 		paginacion();
 		paginacion_editar(id); 
-	}
+    }
 
 	if(llamar == 'elimino'){
 	    paginacion();
@@ -405,12 +407,15 @@ function abrir_modelo(){
                     <i class="icon-cogs" aria-hidden="true"></i>
                 </div>
                 
-                <div class="row">
-                    <div class="col-lg-6">
-                        <a class="btn btn-warning btn-block" onclick="modelo()"> Guardar </a>
-                    </div> 
-                    <div class="col-lg-6">
-                        <a class="btn btn-danger btn-block" onclick="cerrar()">Cancelar</a>
+               
+                <div class="row" >
+                    <div class="modelo">
+                        <div class="col-lg-5" >
+                            <a class="btn btn-warning btn-block" onclick="modelo()"> Guardar </a>
+                        </div> 
+                        <div class="col-lg-5">
+                            <a class="btn btn-danger btn-block" onclick="cerrar()">Cancelar</a>
+                        </div>
                     </div>
                 </div>
             </form>
@@ -1019,12 +1024,18 @@ function abrir_lista_producto(){
     const ventana = document.querySelector('#vent2');
     ventana.innerHTML = `
     <div class="row">
-        <div class="col-lg-6">
-            <h5 style="color:black">Lista De Productos</h5>
+        <div class="col-lg-3">
+            <h5 class="letra2">Lista De Productos</h5>
+        </div>
+
+        <div class="col-lg-3">
+            <div class="cursor">
+               <a onclick="producto_eliminado()"><img src="/img/trash.png" width="30" height="30"> </a>
+            </div>
         </div>
         
         <div class="col-lg-3">
-            <h5 style="color:black; text-align:right">Buscar:</h5>
+            <h5 class="letra2" style="text-align:right">Buscar:</h5>
             
         </div>
 
@@ -1034,24 +1045,22 @@ function abrir_lista_producto(){
         </div>
 
     </div> 
-    <button id="generatereport">Download Report</button> 
-    <div>
-        <a onclick="producto_eliminado('${"true"}')"><img src="/img/trash.png" width="30" height="30"> </a>
-     </div>
+ 
+   
     <div id="lppresults">
     <table  class="table display DataTables" class="table table-bordered order-table" class="card-header" style="color: white">
 
-        <thead style="background-color:#ddac1b; color:black" align="center">
+        <tbody style="background-color:#ddac1b; color:black" align="center">
             <tr>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Precio</th>
-            <th>Cantidad</th>
-            <th>Modelo</th>
-            <th>Imagen</th>
-            <th>Opciones</th>
+            <td>ID</td>
+            <td>Nombre</td>
+            <td>Precio</td>
+            <td>Cantidad</td>
+            <td>Modelo</td>
+            <td>Imagen</td>
+            <td>Opciones</td>
             </tr>
-        </thead>
+        </tbody>
 
         <tbody id="lista" style="color:black" align="center" class="card-header">
 
@@ -1108,7 +1117,6 @@ const filtrar2 = (llamar)=>{
         lista.innerHTML = '';
         prod2 = [];
         var modelo;
-        
         const texto = formulario2.value.toLowerCase();
 
         for (var i=0; i<productos.length;i++) { 
@@ -1146,7 +1154,7 @@ const filtrar2 = (llamar)=>{
 		paginacion2();
 		paginacion_editar2(id); 
 	}
-
+    
 	if(llamar == 'elimino'){
 	    paginacion2();
         paginacion_eliminar2(id);
@@ -1193,9 +1201,9 @@ function producto_eliminado(opcion){
         }
         
     });
-    if(opcion == 'true'){
-        prod_eliminado();
-    }
+   
+    prod_eliminado();
+    
 }
 
 function prod_eliminado(){
@@ -1212,17 +1220,17 @@ function prod_eliminado(){
     const ventana = document.querySelector('#vent2');
     ventana.innerHTML = `
     <ol class="breadcrumb">
-        <li><a onclick="abrir_lista_producto()">Lista de producto</a></li>
-        <li><a class="active" style="color:black">Productos Eliminado</a></li>
+        <li><a onclick="abrir_lista_producto()" class="cursor">Lista de producto</a></li>
+        <li><a class="active" style="color:black; cursor:context-menu;">Productos Eliminado</a></li>
     </ol> 
 
     <div class="row">
         <div class="col-lg-6">
-            <h5 style="color:black">Productos Eliminado</h5>
+            <h5 class="letra2">Productos Eliminado</h5>
         </div>
         
         <div class="col-lg-3">
-            <h5 style="color:black; text-align:right">Buscar:</h5>
+            <h5 class="letra2" style="text-align:right">Buscar:</h5>
             
         </div>
 
@@ -1232,22 +1240,21 @@ function prod_eliminado(){
         </div>
 
     </div> 
-    <button id="generatereport">Download Report</button> 
 
     <div id="lppresults">
     <table  class="table display DataTables" class="table table-bordered order-table" class="card-header" style="color: white">
 
-        <thead style="background-color:#ddac1b; color:black" align="center">
-            <tr>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Precio</th>
-            <th>Cantidad</th>
-            <th>Modelo</th>
-            <th>Imagen</th>
-            <th>Opciones</th>
+        <tbody style="background-color:#ddac1b; color:black" align="center">
+            <tr>  
+            <td>ID</td>
+            <td>Nombre</td>
+            <td>Precio</td>
+            <td>Cantidad</td>
+            <td>Modelo</td>
+            <td>Imagen</td>
+            <td>Opciones</td>
             </tr>
-        </thead>
+        </tbody>
 
         <tbody id="lista" style="color:black" align="center" class="card-header">
 
@@ -1355,7 +1362,6 @@ function editar_producto(id){
 
     if(imagen == ''){
         var datos=$('#editar_producto').serialize();
-        console.log(datos);
         
         $.ajax({
             type:"POST",
@@ -1431,15 +1437,14 @@ function eliminar_producto(id){
         async: false,
         success:function(producto){
                 // console.log(producto);
-                productos = [];
-                for (var n = 0; n < producto.length; n++) {
-                     productos[n] = { id: producto[n].id, nombre: producto[n].nombre, precio:producto[n].precio, cantidad: producto[n].cantidad, modelo: producto[n].modelo, imagen:producto[n].imagen};
-                }
+                productos = producto;
+               
             
         }
         
     }); 
     prod=productos;
+    // console.log(prod);
     eliminado();
     if(prod2.length != 0){
         filtrar2('elimino');
@@ -1477,8 +1482,7 @@ function consulta_Real_Modelo(sele_modelo){
 }
 
 function activar_producto(id){
-    var a=0;
-    var b=0;
+   
     $.ajax({
         type:"POST",
         url:"/administrador/activar_producto",
@@ -1486,17 +1490,26 @@ function activar_producto(id){
         async: false,
         success:function(producto){
                 // console.log(producto);
+                prod = [];
                 productos = [];
                 productos_eliminado = [];
+                var modelo;
                 for (var n = 0; n < producto.length; n++) {
                     if(producto[n].estado == 'A'){
-                        productos[a] = { id: producto[n].id, nombre: producto[n].nombre, precio:producto[n].precio, cantidad: producto[n].cantidad, modelo: producto[n].modelo, imagen:producto[n].imagen};
-                        a+=1;
+
+                        for (i = 0; i < categoria.length; i++){
+                            if(producto[n].id_modelo == categoria[i].id){
+                                 modelo = categoria[i].modelo.toLowerCase();
+                            }
+                        }
+
+                        prod[prod.length] = { id: producto[n].id, nombre: producto[n].nombre, precio:producto[n].precio, cantidad: producto[n].cantidad, modelo: modelo, imagen:producto[n].imagen};
+                        productos[productos.length] = producto[n];
                     }
 
                     if(producto[n].estado == 'I'){
-                        productos_eliminado[b] = { id: producto[n].id, nombre: producto[n].nombre, precio:producto[n].precio, cantidad: producto[n].cantidad, modelo: producto[n].modelo, imagen:producto[n].imagen};
-                        b+=1;
+                        productos_eliminado[productos_eliminado.length] = producto[n];
+                       
                     }
                      
                 }
@@ -1506,7 +1519,6 @@ function activar_producto(id){
     }); 
 
     activado();
-    prod = productos;
     filtrar3('activo');
     // valor(0);
     // paginacion();
@@ -1514,7 +1526,7 @@ function activar_producto(id){
 
 
 var prod4 = [];
-function abrir_lista_compra(){
+function abrir_lista_venta(){
     prod4= [];
     const tamano = document.querySelector('#tamaño');
     tamano.innerHTML = `
@@ -1527,13 +1539,20 @@ function abrir_lista_compra(){
 
     const ventana = document.querySelector('#vent2');
     ventana.innerHTML = `
+    
     <div class="row">
-        <div class="col-lg-6">
-            <h5 style="color:black">Lista De Compras</h5>
+        <div class="col-lg-3">
+            <h5 class="letra2">Lista De Ventas</h5>
+        </div>
+
+        <div class="col-lg-3">
+            <div class="cursor" style="position: relative; left: -58px;">
+               <a onclick="vent_despachada()"><img src="/img/trash.png" width="30" height="30"> </a>
+            </div>
         </div>
         
         <div class="col-lg-3">
-            <h5 style="color:black; text-align:right">Buscar:</h5>
+            <h5 class="letra2" style="text-align:right">Buscar:</h5>
             
         </div>
 
@@ -1547,18 +1566,18 @@ function abrir_lista_compra(){
     <div id="lppresults">
     <table  class="table display DataTables" class="table table-bordered order-table" class="card-header" style="color: white">
 
-        <thead style="background-color:#ddac1b; color:black" align="center">
+        <tbody style="background-color:#ddac1b; color:black" align="center">
             <tr>
-            <th>Nombre</th>
-            <th>Apellido</th>
-            <th>Cedula</th>
-            <th>Imagen</th>
-            <th>Total</th>
-            <th>Fecha</th>
-            <th>Hora</th>
-            <th>Opciones</th>
+            <td>Nombre</td>
+            <td>Apellido</td>
+            <td>Cedula</td>
+            <td>Imagen</td>
+            <td>Total</td>
+            <td>Fecha</td>
+            <td>Hora</td>
+            <td>Opciones</td>
             </tr>
-        </thead>
+        </tbody>
 
         <tbody id="lista" style="color:black" align="center" class="card-header">
 
@@ -1611,6 +1630,7 @@ var prod4 =[];
 var venta = [];
 var products = [];
 const filtrar4 = (llamar)=>{
+    console.log('hola');
     $.ajax({
         type:"POST",
         url:"/administrador/venta",
@@ -1663,6 +1683,7 @@ const filtrar4 = (llamar)=>{
 
 
     if( (llamar != 'edito') && (llamar != 'elimino') ){
+        console.log('hola');
         valor4(0);
 		paginacion4();
 	}
@@ -1725,11 +1746,11 @@ function abrir_factura(id_cliente, nombre, apellido, direccion, telefono, total,
 
        <tbody style="background-color:#ddac1b; color:black" align="center">
            
-            <td align="center">Cant.</td>  
-            <td align="center">Nombre</td>
-            <td align="center">Precio</td>
-            <td align="center">Modelo</td>
-            <td align="center">Importe</td>
+            <td>Cant.</td>  
+            <td>Nombre</td>
+            <td>Precio</td>
+            <td>Modelo</td>
+            <td>Importe</td>
            
        </tbody>
 
@@ -1747,14 +1768,26 @@ function abrir_factura(id_cliente, nombre, apellido, direccion, telefono, total,
     `
 
     const cuerpo = document.querySelector('#cuerpo');
+    var modelo;
     for (var i = 0; i < datos.length; i++){ 
 
         for (n=0;n<products.length;n++) {
 
+
             if(datos[i].id_producto == products[n].id){
+
+                for (p = 0; p < categoria.length; p++){
+                    
+                    if(products[n].id_modelo == categoria[p].id){
+        
+                         modelo = categoria[p].modelo.toLowerCase();
+                    }
+                }
+    
+
                 cuerpo.innerHTML += `
                 <td>${datos[i].unidad}</td> <td>${products[n].nombre}</td> <td>${datos[i].precio}</td>
-                <td>${products[n].modelo}</td> <td>${datos[i].importe}</td>
+                <td>${modelo}</td> <td>${datos[i].importe}</td>
                 
                 ` 
             }
@@ -1796,4 +1829,576 @@ function abrir_factura(id_cliente, nombre, apellido, direccion, telefono, total,
     intro.style.width="40%";
     intro.style.top="-12%";
     
+}
+
+
+
+
+
+function factura_despachada(id_cliente, fecha_hora){
+
+    $.ajax({
+        type:"POST",
+        url:"/administrador/factura_despachada",
+        data: {id_cliente : id_cliente, fecha_hora : fecha_hora},
+        async: false,
+        success:function(venta1){
+               //  console.log(producto);
+               venta = venta1;
+
+        }
+        
+    });
+    
+    filtrar4('elimino');;
+    
+}
+
+
+
+
+
+function vent_despachada(){
+    // prod2= [];
+    const tamano = document.querySelector('#tamaño');
+    tamano.innerHTML = `
+        <span class="close1" onclick="span('${"true"}')">×</span>
+
+        <div id="vent">
+            
+        </div>
+    `
+
+    const ventana = document.querySelector('#vent2');
+
+    ventana.innerHTML = `
+    <ol class="breadcrumb">
+        <li><a onclick="abrir_lista_venta()" class="cursor">Lista de ventas</a></li>
+        <li><a class="active" style="color:black; cursor:context-menu;">Venta despachada</a></li>
+    </ol>
+    
+    <div class="row">
+        <div class="col-lg-6">
+            <h5 class="letra2">Lista De Despachada</h5>
+        </div>
+  
+        <div class="col-lg-3">
+            <h5 class="letra2" style="text-align:right">Buscar:</h5>
+            
+        </div>
+
+        <div class="col-lg-3">
+            
+            <input type="text" id="formulario4" class="form-control ">
+        </div>
+
+    </div> 
+    
+    <div id="lppresults">
+    <table  class="table display DataTables" class="table table-bordered order-table" class="card-header" style="color: white">
+
+        <tbody style="background-color:#ddac1b; color:black" align="center">
+            <tr>
+            <td>Nombre</td>
+            <td>Apellido</td>
+            <td>Cedula</td>
+            <td>Imagen</td>
+            <td>Total</td>
+            <td>Fecha</td>
+            <td>Hora</td>
+            <td>Opciones</td>
+            </tr>
+        </tbody>
+
+        <tbody id="lista" style="color:black" align="center" class="card-header">
+
+        </tbody>
+         
+        
+
+    </table>
+    </div>
+
+    <section class="paginacion">
+		 <div id="options2" class="filter-menu">
+				<ul class="option-set" >
+					<ul id="paginacion4" class="pagination pagination-md">
+			            
+					</ul>	
+				</ul>
+        </div>
+    
+    </section>
+    `
+
+    formulario4.addEventListener('keyup', filtrar04);
+    filtrar04();
+    
+    var intro = document.getElementById('tamañ2');
+    
+    intro.style.width="65%";
+    intro.style.top="-15%";
+    body2='true';
+ 
+    abrir2();
+}  
+
+
+var venta_desp = [];
+const filtrar04 = (llamar)=>{
+    $.ajax({
+        type:"POST",
+        url:"/administrador/vent_despachada",
+        async: false,
+        success:function(venta2){
+               //  console.log(producto);
+               venta_desp=venta2;
+
+        }
+        
+    });
+   
+    const lista = document.querySelector('#lista');
+
+    const formulario4 =  document.querySelector('#formulario4');
+        lista.innerHTML = '';
+        prod4 = [];
+       
+        const texto = formulario4.value.toLowerCase();
+    
+        for (var i=0; i<venta_desp.length;i++) { 
+                    
+                let nombre = venta_desp[i].nombre.toLowerCase();
+                let apellido = venta_desp[i].apellido.toLowerCase();
+                let cedula = venta_desp[i].cedula.toString().toLowerCase();
+                let total = venta_desp[i].total.toString().toLowerCase();
+                let fecha_hora = venta_desp[i].fecha_hora.split(" ");
+              
+              
+                
+        
+                if( (nombre.indexOf(texto) !== -1) || (apellido.indexOf(texto) !== -1) || (cedula.indexOf(texto) !== -1) || (total.indexOf(texto) !== -1) || (fecha_hora[0].indexOf(texto) !== -1) || (fecha_hora[1].indexOf(texto) !== -1) ){ 
+                    
+                    prod4[prod4.length] = venta_desp[i];
+                   
+                    
+                }
+                    
+        } 
+        
+
+
+    if( (llamar != 'edito') && (llamar != 'elimino') ){
+        valor04(0);
+		paginacion4();
+	}
+		
+
+
+    const id = [...document.querySelectorAll('#options2 .selected')].map(el => el.id);
+	if(llamar == 'edito'){
+		paginacion4();
+		paginacion_editar4(id); 
+	}
+
+	if(llamar == 'elimino'){
+	    paginacion4();
+        paginacion_eliminar4(id,2);
+	}
+
+}
+
+function recuperar_venta(id_cliente, fecha_hora){
+
+    $.ajax({
+        type:"POST",
+        url:"/administrador/recuperar_venta",
+        data: {id_cliente : id_cliente, fecha_hora : fecha_hora},
+        async: false,
+        success:function(venta2){
+               //  console.log(producto);
+               venta_desp = venta2;
+
+        }
+        
+    });
+    
+    filtrar04('elimino');
+    
+}
+
+///////////////////////////////////////////
+var prod5 = [];
+function abrir_lista_cliente(){
+    prod4= [];
+    const tamano = document.querySelector('#tamaño');
+    tamano.innerHTML = `
+        <span class="close1" onclick="span('${"true"}')">×</span>
+
+        <div id="vent">
+            
+        </div>
+    `
+
+    const ventana = document.querySelector('#vent2');
+    ventana.innerHTML = `
+    
+    <div class="row">
+        <div class="col-lg-3">
+            <h5 class="letra2">Lista De Clientes</h5>
+        </div>
+
+        <div class="col-lg-3">
+            <div class="cursor" style="position: relative; left: -58px;">
+               <a onclick="abrir_cliente_eliminado()"><img src="/img/trash.png" width="30" height="30"> </a>
+            </div>
+        </div>
+        
+        <div class="col-lg-3">
+            <h5 class="letra2" style="text-align:right">Buscar:</h5>
+            
+        </div>
+
+        <div class="col-lg-3">
+            
+            <input type="text" id="formulario4" class="form-control ">
+        </div>
+
+    </div> 
+    
+    <div id="lppresults">
+    <table  class="table display DataTables" class="table table-bordered order-table" class="card-header" style="color: white">
+
+        <tbody style="background-color:#ddac1b; color:black" align="center">
+            <tr>
+            <td>Nombre</td>
+            <td>Apellido</td>
+            <td>Sexo</td>
+            <td>Direccion</td>
+            <td>Telefono</td>
+            <td>Cedula</td>
+            <td>Correo</td>
+            <td>Imagen</td>
+            <td>Opciones</td>
+            </tr>
+        </tbody>
+
+        <tbody id="lista" style="color:black" align="center" class="card-header">
+
+        </tbody>
+         
+        
+
+    </table>
+    </div>
+
+    <section class="paginacion">
+		 <div id="options2" class="filter-menu">
+				<ul class="option-set" >
+					<ul id="paginacion4" class="pagination pagination-md">
+			            
+					</ul>	
+				</ul>
+        </div>
+    
+    </section>
+    `
+    
+    formulario4.addEventListener('keyup', filtrar5);
+    filtrar5();
+    
+    var intro = document.getElementById('tamañ2');
+    
+    intro.style.width="80%";
+    intro.style.top="-15%";
+    body2='true';
+ 
+    abrir2();
+
+
+
+    var doc = new jsPDF();
+    $('#generatereport').click(function() {
+        doc.fromHTML($('#lppresults')[0], 15, 15, {
+            width: 170
+        }, function() {
+            doc.save('sample-file.pdf');
+        });
+    });
+}
+
+
+//const boton = document.querySelector('#boton');
+
+
+var cliente = [];
+var prod5 = [];
+const filtrar5 = (llamar)=>{
+    if(llamar != 'elimino'){
+        $.ajax({
+            type:"POST",
+            url:"/administrador/lista_cliente",
+            async: false,
+            success:function(cliente1){
+                cliente = cliente1;
+                
+            }
+            
+        });
+    }
+    
+    const lista = document.querySelector('#lista');
+
+    const formulario4 =  document.querySelector('#formulario4');
+        lista.innerHTML = '';
+        prod5 = [];
+       
+        const texto = formulario4.value.toLowerCase();
+    
+        for (var i=0; i<cliente.length;i++) { 
+                    
+                let nombre = cliente[i].nombre.toLowerCase();
+                let apellido = cliente[i].apellido.toLowerCase();
+                let sexo = cliente[i].sexo.toLowerCase();
+                let nacimiento = cliente[i].nacimiento.toLowerCase();
+                let direccion = cliente[i].direccion.toLowerCase();
+                let telefono = cliente[i].telefono.toLowerCase();
+                let cedula = cliente[i].cedula.toString().toLowerCase();
+                let correo = cliente[i].correo.toString().toLowerCase();
+               
+              
+              
+                
+        
+                if( (nombre.indexOf(texto) !== -1) || (apellido.indexOf(texto) !== -1) ||
+                 (sexo.indexOf(texto) !== -1) || (nacimiento.indexOf(texto) !== -1) || 
+                 (direccion.indexOf(texto) !== -1) || (telefono.indexOf(texto) !== -1) ||
+                 (cedula.indexOf(texto) !== -1) || (correo.indexOf(texto) !== -1) ){ 
+                    
+                    prod5[prod5.length] = cliente[i];
+                   
+                    
+                }
+                    
+        } 
+        
+
+
+    if( (llamar != 'edito') && (llamar != 'elimino') ){
+        valor5(0);
+		paginacion4();
+	}
+		
+
+
+    const id = [...document.querySelectorAll('#options2 .selected')].map(el => el.id);
+	if(llamar == 'edito'){
+		paginacion4();
+		paginacion_editar5(id); 
+	}
+
+	if(llamar == 'elimino'){
+        console.log('hola');
+	    paginacion4();
+        paginacion_eliminar5(id);
+	}
+
+}
+
+
+function eliminar_cliente(id){
+    $.ajax({
+        type:"POST",
+        url:"/administrador/eliminar_cliente",
+        data: {id : id},
+        async: false,
+        success:function(cliente1){
+               //  console.log(producto);
+            cliente = cliente1;
+            filtrar5('elimino');
+
+        }
+        
+    });
+    
+   
+}
+
+function abrir_cliente_eliminado(){
+    prod5= [];
+    const tamano = document.querySelector('#tamaño');
+    tamano.innerHTML = `
+        <span class="close1" onclick="span('${"true"}')">×</span>
+
+        <div id="vent">
+            
+        </div>
+    `
+
+    const ventana = document.querySelector('#vent2');
+    ventana.innerHTML = `
+    <ol class="breadcrumb">
+        <li><a onclick="abrir_lista_cliente()" class="cursor">Lista de cliente</a></li>
+        <li><a class="active" style="color:black; cursor:context-menu;">Cliente eliminado</a></li>
+    </ol>
+    
+    <div class="row">
+        <div class="col-lg-6">
+            <h5 class="letra2">Cliente Eliminado</h5>
+        </div>
+
+        <div class="col-lg-3">
+            <h5 class="letra2" style="text-align:right">Buscar:</h5>
+            
+        </div>
+
+        <div class="col-lg-3">
+            
+            <input type="text" id="formulario4" class="form-control ">
+        </div>
+
+    </div> 
+    
+    <div id="lppresults">
+    <table  class="table display DataTables" class="table table-bordered order-table" class="card-header" style="color: white">
+
+        <tbody style="background-color:#ddac1b; color:black" align="center">
+            <tr>
+            <td>Nombre</td>
+            <td>Apellido</td>
+            <td>Sexo</td>
+            <td>Direccion</td>
+            <td>Telefono</td>
+            <td>Cedula</td>
+            <td>Correo</td>
+            <td>Imagen</td>
+            <td>Opciones</td>
+            </tr>
+        </tbody>
+
+        <tbody id="lista" style="color:black" align="center" class="card-header">
+
+        </tbody>
+         
+        
+
+    </table>
+    </div>
+
+    <section class="paginacion">
+		 <div id="options2" class="filter-menu">
+				<ul class="option-set" >
+					<ul id="paginacion4" class="pagination pagination-md">
+			            
+					</ul>	
+				</ul>
+        </div>
+    
+    </section>
+    `
+    
+    formulario4.addEventListener('keyup', filtrar05);
+    filtrar05();
+    
+    var intro = document.getElementById('tamañ2');
+    
+    intro.style.width="80%";
+    intro.style.top="-15%";
+    body2='true';
+ 
+    abrir2();
+
+}
+
+
+//const boton = document.querySelector('#boton');
+
+
+const filtrar05 = (llamar)=>{
+    if(llamar != 'activo'){
+        $.ajax({
+            type:"POST",
+            url:"/administrador/cliente_eliminado",
+            async: false,
+            success:function(cliente1){
+                cliente = cliente1;
+                
+            }
+            
+        });
+    }
+    
+    const lista = document.querySelector('#lista');
+
+    const formulario4 =  document.querySelector('#formulario4');
+        lista.innerHTML = '';
+        prod5 = [];
+       
+        const texto = formulario4.value.toLowerCase();
+    
+        for (var i=0; i<cliente.length;i++) { 
+                    
+                let nombre = cliente[i].nombre.toLowerCase();
+                let apellido = cliente[i].apellido.toLowerCase();
+                let sexo = cliente[i].sexo.toLowerCase();
+                let nacimiento = cliente[i].nacimiento.toLowerCase();
+                let direccion = cliente[i].direccion.toLowerCase();
+                let telefono = cliente[i].telefono.toLowerCase();
+                let cedula = cliente[i].cedula.toString().toLowerCase();
+                let correo = cliente[i].correo.toString().toLowerCase();
+               
+              
+              
+                
+        
+                if( (nombre.indexOf(texto) !== -1) || (apellido.indexOf(texto) !== -1) ||
+                 (sexo.indexOf(texto) !== -1) || (nacimiento.indexOf(texto) !== -1) || 
+                 (direccion.indexOf(texto) !== -1) || (telefono.indexOf(texto) !== -1) ||
+                 (cedula.indexOf(texto) !== -1) || (correo.indexOf(texto) !== -1) ){ 
+                    
+                    prod5[prod5.length] = cliente[i];
+                   
+                    
+                }
+                    
+        } 
+        
+
+
+    if( (llamar != 'edito') && (llamar != 'activo') ){
+        valor05(0);
+		paginacion4();
+	}
+		
+
+
+    const id = [...document.querySelectorAll('#options2 .selected')].map(el => el.id);
+	if(llamar == 'edito'){
+		paginacion4();
+		paginacion_editar5(id); 
+	}
+
+	if(llamar == 'activo'){
+	    paginacion4();
+        paginacion_eliminar5(id, 2);
+	}
+
+}
+
+function activar_cliente(id){
+    $.ajax({
+        type:"POST",
+        url:"/administrador/activar_cliente",
+        data: {id : id},
+        async: false,
+        success:function(cliente1){
+               //  console.log(producto);
+            cliente = cliente1;
+            filtrar05('activo');
+
+        }
+        
+    });
+    
+   
 }

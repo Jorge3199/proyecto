@@ -253,3 +253,98 @@ function confirmar2(id){
   
   
 }
+
+function confirmar4(id_cliente, fecha_hora){
+                   
+    Swal.fire({
+    title: '¿Estás seguro?',
+    text: "¡No podrás revertir esto!",
+    type: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    cancelButtonText: 'Cancelar',
+    confirmButtonText: 'Confirmar'
+    }).then((result) => {
+    if (result.value) {
+       
+       
+        factura_despachada(id_cliente, fecha_hora);
+    
+    }
+     
+    })
+  
+  
+}
+
+function confirmar04(id_cliente, fecha_hora){
+                   
+    Swal.fire({
+    title: '¿Estás seguro?',
+    text: "¡No podrás revertir esto!",
+    type: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    cancelButtonText: 'Cancelar',
+    confirmButtonText: 'Confirmar'
+    }).then((result) => {
+    if (result.value) {
+       
+       recuperar_venta(id_cliente, fecha_hora);
+        
+       
+    }
+     
+    })
+  
+  
+}
+
+function confirmar5(id){
+                   
+    Swal.fire({
+    title: '¿Estás seguro?',
+    text: "¡No podrás revertir esto!",
+    type: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    cancelButtonText: 'Cancelar',
+    confirmButtonText: 'Confirmar'
+    }).then((result) => {
+    if (result.value) {
+      
+            eliminar_cliente(id);
+       
+    }
+     
+    })
+  
+}    
+
+function confirmar05(id){
+                   
+    Swal.fire({
+    title: '¿Estás seguro?',
+    text: "¡No podrás revertir esto!",
+    type: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    cancelButtonText: 'Cancelar',
+    confirmButtonText: 'Confirmar'
+    }).then((result) => {
+    if (result.value) {
+      
+        activar_cliente(id);
+       
+    }
+     
+    })
+  
+}    
+
+  
+  
