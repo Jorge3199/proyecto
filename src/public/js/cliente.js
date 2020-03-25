@@ -189,7 +189,7 @@ if(s >= 8){
 			<div id='tamaño5${n}' class="fondo" style="width:96.5%; " >
 			<div class="row">
 				<div class="col-lg-12">	 
-					<h8 class="tiempo" >${prod[p].fecha_hora}</h8>
+					<h8 class="tiempo">${prod[p].fecha_hora}</h8>
 				</div>	
 			</div>
 			

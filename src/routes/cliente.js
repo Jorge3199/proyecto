@@ -215,12 +215,6 @@ router.post('/pago', isLoggedIn1, async (req, res) => {
    var hora= hoy.getHours() + ":" + hoy.getMinutes() + ":" + hoy.getSeconds();
    var fecha_hora= fecha + " " + hora;
 
-   console.log(fecha);
-   console.log(hora);
-   console.log(fecha_hora);
-
-
-
     var cliente=req.user;
     const { comprar } = req.body;
     // console.log(req.body);

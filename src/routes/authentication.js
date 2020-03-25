@@ -4,7 +4,6 @@ const router = express.Router();
 var flash = require('express-flash');
 var session = require('express-session');
 var app = express();
-//var  flash  = require ( ' express-flash-2 ' ) ;
 const pool = require('../database');
 const passport = require('passport');
 const helpers = require('../lib/helpers');
@@ -39,13 +38,7 @@ router.get('/signin', isNotLoggedIn, (req, res) => {
     res.render('auth/signin');
 });
 router.post('/signin', isNotLoggedIn, (req, res, next) => {
-    // req.check('username', 'Username is Required').notEmpty();
-    // req.check('password', 'Password is Required').notEmpty();
-    // const errors = req.validationErrors();
-    // if (errors.length > 0) {
-    //   req.flash('message', errors[0].msg);
-    //   res.redirect('/signin');
-    // }
+    
     passport.authenticate('local.signin', {
       successRedirect: '/administrador',
       failureRedirect: '/signin',
@@ -63,16 +56,13 @@ router.get('/recuperar_contrasena', isNotLoggedIn, (req, res) => {
     res.render('auth/recuperar_contrasena');
 });
 
-////////////////////////////////
-
-
 router.post('/recuperar_contrasena', isNotLoggedIn, async(req, res) => {
     const { correo } = req.body; 
     const lista = await pool.query('SELECT * FROM administrador WHERE correo = ?', [correo]);
     
     
     if(lista.length != 0){
-       // res.send(lista[0].usuario);
+      
        var aleatorio = Math.random();
        const b = {
             aleatorio
@@ -111,7 +101,7 @@ router.post('/recuperar_contrasena', isNotLoggedIn, async(req, res) => {
         html: contentHTML      
         }
 
-       //res.send(lista[0]);
+       
        await smtpTransport.sendMail(mailOptions,function(error,res){
             if(error){
             console.log(error);
@@ -123,14 +113,13 @@ router.post('/recuperar_contrasena', isNotLoggedIn, async(req, res) => {
         res.render('auth/mensaje');
    
        
-        //res.redirect('/signin');
+       
     }
     if(lista.length === 0){
-       // a=Math.random();
+      
        req.flash('message', 'error, este correo no esta registrado');
-       // res.send("error, este correo no esta registrado");
-        // res.send(lista);
-         res.redirect('/recuperar_contrasena');
+       
+       res.redirect('/recuperar_contrasena');
     }
     
 });
@@ -146,8 +135,7 @@ router.get('/cambiar_contrasena/:aleatorio', isNotLoggedIn, async (req, res) => 
         req.flash( 'error' , '¡ Flash está de vuelta! ' ) ;
         res.render('auth/continuar');
     }
-   // res.send(links);
-    //res.render('auth/cambiar_contrasena', {link: links[0]});
+
 });
 
 router.post('/cambiar_contrasena/:aleatorio', isNotLoggedIn, async (req, res) => {

@@ -640,6 +640,7 @@ function pago(token){
             cerrar2();
             productos=producto;
             filtrar1();
+            alert_compra();
             // paginacion();
             // valor(0);     
             
