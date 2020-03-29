@@ -433,14 +433,24 @@ function abrir_modelo(){
      intro.style.top="-3%";
 }
 ////////////////////////////////////////////////////
-function abrir_cliente(){
+function abrir_cliente(id,nombre,apellido,sexo,nacimiento,direccion,telefono,cedula,correo,imagen){
+    if(typeof id === "undefined"){
+        nombre='';
+        apellido='';
+        sexo='';
+        nacimiento='';
+        direccion='';
+        telefono='';
+        cedula='';
+        correo='';
+    }
     const ventana = document.querySelector('#vent');
     ventana.innerHTML = `
         <div class="row">
         <div class="col-md-12 mx-auto" >
             <div class="card ">
         
-            <div class="card-header">
+            <div class="card-header" id=titulo>
                 <h2 align="center" style="color:black">Registrar Cliente</h2>
             </div>
                 
@@ -460,6 +470,13 @@ function abrir_cliente(){
                         <input type="file" name="imagen" id="imagen"  required>
                     </div>
                 </div>
+
+               
+                    
+                <div id="boton_contrasena" class="boton_contrasena">
+                </div>
+                      
+               
                 <hr color="black" size=3>
     
                 <div class="row">
@@ -467,7 +484,7 @@ function abrir_cliente(){
                     <div class="col-lg-6">
                     <h3 class="negro">Nombre<span style="color:red">*</span></h3>
                     <div class="inputWithIcon jorge">
-                        <input type="text" id="nombre" name="nombre" placeholder="Nombre" class="form-control" required autofocus>
+                        <input type="text" id="nombre" name="nombre" placeholder="Nombre" class="form-control" value="${nombre}" required autofocus>
                         <i class="icon-user" aria-hidden="true"></i>
                     </div>
                     </div>
@@ -476,7 +493,7 @@ function abrir_cliente(){
                     <div class="col-lg-6">
                     <h3 class="negro">Apellido<span style="color:red">*</span></h3>
                     <div class="inputWithIcon jorge">
-                        <input type="text" id="apellido" name="apellido" placeholder="Apellido" class="form-control" >
+                        <input type="text" id="apellido" name="apellido" placeholder="Apellido" class="form-control" value="${apellido}" >
                         <i class="icon-pencil" aria-hidden="true"></i>
                     </div>
                     </div>
@@ -490,8 +507,7 @@ function abrir_cliente(){
                     <div class="inputWithIcon jorge1">
                         <select id="sexo" name="sexo" placeholder="Sexo" class="form-control">
                             <option value="N" disabled selected>Selecciona sexo</option>
-                            <option value="F">Femenino</option> 
-                            <option value="M">Masculino</option> 
+                           
                         </select>
                         <i class="icon-man-woman" aria-hidden="true"></i>
                     </div>
@@ -501,7 +517,7 @@ function abrir_cliente(){
                     <div class="col-lg-6">
                     <h3 class="negro">Nacimiento<span style="color:red">*</span></h3>
                     <div class="inputWithIcon jorge3">
-                        <input type="date" id="nacimiento" name="nacimiento" placeholder="Nacimiento" class="form-control" >
+                        <input type="date" id="nacimiento" name="nacimiento" placeholder="Nacimiento" class="form-control" value="${nacimiento}" >
                         <i class="icon-date" aria-hidden="true"></i>
                     </div>
                     </div>
@@ -515,38 +531,7 @@ function abrir_cliente(){
                     <div class="inputWithIcon jorge2">
                         <select id="direccion" name="direccion" placeholder="Direccion" class="form-control">
                             <option value="N" disabled selected>Selecciona Provincia</option>
-                            <option value="Azua">Azua</option> 
-                            <option value="Bahoruco">Bahoruco</option> 
-                            <option value="Barahona">Barahona</option>
-                            <option value="Dajabón">Dajabón</option> 
-                            <option value="Distrito Nacional">Distrito Nacional</option> 
-                            <option value="San Francisco de Macorís">San Francisco de Macorís</option>
-                            <option value="El Seibo">El Seibo</option> 
-                            <option value="Elías Piña">Elías Piña</option> 
-                            <option value="Moca">Moca</option>
-                            <option value="Hato Mayor">Hato Mayor</option> 
-                            <option value="Salcedo">Salcedo</option> 
-                            <option value="Jimaní">Jimaní</option>
-                            <option value="Higüey">Higüey</option> 
-                            <option value="La Romana">La Romana</option> 
-                            <option value="La Vega">La Vega</option>
-                            <option value="Nagua">Nagua</option> 
-                            <option value="Bonao">Bonao</option> 
-                            <option value="Monte Cristi">Monte Cristi</option>
-                            <option value="Monte Plata">Monte Plata</option> 
-                            <option value="Pedernales">Pedernales</option> 
-                            <option value="Baní">Baní</option>
-                            <option value="Puerto Plata">Puerto Plata</option> 
-                            <option value="Samaná">Samaná</option> 
-                            <option value="San Cristóbal">San Cristóbal</option>
-                            <option value="San José de Ocoa">San José de Ocoa</option> 
-                            <option value="San Juan">San Juan</option> 
-                            <option value="San Pedro de Macorís">San Pedro de Macorís</option>
-                            <option value="Cotuí">Cotuí</option> 
-                            <option value="Santiago">Santiago</option> 
-                            <option value="Santiago Rodríguez">Santiago Rodríguez</option>
-                            <option value="Santo Domingo">Santo Domingo</option> 
-                            <option value="Valverde">Valverde</option>  
+                            
                         </select>
                         <i class="icon-location" aria-hidden="true"></i>
                     </div>
@@ -556,7 +541,7 @@ function abrir_cliente(){
                     <div class="col-lg-6">
                     <h3 class="negro">Teléfono<span style="color:red">*</span></h3>
                     <div class="inputWithIcon jorge">
-                        <input type="text" id="telefono" name="telefono" placeholder="Telefono" class="form-control" >
+                        <input type="text" id="telefono" name="telefono" placeholder="Telefono" class="form-control" value="${telefono}">
                         <i class="icon-phone" aria-hidden="true"></i>
                     </div>
                     </div>
@@ -568,64 +553,35 @@ function abrir_cliente(){
                     <div class="col-lg-6">
                     <h3 class="negro">Cedula<span style="color:red">*</span></h3>
                     <div class="inputWithIcon jorge">
-                        <input type="text" id="cedula" name="cedula" placeholder="Cedula" class="form-control" >
-                        <i class="icon-user-tie" aria-hidden="true"></i>
+                        <input type="text" id="cedula" name="cedula" placeholder="Cedula" class="form-control" value="${cedula}">
+                        <i class="icon-contact_mail" aria-hidden="true"></i>
                     </div>
                     </div>
     
                     <div class="col-lg-6">
                     <h3 class="negro">Correo<span style="color:red">*</span></h3>
                     <div class="inputWithIcon jorge4">
-                        <input type="email" id="correo" name="correo" placeholder="Correo" class="form-control" >
+                        <input type="email" id="correo" name="correo" placeholder="Correo" class="form-control" value="${correo}">
                         <i class="icon-email" aria-hidden="true"></i>
                     </div>
                     </div>
     
                 </div>
-    
-                <div class="row">
-    
-                    <div class="col-lg-6">
-                    <h3 class="negro">Contraseña<span style="color:red">*</span></h3>
-                    <div class="inputWithIcon jorge5">
-                        <input type="password" id="contrasena" name="contrasena" placeholder="Contraseña" class="form-control" >
-                        <i class="icon-lock" aria-hidden="true"></i>
-                    </div>
-                    </div>
-    
-                
-                    <div class="col-lg-6">
-                    <h3 class="negro">Confirmar<span style="color:red">*</span></h3>
-                    <div class="inputWithIcon jorge5">
-                        <input type="password" id="confirmar" name="confirmar" placeholder="Confirmar" class="form-control" >
-                        <i class="icon-key" aria-hidden="true"></i>
-                    </div>
-                    </div>
-    
-                </div>
-                
-                <br>
-
-                <div class="col-lg-12">
-                    <div class="col-lg-1">
-                        <input type="checkbox" name="acepto" >
-                    </div>
-
-                    <div class="col-lg-6">
-                        <a class="negro">Acepto ternimos y condiciones </a>
-                    </div>
+                 
+                <div id="borrar"> 
+                    
                 </div>
 
                 <div class="row">
     
                     <div class="col-lg-3">
-                    <a id="check" class="btn btn-warning btn-block my-3" onclick="validar_registro()">
+                    <a id="check" class="btn btn-warning btn-block my-3" onclick="validar_registro(${id},${1})">
                         Registrar
                     </a>
                     
                     </div>
     
-                    <div class="col-lg-3">
+                    <div class="col-lg-3" id="cancelar">
                     <a class="btn btn-danger btn-block my-3" onclick="cerrar()">
                         Cancelar
                     </a>
@@ -642,17 +598,87 @@ function abrir_cliente(){
         </div>
     
     `
+
+    if(typeof id === "undefined"){
+        const titulo = document.querySelector('#titulo');
+        titulo.innerHTML = `
+         <h2 align="center" style="color:black">Registrar Cliente</h2>
+         `
+        $('#imagenPreview').html("<img src='/img/perfil.jpg' class='imgRedonda'/>");
+        const borrar = document.querySelector('#borrar');
+        borrar.innerHTML = `
+        <div class="row" >
+        
+            <div class="col-lg-6">
+            <h3 class="negro">Contraseña<span style="color:red">*</span></h3>
+            <div class="inputWithIcon jorge5">
+                <input type="password" id="contrasena" name="contrasena" placeholder="Contraseña" class="form-control" >
+                <i class="icon-lock" aria-hidden="true"></i>
+            </div>
+            </div>
+
+        
+            <div class="col-lg-6">
+            <h3 class="negro">Confirmar<span style="color:red">*</span></h3>
+            <div class="inputWithIcon jorge5">
+                <input type="password" id="confirmar" name="confirmar" placeholder="Confirmar" class="form-control" >
+                <i class="icon-key" aria-hidden="true"></i>
+            </div>
+            </div>
+
+        </div>
     
-    var c = () => Array.from(document.getElementsByTagName("INPUT")).filter(cur => cur.type === 'checkbox' && cur.checked).length > 0;
+    
+        <br>
 
-    check.addEventListener("click", () => {
-    if(!c()) { 
-        alert("Debes aceptar ternimos y condiciones");
-        //alertify.alert("HEADER","Esto es un mensaje").set('label', 'Aceptar'); 
-    } 
-    });
+        <div class="col-lg-12">
+            <div class="col-lg-1">
+                <input type="checkbox" name="acepto" >
+            </div>
 
-    $('#imagenPreview').html("<img src='/img/perfil.jpg' class='imgRedonda'/>"); 
+            <div class="col-lg-6">
+                <a class="negro">Acepto ternimos y condiciones </a>
+            </div>
+        </div>`;
+        var c = () => Array.from(document.getElementsByTagName("INPUT")).filter(cur => cur.type === 'checkbox' && cur.checked).length > 0;
+
+        check.addEventListener("click", () => {
+        if(!c()) { 
+            alert("Debes aceptar ternimos y condiciones");
+            //alertify.alert("HEADER","Esto es un mensaje").set('label', 'Aceptar'); 
+        } 
+        });
+        
+    }
+
+    if(typeof id !== "undefined"){
+        const titulo = document.querySelector('#titulo');
+        titulo.innerHTML = `
+         <h2 align="center" style="color:black">Editar Cliente</h2>
+         `
+         
+         const boton_contrasena = document.querySelector('#boton_contrasena');
+         boton_contrasena.innerHTML = `
+         <a class="btn btn-warning btn-block my-3" onclick="abrir_contrasena(${id},'${imagen}',${1})">
+            Cambiar Contraseña
+          </a>
+          `
+        const cancelar = document.querySelector('#cancelar');
+        cancelar.innerHTML = `
+        <a class="btn btn-danger btn-block my-3" onclick="span('${"true"}')">
+            Cancelar
+        </a>
+        ` 
+        $('#imagenPreview').html("<img src='/imagen1/"+imagen+"' class='imgRedonda'/>");
+        const borrar = document.querySelector('#borrar');
+        borrar.innerHTML = ``;
+
+        selecionar(sexo, direccion);
+
+       
+    }
+    
+     
    (function(){
        function filePreview(input){
            if(input.files && input.files[0]){
@@ -670,7 +696,6 @@ function abrir_cliente(){
        });
     }) ();
 
-
     abrir();
 
     var intro = document.getElementById('tamaño');
@@ -678,14 +703,15 @@ function abrir_cliente(){
     intro.style.width="60%";
     intro.style.top="-15%";
 
-    const nombre = document.querySelector('#nombre');
-    const apellido = document.querySelector('#apellido');
-    const telefono = document.querySelector('#telefono');
+    const nombre1 = document.querySelector('#nombre');
+    const apellido1 = document.querySelector('#apellido');
+    const telefono1 = document.querySelector('#telefono');
+    const cedula1 = document.querySelector('#cedula');
 
-    nombre.addEventListener('keyup', (e) => {
+    nombre1.addEventListener('keyup', (e) => {
         let valorInput = e.target.value;
     
-        nombre.value = valorInput
+        nombre1.value = valorInput
 
         //Elimina los numero
         .replace(/([0-9])/g, '')
@@ -696,38 +722,105 @@ function abrir_cliente(){
 
 
 
-    apellido.addEventListener('keyup', (e) => {
+    apellido1.addEventListener('keyup', (e) => {
         let valorInput = e.target.value;
     
-        apellido.value = valorInput
+        apellido1.value = valorInput
         .replace(/([0-9])/g, '')   
         .replace(/^\s+/,"");
         
     }); 
 
-    telefono.addEventListener('keyup', (e) => {
+    telefono1.addEventListener('keyup', (e) => {
         let valorInput = e.target.value;
-    
-        telefono.value = valorInput
-        
-        //Eliminamos espacios en blanco
+      
+        telefono1.value = valorInput
+         //Eliminamos espacios en blanco
         .replace(/\s/g, '')
-        //Eliminar las letrar
+         //Eliminar las letrar
         .replace(/\D/g, '')
+        //Mascara
+        .replace(/^(\d{3})(\d{3})(\d{4}).*/, '($1) $2-$3');
 
-        .trim();
+        // .trim();
+        
+    });
+
+    cedula1.addEventListener('keyup', (e) => {
+        let valorInput = e.target.value;
+      
+        cedula1.value = valorInput
+         //Eliminamos espacios en blanco
+        .replace(/\s/g, '')
+         //Eliminar las letrar
+        .replace(/\D/g, '')
+        //Mascara
+        .replace(/^(\d{3})(\d{7})(\d{1}).*/, '$1-$2-$3');
+
+        // .trim();
         
     });
 }
+
+function selecionar(sexo, direccion){
+    var Provincia= ['Azua','Bahoruco','Barahona','Dajabón','Distrito Nacional','San Francisco de Macorís',
+    'El Seibo','Elías Piña','Moca','Hato Mayor','Salcedo','Jimaní','Higüey','La Romana','La Vega',
+    'Nagua','Bonao','Monte Cristi','Monte Plata','Pedernales','Baní','Puerto Plata','Samaná',
+     'San Cristóbal','San José de Ocoa','San Juan','San Pedro de Macorís','Cotuí','Santiago',
+    'Santiago Rodríguez','Santo Domingo','Valverde'];
+   
+    const direccion1 = document.querySelector('#direccion');
+    const sexo1 = document.querySelector('#sexo');
+   
+    if( sexo == 'M' ){
+        sexo1.innerHTML += `
+         <option value="F">Femenino</option> 
+         <option value="M" selected>Masculino</option> 
+        `;
+    }
+
+    if( sexo == 'F' ){
+        sexo1.innerHTML += `
+         <option value="F" selected>Femenino</option> 
+         <option value="M">Masculino</option> 
+        `;
+    }
+   
+
+    for (var n=0; n < Provincia.length; n++){
+        if( direccion != Provincia[n] ){
+            direccion1.innerHTML += `
+            <option value="${Provincia[n]}">${Provincia[n]}</option> 
+            `;
+        }
+
+        if(direccion == Provincia[n] ){
+            direccion1.innerHTML += `
+            <option value="${Provincia[n]}" selected>${Provincia[n]}</option> 
+            `;
+        }
+    }
+}
+
 ////////////////////////////////////////////////////
-function abrir_administrador(){
+function abrir_administrador(id,nombre,apellido,sexo,nacimiento,direccion,telefono,cedula,correo,imagen){
+    if(typeof id === "undefined"){
+        nombre='';
+        apellido='';
+        sexo='';
+        nacimiento='';
+        direccion='';
+        telefono='';
+        cedula='';
+        correo='';
+    }
     const ventana = document.querySelector('#vent');
     ventana.innerHTML = `
         <div class="row">
         <div class="col-md-12 mx-auto">
             <div class="card ">
             
-            <div class="card-header">
+            <div class="card-header" id=titulo>
                 <h2 align="center" style="color:black">Registrar Administrador</h2>
             </div>
 
@@ -747,6 +840,10 @@ function abrir_administrador(){
                         <input type="file" name="imagen" id="imagen"  required>
                     </div>
                 </div>
+
+                <div id="boton_contrasena" class="boton_contrasena">
+                </div>
+
                 <hr color="black" size=3>
 
                 <div class="row">
@@ -754,7 +851,7 @@ function abrir_administrador(){
                     <div class="col-lg-6">
                     <h3 class="negro">Nombre<span style="color:red">*</span></h3>
                     <div class="inputWithIcon jorge">
-                        <input type="text" id="nombre" name="nombre" placeholder="Nombre" class="form-control" required autofocus>
+                        <input type="text" id="nombre" name="nombre" placeholder="Nombre" class="form-control" value="${nombre}" required autofocus>
                         <i class="icon-user" aria-hidden="true"></i>
                     </div>
                     </div>
@@ -763,7 +860,7 @@ function abrir_administrador(){
                     <div class="col-lg-6">
                     <h3 class="negro">Apellido<span style="color:red">*</span></h3>
                     <div class="inputWithIcon jorge">
-                        <input type="text" id="apellido" name="apellido" placeholder="Apellido" class="form-control" >
+                        <input type="text" id="apellido" name="apellido" placeholder="Apellido" value="${apellido}" class="form-control" >
                         <i class="icon-pencil" aria-hidden="true"></i>
                     </div>
                     </div>
@@ -777,8 +874,7 @@ function abrir_administrador(){
                     <div class="inputWithIcon jorge1">
                         <select id="sexo" name="sexo" placeholder="Sexo" class="form-control">
                             <option value="N" disabled selected>Selecciona sexo</option>
-                            <option value="F">Femenino</option> 
-                            <option value="M">Masculino</option> 
+    
                         </select>
                         <i class="icon-man-woman" aria-hidden="true"></i>
                     </div>
@@ -788,7 +884,7 @@ function abrir_administrador(){
                     <div class="col-lg-6">
                     <h3 class="negro">Nacimiento<span style="color:red">*</span></h3>
                     <div class="inputWithIcon jorge3">
-                        <input type="date" id="nacimiento" name="nacimiento" placeholder="Nacimiento" class="form-control" >
+                        <input type="date" id="nacimiento" name="nacimiento" placeholder="Nacimiento" class="form-control" value="${nacimiento}">
                         <i class="icon-date" aria-hidden="true"></i>
                     </div>
                     </div>
@@ -802,38 +898,7 @@ function abrir_administrador(){
                     <div class="inputWithIcon jorge2">
                         <select id="direccion" name="direccion" placeholder="Direccion" class="form-control">
                             <option value="N" disabled selected>Selecciona Provincia</option>
-                            <option value="Azua">Azua</option> 
-                            <option value="Bahoruco">Bahoruco</option> 
-                            <option value="Barahona">Barahona</option>
-                            <option value="Dajabón">Dajabón</option> 
-                            <option value="Distrito Nacional">Distrito Nacional</option> 
-                            <option value="San Francisco de Macorís">San Francisco de Macorís</option>
-                            <option value="El Seibo">El Seibo</option> 
-                            <option value="Elías Piña">Elías Piña</option> 
-                            <option value="Moca">Moca</option>
-                            <option value="Hato Mayor">Hato Mayor</option> 
-                            <option value="Salcedo">Salcedo</option> 
-                            <option value="Jimaní">Jimaní</option>
-                            <option value="Higüey">Higüey</option> 
-                            <option value="La Romana">La Romana</option> 
-                            <option value="La Vega">La Vega</option>
-                            <option value="Nagua">Nagua</option> 
-                            <option value="Bonao">Bonao</option> 
-                            <option value="Monte Cristi">Monte Cristi</option>
-                            <option value="Monte Plata">Monte Plata</option> 
-                            <option value="Pedernales">Pedernales</option> 
-                            <option value="Baní">Baní</option>
-                            <option value="Puerto Plata">Puerto Plata</option> 
-                            <option value="Samaná">Samaná</option> 
-                            <option value="San Cristóbal">San Cristóbal</option>
-                            <option value="San José de Ocoa">San José de Ocoa</option> 
-                            <option value="San Juan">San Juan</option> 
-                            <option value="San Pedro de Macorís">San Pedro de Macorís</option>
-                            <option value="Cotuí">Cotuí</option> 
-                            <option value="Santiago">Santiago</option> 
-                            <option value="Santiago Rodríguez">Santiago Rodríguez</option>
-                            <option value="Santo Domingo">Santo Domingo</option> 
-                            <option value="Valverde">Valverde</option>  
+                           
                         </select>
                         <i class="icon-location" aria-hidden="true"></i>
                     </div>
@@ -843,7 +908,7 @@ function abrir_administrador(){
                     <div class="col-lg-6">
                     <h3 class="negro">Teléfono<span style="color:red">*</span></h3>
                     <div class="inputWithIcon jorge">
-                        <input type="text" id="telefono" name="telefono" placeholder="Telefono" class="form-control" >
+                        <input type="text" id="telefono" name="telefono" placeholder="Telefono" class="form-control" value="${telefono}">
                         <i class="icon-phone" aria-hidden="true"></i>
                     </div>
                     </div>
@@ -855,58 +920,31 @@ function abrir_administrador(){
                     <div class="col-lg-6">
                     <h3 class="negro">Cedula<span style="color:red">*</span></h3>
                     <div class="inputWithIcon jorge">
-                        <input type="text" id="cedula" name="cedula" placeholder="Cedula" class="form-control" >
-                        <i class="icon-user-tie" aria-hidden="true"></i>
+                        <input type="text" id="cedula" name="cedula" placeholder="Cedula" class="form-control" value="${cedula}" >
+                        <i class="icon-contact_mail" aria-hidden="true"></i>
                     </div>
                     </div>
     
                     <div class="col-lg-6">
                     <h3 class="negro">Correo<span style="color:red">*</span></h3>
                     <div class="inputWithIcon jorge4">
-                        <input type="email" id="correo" name="correo" placeholder="Correo" class="form-control" >
+                        <input type="email" id="correo" name="correo" placeholder="Correo" class="form-control" value="${correo}">
                         <i class="icon-email" aria-hidden="true"></i>
                     </div>
                     </div>
     
                 </div>
     
-                <div class="row">
-    
-                    <div class="col-lg-6">
-                    <h3 class="negro">Contraseña<span style="color:red">*</span></h3>
-                    <div class="inputWithIcon jorge5">
-                        <input type="password" id="contrasena" name="contrasena" placeholder="Contraseña" class="form-control" >
-                        <i class="icon-lock" aria-hidden="true"></i>
-                    </div>
-                    </div>
-    
-                
-                    <div class="col-lg-6">
-                    <h3 class="negro">Confirmar<span style="color:red">*</span></h3>
-                    <div class="inputWithIcon jorge5">
-                        <input type="password" id="confirmar" name="confirmar" placeholder="Confirmar" class="form-control" >
-                        <i class="icon-key" aria-hidden="true"></i>
-                    </div>
-                    </div>
-    
-                </div>
-                
-                <br>
+             
 
-                <div class="col-lg-12">
-                    <div class="col-lg-1">
-                        <input type="checkbox" name="acepto" >
-                    </div>
-
-                    <div class="col-lg-6">
-                        <a class="negro">Acepto ternimos y condiciones </a>
-                    </div>
+                <div id="borrar"> 
+                    
                 </div>
 
                 <div class="row">
     
                     <div class="col-lg-3">
-                    <a id="check" class="btn btn-warning btn-block my-3" onclick="validar_registro()">
+                    <a id="check" class="btn btn-warning btn-block my-3" onclick="validar_registro(${id},${2})">
                         Registrar
                     </a>
                     
@@ -929,17 +967,82 @@ function abrir_administrador(){
         </div>
     
     `
-  //  alert(administrador);
-    var c = () => Array.from(document.getElementsByTagName("INPUT")).filter(cur => cur.type === 'checkbox' && cur.checked).length > 0;
+    
+    if(typeof id === "undefined"){
+        const titulo = document.querySelector('#titulo');
+        titulo.innerHTML = `
+         <h2 align="center" style="color:black">Registrar Administrador</h2>
+         `
+        $('#imagenPreview').html("<img src='/img/perfil.jpg' class='imgRedonda'/>");
+        const borrar = document.querySelector('#borrar');
+        borrar.innerHTML = `
+        <div class="row" >
+        
+            <div class="col-lg-6">
+            <h3 class="negro">Contraseña<span style="color:red">*</span></h3>
+            <div class="inputWithIcon jorge5">
+                <input type="password" id="contrasena" name="contrasena" placeholder="Contraseña" class="form-control" >
+                <i class="icon-lock" aria-hidden="true"></i>
+            </div>
+            </div>
 
-    check.addEventListener("click", () => {
-    if(!c()) { 
-        alert("Debes aceptar ternimos y condiciones");
-        //alertify.alert("HEADER","Esto es un mensaje").set('label', 'Aceptar'); 
-    } 
-    });
+        
+            <div class="col-lg-6">
+            <h3 class="negro">Confirmar<span style="color:red">*</span></h3>
+            <div class="inputWithIcon jorge5">
+                <input type="password" id="confirmar" name="confirmar" placeholder="Confirmar" class="form-control" >
+                <i class="icon-key" aria-hidden="true"></i>
+            </div>
+            </div>
 
-    $('#imagenPreview').html("<img src='/img/perfil.jpg' class='imgRedonda'/>"); 
+        </div>
+    
+    
+        <br>
+
+        <div class="col-lg-12">
+            <div class="col-lg-1">
+                <input type="checkbox" name="acepto" >
+            </div>
+
+            <div class="col-lg-6">
+                <a class="negro">Acepto ternimos y condiciones </a>
+            </div>
+        </div>`;
+        var c = () => Array.from(document.getElementsByTagName("INPUT")).filter(cur => cur.type === 'checkbox' && cur.checked).length > 0;
+
+        check.addEventListener("click", () => {
+        if(!c()) { 
+            alert("Debes aceptar ternimos y condiciones");
+            //alertify.alert("HEADER","Esto es un mensaje").set('label', 'Aceptar'); 
+        } 
+        });
+        
+    }
+
+    if(typeof id !== "undefined"){
+        
+        const titulo = document.querySelector('#titulo');
+        titulo.innerHTML = `
+         <h2 align="center" style="color:black">Editar Administrador</h2>
+         `
+         
+         const boton_contrasena = document.querySelector('#boton_contrasena');
+         boton_contrasena.innerHTML = `
+         <a class="btn btn-warning btn-block my-3" onclick="abrir_contrasena(${id},'${imagen}',${2})">
+            Cambiar Contraseña
+          </a>
+          `
+
+        $('#imagenPreview').html("<img src='/imagen1/"+imagen+"' class='imgRedonda'/>");
+        const borrar = document.querySelector('#borrar');
+        borrar.innerHTML = ``;
+
+        selecionar(sexo, direccion);
+
+       
+    }
+
     (function(){
         function filePreview(input){
             if(input.files && input.files[0]){
@@ -965,14 +1068,15 @@ function abrir_administrador(){
     intro.style.width="60%";
     intro.style.top="-15%";
 
-    const nombre = document.querySelector('#nombre');
-    const apellido = document.querySelector('#apellido');
-    const telefono = document.querySelector('#telefono');
+    const nombre1 = document.querySelector('#nombre');
+    const apellido1 = document.querySelector('#apellido');
+    const telefono1 = document.querySelector('#telefono');
+    const cedula1 = document.querySelector('#cedula');
 
-    nombre.addEventListener('keyup', (e) => {
+    nombre1.addEventListener('keyup', (e) => {
         let valorInput = e.target.value;
     
-        nombre.value = valorInput
+        nombre1.value = valorInput
 
         //Elimina los numero
         .replace(/([0-9])/g, '')
@@ -983,26 +1087,42 @@ function abrir_administrador(){
 
 
 
-    apellido.addEventListener('keyup', (e) => {
+    apellido1.addEventListener('keyup', (e) => {
         let valorInput = e.target.value;
     
-        apellido.value = valorInput
+        apellido1.value = valorInput
         .replace(/([0-9])/g, '')   
         .replace(/^\s+/,"");
         
     }); 
 
-    telefono.addEventListener('keyup', (e) => {
+    telefono1.addEventListener('keyup', (e) => {
         let valorInput = e.target.value;
-    
-        telefono.value = valorInput
-        
-        //Eliminamos espacios en blanco
+      
+        telefono1.value = valorInput
+         //Eliminamos espacios en blanco
         .replace(/\s/g, '')
-        //Eliminar las letrar
+         //Eliminar las letrar
         .replace(/\D/g, '')
+        //Mascara
+        .replace(/^(\d{3})(\d{3})(\d{4}).*/, '($1) $2-$3');
 
-        .trim();
+        // .trim();
+        
+    });
+
+    cedula1.addEventListener('keyup', (e) => {
+        let valorInput = e.target.value;
+      
+        cedula1.value = valorInput
+         //Eliminamos espacios en blanco
+        .replace(/\s/g, '')
+         //Eliminar las letrar
+        .replace(/\D/g, '')
+        //Mascara
+        .replace(/^(\d{3})(\d{7})(\d{1}).*/, '$1-$2-$3');
+
+        // .trim();
         
     });
 }
@@ -1630,7 +1750,7 @@ var prod4 =[];
 var venta = [];
 var products = [];
 const filtrar4 = (llamar)=>{
-    console.log('hola');
+ 
     $.ajax({
         type:"POST",
         url:"/administrador/venta",
@@ -1683,7 +1803,7 @@ const filtrar4 = (llamar)=>{
 
 
     if( (llamar != 'edito') && (llamar != 'elimino') ){
-        console.log('hola');
+  
         valor4(0);
 		paginacion4();
 	}
@@ -2198,7 +2318,6 @@ const filtrar5 = (llamar)=>{
 	}
 
 	if(llamar == 'elimino'){
-        console.log('hola');
 	    paginacion4();
         paginacion_eliminar5(id);
 	}
@@ -2401,4 +2520,175 @@ function activar_cliente(id){
     });
     
    
+}
+
+///////////////////////editar_cliente/////////////////////////////
+function editar_cliente(id, opcion){
+
+    var imagen = document.getElementById("imagen").value;
+
+    if(imagen == ''){
+        var datos=$('#enviar').serialize();
+        
+        $.ajax({
+            type:"POST",
+            url:"/administrador/editar_informacion/"+id+"/"+opcion,
+            data: datos,
+            async: false,
+            success:function(datos){
+               if(opcion == 1) {
+                    cliente=datos;
+                    filtrar5();
+                    cerrar('opcion2');
+               } 
+               
+               if(opcion == 2){
+                const admin = document.querySelector('#admin');
+                admin.innerHTML = `
+                <a  onclick="abrir_administrador(${datos[0].id},'${datos[0].nombre}','${datos[0].apellido}','${datos[0].sexo}','${datos[0].nacimiento}',
+                '${datos[0].direccion}','${datos[0].telefono}','${datos[0].cedula}','${datos[0].correo}','${datos[0].imagen}')">Editar informacion</a>
+                `
+                   cerrar();
+               }
+               
+               editado();
+                
+    
+            }
+            
+        });
+    }
+    if(imagen != ''){
+        var datos = new FormData(document.getElementById("enviar"));
+      
+        $.ajax({
+            type:"POST",
+            url:"/administrador/editar_informacion2/"+id+"/"+opcion,
+            data: datos,
+            async: false,
+            processData: false,
+            contentType: false,
+            success:function(datos){
+                     
+                if(opcion == 1) {
+                    cliente=datos;
+                    filtrar5();
+                    cerrar('opcion2');
+               } 
+               
+               if(opcion == 2){
+                    const admin = document.querySelector('#admin');
+                    admin.innerHTML = `
+                    <a  onclick="abrir_administrador(${datos[0].id},'${datos[0].nombre}','${datos[0].apellido}','${datos[0].sexo}','${datos[0].nacimiento}',
+                    '${datos[0].direccion}','${datos[0].telefono}','${datos[0].cedula}','${datos[0].correo}','${datos[0].imagen}')">Editar informacion</a>
+                    `
+                    const admin2 = document.querySelector('#admin2');
+                    admin2.innerHTML = `
+                    <a onclick="abrir_contrasena(${datos[0].id},'${datos[0].imagen}','2','true')">Cambiar Contraseña</a>
+                    `
+
+                    const link01 = document.querySelector('#link01');
+                    link01.innerHTML = `
+                    <img src='/imagen1/${datos[0].imagen}' class='imgRedonda2'/>
+                    `
+                   cerrar();
+               }
+               editado();
+    
+            }
+           
+            
+        });
+    }
+}
+
+function abrir_contrasena(id,imagen,opcion,true1){
+
+    const ventana = document.querySelector('#vent3');
+    ventana.innerHTML = `
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-sx-12 col-lg-12 mx-auto">
+
+           <div class="col-md-12 col-lg-12">
+                <a><img height="75" width="100" src="/imagen1/${imagen}" class='imgRedonda3'></a>
+                <h4 class="titulo2"> CAMBIAR CONTRASEÑA</h4> 
+            </div> 
+
+            <form id="cambiar_contrasena"  method="POST" onsubmit="return validar_contrasena();">
+                <div class="row">
+
+                    <div class="col-lg-12">
+                        <h5 class="nombre3">Nueva contraseña<span style="color:red">*</span></h5>
+                        <div class="inputWithIcon jorge5">
+                        <input type="password" id="contrasena" name="contrasena" placeholder="Ingrese contraseña" class="form-control" required autofocus>
+                        <i class="icon-lock" aria-hidden="true"></i>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h5 class="nombre3">Confirmar contraseña<span style="color:red">*</span></h5>
+                        <div class="inputWithIcon jorge5">
+                        <input type="password" id="confirmar" name="confirmar" placeholder="Ingrese de nuevo su contraseña" class="form-control"  required >
+                        <i class="icon-key" aria-hidden="true"></i>
+                        </div>
+                    </div>
+
+                </div>
+
+                <br>
+                
+                <div class="row">
+                    <div class="col-lg-6">
+                        <a class="btn btn-warning btn-block" onclick="validar_contrasena(${id},${opcion})">Guardar</a>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <a class="btn btn-danger btn-block" onclick="span3()">Cancelar</a>
+                    </div>
+ 
+                </div>
+
+
+            </form>
+
+        </div>
+
+    </div>`;
+
+    var intro = document.getElementById('tamañ3');
+    
+    intro.style.width="35%";
+    intro.style.top="-5%";
+    abrir3('true');
+    if(typeof true1 === "undefined"){
+        body3='true';
+    }if(typeof true1 !== "undefined"){
+        body3='false';
+    }
+
+}
+
+function cambiar_contrasena(id,opcion){
+
+    body3="false";
+   
+    var datos=$('#cambiar_contrasena').serialize();
+    
+    $.ajax({
+        type:"POST",
+        url:"/administrador/cambiar_contrasena/"+id+"/"+opcion,
+        data: datos,
+        async: false,
+        success:function(opcion1){
+
+            if(opcion1 == 'edito'){
+                span3();
+                editado();
+            }
+
+        }
+        
+    });
+  
 }

@@ -1699,3 +1699,37 @@ tbody img {
 	color: black;
 }
 
+.boton_contrasena{
+	position: absolute;
+	top: 45px;	
+}
+
+.titulo2{
+	position: absolute;
+	top: 25px;	
+	left: 105px;
+	color: black;
+}
+
+.nombre3{
+	position: relative;
+	top: 10px;	
+	left: 10px;
+	color: black;
+}
+
+.imgRedonda3 {
+	position: relative;
+	left: 15px;
+    width:75px;
+    height:75px;
+	border-radius:100px;
+	border:1px solid #000;
+}
+
+.bont{
+	position: relative;
+	/* top: 25px;	 */
+	left: 115px;
+
+}

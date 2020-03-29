@@ -135,7 +135,7 @@ function abrir_compra(id, imagen, nombre, precio, modelo, cantidad){
 
 
 
-var lista_comprar = []
+var lista_comprar = [];
 var total_compra=0;
 var mult;
 function compra(id,nombre,precio,modelo,cantidad,imagen){
@@ -162,8 +162,8 @@ function compra(id,nombre,precio,modelo,cantidad,imagen){
         }
 
         if(encontrado==0){
-            n1=lista_comprar.length;
-            lista_comprar[n1]= { id: id, nombre: nombre, precio: precio, modelo: modelo, cantidad: comprar, imagen: imagen, cant_disp: cantidad};
+        
+            lista_comprar[lista_comprar.length]= { id: id, nombre: nombre, precio: precio, modelo: modelo, cantidad: comprar, imagen: imagen, cant_disp: cantidad};
         }
         
         const cantidad_producto = document.querySelector('#cantidad_producto');
@@ -412,22 +412,6 @@ function lista_favoritos(id){
     if(encontrado==0){
         agregar_favorito(id);
     
-        // var id_producto = id;
-        // $(document).ready(function(){
-        //     $.ajax({
-        //         type:"POST",
-        //         url:"/lista_favorito/"+id_cliente+"/"+id_producto,
-        //         data: id_producto,
-        //         success:function(r){
-        //             if(r==1){
-        //                 alert("agregado con exito");
-        //             }else{
-        //                 alert("Fallo del servidor");
-        //             }
-        //         }
-        //     }); 
-        // });
-    
     }
     
     
@@ -638,9 +622,30 @@ function pago(token){
                 ${total_compra.toFixed(2)}
             `
             cerrar2();
-            productos=producto;
-            filtrar1();
-            alert_compra();
+            if(producto != 1){
+                productos=producto;
+                filtrar1();
+                alert_compra();
+            }
+
+            if(producto == 1){
+
+                $.ajax({
+                    type:"POST",
+                    url:"todos_productos",
+                    async: false,
+                    success:function(products){
+                        productos=products;
+                        filtrar1();
+                        alert_compra1();
+                            
+               
+                    }
+                    
+                });
+                
+            }
+            
             // paginacion();
             // valor(0);     
             
@@ -649,17 +654,351 @@ function pago(token){
     });
 }
 
-function factura(){
+// function factura(){
   
-    $.ajax({
-        type:"POST",
-        url:"factura",
-        async: false,
-        success:function(pago){
-                console.log(pago);
+//     $.ajax({
+//         type:"POST",
+//         url:"factura",
+//         async: false,
+//         success:function(pago){
+//                 console.log(pago);
                
             
+//         }
+        
+//     });
+// }
+
+function abrir_contrasena(imagen){
+    
+    const ventana = document.querySelector('#vent');
+    ventana.innerHTML = `
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-sx-12 col-lg-12 mx-auto">
+
+           <div class="col-md-12 col-lg-12">
+                <a><img height="75" width="100" src="/imagen1/${imagen}" class='imgRedonda3'></a>
+                <h4 class="titulo2"> CAMBIAR CONTRASEÑA</h4> 
+            </div> 
+
+            <form id="cambiar_contrasena"  method="POST" onsubmit="return validar_contrasena();">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h5 class="nombre3">Contraseña actual<span style="color:red">*</span></h5>
+                        <div class="inputWithIcon jorge5">
+                        <input type="password" id="actual" name="actual" placeholder="Contraseña actual" class="form-control" required autofocus>
+                        <i class="icon-pencil" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-lg-12">
+                        <h5 class="nombre3">Nueva contraseña<span style="color:red">*</span></h5>
+                        <div class="inputWithIcon jorge5">
+                        <input type="password" id="contrasena" name="contrasena" placeholder="Ingrese contraseña" class="form-control" required autofocus>
+                        <i class="icon-lock" aria-hidden="true"></i>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h5 class="nombre3">Confirmar contraseña<span style="color:red">*</span></h5>
+                        <div class="inputWithIcon jorge5">
+                        <input type="password" id="confirmar" name="confirmar" placeholder="Ingrese de nuevo su contraseña" class="form-control"  required >
+                        <i class="icon-key" aria-hidden="true"></i>
+                        </div>
+                    </div>
+
+                </div>
+
+                <br>
+                
+                <div class="row">
+                    <div class="col-lg-6">
+                        <a class="btn btn-warning btn-block" onclick="validar_contrasena()">Guardar</a>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <a class="btn btn-danger btn-block" onclick="cerrar()">Cancelar</a>
+                    </div>
+ 
+                </div>
+
+
+            </form>
+
+        </div>
+
+    </div>`;
+
+    var intro = document.getElementById('tamaño');
+    
+    intro.style.width="35%";
+    intro.style.top="-5%";
+    abrir();
+
+}
+////////////////////////////////////////////////////
+function abrir_informacion(telefono,correo,imagen){
+    
+    const ventana = document.querySelector('#vent');
+    ventana.innerHTML = `
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-sx-12 col-lg-12 mx-auto">
+
+           <div class="col-md-12 col-lg-12">
+                <a><img height="75" width="100" src="/imagen1/${imagen}" class='imgRedonda3'></a>
+                <h4 class="titulo2"> EDITAR INFORMACION</h4> 
+            </div> 
+
+            <form id="editar_informacion"  method="POST" onsubmit="return validar_contrasena();">
+                <div class="row">
+
+                    <div class="col-lg-12">
+                        <h5 class="nombre3">Teléfono<span style="color:red">*</span></h5>
+                        <div class="inputWithIcon jorge">
+                        <input type="text" id="telefono" name="telefono" placeholder="Telefono" class="form-control" value="${telefono}">
+                        <i class="icon-phone" aria-hidden="true"></i>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-lg-12">
+                    <h5 class="nombre3">Correo<span style="color:red">*</span></h5>
+                    <div class="inputWithIcon jorge4">
+                    <input type="email" id="correo" name="correo" placeholder="Correo" class="form-control" value="${correo}">
+                    <i class="icon-email" aria-hidden="true"></i>
+                    </div>
+                    </div>
+
+                </div>
+
+                <br>
+                
+                <div class="row">
+                    <div class="col-lg-6">
+                        <a class="btn btn-warning btn-block" onclick="validar_informacion()">Guardar</a>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <a class="btn btn-danger btn-block" onclick="cerrar()">Cancelar</a>
+                    </div>
+ 
+                </div>
+
+
+            </form>
+
+        </div>
+
+    </div>`;
+
+    var intro = document.getElementById('tamaño');
+    
+    intro.style.width="35%";
+    intro.style.top="-5%";
+    abrir();
+
+}
+////////////////////////////////////////////////////
+function abrir_imagen(imagen){
+   
+    const ventana = document.querySelector('#vent');
+    ventana.innerHTML = `
+        <div class="row">
+        <div class="col-md-12 mx-auto" >
+            
+        
+        <div class="card-header" id=titulo>
+            <h2 align="center" style="color:black">Editar Imagen</h2>
+        </div>
+                
+        <hr style="color:black" size=3>
+    
+        <form id="cambiar_imagen"  method="POST" >
+
+        <div align="center">
+            <div id="imagenPreview">
+            </div>
+        </div>
+            
+        
+        <div align="center">
+            <div id="div_file" style="top:-20px; left: 2px;">
+            <p id="texto"><i class="icon-camera" aria-hidden="true"></i>Add file</p>
+                <input type="file" name="imagen" id="imagen"  required>
+            </div>
+        </div>
+                
+        
+        <div class="row">
+            <div class="bont">
+
+                <div class="col-lg-4">
+                    <a class="btn btn-warning btn-block my-3" onclick="validar_imagen()">
+                        Guardar
+                    </a>
+                </div>
+
+                <div class="col-lg-4" >
+                    <a class="btn btn-danger btn-block my-3" onclick="cerrar()">
+                        Cancelar
+                    </a>
+                </div>
+            
+            </div>
+
+        </div>
+
+        </div>
+        </form>
+           
+    </div>
+    </div>
+    
+    `
+
+    
+
+   
+    
+    $('#imagenPreview').html("<img src='/imagen1/"+imagen+"' class='imgRedonda'/>"); 
+   (function(){
+       function filePreview(input){
+           if(input.files && input.files[0]){
+               var reader = new FileReader();
+
+               reader.onload = function(e){
+                   $('#imagenPreview').html("<img src='"+e.target.result+"' class='imgRedonda'/>");
+               }
+
+               reader.readAsDataURL(input.files[0]);
+           }
+       }
+       $('#imagen').change(function(){
+          filePreview(this);
+       });
+    }) ();
+
+    abrir();
+
+    var intro = document.getElementById('tamaño');
+
+    intro.style.width="60%";
+    intro.style.top="-15%";
+
+   
+    const telefono1 = document.querySelector('#telefono');
+
+    telefono1.addEventListener('keyup', (e) => {
+        let valorInput = e.target.value;
+      
+        telefono1.value = valorInput
+         //Eliminamos espacios en blanco
+        .replace(/\s/g, '')
+         //Eliminar las letrar
+        .replace(/\D/g, '')
+        //Mascara
+        .replace(/^(\d{3})(\d{3})(\d{4}).*/, '($1) $2-$3');
+
+        // .trim();
+        
+    });
+
+}
+
+function cambiar_imagen(){
+   
+    var datos = new FormData(document.getElementById("cambiar_imagen"));
+      
+    $.ajax({
+        type:"POST",
+        url:"cambiar_imagen",
+        data: datos,
+        async: false,
+        processData: false,
+        contentType: false,
+        success:function(datos){
+           
+            cambiar(datos);
+
+        }    
+    });
+}
+
+function editar_informacion(){
+    var datos=$('#editar_informacion').serialize();
+
+    $.ajax({
+        type:"POST",
+        url:"editar_informacion",
+        data: datos,
+        async: false,
+        success:function(datos){
+            
+            cambiar(datos);    
+   
         }
         
     });
+}
+
+function cambiar_contrasena(){
+    var datos=$('#cambiar_contrasena').serialize();
+
+    $.ajax({
+        type:"POST",
+        url:"cambiar_contrasena",
+        data: datos,
+        async: false,
+        success:function(opcion){
+            
+            if(opcion == 'confirmacion'){
+                editado();
+                cerrar();
+            }
+
+            if(opcion == 'invalido'){
+                Swal.fire({
+                    type: 'error',
+                    title: 'Error',
+                    text: 'Contraseña actual incorrecto!', 
+                }) 
+                return  false;
+            }
+            // cambiar(datos);    
+   
+        }
+        
+    });
+
+    // $.ajax({
+    //     type:"POST",
+    //     url:"cambiar_contrasena",
+    //     data: datos,
+    //     async: false,
+    //     success:function(datos){
+            
+    //         cambiar(datos);    
+   
+    //     }
+        
+    // });
+}
+
+function cambiar(datos){
+    const admin = document.querySelector('#admin');
+    admin.innerHTML = `
+    <li class="cursor"><a  onclick="abrir_imagen('${datos[0].imagen}')">Editar imagen</a></li>
+    <li class="cursor"><a  onclick="abrir_informacion('${datos[0].telefono}','${datos[0].correo}','${datos[0].imagen}')">Editar informacion</a></li>
+    <li class="cursor"><a onclick="abrir_contrasena('${datos[0].imagen}')">Cambiar Contraseña</a></li>
+    <li class="cursor"><a onclick="tabla_favorito()">Lista de favorito</a></li>
+    <li><a href="/cliente_logout">Cerrar Sesion</a></li>
+    `
+    const link01 = document.querySelector('#link01');
+    link01.innerHTML = `
+    <img src='/imagen1/${datos[0].imagen}' class='imgRedonda2'/>
+    `
+    editado();
+    cerrar();
 }

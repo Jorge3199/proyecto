@@ -207,6 +207,13 @@ router.post('/c_cambiar_contrasena/:aleatorio', isNotLoggedIn1, async (req, res)
    
 });
 
+router.post('/todos_productos', isLoggedIn1, async (req, res) => {
+     
+    const products= await pool.query('SELECT * FROM producto WHERE estado="A" ');
+
+    res.json(products);
+});
+
 //////////////////pago////////////////////////
 router.post('/pago', isLoggedIn1, async (req, res) => {
 
@@ -223,58 +230,66 @@ router.post('/pago', isLoggedIn1, async (req, res) => {
     var pedidos = [];
     var valor;
     var total=0;
+    var encontrado=0;
    
     var cuerpotHTML='';
 
     for (var i=lista_comprar.length-1; i>=0;i--) { 
-        var productos = await pool.query('SELECT * FROM producto WHERE id=?', [lista_comprar[i].id]);
-        var a = parseInt(productos[0].cantidad);
-        // console.log(productos[0].cantidad);
-       
 
-        if(a >= lista_comprar[i].cantidad){
-            valor= (a - lista_comprar[i].cantidad);
-            await pool.query('UPDATE producto set cantidad=? WHERE id = ?', [valor, lista_comprar[i].id]);
-            var id_producto= parseInt(productos[0].id);
-            var unidad= parseInt(lista_comprar[i].cantidad);
-            var precio= parseInt(productos[0].precio);
-            var importe= unidad * precio;
-            total+= importe;
-            const newDetalle = {
-                id_cliente,
-                id_producto,
-                unidad,
-                precio,
-                importe,
-                fecha_hora
-            };
+        var productos = await pool.query('SELECT * FROM producto WHERE id=? AND estado="A" ', [lista_comprar[i].id]);
+       
+        if(productos.length != 0){
+           
+            var a = parseInt(productos[0].cantidad);
         
-            await pool.query('INSERT INTO detalle set ?', [newDetalle]);
-            //console.log(total);
-            //console.log(productos);
-          
-            if(valor < 10){
-                pedidos[pedidos.length] = { id: productos[0].id, nombre: productos[0].nombre, modelo: productos[0].modelo, imagen: productos[0].imagen };
+            if(a >= lista_comprar[i].cantidad){
+                valor= (a - lista_comprar[i].cantidad);
+                await pool.query('UPDATE producto set cantidad=? WHERE id = ?', [valor, lista_comprar[i].id]);
+                var id_producto= parseInt(productos[0].id);
+                var unidad= parseInt(lista_comprar[i].cantidad);
+                var precio= parseInt(productos[0].precio);
+                var importe= unidad * precio;
+                total+= importe;
+                const newDetalle = {
+                    id_cliente,
+                    id_producto,
+                    unidad,
+                    precio,
+                    importe,
+                    fecha_hora
+                };
+            
+                await pool.query('INSERT INTO detalle set ?', [newDetalle]);
+                //console.log(total);
+                //console.log(productos);
+            
+                if(valor < 10){
+                    pedidos[pedidos.length] = { id: productos[0].id, nombre: productos[0].nombre, modelo: productos[0].modelo, imagen: productos[0].imagen };
+                }
             }
-        }
-        
-        if(a < lista_comprar[i].cantidad){
-            await pool.query('UPDATE producto set cantidad=? WHERE id = ?', [0, lista_comprar[i].id]);
-            pedidos[pedidos.length] = { id: productos[0].id, nombre: productos[0].nombre, modelo: productos[0].modelo, imagen: productos[0].imagen };
-            valor= (a - lista_comprar[i].cantidad);
+            
+            if(a < lista_comprar[i].cantidad){
+                await pool.query('UPDATE producto set cantidad=? WHERE id = ?', [0, lista_comprar[i].id]);
+                pedidos[pedidos.length] = { id: productos[0].id, nombre: productos[0].nombre, modelo: productos[0].modelo, imagen: productos[0].imagen };
+                valor= (a - lista_comprar[i].cantidad);
 
+            }
+
+        
+            cuerpotHTML += `
+            <tbody style="color:black; text-align: center;">
+                <td>${lista_comprar[i].cantidad}</td> <td>${lista_comprar[i].nombre}</td> <td>${lista_comprar[i].precio}</td> <td>${lista_comprar[i].modelo}</td> <td>${importe}</td>
+            </tbody>
+            <tbody id="resultado" style="color:black; text-align: center;">
+                <td><hr color="black" size=1></td>  <td><hr color="black" size=1></td> <td><hr color="black" size=1></td> <td><hr color="black" size=1></td> <td><hr color="black" size=1></td>
+            </tbody>
+            `;
         }
 
-       
-        cuerpotHTML += `
-        <tbody style="color:black; text-align: center;">
-            <td>${lista_comprar[i].cantidad}</td> <td>${lista_comprar[i].nombre}</td> <td>${lista_comprar[i].precio}</td> <td>${lista_comprar[i].modelo}</td> <td>${importe}</td>
-        </tbody>
-        <tbody id="resultado" style="color:black; text-align: center;">
-            <td><hr color="black" size=1></td>  <td><hr color="black" size=1></td> <td><hr color="black" size=1></td> <td><hr color="black" size=1></td> <td><hr color="black" size=1></td>
-        </tbody>
-        `;
-        
+        if(productos.length === 0){
+            encontrado=1;
+        }
+
     }
     
     var estado="P";
@@ -379,98 +394,62 @@ router.post('/pago', isLoggedIn1, async (req, res) => {
     });
     //res.render('cliente/mensaje');
     // res.json('pago03');
-    var producto = await pool.query('SELECT * FROM producto WHERE estado="A" '); 
-    res.json(producto);
+    
+    if(encontrado == 0){
+        var producto = await pool.query('SELECT * FROM producto WHERE estado="A" ');
+        res.json(producto);
+    }
+
+    if(encontrado == 1){
+        res.json(encontrado);
+    }
+   
     
 });
 
-router.post('/factura', isLoggedIn1, async (req, res) => {
+
+router.post('/cambiar_imagen', isLoggedIn1, async (req, res) => {
+    var imagen = (req.file['filename']);
     var cliente=req.user;
+
+    await pool.query('UPDATE cliente set imagen = ? WHERE id = ?', [imagen, cliente.id]);
+
+    const datos = await pool.query('SELECT * FROM cliente WHERE estado1="A" AND id = ? ', [cliente.id]);
+
+    res.json(datos);
     
-    var smtpTransport= nodemailer.createTransport({
-        service: 'gmail',
-        auth:{
-            type: 'login',
-            user: 'supergato3199@gmail.com',
-            pass: 'supergato2020'
-        }
-    });
+});
 
+router.post('/editar_informacion', isLoggedIn1, async (req, res) => {
+    var { telefono, correo} = req.body;
+    var cliente=req.user;
 
-    contentHTML = `
-       <h1 style="color:black; text-align: center;">Super Gato</h1>
-       <p style="color:black; text-align: center;">Santo Domingo, Km 11/2</p>
-       <p style="color:black; text-align: center;">Tel(s):809-573-3711</p>
-       <p style="color:black; text-align: center;">RNC: 103003133</p>
-       <p style="color:black; text-align: center;">-----------------------------------</p>
-       <br/>
-       <table width="75%" align="center" style=" background: rgb(240, 239, 239);">
-         
-       <thead style="background-color:#FFC312; color:black;" align="center">
-         <tr>
-           <th>Cant.</th>  
-           <th>Nombre</th>
-           <th>Precio</th>
-           <th>Importe</th>
-         </tr>
-       </thead>
+    const newLink = {
+        telefono,
+        correo
+    };
+
+    await pool.query('UPDATE cliente set ? WHERE id = ?', [newLink, cliente.id]);
+
+    const datos = await pool.query('SELECT * FROM cliente WHERE estado1="A" AND id = ? ', [cliente.id]);
+
+    res.json(datos);
+    
+});
+
+router.post('/cambiar_contrasena', isLoggedIn1, async (req, res) => {
+    var { actual, contrasena} = req.body;
+    var cliente=req.user;
+
+    const validPassword = await helpers.matchPassword(actual, cliente.contrasena);
+    if (validPassword) {
+        contrasena = await helpers.encryptPassword(contrasena);
+        await pool.query('UPDATE cliente set contrasena = ? WHERE id = ?', [contrasena, cliente.id]);
        
-
-    `;
-    for(var n=0; n<4; n++){
-        contentHTML += `
-        <tbody id="resultado" style="color:black; text-align: center;">
-          <td>jorge restituyo</td> <td>hidalgo</td> <td>jose</td> <td>34</td>
-        </tbody>
-        <tbody id="resultado" style="color:black; text-align: center;">
-        <td><hr color="black" size=1></td>  <td><hr color="black" size=1></td> <td><hr color="black" size=1></td> <td><hr color="black" size=1></td>
-        </tbody>
-        `;
+        res.json('confirmacion');
+    } else {
+        res.json('invalido');
     }
 
-    contentHTML += `
-    <tbody style="color:black; text-align: center;">
-      <th></th> <th></th> <th>Sub-Total:</th> <th>127.12</th>
-    </tbody>
-    <tbody style="color:black; text-align: center;">
-      <th></th> <th></th> <th>DESCUENTO:</th> <th>0.00</th>
-    </tbody>
-    <tbody style="color:black; text-align: center;">
-       <th></th> <th></th> <th>ITBIS:</th> <th>22.88</th>
-    </tbody>
-    <tbody style="color:black; text-align: center;">
-       <th></th> <th></th> <th>TOTAL:</th> <th>150.00</th>
-    </tbody>
-    
-    `;
-
-    
-  
-    contentHTML+=`
-    </table> 
-    <p style="color:black; text-align: center;">-----------------------------------</p>
-    `;  
-   
-    
-    var mailOptions={
-    from:'jose',
-    to: cliente.correo,
-    subject: 'Factura de producto',
-    text: 'Hola_Mundo',
-    html: contentHTML      
-    }
-
-  
-    await smtpTransport.sendMail(mailOptions,function(error,res){
-        if(error){
-        console.log(error);
-        }else{
-           
-           res.send('Mensaje Enviado');
-        }
-    });
-    //res.render('cliente/mensaje');
-    res.json('pago03');
-    
 });
 module.exports = router;

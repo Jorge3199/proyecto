@@ -52,13 +52,13 @@
 					<li><a href="#pricing" class="scroll link">Pricing</a></li>
 					<li><a href="#team" class="scroll link">Team</a></li>
 					<li>
-						<a href="#blog" class="scroll link">Blog <i class="fa fa-chevron-down"></i></a>
-						<ul>
-							{{!-- <li><a href="blog-main.html">Blog Main</a></li>
-							<li><a href="blog-single.html">Blog Single</a></li> --}}
-							<li><a href="/pago">Pago</a></li>
-							<li><a onclick="factura()">Factura</a></li>
-							<li><a onclick="tabla_favorito()">Lista de favorito</a></li>
+						{{!-- <a href="#blog" class="scroll link">Blog <i class="fa fa-chevron-down"></i></a> --}}
+						<a href="#blog" id="link01" class="scroll link"><img src='/imagen1/{{user.imagen}}' class='imgRedonda2'/></a>
+						<ul id="admin">
+							<li class="cursor"><a  onclick="abrir_imagen('{{user.imagen}}')">Editar imagen</a></li>
+							<li class="cursor"><a  onclick="abrir_informacion('{{user.telefono}}','{{user.correo}}','{{user.imagen}}')">Editar informacion</a></li>
+							<li class="cursor"><a onclick="abrir_contrasena('{{user.imagen}}')">Cambiar Contraseña</a></li>
+							<li class="cursor"><a onclick="tabla_favorito()">Lista de favorito</a></li>
 							<li><a href="/cliente_logout">Cerrar Sesion</a></li>
 						</ul>
 					</li><!-- end drop down -->

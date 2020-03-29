@@ -198,7 +198,7 @@ function valor4(p){
             <td> <a onclick="imagenes('${prod4[p].imagen}')"><img src="/imagen1/${prod4[p].imagen}" class='imgRedonda2'></a></td>
             <td>${prod4[p].total}</td> <td>${fecha_hora[0]}</td> <td>${fecha_hora[1]}</td>
             <td> 
-                <a class="btn btn-warning mx-1" onclick="abrir_factura(${prod4[p].id_cliente},'${prod4[p].nombre}','${prod4[p].apellido}','${prod4[p].direccion}',${prod4[p].telefono},${prod4[p].total},'${prod4[p].fecha_hora}')">
+                <a class="btn btn-warning mx-1" onclick="abrir_factura(${prod4[p].id_cliente},'${prod4[p].nombre}','${prod4[p].apellido}','${prod4[p].direccion}','${prod4[p].telefono}',${prod4[p].total},'${prod4[p].fecha_hora}')">
                 <img height="25" width="20" src="/img/bill.png"></a>  
 
                 <a class="btn btn-success" onclick="confirmar4(${prod4[p].id_cliente},'${prod4[p].fecha_hora}')"> 
@@ -217,7 +217,7 @@ function valor4(p){
             <td> <a onclick="imagenes('${prod4[p].imagen}')"><img src="/imagen1/${prod4[p].imagen}" class='imgRedonda2'></a></td>
             <td>${prod4[p].total}</td> <td>${fecha_hora[0]}</td> <td>${fecha_hora[1]}</td>
             <td> 
-                <a class="btn btn-warning mx-1" onclick="abrir_factura(${prod4[p].id_cliente},'${prod4[p].nombre}','${prod4[p].apellido}','${prod4[p].direccion}',${prod4[p].telefono},${prod4[p].total},'${prod4[p].fecha_hora}')">
+                <a class="btn btn-warning mx-1" onclick="abrir_factura(${prod4[p].id_cliente},'${prod4[p].nombre}','${prod4[p].apellido}','${prod4[p].direccion}','${prod4[p].telefono}',${prod4[p].total},'${prod4[p].fecha_hora}')">
                 <img height="25" width="20" src="/img/bill.png"></a>  
 
                 <a class="btn btn-success" onclick="confirmar4(${prod4[p].id_cliente},'${prod4[p].fecha_hora}')"> 
@@ -244,7 +244,7 @@ function valor04(p){
             <td> <a onclick="imagenes('${prod4[p].imagen}')"><img src="/imagen1/${prod4[p].imagen}" class='imgRedonda2'></a></td>
             <td>${prod4[p].total}</td> <td>${fecha_hora[0]}</td> <td>${fecha_hora[1]}</td>
             <td> 
-                <a class="btn btn-warning mx-1" onclick="abrir_factura(${prod4[p].id_cliente},'${prod4[p].nombre}','${prod4[p].apellido}','${prod4[p].direccion}',${prod4[p].telefono},${prod4[p].total},'${prod4[p].fecha_hora}')">
+                <a class="btn btn-warning mx-1" onclick="abrir_factura(${prod4[p].id_cliente},'${prod4[p].nombre}','${prod4[p].apellido}','${prod4[p].direccion}','${prod4[p].telefono}',${prod4[p].total},'${prod4[p].fecha_hora}')">
                 <img height="25" width="20" src="/img/bill.png"></a>  
 
                 <a class="btn btn-success" onclick="confirmar04(${prod4[p].id_cliente},'${prod4[p].fecha_hora}')"> 
@@ -263,7 +263,7 @@ function valor04(p){
             <td> <a onclick="imagenes('${prod4[p].imagen}')"><img src="/imagen1/${prod4[p].imagen}" class='imgRedonda2'></a></td>
             <td>${prod4[p].total}</td> <td>${fecha_hora[0]}</td> <td>${fecha_hora[1]}</td>
             <td> 
-                <a class="btn btn-warning mx-1" onclick="abrir_factura(${prod4[p].id_cliente},'${prod4[p].nombre}','${prod4[p].apellido}','${prod4[p].direccion}',${prod4[p].telefono},${prod4[p].total},'${prod4[p].fecha_hora}')">
+                <a class="btn btn-warning mx-1" onclick="abrir_factura(${prod4[p].id_cliente},'${prod4[p].nombre}','${prod4[p].apellido}','${prod4[p].direccion}','${prod4[p].telefono}',${prod4[p].total},'${prod4[p].fecha_hora}')">
                 <img height="25" width="20" src="/img/bill.png"></a>  
 
                 <a class="btn btn-success" onclick="confirmar04(${prod4[p].id_cliente},'${prod4[p].fecha_hora}')"> 

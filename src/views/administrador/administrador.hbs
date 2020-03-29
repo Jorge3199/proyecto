@@ -66,16 +66,14 @@
 						</ul>
 					</li>
 					<li>
-						<a href="#blog" id="link01" class="scroll link"></i><img src='/imagen1/{{user.imagen}}' class='imgRedonda2'/></a>
+						<a href="#blog" id="link01" class="scroll link"><img src='/imagen1/{{user.imagen}}' class='imgRedonda2'/></a>
 						<ul>
 							{{!-- <li><a href="blog-main.html">Blog Main</a></li>
 							<li><a href="blog-single.html">Blog Single</a></li> --}}
-							<li><a  onclick="abrir_productos()">Agregar nuevo producto</a></li>
-							<li><a  onclick="abrir_modelo()">Agregar nuevo modelo</a></li>
-							<li><a onclick="abrir_cliente()">Agregar nuevo cliente</a></li>
-							<li><a onclick="abrir_administrador()">Agregar nuevo administrador</a></li>
-							<li><a onclick="abrir_lista_producto()">Lista de producto</a></li>
-							<li><a onclick="abrir_lista_venta()">Lista de venta</a></li>
+							
+							<li id="admin"><a  onclick="abrir_administrador({{user.id}},'{{user.nombre}}','{{user.apellido}}','{{user.sexo}}','{{user.nacimiento}}',
+							         '{{user.direccion}}','{{user.telefono}}','{{user.cedula}}','{{user.correo}}','{{user.imagen}}')">Editar informacion</a></li>
+							<li id="admin2"><a onclick="abrir_contrasena({{user.id}},'{{user.imagen}}','2','true')">Cambiar Contraseña</a></li>
 							<li><a href="/logout">Cerrar Sesion</a></li>
 						</ul>
 					</li><!-- end drop down -->
@@ -623,6 +621,15 @@
 		
 </div>
 
+<div id="tvesModal3" class="modalContainer">
+	<div id="tamañ3" class="modal-content">
+		<span class="close" onclick="span3()">×</span>
+
+		<div id="vent3">
+		
+		</div>
+	</div>	
+</div>
 {{!-- ///////////////////////////////////////////////////////////////////////////////////////// --}}
 <script type="text/javascript" src="js/paginacion.js"></script>
 <script type="text/javascript" src="js/administrador.js"></script>

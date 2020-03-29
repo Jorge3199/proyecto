@@ -3,8 +3,10 @@ var btn = document.getElementById("btnModal");
 // var span = document.getElementsByClassName("close1")[0];
 
 var body = document.getElementsByTagName("body")[0];
+var body2 = document.getElementsByTagName("body")[1];
 
 var body2= "false";
+var body3= "false"
 /////////////////////////
 var modal3 = document.getElementById("tvesModal3");
 function span3(){
@@ -13,16 +15,23 @@ function span3(){
     body.style.position = "inherit";
     body.style.height = "auto";
 
+    if(body3 == 'false'){
+        body.style.overflow = "visible"; 
+    }
 
 }
 
-function abrir3(){
-    const enviar = document.querySelector('#enviar');
+function abrir3(opcion){
+    if(opcion != 'true'){
+        const enviar = document.querySelector('#enviar');
         enviar.innerHTML = `
         <button class="btn btn-warning mx-1" align="center">RD$ ${total_compra.toFixed(2)} Pagar</button>
         `
+        body3="true";
+    }
+    
     modal3.style.display = "block";
-
+    
     body.style.position = "static";
     body.style.height = "100%";
     body.style.overflow = "hidden";
@@ -33,6 +42,9 @@ function cerrar3(){
 
     body.style.position = "inherit";
     body.style.height = "auto";
+    if(body3 == 'false'){
+        body.style.overflow = "visible"; 
+    }
 
 
 }
@@ -151,7 +163,7 @@ window.onclick = function(event) {
         body.style.position = "inherit";
         body.style.height = "auto";
 
-        if(body2 == 'false'){
+        if(body3 == 'false'){
             body.style.overflow = "visible"; 
         }
     }

@@ -1,5 +1,14 @@
+var sexo1;
+function cambiar_sexo(sexo){
+    if( sexo == 'F' ){
+        sexo1="Femenino";
+    }
+    if( sexo == 'M' ){
+       sexo1="Masculino";
+    }
+}
+
 function valor5(p){	
-     
     const lista = document.querySelector('#lista');
     lista.innerHTML = '';
     const s= prod5.length - p;
@@ -7,14 +16,14 @@ function valor5(p){
     p = s - 1;
     if(s < 10){ 
         for (var n = 0; n < s; n++) { 
-          
+            cambiar_sexo(prod5[p].sexo);
             lista.innerHTML += `
-            <td>${prod5[p].nombre}</td> <td>${prod5[p].apellido}</td> <td>${prod5[p].sexo}</td>
+            <td>${prod5[p].nombre}</td> <td>${prod5[p].apellido}</td> <td>${sexo1}</td>
            <td>${prod5[p].direccion}</td> <td>${prod5[p].telefono}</td> <td>${prod5[p].cedula}</td> <td>${prod5[p].correo}</td>
             <td> <a onclick="imagenes('${prod5[p].imagen}')"><img src="/imagen1/${prod5[p].imagen}" class='imgRedonda2'></a></td>
-        
+           
             <td> 
-                <a class="btn btn-warning mx-1" onclick="abrir_factura(${prod5[p].id_cliente},'${prod5[p].nombre}','${prod5[p].apellido}','${prod5[p].direccion}',${prod5[p].telefono},${prod5[p].total},'${prod5[p].fecha_hora}')">
+                <a class="btn btn-warning mx-1" onclick="abrir_cliente(${prod5[p].id},'${prod5[p].nombre}','${prod5[p].apellido}','${prod5[p].sexo}','${prod5[p].nacimiento}','${prod5[p].direccion}','${prod5[p].telefono}','${prod5[p].cedula}','${prod5[p].correo}','${prod5[p].imagen}')">
                 <img height="25" width="20" src="/img/editar2.png"></a>  
                  
                 <a class="btn btn-danger" onclick="confirmar5(${prod5[p].id})"> 
@@ -27,17 +36,18 @@ function valor5(p){
     
     if(s >= 10){
         for (var n = 0; n < 10; n++) { 
-           
+            cambiar_sexo(prod5[p].sexo);
             lista.innerHTML += `
-            <td>${prod5[p].nombre}</td> <td>${prod5[p].apellido}</td> <td>${prod5[p].cedula}</td> 
+            <td>${prod5[p].nombre}</td> <td>${prod5[p].apellido}</td> <td>${sexo1}</td>
+           <td>${prod5[p].direccion}</td> <td>${prod5[p].telefono}</td> <td>${prod5[p].cedula}</td> <td>${prod5[p].correo}</td>
             <td> <a onclick="imagenes('${prod5[p].imagen}')"><img src="/imagen1/${prod5[p].imagen}" class='imgRedonda2'></a></td>
-            <td>${prod5[p].total}</td> <td>${fecha_hora[0]}</td> <td>${fecha_hora[1]}</td>
+           
             <td> 
-                <a class="btn btn-warning mx-1" onclick="abrir_factura(${prod5[p].id_cliente},'${prod5[p].nombre}','${prod5[p].apellido}','${prod5[p].direccion}',${prod5[p].telefono},${prod5[p].total},'${prod5[p].fecha_hora}')">
-                <img height="25" width="20" src="/img/invoice.png"></a>  
-
-                <a class="btn btn-success" onclick="confirmar5(${prod5[p].id_cliente},'${prod5[p].fecha_hora}')"> 
-                <img height="25" width="20" src="/img/updated.png"></a> 
+                <a class="btn btn-warning mx-1" onclick="abrir_cliente(${prod5[p].id},'${prod5[p].nombre}','${prod5[p].apellido}','${prod5[p].sexo}','${prod5[p].nacimiento}','${prod5[p].direccion}','${prod5[p].telefono}','${prod5[p].cedula}','${prod5[p].correo}','${prod5[p].imagen}')">
+                <img height="25" width="20" src="/img/editar2.png"></a>  
+                 
+                <a class="btn btn-danger" onclick="confirmar5(${prod5[p].id})"> 
+                <img height="25" width="20" src="/img/borrar.png"></a> 
             </td>
             `
             p--;
@@ -46,6 +56,7 @@ function valor5(p){
 }    
 
 ////////////////////////////////////////////////
+
 function valor05(p){	
     const lista = document.querySelector('#lista');
     lista.innerHTML = '';
@@ -53,14 +64,15 @@ function valor05(p){
     p = s - 1;
     if(s < 10){
         for (var n = 0; n < s; n++) { 
+            cambiar_sexo(prod5[p].sexo);
           
             lista.innerHTML += `
-            <td>${prod5[p].nombre}</td> <td>${prod5[p].apellido}</td> <td>${prod5[p].sexo}</td>
+            <td>${prod5[p].nombre}</td> <td>${prod5[p].apellido}</td> <td>${sexo1}</td>
            <td>${prod5[p].direccion}</td> <td>${prod5[p].telefono}</td> <td>${prod5[p].cedula}</td> <td>${prod5[p].correo}</td>
             <td> <a onclick="imagenes('${prod5[p].imagen}')"><img src="/imagen1/${prod5[p].imagen}" class='imgRedonda2'></a></td>
-        
+           
             <td> 
-                <a class="btn btn-warning mx-1" onclick="abrir_factura(${prod5[p].id_cliente},'${prod5[p].nombre}','${prod5[p].apellido}','${prod5[p].direccion}',${prod5[p].telefono},${prod5[p].total},'${prod5[p].fecha_hora}')">
+                <a class="btn btn-warning mx-1" onclick="abrir_cliente(${prod5[p].id},'${prod5[p].nombre}','${prod5[p].apellido}','${prod5[p].sexo}','${prod5[p].nacimiento}','${prod5[p].direccion}','${prod5[p].telefono}','${prod5[p].cedula}','${prod5[p].correo}','${prod5[p].imagen}')">
                 <img height="25" width="20" src="/img/editar2.png"></a>  
                  
                 <a class="btn btn-success" onclick="confirmar05(${prod5[p].id})"> 
@@ -73,14 +85,15 @@ function valor05(p){
     
     if(s >= 10){
         for (var n = 0; n < 10; n++) { 
-           
+
+            cambiar_sexo(prod5[p].sexo);
             lista.innerHTML += `
-            <td>${prod5[p].nombre}</td> <td>${prod5[p].apellido}</td> <td>${prod5[p].sexo}</td>
+            <td>${prod5[p].nombre}</td> <td>${prod5[p].apellido}</td> <td>${sexo1}</td>
            <td>${prod5[p].direccion}</td> <td>${prod5[p].telefono}</td> <td>${prod5[p].cedula}</td> <td>${prod5[p].correo}</td>
             <td> <a onclick="imagenes('${prod5[p].imagen}')"><img src="/imagen1/${prod5[p].imagen}" class='imgRedonda2'></a></td>
-        
+           
             <td> 
-                <a class="btn btn-warning mx-1" onclick="abrir_factura(${prod5[p].id_cliente},'${prod5[p].nombre}','${prod5[p].apellido}','${prod5[p].direccion}',${prod5[p].telefono},${prod5[p].total},'${prod5[p].fecha_hora}')">
+                <a class="btn btn-warning mx-1" onclick="abrir_cliente(${prod5[p].id},'${prod5[p].nombre}','${prod5[p].apellido}','${prod5[p].sexo}','${prod5[p].nacimiento}','${prod5[p].direccion}','${prod5[p].telefono}','${prod5[p].cedula}','${prod5[p].correo}','${prod5[p].imagen}')">
                 <img height="25" width="20" src="/img/editar2.png"></a>  
                  
                 <a class="btn btn-success" onclick="confirmar05(${prod5[p].id})"> 

@@ -1,6 +1,5 @@
-function validar_registro(opcion) {
-    var form = document.getElementById('enviar');
-    
+function validar_registro(id, opcion) {
+     
     var nombre, apellido, sexo, nacimiento, direccion, telefono, correo, usuario, contrasena, confirmar, expresion;
 
     nombre = document.getElementById("nombre").value;
@@ -11,8 +10,6 @@ function validar_registro(opcion) {
     telefono = document.getElementById("telefono").value;
     correo = document.getElementById("correo").value;
     cedula = document.getElementById("cedula").value;
-    contrasena = document.getElementById("contrasena").value;
-    confirmar = document.getElementById("confirmar").value;
     
   
     expresion = /\w+@\w+\.+[a-z]/;
@@ -30,9 +27,10 @@ function validar_registro(opcion) {
         return false;
     }
 
-    if( (isNaN(telefono)) || (telefono.length < 10) || (telefono.length > 10)  ){
+    if( (telefono.length < 14) || (telefono.length > 14)  ){
         alert("El telefono no es numero valido");
         return false;
+        // (isNaN(telefono)) 
     }
 
     if(!expresion.test(correo)){
@@ -45,8 +43,14 @@ function validar_registro(opcion) {
         // alert("La contraseña no son iguales");
         return  false;
     }
+    if(typeof id === "undefined"){
+        var form = document.getElementById('enviar');
+        form.submit();
+    }
 
-    form.submit();
+    if(typeof id !== "undefined"){
+        editar_cliente(id, opcion);
+    }
       
 }
 
@@ -135,7 +139,7 @@ function validar_formulario_editar(id, opcion) {
       
 }
 ////////////////////////////CAMBIAR_CONTRASENA////////////////////////////////////
-function validar_contrasena() {
+function validar_contrasena(id, opcion) {
     var contrasena, confirmar;
 
     contrasena = document.getElementById("contrasena").value;
@@ -151,6 +155,10 @@ function validar_contrasena() {
         // alertify.alert("HEADER","La contraseña no son iguales").set('label', 'Aceptar'); 
         return  false;
     }
+    
+    
+    cambiar_contrasena(id, opcion);
+    
 }
 
 function imagenes(imagen){
@@ -161,7 +169,7 @@ function imagenes(imagen){
         imageWidth: 400,
         imageHeight: 300,
         //imageAlt: 'Custom image',
-        })
+    })
 }
 
 function confirmar(id){

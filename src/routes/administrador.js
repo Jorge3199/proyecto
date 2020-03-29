@@ -4,6 +4,7 @@ const router = express.Router();
 
 const pool = require('../database');
 const { isLoggedIn } = require('../lib/auth');
+const helpers = require('../lib/helpers');
 
 
 router.get('/', isLoggedIn, async (req, res) => {
@@ -24,10 +25,11 @@ router.post('/delete', isLoggedIn, async (req, res) => {
 
 router.post('/edit/:id', isLoggedIn, async (req, res) => {
     const { id } = req.params;
-    var { nombre, precio, id_modelo} = req.body;
+    var { nombre, cantidad, precio, id_modelo} = req.body;
 
     const newLink1 = {
         nombre,
+        cantidad,
         precio,
         id_modelo
     };
@@ -44,12 +46,13 @@ router.post('/editar/:id', isLoggedIn, async (req, res) => {
     var imagen = (req.file['filename']);
     // console.log(req.file);
    
-    var { nombre, precio, id_modelo } = req.body; 
+    var { nombre, cantidad, precio, id_modelo } = req.body; 
 
     const { id } = req.params;
     
     const newLink = {
         nombre,
+        cantidad,
         precio,
         id_modelo,
         imagen
@@ -183,10 +186,28 @@ router.post('/recuperar_venta', isLoggedIn, async (req, res) => {
 
 router.post('/lista_cliente', isLoggedIn, async (req, res) => {
      
-    const cliente1 = await pool.query('SELECT * FROM cliente WHERE estado1="A" ');
-    
+    const cliente1 = await pool.query('SELECT * FROM cliente WHERE estado1="A" ');   
 
     res.json(cliente1);
+});
+
+router.post('/cambiar_contrasena/:id/:opcion', isLoggedIn, async (req, res) => {
+    const { id, opcion } = req.params;
+    var { contrasena } = req.body;
+    contrasena = await helpers.encryptPassword(contrasena);
+
+    if(opcion == 1){
+        await pool.query('UPDATE cliente SET contrasena = ? WHERE id = ?', [contrasena,id]);
+   
+        res.json('edito');
+    }
+
+    if(opcion == 2){
+        await pool.query('UPDATE administrador SET contrasena = ? WHERE id = ?', [contrasena,id]);
+   
+        res.json('edito');
+    }
+
 });
 
 router.post('/eliminar_cliente', isLoggedIn, async (req, res) => {
@@ -216,6 +237,73 @@ router.post('/activar_cliente', isLoggedIn, async (req, res) => {
     res.json(cliente1);
 });
 
+router.post('/editar_informacion/:id/:opcion', isLoggedIn, async (req, res) => {
+    const { id, opcion } = req.params;
+  
+    var { nombre, apellido, sexo, nacimiento, direccion, telefono, cedula, correo} = req.body;
+
+    const newLink = {
+        nombre,
+        apellido,
+        sexo,
+        nacimiento,
+        direccion,
+        telefono,
+        cedula,
+        correo
+    };
+    if(opcion == 1){
+        await pool.query('UPDATE cliente set ? WHERE id = ?', [newLink, id]);
+  
+        const datos = await pool.query('SELECT * FROM cliente WHERE estado1="A" ');
+        
+        res.json(datos);
+    }
+
+    if(opcion == 2){
+        await pool.query('UPDATE administrador set ? WHERE id = ?', [newLink, id]);
+  
+        const datos = await pool.query('SELECT * FROM administrador WHERE id = ? ', [id]);
+        
+        res.json(datos);
+    }
+   
+  
+});
+
+router.post('/editar_informacion2/:id/:opcion', isLoggedIn, async (req, res) => {
+    const { id, opcion } = req.params;
+    var imagen = (req.file['filename']);
+    var { nombre, apellido, sexo, nacimiento, direccion, telefono, cedula, correo} = req.body;
+
+    const newLink = {
+        nombre,
+        apellido,
+        sexo,
+        nacimiento,
+        direccion,
+        telefono,
+        cedula,
+        correo,
+        imagen
+    };
+    if(opcion == 1){
+        await pool.query('UPDATE cliente set ? WHERE id = ?', [newLink, id]);
+  
+        const datos = await pool.query('SELECT * FROM cliente WHERE estado1="A" ');
+        
+        res.json(datos);
+    }
+
+    if(opcion == 2){
+        await pool.query('UPDATE administrador set ? WHERE id = ?', [newLink, id]);
+  
+        const datos = await pool.query('SELECT * FROM administrador WHERE id = ? ', [id]);
+        
+        res.json(datos);
+    }
+   
+});
 
 
 module.exports = router;
