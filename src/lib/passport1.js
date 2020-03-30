@@ -33,6 +33,7 @@ passport.use('local.cliente_signup', new LocalStrategy({
   const { nombre, apellido, sexo, nacimiento, direccion, telefono, cedula } = req.body;
   var imagen = (req.file['filename']);
   var aleatorio = Math.random();
+  var estado1 = "A";
   var administrador=req.user;
   var id_administrador= administrador.id;
   const newUser = {
@@ -47,6 +48,7 @@ passport.use('local.cliente_signup', new LocalStrategy({
     contrasena,
     imagen,
     aleatorio,
+    estado1,
     id_administrador
   };
   newUser.contrasena = await helpers.encryptPassword(contrasena);

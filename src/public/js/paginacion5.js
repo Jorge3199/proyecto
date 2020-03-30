@@ -23,7 +23,7 @@ function valor5(p){
             <td> <a onclick="imagenes('${prod5[p].imagen}')"><img src="/imagen1/${prod5[p].imagen}" class='imgRedonda2'></a></td>
            
             <td> 
-                <a class="btn btn-warning mx-1" onclick="abrir_cliente(${prod5[p].id},'${prod5[p].nombre}','${prod5[p].apellido}','${prod5[p].sexo}','${prod5[p].nacimiento}','${prod5[p].direccion}','${prod5[p].telefono}','${prod5[p].cedula}','${prod5[p].correo}','${prod5[p].imagen}')">
+                <a class="btn btn-warning mx-1" onclick="abrir_informacion(${prod5[p].id},'${prod5[p].nombre}','${prod5[p].apellido}','${prod5[p].sexo}','${prod5[p].nacimiento}','${prod5[p].direccion}','${prod5[p].telefono}','${prod5[p].cedula}','${prod5[p].correo}','${prod5[p].imagen}','1')">
                 <img height="25" width="20" src="/img/editar2.png"></a>  
                  
                 <a class="btn btn-danger" onclick="confirmar5(${prod5[p].id})"> 
@@ -43,7 +43,7 @@ function valor5(p){
             <td> <a onclick="imagenes('${prod5[p].imagen}')"><img src="/imagen1/${prod5[p].imagen}" class='imgRedonda2'></a></td>
            
             <td> 
-                <a class="btn btn-warning mx-1" onclick="abrir_cliente(${prod5[p].id},'${prod5[p].nombre}','${prod5[p].apellido}','${prod5[p].sexo}','${prod5[p].nacimiento}','${prod5[p].direccion}','${prod5[p].telefono}','${prod5[p].cedula}','${prod5[p].correo}','${prod5[p].imagen}')">
+                <a class="btn btn-warning mx-1" onclick="abrir_informacion(${prod5[p].id},'${prod5[p].nombre}','${prod5[p].apellido}','${prod5[p].sexo}','${prod5[p].nacimiento}','${prod5[p].direccion}','${prod5[p].telefono}','${prod5[p].cedula}','${prod5[p].correo}','${prod5[p].imagen}','1')">
                 <img height="25" width="20" src="/img/editar2.png"></a>  
                  
                 <a class="btn btn-danger" onclick="confirmar5(${prod5[p].id})"> 
@@ -72,7 +72,7 @@ function valor05(p){
             <td> <a onclick="imagenes('${prod5[p].imagen}')"><img src="/imagen1/${prod5[p].imagen}" class='imgRedonda2'></a></td>
            
             <td> 
-                <a class="btn btn-warning mx-1" onclick="abrir_cliente(${prod5[p].id},'${prod5[p].nombre}','${prod5[p].apellido}','${prod5[p].sexo}','${prod5[p].nacimiento}','${prod5[p].direccion}','${prod5[p].telefono}','${prod5[p].cedula}','${prod5[p].correo}','${prod5[p].imagen}')">
+                <a class="btn btn-warning mx-1" onclick="abrir_informacion(${prod5[p].id},'${prod5[p].nombre}','${prod5[p].apellido}','${prod5[p].sexo}','${prod5[p].nacimiento}','${prod5[p].direccion}','${prod5[p].telefono}','${prod5[p].cedula}','${prod5[p].correo}','${prod5[p].imagen}','10')">
                 <img height="25" width="20" src="/img/editar2.png"></a>  
                  
                 <a class="btn btn-success" onclick="confirmar05(${prod5[p].id})"> 
@@ -93,7 +93,7 @@ function valor05(p){
             <td> <a onclick="imagenes('${prod5[p].imagen}')"><img src="/imagen1/${prod5[p].imagen}" class='imgRedonda2'></a></td>
            
             <td> 
-                <a class="btn btn-warning mx-1" onclick="abrir_cliente(${prod5[p].id},'${prod5[p].nombre}','${prod5[p].apellido}','${prod5[p].sexo}','${prod5[p].nacimiento}','${prod5[p].direccion}','${prod5[p].telefono}','${prod5[p].cedula}','${prod5[p].correo}','${prod5[p].imagen}')">
+                <a class="btn btn-warning mx-1" onclick="abrir_informacion(${prod5[p].id},'${prod5[p].nombre}','${prod5[p].apellido}','${prod5[p].sexo}','${prod5[p].nacimiento}','${prod5[p].direccion}','${prod5[p].telefono}','${prod5[p].cedula}','${prod5[p].correo}','${prod5[p].imagen}','10')">
                 <img height="25" width="20" src="/img/editar2.png"></a>  
                  
                 <a class="btn btn-success" onclick="confirmar05(${prod5[p].id})"> 
@@ -114,7 +114,7 @@ function paginacion_eliminar5(id, dos){
             disabled1.classList.replace('disabled', 'disabled1');   
         }
 
-        if(id==numero5){
+        if(id==numero4){
             const id3 = document.querySelector('#options2 .selected'+id);
             id3.classList.replace('selected'+id, 'selected');
             const disabled2 = document.querySelector('#options2 .disabled2');
@@ -129,7 +129,7 @@ function paginacion_eliminar5(id, dos){
            
         }
 
-        if(id<numero5 && id!=1){
+        if(id<numero4 && id!=1){
             const id3 = document.querySelector('#options2 .selected'+id);
             id3.classList.replace('selected'+id, 'selected');
             var p= (id-1) * 10;
@@ -141,7 +141,7 @@ function paginacion_eliminar5(id, dos){
             }
         }
         
-        if(id>numero5){
+        if(id>numero4){
             const id3 = document.querySelector('#options2 .selected'+(id-1));
             id3.classList.replace('selected'+(id-1), 'selected');
             const disabled2 = document.querySelector('#options2 .disabled2');
@@ -176,8 +176,8 @@ function paginacion_eliminar5(id, dos){
     }
 }
 
-function paginacion_editar5(id){
-    if( (id==numero5) && (numero5!=0) ){
+function paginacion_editar5(id, dos){
+    if( (id==numero4) && (numero4!=0) ){
         const id1 = document.querySelector('#options2 .selected');
         id1.classList.replace('selected', 'selected'+1);
         const disabled1 = document.querySelector('#options2 .disabled');
@@ -187,10 +187,15 @@ function paginacion_editar5(id){
         const disabled2 = document.querySelector('#options2 .disabled2');
         disabled2.classList.replace('disabled2', 'disabled');
         var p= (id-1) * 10;
-        valor5(p);   
+        if(dos != 2){
+            valor5(p);
+        }
+        if(dos == 2){
+            valor05(p);
+        }  
     }
 
-    if( (id!=numero5) && (id!=1) && (numero5!=1) && (numero5!=0) ){
+    if( (id!=numero4) && (id!=1) && (numero4!=1) && (numero4!=0) ){
         const id1 = document.querySelector('#options2 .selected');
         id1.classList.replace('selected', 'selected'+1);
         const disabled1 = document.querySelector('#options2 .disabled');
@@ -198,10 +203,20 @@ function paginacion_editar5(id){
         const id2 = document.querySelector('#options2 .selected'+id);
         id2.classList.replace('selected'+id, 'selected');
          var p= (id-1) * 10;
-        valor5(p);
+         if(dos != 2){
+            valor5(p);
+        }
+        if(dos == 2){
+            valor05(p);
+        }
     }
      
-    if( (numero5==0) || (id==1) ){
-        valor5(0);
+    if( (numero4==0) || (id==1) ){
+        if(dos != 2){
+            valor5(0);
+        }
+        if(dos == 2){
+            valor05(0);
+        }
     }
 }

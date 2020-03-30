@@ -49,7 +49,7 @@ function validar_registro(id, opcion) {
     }
 
     if(typeof id !== "undefined"){
-        editar_cliente(id, opcion);
+        editar_informacion(id, opcion);
     }
       
 }

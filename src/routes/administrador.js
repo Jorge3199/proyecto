@@ -8,6 +8,7 @@ const helpers = require('../lib/helpers');
 
 
 router.get('/', isLoggedIn, async (req, res) => {
+    
     const productos = await pool.query('SELECT * FROM producto WHERE estado="A" ');
     
     const categoria = await pool.query('SELECT * FROM categoria');
@@ -193,7 +194,7 @@ router.post('/lista_cliente', isLoggedIn, async (req, res) => {
 
 router.post('/cambiar_contrasena/:id/:opcion', isLoggedIn, async (req, res) => {
     const { id, opcion } = req.params;
-    var { contrasena } = req.body;
+    var { actual, contrasena } = req.body;
     contrasena = await helpers.encryptPassword(contrasena);
 
     if(opcion == 1){
@@ -256,6 +257,14 @@ router.post('/editar_informacion/:id/:opcion', isLoggedIn, async (req, res) => {
         await pool.query('UPDATE cliente set ? WHERE id = ?', [newLink, id]);
   
         const datos = await pool.query('SELECT * FROM cliente WHERE estado1="A" ');
+        
+        res.json(datos);
+    }
+
+    if(opcion == 10){
+        await pool.query('UPDATE cliente set ? WHERE id = ?', [newLink, id]);
+  
+        const datos = await pool.query('SELECT * FROM cliente WHERE estado1="I" ');
         
         res.json(datos);
     }

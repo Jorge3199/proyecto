@@ -433,17 +433,8 @@ function abrir_modelo(){
      intro.style.top="-3%";
 }
 ////////////////////////////////////////////////////
-function abrir_cliente(id,nombre,apellido,sexo,nacimiento,direccion,telefono,cedula,correo,imagen){
-    if(typeof id === "undefined"){
-        nombre='';
-        apellido='';
-        sexo='';
-        nacimiento='';
-        direccion='';
-        telefono='';
-        cedula='';
-        correo='';
-    }
+function abrir_cliente(){
+   
     const ventana = document.querySelector('#vent');
     ventana.innerHTML = `
         <div class="row">
@@ -484,7 +475,7 @@ function abrir_cliente(id,nombre,apellido,sexo,nacimiento,direccion,telefono,ced
                     <div class="col-lg-6">
                     <h3 class="negro">Nombre<span style="color:red">*</span></h3>
                     <div class="inputWithIcon jorge">
-                        <input type="text" id="nombre" name="nombre" placeholder="Nombre" class="form-control" value="${nombre}" required autofocus>
+                        <input type="text" id="nombre" name="nombre" placeholder="Nombre" class="form-control" required autofocus>
                         <i class="icon-user" aria-hidden="true"></i>
                     </div>
                     </div>
@@ -493,7 +484,7 @@ function abrir_cliente(id,nombre,apellido,sexo,nacimiento,direccion,telefono,ced
                     <div class="col-lg-6">
                     <h3 class="negro">Apellido<span style="color:red">*</span></h3>
                     <div class="inputWithIcon jorge">
-                        <input type="text" id="apellido" name="apellido" placeholder="Apellido" class="form-control" value="${apellido}" >
+                        <input type="text" id="apellido" name="apellido" placeholder="Apellido" class="form-control" >
                         <i class="icon-pencil" aria-hidden="true"></i>
                     </div>
                     </div>
@@ -517,7 +508,7 @@ function abrir_cliente(id,nombre,apellido,sexo,nacimiento,direccion,telefono,ced
                     <div class="col-lg-6">
                     <h3 class="negro">Nacimiento<span style="color:red">*</span></h3>
                     <div class="inputWithIcon jorge3">
-                        <input type="date" id="nacimiento" name="nacimiento" placeholder="Nacimiento" class="form-control" value="${nacimiento}" >
+                        <input type="date" id="nacimiento" name="nacimiento" placeholder="Nacimiento" class="form-control">
                         <i class="icon-date" aria-hidden="true"></i>
                     </div>
                     </div>
@@ -541,7 +532,7 @@ function abrir_cliente(id,nombre,apellido,sexo,nacimiento,direccion,telefono,ced
                     <div class="col-lg-6">
                     <h3 class="negro">Teléfono<span style="color:red">*</span></h3>
                     <div class="inputWithIcon jorge">
-                        <input type="text" id="telefono" name="telefono" placeholder="Telefono" class="form-control" value="${telefono}">
+                        <input type="text" id="telefono" name="telefono" placeholder="Telefono" class="form-control">
                         <i class="icon-phone" aria-hidden="true"></i>
                     </div>
                     </div>
@@ -553,7 +544,7 @@ function abrir_cliente(id,nombre,apellido,sexo,nacimiento,direccion,telefono,ced
                     <div class="col-lg-6">
                     <h3 class="negro">Cedula<span style="color:red">*</span></h3>
                     <div class="inputWithIcon jorge">
-                        <input type="text" id="cedula" name="cedula" placeholder="Cedula" class="form-control" value="${cedula}">
+                        <input type="text" id="cedula" name="cedula" placeholder="Cedula" class="form-control" >
                         <i class="icon-contact_mail" aria-hidden="true"></i>
                     </div>
                     </div>
@@ -561,21 +552,51 @@ function abrir_cliente(id,nombre,apellido,sexo,nacimiento,direccion,telefono,ced
                     <div class="col-lg-6">
                     <h3 class="negro">Correo<span style="color:red">*</span></h3>
                     <div class="inputWithIcon jorge4">
-                        <input type="email" id="correo" name="correo" placeholder="Correo" class="form-control" value="${correo}">
+                        <input type="email" id="correo" name="correo" placeholder="Correo" class="form-control" >
                         <i class="icon-email" aria-hidden="true"></i>
                     </div>
                     </div>
     
                 </div>
                  
-                <div id="borrar"> 
-                    
+                <div class="row" >
+        
+                    <div class="col-lg-6">
+                    <h3 class="negro">Contraseña<span style="color:red">*</span></h3>
+                    <div class="inputWithIcon jorge5">
+                        <input type="password" id="contrasena" name="contrasena" placeholder="Contraseña" class="form-control" >
+                        <i class="icon-lock" aria-hidden="true"></i>
+                    </div>
+                    </div>
+
+                
+                    <div class="col-lg-6">
+                    <h3 class="negro">Confirmar<span style="color:red">*</span></h3>
+                    <div class="inputWithIcon jorge5">
+                        <input type="password" id="confirmar" name="confirmar" placeholder="Confirmar" class="form-control" >
+                        <i class="icon-key" aria-hidden="true"></i>
+                    </div>
+                    </div>
+
+                </div>
+            
+            
+                <br>
+
+                <div class="col-lg-12">
+                    <div class="col-lg-1">
+                        <input type="checkbox" name="acepto" >
+                    </div>
+
+                    <div class="col-lg-6">
+                        <a class="negro">Acepto ternimos y condiciones </a>
+                    </div>
                 </div>
 
                 <div class="row">
     
                     <div class="col-lg-3">
-                    <a id="check" class="btn btn-warning btn-block my-3" onclick="validar_registro(${id},${1})">
+                    <a id="check" class="btn btn-warning btn-block my-3" onclick="validar_registro()">
                         Registrar
                     </a>
                     
@@ -599,86 +620,18 @@ function abrir_cliente(id,nombre,apellido,sexo,nacimiento,direccion,telefono,ced
     
     `
 
-    if(typeof id === "undefined"){
-        const titulo = document.querySelector('#titulo');
-        titulo.innerHTML = `
-         <h2 align="center" style="color:black">Registrar Cliente</h2>
-         `
-        $('#imagenPreview').html("<img src='/img/perfil.jpg' class='imgRedonda'/>");
-        const borrar = document.querySelector('#borrar');
-        borrar.innerHTML = `
-        <div class="row" >
-        
-            <div class="col-lg-6">
-            <h3 class="negro">Contraseña<span style="color:red">*</span></h3>
-            <div class="inputWithIcon jorge5">
-                <input type="password" id="contrasena" name="contrasena" placeholder="Contraseña" class="form-control" >
-                <i class="icon-lock" aria-hidden="true"></i>
-            </div>
-            </div>
+    var c = () => Array.from(document.getElementsByTagName("INPUT")).filter(cur => cur.type === 'checkbox' && cur.checked).length > 0;
 
-        
-            <div class="col-lg-6">
-            <h3 class="negro">Confirmar<span style="color:red">*</span></h3>
-            <div class="inputWithIcon jorge5">
-                <input type="password" id="confirmar" name="confirmar" placeholder="Confirmar" class="form-control" >
-                <i class="icon-key" aria-hidden="true"></i>
-            </div>
-            </div>
+    check.addEventListener("click", () => {
+    if(!c()) { 
+        alert("Debes aceptar ternimos y condiciones");
+        //alertify.alert("HEADER","Esto es un mensaje").set('label', 'Aceptar'); 
+    } 
+    });
 
-        </div>
+    selecionar();
     
-    
-        <br>
-
-        <div class="col-lg-12">
-            <div class="col-lg-1">
-                <input type="checkbox" name="acepto" >
-            </div>
-
-            <div class="col-lg-6">
-                <a class="negro">Acepto ternimos y condiciones </a>
-            </div>
-        </div>`;
-        var c = () => Array.from(document.getElementsByTagName("INPUT")).filter(cur => cur.type === 'checkbox' && cur.checked).length > 0;
-
-        check.addEventListener("click", () => {
-        if(!c()) { 
-            alert("Debes aceptar ternimos y condiciones");
-            //alertify.alert("HEADER","Esto es un mensaje").set('label', 'Aceptar'); 
-        } 
-        });
-        
-    }
-
-    if(typeof id !== "undefined"){
-        const titulo = document.querySelector('#titulo');
-        titulo.innerHTML = `
-         <h2 align="center" style="color:black">Editar Cliente</h2>
-         `
-         
-         const boton_contrasena = document.querySelector('#boton_contrasena');
-         boton_contrasena.innerHTML = `
-         <a class="btn btn-warning btn-block my-3" onclick="abrir_contrasena(${id},'${imagen}',${1})">
-            Cambiar Contraseña
-          </a>
-          `
-        const cancelar = document.querySelector('#cancelar');
-        cancelar.innerHTML = `
-        <a class="btn btn-danger btn-block my-3" onclick="span('${"true"}')">
-            Cancelar
-        </a>
-        ` 
-        $('#imagenPreview').html("<img src='/imagen1/"+imagen+"' class='imgRedonda'/>");
-        const borrar = document.querySelector('#borrar');
-        borrar.innerHTML = ``;
-
-        selecionar(sexo, direccion);
-
-       
-    }
-    
-     
+    $('#imagenPreview').html("<img src='/img/perfil.jpg' class='imgRedonda'/>"); 
    (function(){
        function filePreview(input){
            if(input.files && input.files[0]){
@@ -703,63 +656,7 @@ function abrir_cliente(id,nombre,apellido,sexo,nacimiento,direccion,telefono,ced
     intro.style.width="60%";
     intro.style.top="-15%";
 
-    const nombre1 = document.querySelector('#nombre');
-    const apellido1 = document.querySelector('#apellido');
-    const telefono1 = document.querySelector('#telefono');
-    const cedula1 = document.querySelector('#cedula');
-
-    nombre1.addEventListener('keyup', (e) => {
-        let valorInput = e.target.value;
-    
-        nombre1.value = valorInput
-
-        //Elimina los numero
-        .replace(/([0-9])/g, '')
-        //Elimina el primer espaciado
-        .replace(/^\s+/,"");
-        
-    });    
-
-
-
-    apellido1.addEventListener('keyup', (e) => {
-        let valorInput = e.target.value;
-    
-        apellido1.value = valorInput
-        .replace(/([0-9])/g, '')   
-        .replace(/^\s+/,"");
-        
-    }); 
-
-    telefono1.addEventListener('keyup', (e) => {
-        let valorInput = e.target.value;
-      
-        telefono1.value = valorInput
-         //Eliminamos espacios en blanco
-        .replace(/\s/g, '')
-         //Eliminar las letrar
-        .replace(/\D/g, '')
-        //Mascara
-        .replace(/^(\d{3})(\d{3})(\d{4}).*/, '($1) $2-$3');
-
-        // .trim();
-        
-    });
-
-    cedula1.addEventListener('keyup', (e) => {
-        let valorInput = e.target.value;
-      
-        cedula1.value = valorInput
-         //Eliminamos espacios en blanco
-        .replace(/\s/g, '')
-         //Eliminar las letrar
-        .replace(/\D/g, '')
-        //Mascara
-        .replace(/^(\d{3})(\d{7})(\d{1}).*/, '$1-$2-$3');
-
-        // .trim();
-        
-    });
+    validar_input();
 }
 
 function selecionar(sexo, direccion){
@@ -785,6 +682,13 @@ function selecionar(sexo, direccion){
          <option value="M">Masculino</option> 
         `;
     }
+
+    if(typeof sexo === "undefined"){
+        sexo1.innerHTML += `
+        <option value="F">Femenino</option> 
+        <option value="M">Masculino</option> 
+       `;
+    }
    
 
     for (var n=0; n < Provincia.length; n++){
@@ -803,24 +707,15 @@ function selecionar(sexo, direccion){
 }
 
 ////////////////////////////////////////////////////
-function abrir_administrador(id,nombre,apellido,sexo,nacimiento,direccion,telefono,cedula,correo,imagen){
-    if(typeof id === "undefined"){
-        nombre='';
-        apellido='';
-        sexo='';
-        nacimiento='';
-        direccion='';
-        telefono='';
-        cedula='';
-        correo='';
-    }
+function abrir_administrador(){
+    
     const ventana = document.querySelector('#vent');
     ventana.innerHTML = `
         <div class="row">
         <div class="col-md-12 mx-auto">
             <div class="card ">
             
-            <div class="card-header" id=titulo>
+            <div class="card-header">
                 <h2 align="center" style="color:black">Registrar Administrador</h2>
             </div>
 
@@ -842,6 +737,237 @@ function abrir_administrador(id,nombre,apellido,sexo,nacimiento,direccion,telefo
                 </div>
 
                 <div id="boton_contrasena" class="boton_contrasena">
+                </div>
+
+                <hr color="black" size=3>
+
+                <div class="row">
+    
+                    <div class="col-lg-6">
+                    <h3 class="negro">Nombre<span style="color:red">*</span></h3>
+                    <div class="inputWithIcon jorge">
+                        <input type="text" id="nombre" name="nombre" placeholder="Nombre" class="form-control" required autofocus>
+                        <i class="icon-user" aria-hidden="true"></i>
+                    </div>
+                    </div>
+    
+                
+                    <div class="col-lg-6">
+                    <h3 class="negro">Apellido<span style="color:red">*</span></h3>
+                    <div class="inputWithIcon jorge">
+                        <input type="text" id="apellido" name="apellido" placeholder="Apellido" class="form-control" >
+                        <i class="icon-pencil" aria-hidden="true"></i>
+                    </div>
+                    </div>
+    
+                </div>
+    
+                <div class="row">
+    
+                    <div class="col-lg-6">
+                    <h3 class="negro">Sexo<span style="color:red">*</span></h3>
+                    <div class="inputWithIcon jorge1">
+                        <select id="sexo" name="sexo" placeholder="Sexo" class="form-control">
+                            <option value="N" disabled selected>Selecciona sexo</option>
+    
+                        </select>
+                        <i class="icon-man-woman" aria-hidden="true"></i>
+                    </div>
+                    </div>
+    
+                
+                    <div class="col-lg-6">
+                    <h3 class="negro">Nacimiento<span style="color:red">*</span></h3>
+                    <div class="inputWithIcon jorge3">
+                        <input type="date" id="nacimiento" name="nacimiento" placeholder="Nacimiento" class="form-control" >
+                        <i class="icon-date" aria-hidden="true"></i>
+                    </div>
+                    </div>
+    
+                </div>
+    
+                <div class="row">
+    
+                    <div class="col-lg-6">
+                    <h3 class="negro">Dirección<span style="color:red">*</span></h3>
+                    <div class="inputWithIcon jorge2">
+                        <select id="direccion" name="direccion" placeholder="Direccion" class="form-control">
+                            <option value="N" disabled selected>Selecciona Provincia</option>
+                           
+                        </select>
+                        <i class="icon-location" aria-hidden="true"></i>
+                    </div>
+                    </div>
+    
+                
+                    <div class="col-lg-6">
+                    <h3 class="negro">Teléfono<span style="color:red">*</span></h3>
+                    <div class="inputWithIcon jorge">
+                        <input type="text" id="telefono" name="telefono" placeholder="Telefono" class="form-control" >
+                        <i class="icon-phone" aria-hidden="true"></i>
+                    </div>
+                    </div>
+    
+                </div>
+    
+                <div class="row">
+
+                    <div class="col-lg-6">
+                    <h3 class="negro">Cedula<span style="color:red">*</span></h3>
+                    <div class="inputWithIcon jorge">
+                        <input type="text" id="cedula" name="cedula" placeholder="Cedula" class="form-control" >
+                        <i class="icon-contact_mail" aria-hidden="true"></i>
+                    </div>
+                    </div>
+    
+                    <div class="col-lg-6">
+                    <h3 class="negro">Correo<span style="color:red">*</span></h3>
+                    <div class="inputWithIcon jorge4">
+                        <input type="email" id="correo" name="correo" placeholder="Correo" class="form-control">
+                        <i class="icon-email" aria-hidden="true"></i>
+                    </div>
+                    </div>
+    
+                </div>
+    
+             
+
+                <div class="row" >
+        
+                    <div class="col-lg-6">
+                    <h3 class="negro">Contraseña<span style="color:red">*</span></h3>
+                    <div class="inputWithIcon jorge5">
+                        <input type="password" id="contrasena" name="contrasena" placeholder="Contraseña" class="form-control" >
+                        <i class="icon-lock" aria-hidden="true"></i>
+                    </div>
+                    </div>
+
+                
+                    <div class="col-lg-6">
+                    <h3 class="negro">Confirmar<span style="color:red">*</span></h3>
+                    <div class="inputWithIcon jorge5">
+                        <input type="password" id="confirmar" name="confirmar" placeholder="Confirmar" class="form-control" >
+                        <i class="icon-key" aria-hidden="true"></i>
+                    </div>
+                    </div>
+
+                </div>
+            
+            
+                <br>
+
+                <div class="col-lg-12">
+                    <div class="col-lg-1">
+                        <input type="checkbox" name="acepto" >
+                    </div>
+
+                    <div class="col-lg-6">
+                        <a class="negro">Acepto ternimos y condiciones </a>
+                    </div>
+                </div>
+
+                <div class="row">
+    
+                    <div class="col-lg-3">
+                    <a id="check" class="btn btn-warning btn-block my-3" onclick="validar_registro()">
+                        Registrar
+                    </a>
+                    
+                    </div>
+    
+                    <div class="col-lg-3">
+                    <a class="btn btn-danger btn-block my-3" onclick="cerrar()">
+                        Cancelar
+                    </a>
+                    
+                    </div>
+    
+                </div>
+    
+                </div>
+                </form>
+            </div>
+            </div>
+        </div>
+        </div>
+    
+    `
+
+    var c = () => Array.from(document.getElementsByTagName("INPUT")).filter(cur => cur.type === 'checkbox' && cur.checked).length > 0;
+
+    check.addEventListener("click", () => {
+    if(!c()) { 
+        alert("Debes aceptar ternimos y condiciones");
+        //alertify.alert("HEADER","Esto es un mensaje").set('label', 'Aceptar'); 
+    } 
+    });
+
+    selecionar();
+    
+    $('#imagenPreview').html("<img src='/img/perfil.jpg' class='imgRedonda'/>");
+    (function(){
+        function filePreview(input){
+            if(input.files && input.files[0]){
+                var reader = new FileReader();
+ 
+                reader.onload = function(e){
+                    $('#imagenPreview').html("<img src='"+e.target.result+"' class='imgRedonda'/>");
+                }
+ 
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        $('#imagen').change(function(){
+           filePreview(this);
+        });
+    }) ();
+
+
+    abrir();
+
+    var intro = document.getElementById('tamaño');
+  
+    intro.style.width="60%";
+    intro.style.top="-15%";
+
+    validar_input();
+
+    
+}
+
+////////////////////////////////////////////////////////////////////////
+function abrir_informacion(id,nombre,apellido,sexo,nacimiento,direccion,telefono,cedula,correo,imagen,opcion){
+    const ventana = document.querySelector('#vent');
+    ventana.innerHTML = `
+        <div class="row">
+        <div class="col-md-12 mx-auto">
+            <div class="card ">
+            
+            <div class="card-header" id=titulo>
+                <h2 align="center" style="color:black">Editar Cliente</h2>
+            </div>
+
+            <hr color="black" size=3>
+            <div class="card-body">
+                <form id="enviar" method="POST" >
+                 
+                <div align="center">
+                    <div id="imagenPreview">
+                    </div>
+                </div>
+            
+        
+                <div align="center">
+                    <div id="div_file" style="top:-20px; left: 2px;">
+                    <p id="texto"><i class="icon-camera" aria-hidden="true"></i>Add file</p>
+                        <input type="file" name="imagen" id="imagen"  required>
+                    </div>
+                </div>
+
+                <div id="boton_contrasena" class="boton_contrasena">
+                    <a class="btn btn-warning btn-block my-3" onclick="abrir_contrasena(${id},'${imagen}',${opcion})">
+                    Cambiar Contraseña
+                    </a>
                 </div>
 
                 <hr color="black" size=3>
@@ -935,16 +1061,11 @@ function abrir_administrador(id,nombre,apellido,sexo,nacimiento,direccion,telefo
     
                 </div>
     
-             
-
-                <div id="borrar"> 
-                    
-                </div>
 
                 <div class="row">
     
                     <div class="col-lg-3">
-                    <a id="check" class="btn btn-warning btn-block my-3" onclick="validar_registro(${id},${2})">
+                    <a id="check" class="btn btn-warning btn-block my-3" onclick="validar_registro(${id},${opcion})">
                         Registrar
                     </a>
                     
@@ -967,82 +1088,24 @@ function abrir_administrador(id,nombre,apellido,sexo,nacimiento,direccion,telefo
         </div>
     
     `
-    
-    if(typeof id === "undefined"){
+
+    if(opcion == 2){
         const titulo = document.querySelector('#titulo');
         titulo.innerHTML = `
-         <h2 align="center" style="color:black">Registrar Administrador</h2>
-         `
-        $('#imagenPreview').html("<img src='/img/perfil.jpg' class='imgRedonda'/>");
-        const borrar = document.querySelector('#borrar');
-        borrar.innerHTML = `
-        <div class="row" >
-        
-            <div class="col-lg-6">
-            <h3 class="negro">Contraseña<span style="color:red">*</span></h3>
-            <div class="inputWithIcon jorge5">
-                <input type="password" id="contrasena" name="contrasena" placeholder="Contraseña" class="form-control" >
-                <i class="icon-lock" aria-hidden="true"></i>
-            </div>
-            </div>
-
-        
-            <div class="col-lg-6">
-            <h3 class="negro">Confirmar<span style="color:red">*</span></h3>
-            <div class="inputWithIcon jorge5">
-                <input type="password" id="confirmar" name="confirmar" placeholder="Confirmar" class="form-control" >
-                <i class="icon-key" aria-hidden="true"></i>
-            </div>
-            </div>
-
-        </div>
+            <h2 align="center" style="color:black">Editar Perfil</h2>
+        `
     
-    
-        <br>
-
-        <div class="col-lg-12">
-            <div class="col-lg-1">
-                <input type="checkbox" name="acepto" >
-            </div>
-
-            <div class="col-lg-6">
-                <a class="negro">Acepto ternimos y condiciones </a>
-            </div>
-        </div>`;
-        var c = () => Array.from(document.getElementsByTagName("INPUT")).filter(cur => cur.type === 'checkbox' && cur.checked).length > 0;
-
-        check.addEventListener("click", () => {
-        if(!c()) { 
-            alert("Debes aceptar ternimos y condiciones");
-            //alertify.alert("HEADER","Esto es un mensaje").set('label', 'Aceptar'); 
-        } 
-        });
-        
+        const boton_contrasena = document.querySelector('#boton_contrasena');
+        boton_contrasena.innerHTML = `
+        <a class="btn btn-warning btn-block my-3" onclick="abrir_contrasena2(${id},'${imagen}',${opcion})">
+          Cambiar Contraseña
+        </a>
+        `
     }
 
-    if(typeof id !== "undefined"){
-        
-        const titulo = document.querySelector('#titulo');
-        titulo.innerHTML = `
-         <h2 align="center" style="color:black">Editar Administrador</h2>
-         `
-         
-         const boton_contrasena = document.querySelector('#boton_contrasena');
-         boton_contrasena.innerHTML = `
-         <a class="btn btn-warning btn-block my-3" onclick="abrir_contrasena(${id},'${imagen}',${2})">
-            Cambiar Contraseña
-          </a>
-          `
+    selecionar(sexo, direccion);
 
-        $('#imagenPreview').html("<img src='/imagen1/"+imagen+"' class='imgRedonda'/>");
-        const borrar = document.querySelector('#borrar');
-        borrar.innerHTML = ``;
-
-        selecionar(sexo, direccion);
-
-       
-    }
-
+    $('#imagenPreview').html("<img src='/imagen1/"+imagen+"' class='imgRedonda'/>");
     (function(){
         function filePreview(input){
             if(input.files && input.files[0]){
@@ -1060,14 +1123,15 @@ function abrir_administrador(id,nombre,apellido,sexo,nacimiento,direccion,telefo
         });
     }) ();
 
-
-    abrir();
-
     var intro = document.getElementById('tamaño');
-  
     intro.style.width="60%";
     intro.style.top="-15%";
 
+    abrir();
+    validar_input();
+}
+/////////////////////////////////////////////////////////////////////
+function validar_input(){
     const nombre1 = document.querySelector('#nombre');
     const apellido1 = document.querySelector('#apellido');
     const telefono1 = document.querySelector('#telefono');
@@ -1126,6 +1190,7 @@ function abrir_administrador(id,nombre,apellido,sexo,nacimiento,direccion,telefo
         
     });
 }
+///////////////////////////////////////////////////////////////
 
 var prod2 = [];
 var prod3 = [];
@@ -2254,7 +2319,7 @@ function abrir_lista_cliente(){
 var cliente = [];
 var prod5 = [];
 const filtrar5 = (llamar)=>{
-    if(llamar != 'elimino'){
+    if( (llamar != 'elimino') && (llamar != 'edito')){
         $.ajax({
             type:"POST",
             url:"/administrador/lista_cliente",
@@ -2313,6 +2378,7 @@ const filtrar5 = (llamar)=>{
 
     const id = [...document.querySelectorAll('#options2 .selected')].map(el => el.id);
 	if(llamar == 'edito'){
+        valor5(0);
 		paginacion4();
 		paginacion_editar5(id); 
 	}
@@ -2434,7 +2500,7 @@ function abrir_cliente_eliminado(){
 
 
 const filtrar05 = (llamar)=>{
-    if(llamar != 'activo'){
+    if( (llamar != 'activo') && (llamar != 'edito') ){
         $.ajax({
             type:"POST",
             url:"/administrador/cliente_eliminado",
@@ -2493,8 +2559,9 @@ const filtrar05 = (llamar)=>{
 
     const id = [...document.querySelectorAll('#options2 .selected')].map(el => el.id);
 	if(llamar == 'edito'){
+        valor05(0);
 		paginacion4();
-		paginacion_editar5(id); 
+		paginacion_editar5(id, 2); 
 	}
 
 	if(llamar == 'activo'){
@@ -2523,7 +2590,7 @@ function activar_cliente(id){
 }
 
 ///////////////////////editar_cliente/////////////////////////////
-function editar_cliente(id, opcion){
+function editar_informacion(id, opcion){
 
     var imagen = document.getElementById("imagen").value;
 
@@ -2538,15 +2605,21 @@ function editar_cliente(id, opcion){
             success:function(datos){
                if(opcion == 1) {
                     cliente=datos;
-                    filtrar5();
+                    filtrar5('edito');
                     cerrar('opcion2');
                } 
+                  
+               if(opcion == 10){
+                    cliente=datos;
+                    filtrar05('edito');
+                    cerrar('opcion2');
+                }
                
                if(opcion == 2){
                 const admin = document.querySelector('#admin');
                 admin.innerHTML = `
-                <a  onclick="abrir_administrador(${datos[0].id},'${datos[0].nombre}','${datos[0].apellido}','${datos[0].sexo}','${datos[0].nacimiento}',
-                '${datos[0].direccion}','${datos[0].telefono}','${datos[0].cedula}','${datos[0].correo}','${datos[0].imagen}')">Editar informacion</a>
+                <a  onclick="abrir_informacion(${datos[0].id},'${datos[0].nombre}','${datos[0].apellido}','${datos[0].sexo}','${datos[0].nacimiento}',
+                '${datos[0].direccion}','${datos[0].telefono}','${datos[0].cedula}','${datos[0].correo}','${datos[0].imagen}','2')">Editar informacion</a>
                 `
                    cerrar();
                }
@@ -2572,15 +2645,21 @@ function editar_cliente(id, opcion){
                      
                 if(opcion == 1) {
                     cliente=datos;
-                    filtrar5();
+                    filtrar5('edito');
                     cerrar('opcion2');
-               } 
+                } 
+                
+                if(opcion == 10){
+                    cliente=datos;
+                    filtrar05('edito');
+                    cerrar('opcion2');
+                }
                
                if(opcion == 2){
                     const admin = document.querySelector('#admin');
                     admin.innerHTML = `
-                    <a  onclick="abrir_administrador(${datos[0].id},'${datos[0].nombre}','${datos[0].apellido}','${datos[0].sexo}','${datos[0].nacimiento}',
-                    '${datos[0].direccion}','${datos[0].telefono}','${datos[0].cedula}','${datos[0].correo}','${datos[0].imagen}')">Editar informacion</a>
+                    <a  onclick="abrir_informacion(${datos[0].id},'${datos[0].nombre}','${datos[0].apellido}','${datos[0].sexo}','${datos[0].nacimiento}',
+                    '${datos[0].direccion}','${datos[0].telefono}','${datos[0].cedula}','${datos[0].correo}','${datos[0].imagen}','2')">Editar informacion</a>
                     `
                     const admin2 = document.querySelector('#admin2');
                     admin2.innerHTML = `
@@ -2616,7 +2695,81 @@ function abrir_contrasena(id,imagen,opcion,true1){
 
             <form id="cambiar_contrasena"  method="POST" onsubmit="return validar_contrasena();">
                 <div class="row">
+                    <div class="col-lg-12">
+                        <h5 class="nombre3">Nueva contraseña<span style="color:red">*</span></h5>
+                        <div class="inputWithIcon jorge5">
+                        <input type="password" id="contrasena" name="contrasena" placeholder="Ingrese contraseña" class="form-control" required autofocus>
+                        <i class="icon-lock" aria-hidden="true"></i>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h5 class="nombre3">Confirmar contraseña<span style="color:red">*</span></h5>
+                        <div class="inputWithIcon jorge5">
+                        <input type="password" id="confirmar" name="confirmar" placeholder="Ingrese de nuevo su contraseña" class="form-control"  required >
+                        <i class="icon-key" aria-hidden="true"></i>
+                        </div>
+                    </div>
 
+                </div>
+
+                <br>
+                
+                <div class="row">
+                    <div class="col-lg-6">
+                        <a class="btn btn-warning btn-block" onclick="validar_contrasena(${id},${opcion})">Guardar</a>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <a class="btn btn-danger btn-block" onclick="span3()">Cancelar</a>
+                    </div>
+ 
+                </div>
+
+
+            </form>
+
+        </div>
+
+    </div>`;
+
+    var intro = document.getElementById('tamañ3');
+    
+    intro.style.width="35%";
+    intro.style.top="-5%";
+    abrir3('true');
+    if(typeof true1 === "undefined"){
+        body3='true';
+    }if(typeof true1 !== "undefined"){
+        body3='false';
+    }
+
+}
+
+function abrir_contrasena2(id,imagen,opcion,true1){
+
+    const ventana = document.querySelector('#vent3');
+    ventana.innerHTML = `
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-sx-12 col-lg-12 mx-auto">
+
+           <div class="col-md-12 col-lg-12">
+                <a><img height="75" width="100" src="/imagen1/${imagen}" class='imgRedonda3'></a>
+                <h4 class="titulo2"> CAMBIAR CONTRASEÑA</h4> 
+            </div> 
+
+            <form id="cambiar_contrasena2"  method="POST" onsubmit="return validar_contrasena();">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h5 class="nombre3">Contraseña actual<span style="color:red">*</span></h5>
+                        <div class="inputWithIcon jorge5">
+                        <input type="password" id="actual" name="actual" placeholder="Contraseña actual" class="form-control" required autofocus>
+                        <i class="icon-pencil" aria-hidden="true"></i>
+                    </div>
+                </div>
+
+                <div class="row">
                     <div class="col-lg-12">
                         <h5 class="nombre3">Nueva contraseña<span style="color:red">*</span></h5>
                         <div class="inputWithIcon jorge5">
@@ -2670,10 +2823,12 @@ function abrir_contrasena(id,imagen,opcion,true1){
 }
 
 function cambiar_contrasena(id,opcion){
-
-    body3="false";
    
-    var datos=$('#cambiar_contrasena').serialize();
+    if(opcion == 2){
+        var datos=$('#cambiar_contrasena2').serialize();
+    } else{
+        var datos=$('#cambiar_contrasena').serialize();
+    }
     
     $.ajax({
         type:"POST",

@@ -5,7 +5,7 @@ module.exports = {
         if (req.isAuthenticated()) {
             var a=req.user;
 
-            const lista = await pool.query('SELECT * FROM cliente WHERE id = ? AND contrasena = ?', [a.id, a.contrasena]);
+            const lista = await pool.query('SELECT * FROM cliente WHERE estado1 = "A" AND id = ? AND contrasena = ?', [a.id, a.contrasena]);
 
             if(lista.length === 0){
                 return res.redirect('/administrador');
