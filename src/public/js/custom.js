@@ -271,7 +271,7 @@ $(window).load(function() {
         var topPosition = portfolioContainer.offset().top;
         var bottomPosition = topPosition + portfolioContainer.height();
         $('html,body').delay(600).animate({ scrollTop: topPosition }, 800);
-        var container = $('#item-expander>div', loader);
+        // var container = $('#item-expander>div', loader);
         
         container.html(data);
          $(".fit-vids").fitVids();

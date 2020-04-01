@@ -352,16 +352,6 @@ transition: opacity 400ms ease-in;
 #tamaño3{
     width: 35%;
 }
-/* //////////////////////////////////////// */
-.fondo {
-    background: #fff;
-    background: -moz-linear-gradient(#fff, #999);
-    background: -webkit-linear-gradient(#fff, #999);
-    background: -o-linear-gradient(#fff, #999);
--webkit-transition: opacity 400ms ease-in;
--moz-transition: opacity 400ms ease-in;
-transition: opacity 400ms ease-in;
-}
 
 .expander:focus {
     width: 100%;
@@ -389,7 +379,7 @@ transition: opacity 400ms ease-in;
 
 .tiempo{
     position: absolute;
-    left: 90px;
+    left: 80px;
     top:-10px;
     font-family: Arial, Helvetica, sans-serif;
     color: #000;

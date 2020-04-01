@@ -486,10 +486,6 @@ function tabla_favorito(){
 
     const formulario =  document.querySelector('#formulario');
     //const boton = document.querySelector('#boton');
-    
-
-  
-
 
     // boton.addEventListener('click', filtrar)
     formulario.addEventListener('keyup', filtrar3)

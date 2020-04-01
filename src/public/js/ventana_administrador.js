@@ -26,7 +26,7 @@ const filtrar = (llamar)=>{
         
                 if( (id.indexOf(texto) !== -1) || (nombre.indexOf(texto) !== -1) || (precio.indexOf(texto) !== -1) || (cantidad.indexOf(texto) !== -1) || (modelo.indexOf(texto) !== -1) ){ 
                     
-                    prod[prod.length] = { id: productos[i].id, nombre: productos[i].nombre, precio:productos[i].precio, cantidad: productos[i].cantidad, modelo: modelo, tiempo: productos[i].tiempo, imagen: productos[i].imagen};
+                    prod[prod.length] = { id: productos[i].id, nombre: productos[i].nombre, precio:productos[i].precio, cantidad: productos[i].cantidad, modelo: modelo, fecha_hora: productos[i].fecha_hora, imagen: productos[i].imagen};
                     
                     
                 }
@@ -1688,7 +1688,7 @@ function activar_producto(id){
                             }
                         }
 
-                        prod[prod.length] = { id: producto[n].id, nombre: producto[n].nombre, precio:producto[n].precio, cantidad: producto[n].cantidad, modelo: modelo, imagen:producto[n].imagen};
+                        prod[prod.length] = { id: producto[n].id, nombre: producto[n].nombre, precio:producto[n].precio, cantidad: producto[n].cantidad, modelo: modelo, fecha_hora: producto[n].fecha_hora, imagen:producto[n].imagen};
                         productos[productos.length] = producto[n];
                     }
 
@@ -2837,9 +2837,18 @@ function cambiar_contrasena(id,opcion){
         async: false,
         success:function(opcion1){
 
-            if(opcion1 == 'edito'){
+            if(opcion1 == 'confirmacion'){
                 span3();
                 editado();
+            }
+
+            if(opcion1 == 'invalido'){
+                Swal.fire({
+                    type: 'error',
+                    title: 'Error',
+                    text: 'Contraseña actual incorrecto!', 
+                }) 
+                return  false;
             }
 
         }

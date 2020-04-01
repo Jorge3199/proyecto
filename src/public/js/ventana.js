@@ -187,26 +187,3 @@ window.onclick = function(event) {
     }
 }
 
-function bigImg(n) {
-	var intro = document.getElementById('tamaño'+n);
-	intro.style.width="100%";
-	intro.style.transition= "all .1s ease";
-}
-
-function normalImg(n) {
-	var intro = document.getElementById('tamaño'+n);
-	intro.style.width="96.5%";
-	intro.style.transition= "all .1s ease";
-}
-
-function bigImg5(n) {
-	var intro = document.getElementById('tamaño5'+n);
-	intro.style.width="100%";
-	intro.style.transition= "all .1s ease";
-}
-
-function normalImg5(n) {
-	var intro = document.getElementById('tamaño5'+n);
-	intro.style.width="96.5%";
-	intro.style.transition= "all .1s ease";
-}

@@ -5,6 +5,7 @@ const router = express.Router();
 const pool = require('../database');
 const { isLoggedIn } = require('../lib/auth');
 const helpers = require('../lib/helpers');
+const { format } = require('timeago.js');
 
 
 router.get('/', isLoggedIn, async (req, res) => {
@@ -21,6 +22,9 @@ router.post('/delete', isLoggedIn, async (req, res) => {
     await pool.query('UPDATE producto SET estado="I" WHERE id = ?', [id]);
     
     const producto = await pool.query('SELECT * FROM producto WHERE estado="A" ');
+    for(var n=0; n<producto.length; n++){
+        producto[n].fecha_hora = (format(producto[n].fecha_hora, 'es_ES') );
+    }
     res.json(producto);
 });
 
@@ -37,7 +41,11 @@ router.post('/edit/:id', isLoggedIn, async (req, res) => {
     await pool.query('UPDATE producto set ? WHERE id = ?', [newLink1, id]);
   
     const producto = await pool.query('SELECT * FROM producto WHERE estado="A" ');
-  
+   
+    for(var n=0; n<producto.length; n++){
+        producto[n].fecha_hora = (format(producto[n].fecha_hora, 'es_ES') );
+    }
+
     res.json(producto);
   
 });
@@ -63,6 +71,9 @@ router.post('/editar/:id', isLoggedIn, async (req, res) => {
     await pool.query('UPDATE producto set ? WHERE id = ?', [newLink, id]);
       
     const producto = await pool.query('SELECT * FROM producto WHERE estado="A" ');
+    for(var n=0; n<producto.length; n++){
+        producto[n].fecha_hora = (format(producto[n].fecha_hora, 'es_ES') );
+    }
     
     res.json(producto);
 });
@@ -91,6 +102,9 @@ router.post('/add', isLoggedIn, async (req, res) => {
     await pool.query('INSERT INTO producto set ?', [newLink]);
 
     const producto = await pool.query('SELECT * FROM producto WHERE estado="A" ');
+    for(var n=0; n<producto.length; n++){
+        producto[n].fecha_hora = (format(producto[n].fecha_hora, 'es_ES') );
+    }
     
     res.json(producto);
    
@@ -125,6 +139,7 @@ router.post('/modelo', isLoggedIn, async (req, res) => {
 router.post('/productos_eliminado', isLoggedIn, async (req, res) => {
      
     const producto = await pool.query('SELECT * FROM producto WHERE estado="I" ');
+    
     res.json(producto);
 });
 
@@ -133,6 +148,9 @@ router.post('/activar_producto', isLoggedIn, async (req, res) => {
     await pool.query('UPDATE producto SET estado="A" WHERE id = ?', [id]);
     
     const producto = await pool.query('SELECT * FROM producto');
+    for(var n=0; n<producto.length; n++){
+        producto[n].fecha_hora = (format(producto[n].fecha_hora, 'es_ES') );
+    }
     res.json(producto);
 });
 
@@ -195,18 +213,26 @@ router.post('/lista_cliente', isLoggedIn, async (req, res) => {
 router.post('/cambiar_contrasena/:id/:opcion', isLoggedIn, async (req, res) => {
     const { id, opcion } = req.params;
     var { actual, contrasena } = req.body;
-    contrasena = await helpers.encryptPassword(contrasena);
 
     if(opcion == 1){
+        contrasena = await helpers.encryptPassword(contrasena);
         await pool.query('UPDATE cliente SET contrasena = ? WHERE id = ?', [contrasena,id]);
    
-        res.json('edito');
+        res.json('confirmacion');
     }
 
     if(opcion == 2){
-        await pool.query('UPDATE administrador SET contrasena = ? WHERE id = ?', [contrasena,id]);
-   
-        res.json('edito');
+        var admi=req.user;
+        const validPassword = await helpers.matchPassword(actual, admi.contrasena);
+        if (validPassword) {
+            contrasena = await helpers.encryptPassword(contrasena);
+            await pool.query('UPDATE administrador SET contrasena = ? WHERE id = ?', [contrasena,admi.id]);
+        
+            res.json('confirmacion');
+        } else {
+            res.json('invalido');
+        }
+        
     }
 
 });

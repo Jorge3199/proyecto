@@ -4,11 +4,11 @@ const router = express.Router();
 var flash = require('express-flash');
 var session = require('express-session');
 var app = express();
-//var  flash  = require ( ' express-flash-2 ' ) ;
 const pool = require('../database');
 const passport = require('passport');
 const helpers = require('../lib/helpers');
-const { isLoggedIn, isNotLoggedIn } = require('../lib/auth');
+const { format } = require('timeago.js');
+const { isLoggedIn} = require('../lib/auth');
 const { isLoggedIn1, isNotLoggedIn1 } = require('../lib/auth1');
 const stripe = require('stripe')('sk_test_sWHCKBiXFFGfdGLtpjK4KgDT00ibQv3arz');
 
@@ -210,6 +210,9 @@ router.post('/c_cambiar_contrasena/:aleatorio', isNotLoggedIn1, async (req, res)
 router.post('/todos_productos', isLoggedIn1, async (req, res) => {
      
     const products= await pool.query('SELECT * FROM producto WHERE estado="A" ');
+    for(var n=0; n<products.length; n++){
+        products[n].fecha_hora = (format(products[n].fecha_hora, 'es_ES') );
+    }
 
     res.json(products);
 });
@@ -397,6 +400,9 @@ router.post('/pago', isLoggedIn1, async (req, res) => {
     
     if(encontrado == 0){
         var producto = await pool.query('SELECT * FROM producto WHERE estado="A" ');
+        for(var n=0; n<producto.length; n++){
+            producto[n].fecha_hora = (format(producto[n].fecha_hora, 'es_ES') );
+        }
         res.json(producto);
     }
 

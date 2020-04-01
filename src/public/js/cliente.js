@@ -101,9 +101,9 @@ if(s < 8){
     for (n = 0; n < s; n++) {
     
         resultado10.innerHTML += `
-        <div class="item four columns illustration" onmouseover="bigImg5(${n})" onmouseout="normalImg5(${n})">
+        <div class="item four columns illustration">
         
-            <a href="project-1.html" class="expander">
+            <a class="expander">
                 <img height="200" width="270" src="imagen1/${prod[p].imagen}" alt="" />
                 <div class="mask"></div>
                 <div class="icon">
@@ -114,7 +114,7 @@ if(s < 8){
               
             </a>
 
-			<div id='tamaño5${n}' class="fondo" style="width:96.5%; " >
+			<div class="fondo">
 			<div class="row">
 				<div class="col-lg-12">	 
 					<h8 class="tiempo" >${prod[p].fecha_hora}</h8>
@@ -174,9 +174,9 @@ if(s >= 8){
     for (n = 0; n < 8; n++) {
         
         resultado10.innerHTML += `
-        <div class="item four columns illustration" onmouseover="bigImg5(${n})" onmouseout="normalImg5(${n})">
+        <div class="item four columns illustration">
         
-            <a href="project-1.html" class="expander">
+            <a class="expander">
                 <img height="200" width="270" src="imagen1/${prod[p].imagen}" alt="" />
                 <div class="mask"></div>
                 <div class="icon">
@@ -186,7 +186,7 @@ if(s >= 8){
                 </div>
             </a>
 
-			<div id='tamaño5${n}' class="fondo" style="width:96.5%; " >
+			<div class="fondo">
 			<div class="row">
 				<div class="col-lg-12">	 
 					<h8 class="tiempo">${prod[p].fecha_hora}</h8>
