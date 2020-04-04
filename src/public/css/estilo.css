@@ -451,3 +451,19 @@ input#imagen{
     top: -40px;
     right: -25px;
 }
+
+.opcion{
+    width: auto;
+    height: auto;
+	background-color: #FFC312;
+	-webkit-border-radius:5px;
+    -webkit-box-shadow:0px 3px 0px rgb(204, 155, 8);
+    cursor: pointer;  
+    text-align: center; 
+}
+
+.contras{
+    position: absolute;
+    top: -40px;
+    right: -17px;
+}

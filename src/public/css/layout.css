@@ -1740,7 +1740,8 @@ tbody img {
 
 .boton_contrasena{
 	position: absolute;
-	top: 527px;	
+	top: 520px;	
+	left: 30px;
 }
 
 .titulo2{
@@ -1772,4 +1773,5 @@ tbody img {
 	left: 115px;
 
 }
+
 

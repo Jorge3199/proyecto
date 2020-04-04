@@ -28,46 +28,22 @@ router.post('/delete', isLoggedIn, async (req, res) => {
     res.json(producto);
 });
 
-router.post('/edit/:id', isLoggedIn, async (req, res) => {
-    const { id } = req.params;
-    var { nombre, cantidad, precio, id_modelo} = req.body;
-
-    const newLink1 = {
-        nombre,
-        cantidad,
-        precio,
-        id_modelo
-    };
-    await pool.query('UPDATE producto set ? WHERE id = ?', [newLink1, id]);
-  
-    const producto = await pool.query('SELECT * FROM producto WHERE estado="A" ');
-   
-    for(var n=0; n<producto.length; n++){
-        producto[n].fecha_hora = (format(producto[n].fecha_hora, 'es_ES') );
-    }
-
-    res.json(producto);
-  
-});
-
 router.post('/editar/:id', isLoggedIn, async (req, res) => {
   
-    var imagen = (req.file['filename']);
-    // console.log(req.file);
-   
     var { nombre, cantidad, precio, id_modelo } = req.body; 
 
     const { id } = req.params;
-    
-    const newLink = {
-        nombre,
-        cantidad,
-        precio,
-        id_modelo,
-        imagen
-    };
+    var newLink;
 
-   
+    if(typeof req.file !== "undefined"){
+        var imagen = (req.file['filename']);
+        newLink = { nombre, cantidad, precio, id_modelo,  imagen };
+    }
+ 
+    if(typeof req.file === "undefined"){
+        newLink = { nombre, cantidad, precio, id_modelo };
+    }
+
     await pool.query('UPDATE producto set ? WHERE id = ?', [newLink, id]);
       
     const producto = await pool.query('SELECT * FROM producto WHERE estado="A" ');
@@ -269,16 +245,17 @@ router.post('/editar_informacion/:id/:opcion', isLoggedIn, async (req, res) => {
   
     var { nombre, apellido, sexo, nacimiento, direccion, telefono, cedula, correo} = req.body;
 
-    const newLink = {
-        nombre,
-        apellido,
-        sexo,
-        nacimiento,
-        direccion,
-        telefono,
-        cedula,
-        correo
-    };
+    var newLink;
+
+    if(typeof req.file !== "undefined"){
+        var imagen = (req.file['filename']);
+        newLink = { nombre, apellido, sexo, nacimiento, direccion, telefono, cedula, correo, imagen };
+    }
+ 
+    if(typeof req.file === "undefined"){
+        newLink = { nombre, apellido, sexo, nacimiento, direccion, telefono, cedula, correo };
+    }
+
     if(opcion == 1){
         await pool.query('UPDATE cliente set ? WHERE id = ?', [newLink, id]);
   
@@ -306,39 +283,45 @@ router.post('/editar_informacion/:id/:opcion', isLoggedIn, async (req, res) => {
   
 });
 
-router.post('/editar_informacion2/:id/:opcion', isLoggedIn, async (req, res) => {
-    const { id, opcion } = req.params;
-    var imagen = (req.file['filename']);
-    var { nombre, apellido, sexo, nacimiento, direccion, telefono, cedula, correo} = req.body;
+router.post('/informacion', isLoggedIn, async (req, res) => {
+    const { opcion} = req.body;
+    var informacion;
+    
+    if(opcion == 1 || opcion == 10){
+        informacion = await pool.query('SELECT * FROM cliente');
+    }
 
-    const newLink = {
-        nombre,
-        apellido,
-        sexo,
-        nacimiento,
-        direccion,
-        telefono,
-        cedula,
-        correo,
-        imagen
-    };
+    if(opcion == 2){
+        informacion = await pool.query('SELECT * FROM administrador');
+    }
+    
+    res.json(informacion);
+});
+
+router.post('/eliminar_foto', isLoggedIn, async (req, res) => {
+    const { id, opcion} = req.body;
+    var imagen = 'perfil.jpg';
+   
     if(opcion == 1){
-        await pool.query('UPDATE cliente set ? WHERE id = ?', [newLink, id]);
-  
+        await pool.query('UPDATE cliente SET imagen = ? WHERE id = ?', [imagen, id]);
         const datos = await pool.query('SELECT * FROM cliente WHERE estado1="A" ');
-        
+        res.json(datos);
+    }
+
+    if(opcion == 10){
+        await pool.query('UPDATE cliente SET imagen = ? WHERE id = ?', [imagen, id]);
+        const datos = await pool.query('SELECT * FROM cliente WHERE estado1="I" ');
         res.json(datos);
     }
 
     if(opcion == 2){
-        await pool.query('UPDATE administrador set ? WHERE id = ?', [newLink, id]);
-  
-        const datos = await pool.query('SELECT * FROM administrador WHERE id = ? ', [id]);
-        
+        await pool.query('UPDATE administrador SET imagen = ? WHERE id = ?', [imagen, id]);
+        const datos = await pool.query('SELECT * FROM  administrador');
         res.json(datos);
     }
-   
+    
 });
+
 
 
 module.exports = router;

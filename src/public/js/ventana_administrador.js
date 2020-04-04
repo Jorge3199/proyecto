@@ -3,7 +3,7 @@
 const formulario =  document.querySelector('#formulario');
        
 const filtrar = (llamar)=>{
-   
+       
         prod = [];
         var modelo;
 
@@ -51,7 +51,12 @@ const filtrar = (llamar)=>{
         paginacion_eliminar(id);
 	}
     
-    
+    if(prod.length == 0){
+        const resultado = document.querySelector('#resultado');
+        resultado.innerHTML += `
+        <h1 style="color: white">Producto no encontrado...</h1>
+        `
+    }  
 
 }
      
@@ -589,14 +594,14 @@ function abrir_cliente(){
                     </div>
 
                     <div class="col-lg-6">
-                        <a class="negro">Acepto ternimos y condiciones </a>
+                        <a class="negro" style="position: relative; left: -20px;">Acepto ternimos y condiciones </a>
                     </div>
+                    
                 </div>
 
                 <div class="row">
-    
                     <div class="col-lg-3">
-                    <a id="check" class="btn btn-warning btn-block my-3" onclick="validar_registro()">
+                    <a id="check" class="btn btn-warning btn-block my-3" onclick="validar_registro(1)">
                         Registrar
                     </a>
                     
@@ -862,14 +867,14 @@ function abrir_administrador(){
                     </div>
 
                     <div class="col-lg-6">
-                        <a class="negro">Acepto ternimos y condiciones </a>
+                        <a class="negro" style="position: relative; left: -20px;">Acepto ternimos y condiciones </a>
                     </div>
                 </div>
 
                 <div class="row">
     
                     <div class="col-lg-3">
-                    <a id="check" class="btn btn-warning btn-block my-3" onclick="validar_registro()">
+                    <a id="check" class="btn btn-warning btn-block my-3" onclick="validar_registro(2)">
                         Registrar
                     </a>
                     
@@ -937,6 +942,7 @@ function abrir_administrador(){
 
 ////////////////////////////////////////////////////////////////////////
 function abrir_informacion(id,nombre,apellido,sexo,nacimiento,direccion,telefono,cedula,correo,imagen,opcion){
+    
     const ventana = document.querySelector('#vent');
     ventana.innerHTML = `
         <div class="row">
@@ -965,9 +971,17 @@ function abrir_informacion(id,nombre,apellido,sexo,nacimiento,direccion,telefono
                 </div>
 
                 <div id="boton_contrasena" class="boton_contrasena">
-                    <a class="btn btn-warning btn-block my-3" onclick="abrir_contrasena(${id},'${imagen}',${opcion})">
-                    Cambiar Contraseña
-                    </a>
+               
+                    <ul class="nav">
+                        <li><a class="opcion">Opciones</a>
+                            <ul>
+                                <li class="cursor"><a onclick="abrir_contrasena(${id},'${imagen}',${opcion})">Cambiar Contraseña</a></li>
+                                <li class="cursor"><a onclick="eliminacion_foto(${id},${opcion})">Eliminar Fotos</a></li>
+                            
+                            </ul>
+                        </li>
+                    </ul>
+            
                 </div>
 
                 <hr color="black" size=3>
@@ -1065,8 +1079,8 @@ function abrir_informacion(id,nombre,apellido,sexo,nacimiento,direccion,telefono
                 <div class="row">
     
                     <div class="col-lg-3">
-                    <a id="check" class="btn btn-warning btn-block my-3" onclick="validar_registro(${id},${opcion})">
-                        Registrar
+                    <a id="check" class="btn btn-warning btn-block my-3" onclick="validar_registro2(${id},${opcion})">
+                        Guardar
                     </a>
                     
                     </div>
@@ -1097,9 +1111,15 @@ function abrir_informacion(id,nombre,apellido,sexo,nacimiento,direccion,telefono
     
         const boton_contrasena = document.querySelector('#boton_contrasena');
         boton_contrasena.innerHTML = `
-        <a class="btn btn-warning btn-block my-3" onclick="abrir_contrasena2(${id},'${imagen}',${opcion})">
-          Cambiar Contraseña
-        </a>
+        <ul class="nav">
+            <li><a class="opcion">Opciones</a>
+                <ul>
+                    <li class="cursor"><a onclick="abrir_contrasena2(${id},'${imagen}',${opcion})">Cambiar Contraseña</a></li>
+                    <li class="cursor"><a onclick="eliminacion_foto(${id},${opcion})">Eliminar Fotos</a></li>
+                
+                </ul>
+            </li>
+        </ul>
         `
     }
 
@@ -1227,6 +1247,7 @@ function abrir_lista_producto(){
         <div class="col-lg-3">
             
             <input type="text" id="formulario2" class="form-control ">
+
         </div>
 
     </div> 
@@ -1343,7 +1364,13 @@ const filtrar2 = (llamar)=>{
 	if(llamar == 'elimino'){
 	    paginacion2();
         paginacion_eliminar2(id);
-	}
+    }
+    
+    if(prod2.length == 0){
+        const lista = document.querySelector('#lista');
+        lista.innerHTML += `
+        <td>Producto no encontrado..</td>`
+    }  
 
 }
     
@@ -1537,49 +1564,36 @@ const filtrar3 = (llamar)=>{
         paginacion_eliminar3(id);
         valor(0);
         paginacion();
-	}
+    }
+    
+    if(prod3.length == 0){
+        const lista = document.querySelector('#lista');
+        lista.innerHTML += `
+        <td>Producto no encontrado..</td>`
+    }  
 
 }
 
 function editar_producto(id){
   
-    var imagen = document.getElementById("imagen").value;
 
-    if(imagen == ''){
-        var datos=$('#editar_producto').serialize();
+    var datos = new FormData(document.getElementById("editar_producto"));
+    $.ajax({
+        type:"POST",
+        url:"/administrador/editar/"+id,
+        data: datos,
+        async: false,
+        processData: false,
+        contentType: false,
+        success:function(producto){
+                    
+            productos= producto;
+
+        }
         
-        $.ajax({
-            type:"POST",
-            url:"/administrador/edit/"+id,
-            data: datos,
-            async: false,
-            success:function(producto){
-                    // console.log(producto);
-                   
-                    productos= producto;
+        
+    });
     
-            }
-            
-        });
-    }
-    if(imagen != ''){
-        var datos = new FormData(document.getElementById("editar_producto"));
-        $.ajax({
-            type:"POST",
-            url:"/administrador/editar/"+id,
-            data: datos,
-            async: false,
-            processData: false,
-            contentType: false,
-            success:function(producto){
-                     
-                productos= producto;
-    
-            }
-           
-            
-        });
-    }
     
     editado();
     if(prod2.length != 0){
@@ -1731,7 +1745,7 @@ function abrir_lista_venta(){
         </div>
 
         <div class="col-lg-3">
-            <div class="cursor" style="position: relative; left: -58px;">
+            <div class="cursor" style="position: relative; left: -100px;">
                <a onclick="vent_despachada()"><img src="/img/trash.png" width="30" height="30"> </a>
             </div>
         </div>
@@ -1755,6 +1769,7 @@ function abrir_lista_venta(){
             <tr>
             <td>Nombre</td>
             <td>Apellido</td>
+            <td>Telefono</td>
             <td>Cedula</td>
             <td>Imagen</td>
             <td>Total</td>
@@ -1790,7 +1805,7 @@ function abrir_lista_venta(){
     
     var intro = document.getElementById('tamañ2');
     
-    intro.style.width="65%";
+    intro.style.width="80%";
     intro.style.top="-15%";
     body2='true';
  
@@ -1852,11 +1867,15 @@ const filtrar4 = (llamar)=>{
                 let cedula = venta[i].cedula.toString().toLowerCase();
                 let total = venta[i].total.toString().toLowerCase();
                 let fecha_hora = venta[i].fecha_hora.split(" ");
+                let telefono = venta[i].telefono.toLowerCase();
+                let telefono1 = venta[i].telefono.replace("(", '').replace(")", '').replace(" ", '').replace("-", '');
+                let cedula1 = venta[i].cedula.replace("-", '').replace("-", '');
               
               
                 
         
-                if( (nombre.indexOf(texto) !== -1) || (apellido.indexOf(texto) !== -1) || (cedula.indexOf(texto) !== -1) || (total.indexOf(texto) !== -1) || (fecha_hora[0].indexOf(texto) !== -1) || (fecha_hora[1].indexOf(texto) !== -1) ){ 
+                if( (nombre.indexOf(texto) !== -1) || (apellido.indexOf(texto) !== -1) || (cedula.indexOf(texto) !== -1) || (cedula1.indexOf(texto) !== -1) ||
+                  (total.indexOf(texto) !== -1) || (telefono1.indexOf(texto) !== -1) || (telefono.indexOf(texto) !== -1) || (fecha_hora[0].indexOf(texto) !== -1) || (fecha_hora[1].indexOf(texto) !== -1) ){ 
                     
                     prod4[prod4.length] = venta[i];
                    
@@ -1884,7 +1903,13 @@ const filtrar4 = (llamar)=>{
 	if(llamar == 'elimino'){
 	    paginacion4();
         paginacion_eliminar4(id);
-	}
+    }
+    
+    if(prod4.length == 0){
+        const lista = document.querySelector('#lista');
+        lista.innerHTML += `
+        <td>Producto no encontrado..</td>`
+    }  
 
 }
 
@@ -2086,6 +2111,7 @@ function vent_despachada(){
             <tr>
             <td>Nombre</td>
             <td>Apellido</td>
+            <td>Telefono</td>
             <td>Cedula</td>
             <td>Imagen</td>
             <td>Total</td>
@@ -2121,7 +2147,7 @@ function vent_despachada(){
     
     var intro = document.getElementById('tamañ2');
     
-    intro.style.width="65%";
+    intro.style.width="80%";
     intro.style.top="-15%";
     body2='true';
  
@@ -2158,11 +2184,12 @@ const filtrar04 = (llamar)=>{
                 let cedula = venta_desp[i].cedula.toString().toLowerCase();
                 let total = venta_desp[i].total.toString().toLowerCase();
                 let fecha_hora = venta_desp[i].fecha_hora.split(" ");
-              
-              
-                
-        
-                if( (nombre.indexOf(texto) !== -1) || (apellido.indexOf(texto) !== -1) || (cedula.indexOf(texto) !== -1) || (total.indexOf(texto) !== -1) || (fecha_hora[0].indexOf(texto) !== -1) || (fecha_hora[1].indexOf(texto) !== -1) ){ 
+                let telefono = venta_desp[i].telefono.toLowerCase();
+                let telefono1 = venta_desp[i].telefono.replace("(", '').replace(")", '').replace(" ", '').replace("-", '');
+                let cedula1 = venta_desp[i].cedula.replace("-", '').replace("-", '');
+ 
+                if( (nombre.indexOf(texto) !== -1) || (apellido.indexOf(texto) !== -1) || (telefono1.indexOf(texto) !== -1) ||
+                   (telefono.indexOf(texto) !== -1) ||(cedula1.indexOf(texto) !== -1) || (cedula.indexOf(texto) !== -1) || (total.indexOf(texto) !== -1) || (fecha_hora[0].indexOf(texto) !== -1) || (fecha_hora[1].indexOf(texto) !== -1) ){ 
                     
                     prod4[prod4.length] = venta_desp[i];
                    
@@ -2189,7 +2216,13 @@ const filtrar04 = (llamar)=>{
 	if(llamar == 'elimino'){
 	    paginacion4();
         paginacion_eliminar4(id,2);
-	}
+    }
+    
+    if(prod4.length == 0){
+        const lista = document.querySelector('#lista');
+        lista.innerHTML += `
+        <td>Producto no encontrado..</td>`
+    }  
 
 }
 
@@ -2234,7 +2267,7 @@ function abrir_lista_cliente(){
         </div>
 
         <div class="col-lg-3">
-            <div class="cursor" style="position: relative; left: -58px;">
+            <div class="cursor" style="position: relative; left: -120px;">
                <a onclick="abrir_cliente_eliminado()"><img src="/img/trash.png" width="30" height="30"> </a>
             </div>
         </div>
@@ -2294,7 +2327,7 @@ function abrir_lista_cliente(){
     
     var intro = document.getElementById('tamañ2');
     
-    intro.style.width="80%";
+    intro.style.width="90%";
     intro.style.top="-15%";
     body2='true';
  
@@ -2350,16 +2383,14 @@ const filtrar5 = (llamar)=>{
                 let telefono = cliente[i].telefono.toLowerCase();
                 let cedula = cliente[i].cedula.toString().toLowerCase();
                 let correo = cliente[i].correo.toString().toLowerCase();
-               
-              
-              
-                
-        
+                let telefono1 = cliente[i].telefono.replace("(", '').replace(")", '').replace(" ", '').replace("-", '');
+                let cedula1 = cliente[i].cedula.replace("-", '').replace("-", '');
+
                 if( (nombre.indexOf(texto) !== -1) || (apellido.indexOf(texto) !== -1) ||
                  (sexo.indexOf(texto) !== -1) || (nacimiento.indexOf(texto) !== -1) || 
-                 (direccion.indexOf(texto) !== -1) || (telefono.indexOf(texto) !== -1) ||
-                 (cedula.indexOf(texto) !== -1) || (correo.indexOf(texto) !== -1) ){ 
-                    
+                 (direccion.indexOf(texto) !== -1) || (telefono1.indexOf(texto) !== -1) || (telefono.indexOf(texto) !== -1) ||
+                 (cedula.indexOf(texto) !== -1) || (cedula1.indexOf(texto) !== -1) || (correo.indexOf(texto) !== -1) ){ 
+                   
                     prod5[prod5.length] = cliente[i];
                    
                     
@@ -2386,7 +2417,13 @@ const filtrar5 = (llamar)=>{
 	if(llamar == 'elimino'){
 	    paginacion4();
         paginacion_eliminar5(id);
-	}
+    }
+    
+    if(prod5.length == 0){
+        const lista = document.querySelector('#lista');
+        lista.innerHTML += `
+        <td>Producto no encontrado..</td>`
+    }  
 
 }
 
@@ -2487,7 +2524,7 @@ function abrir_cliente_eliminado(){
     
     var intro = document.getElementById('tamañ2');
     
-    intro.style.width="80%";
+    intro.style.width="90%";
     intro.style.top="-15%";
     body2='true';
  
@@ -2531,15 +2568,14 @@ const filtrar05 = (llamar)=>{
                 let telefono = cliente[i].telefono.toLowerCase();
                 let cedula = cliente[i].cedula.toString().toLowerCase();
                 let correo = cliente[i].correo.toString().toLowerCase();
+                let telefono1 = cliente[i].telefono.replace("(", '').replace(")", '').replace(" ", '').replace("-", '');
+                let cedula1 = cliente[i].cedula.replace("-", '').replace("-", '');
                
-              
-              
-                
-        
+
                 if( (nombre.indexOf(texto) !== -1) || (apellido.indexOf(texto) !== -1) ||
                  (sexo.indexOf(texto) !== -1) || (nacimiento.indexOf(texto) !== -1) || 
-                 (direccion.indexOf(texto) !== -1) || (telefono.indexOf(texto) !== -1) ||
-                 (cedula.indexOf(texto) !== -1) || (correo.indexOf(texto) !== -1) ){ 
+                 (direccion.indexOf(texto) !== -1) || (telefono1.indexOf(texto) !== -1) || (telefono.indexOf(texto) !== -1) ||
+                 (cedula.indexOf(texto) !== -1) || (cedula1.indexOf(texto) !== -1) || (correo.indexOf(texto) !== -1) ){ 
                     
                     prod5[prod5.length] = cliente[i];
                    
@@ -2567,7 +2603,13 @@ const filtrar05 = (llamar)=>{
 	if(llamar == 'activo'){
 	    paginacion4();
         paginacion_eliminar5(id, 2);
-	}
+    }
+    
+    if(prod5.length == 0){
+        const lista = document.querySelector('#lista');
+        lista.innerHTML += `
+        <td>Producto no encontrado..</td>`
+    }  
 
 }
 
@@ -2589,96 +2631,112 @@ function activar_cliente(id){
    
 }
 
+function eliminar_foto(id, opcion){
+    $.ajax({
+        type:"POST",
+        url:"/administrador/eliminar_foto",
+        data: {id : id, opcion : opcion},
+        async: false,
+        success:function(datos){
+            
+            for(var n=0; n<datos.length; n++){
+                if(id == datos[n].id){
+                   
+                    if(opcion == 1){
+                        filtrar5();
+                        abrir_informacion(datos[n].id,datos[n].nombre,datos[n].apellido,datos[n].sexo,datos[n].nacimiento,
+                        datos[n].direccion,datos[n].telefono,datos[n].cedula,datos[n].correo,datos[n].imagen,'1');
+                        eliminado();
+                    }
+
+                    if(opcion == 10){
+                        filtrar05();
+                        abrir_informacion(datos[n].id,datos[n].nombre,datos[n].apellido,datos[n].sexo,datos[n].nacimiento,
+                        datos[n].direccion,datos[n].telefono,datos[n].cedula,datos[n].correo,datos[n].imagen,'10');
+                        eliminado();
+                    }
+
+                    if(opcion == 2){
+                        const admin = document.querySelector('#admin');
+                        admin.innerHTML = `
+                        <a  onclick="abrir_informacion(${datos[0].id},'${datos[0].nombre}','${datos[0].apellido}','${datos[0].sexo}','${datos[0].nacimiento}',
+                        '${datos[0].direccion}','${datos[0].telefono}','${datos[0].cedula}','${datos[0].correo}','${datos[0].imagen}','2')">Editar informacion</a>
+                        `
+                        const admin2 = document.querySelector('#admin2');
+                        admin2.innerHTML = `
+                        <a onclick="abrir_contrasena(${datos[0].id},'${datos[0].imagen}','2','true')">Cambiar Contraseña</a>
+                        `
+    
+                        const link01 = document.querySelector('#link01');
+                        link01.innerHTML = `
+                        <img src='/imagen1/${datos[0].imagen}' class='imgRedonda2'/>
+                        `
+                        abrir_informacion(datos[n].id,datos[n].nombre,datos[n].apellido,datos[n].sexo,datos[n].nacimiento,
+                        datos[n].direccion,datos[n].telefono,datos[n].cedula,datos[n].correo,datos[n].imagen,'2');
+                        eliminado();
+                    }
+                   
+                }
+            }
+            
+     
+        }
+        
+    });
+    
+   
+}
+
 ///////////////////////editar_cliente/////////////////////////////
 function editar_informacion(id, opcion){
-
-    var imagen = document.getElementById("imagen").value;
-
-    if(imagen == ''){
-        var datos=$('#enviar').serialize();
-        
-        $.ajax({
-            type:"POST",
-            url:"/administrador/editar_informacion/"+id+"/"+opcion,
-            data: datos,
-            async: false,
-            success:function(datos){
-               if(opcion == 1) {
-                    cliente=datos;
-                    filtrar5('edito');
-                    cerrar('opcion2');
-               } 
-                  
-               if(opcion == 10){
-                    cliente=datos;
-                    filtrar05('edito');
-                    cerrar('opcion2');
-                }
-               
-               if(opcion == 2){
+    
+    var datos = new FormData(document.getElementById("enviar"));
+    
+    $.ajax({
+        type:"POST",
+        url:"/administrador/editar_informacion/"+id+"/"+opcion,
+        data: datos,
+        async: false,
+        processData: false,
+        contentType: false,
+        success:function(datos){
+                    
+            if(opcion == 1) {
+                cliente=datos;
+                filtrar5('edito');
+                cerrar('opcion2');
+            } 
+            
+            if(opcion == 10){
+                cliente=datos;
+                filtrar05('edito');
+                cerrar('opcion2');
+            }
+            
+            if(opcion == 2){
                 const admin = document.querySelector('#admin');
                 admin.innerHTML = `
                 <a  onclick="abrir_informacion(${datos[0].id},'${datos[0].nombre}','${datos[0].apellido}','${datos[0].sexo}','${datos[0].nacimiento}',
                 '${datos[0].direccion}','${datos[0].telefono}','${datos[0].cedula}','${datos[0].correo}','${datos[0].imagen}','2')">Editar informacion</a>
                 `
-                   cerrar();
-               }
-               
-               editado();
-                
-    
-            }
-            
-        });
-    }
-    if(imagen != ''){
-        var datos = new FormData(document.getElementById("enviar"));
-      
-        $.ajax({
-            type:"POST",
-            url:"/administrador/editar_informacion2/"+id+"/"+opcion,
-            data: datos,
-            async: false,
-            processData: false,
-            contentType: false,
-            success:function(datos){
-                     
-                if(opcion == 1) {
-                    cliente=datos;
-                    filtrar5('edito');
-                    cerrar('opcion2');
-                } 
-                
-                if(opcion == 10){
-                    cliente=datos;
-                    filtrar05('edito');
-                    cerrar('opcion2');
-                }
-               
-               if(opcion == 2){
-                    const admin = document.querySelector('#admin');
-                    admin.innerHTML = `
-                    <a  onclick="abrir_informacion(${datos[0].id},'${datos[0].nombre}','${datos[0].apellido}','${datos[0].sexo}','${datos[0].nacimiento}',
-                    '${datos[0].direccion}','${datos[0].telefono}','${datos[0].cedula}','${datos[0].correo}','${datos[0].imagen}','2')">Editar informacion</a>
-                    `
-                    const admin2 = document.querySelector('#admin2');
-                    admin2.innerHTML = `
-                    <a onclick="abrir_contrasena(${datos[0].id},'${datos[0].imagen}','2','true')">Cambiar Contraseña</a>
-                    `
+                const admin2 = document.querySelector('#admin2');
+                admin2.innerHTML = `
+                <a onclick="abrir_contrasena(${datos[0].id},'${datos[0].imagen}','2','true')">Cambiar Contraseña</a>
+                `
 
-                    const link01 = document.querySelector('#link01');
-                    link01.innerHTML = `
-                    <img src='/imagen1/${datos[0].imagen}' class='imgRedonda2'/>
-                    `
-                   cerrar();
-               }
-               editado();
-    
+                const link01 = document.querySelector('#link01');
+                link01.innerHTML = `
+                <img src='/imagen1/${datos[0].imagen}' class='imgRedonda2'/>
+                `
+                cerrar();
             }
-           
-            
-        });
-    }
+            editado();
+
+        }
+        
+        
+    });
+    
 }
 
 function abrir_contrasena(id,imagen,opcion,true1){
@@ -2839,15 +2897,11 @@ function cambiar_contrasena(id,opcion){
 
             if(opcion1 == 'confirmacion'){
                 span3();
-                editado();
+                cambio();
             }
 
-            if(opcion1 == 'invalido'){
-                Swal.fire({
-                    type: 'error',
-                    title: 'Error',
-                    text: 'Contraseña actual incorrecto!', 
-                }) 
+            if(opcion1 == 'invalido'){ 
+                error('Contraseña actual incorrecto!');
                 return  false;
             }
 

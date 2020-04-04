@@ -154,3 +154,22 @@ function validar_contrasena() {
   cambiar_contrasena();
   
 }
+
+function eliminacion_foto() {
+  Swal.fire({
+      title: '¿Estás seguro?',
+      text: "¡No podrás revertir esto!",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'Cancelar',
+      confirmButtonText: 'Confirmar'
+      }).then((result) => {
+      if (result.value) {
+        
+          eliminar_foto();
+      }
+       
+  })
+}

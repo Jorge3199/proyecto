@@ -31,7 +31,15 @@ passport.use('local.cliente_signup', new LocalStrategy({
 }, async (req, correo, contrasena, done) => {
 
   const { nombre, apellido, sexo, nacimiento, direccion, telefono, cedula } = req.body;
-  var imagen = (req.file['filename']);
+
+  if(typeof req.file !== "undefined"){
+     var imagen = (req.file['filename']);
+  }
+
+  if(typeof req.file === "undefined"){
+    var imagen = 'perfil.jpg';
+  }
+ 
   var aleatorio = Math.random();
   var estado1 = "A";
   var administrador=req.user;

@@ -194,7 +194,7 @@ function valor4(p){
         for (var n = 0; n < s; n++) { 
             let fecha_hora = prod4[p].fecha_hora.split(" ");
             lista.innerHTML += `
-            <td>${prod4[p].nombre}</td> <td>${prod4[p].apellido}</td> <td>${prod4[p].cedula}</td> 
+            <td>${prod4[p].nombre}</td> <td>${prod4[p].apellido}</td> <td>${prod4[p].telefono}</td> <td>${prod4[p].cedula}</td> 
             <td> <a onclick="imagenes('${prod4[p].imagen}')"><img src="/imagen1/${prod4[p].imagen}" class='imgRedonda2'></a></td>
             <td>${prod4[p].total}</td> <td>${fecha_hora[0]}</td> <td>${fecha_hora[1]}</td>
             <td> 
@@ -213,7 +213,7 @@ function valor4(p){
         for (var n = 0; n < 10; n++) { 
             let fecha_hora = prod4[p].fecha_hora.split(" ");
             lista.innerHTML += `
-            <td>${prod4[p].nombre}</td> <td>${prod4[p].apellido}</td> <td>${prod4[p].cedula}</td> 
+            <td>${prod4[p].nombre}</td> <td>${prod4[p].apellido}</td> <td>${prod4[p].telefono}</td> <td>${prod4[p].cedula}</td> 
             <td> <a onclick="imagenes('${prod4[p].imagen}')"><img src="/imagen1/${prod4[p].imagen}" class='imgRedonda2'></a></td>
             <td>${prod4[p].total}</td> <td>${fecha_hora[0]}</td> <td>${fecha_hora[1]}</td>
             <td> 
@@ -240,7 +240,7 @@ function valor04(p){
         for (var n = 0; n < s; n++) { 
             let fecha_hora = prod4[p].fecha_hora.split(" ");
             lista.innerHTML += `
-            <td>${prod4[p].nombre}</td> <td>${prod4[p].apellido}</td> <td>${prod4[p].cedula}</td> 
+            <td>${prod4[p].nombre}</td> <td>${prod4[p].apellido}</td>  <td>${prod4[p].telefono}</td> <td>${prod4[p].cedula}</td> 
             <td> <a onclick="imagenes('${prod4[p].imagen}')"><img src="/imagen1/${prod4[p].imagen}" class='imgRedonda2'></a></td>
             <td>${prod4[p].total}</td> <td>${fecha_hora[0]}</td> <td>${fecha_hora[1]}</td>
             <td> 
@@ -259,7 +259,7 @@ function valor04(p){
         for (var n = 0; n < 10; n++) { 
             let fecha_hora = prod4[p].fecha_hora.split(" ");
             lista.innerHTML += `
-            <td>${prod4[p].nombre}</td> <td>${prod4[p].apellido}</td> <td>${prod4[p].cedula}</td> 
+            <td>${prod4[p].nombre}</td> <td>${prod4[p].apellido}</td>  <td>${prod4[p].telefono}</td> <td>${prod4[p].cedula}</td> 
             <td> <a onclick="imagenes('${prod4[p].imagen}')"><img src="/imagen1/${prod4[p].imagen}" class='imgRedonda2'></a></td>
             <td>${prod4[p].total}</td> <td>${fecha_hora[0]}</td> <td>${fecha_hora[1]}</td>
             <td> 

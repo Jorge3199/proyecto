@@ -458,4 +458,17 @@ router.post('/cambiar_contrasena', isLoggedIn1, async (req, res) => {
     }
 
 });
+
+router.post('/eliminar_foto', isLoggedIn1, async (req, res) => {
+
+    var cliente=req.user;
+    var imagen = 'perfil.jpg';
+
+    await pool.query('UPDATE cliente SET imagen = ? WHERE id = ?', [imagen, cliente.id]);
+
+    const datos = await pool.query('SELECT * FROM cliente WHERE estado1="A" AND id = ? ', [cliente.id]);
+
+    res.json(datos);
+    
+});
 module.exports = router;

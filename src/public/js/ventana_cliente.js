@@ -3,36 +3,42 @@ const formulario1 =  document.querySelector('#formulario1');
 var n5;       
 const filtrar1 = ()=>{
    
-        prod = [];
-        var modelo;
+    prod = [];
+    var modelo;
+
+    const texto = formulario1.value.toLowerCase();
+
+    for (var i=0; i<productos.length;i++) { 
+            
+            let nombre = productos[i].nombre.toLowerCase();
+            let precio = productos[i].precio.toString().toLowerCase();
+            let cantidad = productos[i].cantidad.toString().toLowerCase();
+            for (n = 0; n < categoria.length; n++){
+                if(productos[i].id_modelo == categoria[n].id){
+                        modelo = categoria[n].modelo.toLowerCase();
+                }
+            }
+            
     
-        const texto = formulario1.value.toLowerCase();
+            if( (nombre.indexOf(texto) !== -1) || (precio.indexOf(texto) !== -1) || (cantidad.indexOf(texto) !== -1) || (modelo.indexOf(texto) !== -1) ){ 
+                
+                prod[prod.length] = { id: productos[i].id, nombre: productos[i].nombre, precio:productos[i].precio, cantidad: productos[i].cantidad, modelo: modelo, fecha_hora: productos[i].fecha_hora, imagen: productos[i].imagen};
+                
+                
+            }
+                
+    } 
 
-        for (var i=0; i<productos.length;i++) { 
-                
-                let nombre = productos[i].nombre.toLowerCase();
-                let precio = productos[i].precio.toString().toLowerCase();
-                let cantidad = productos[i].cantidad.toString().toLowerCase();
-                for (n = 0; n < categoria.length; n++){
-                    if(productos[i].id_modelo == categoria[n].id){
-                         modelo = categoria[n].modelo.toLowerCase();
-                    }
-                }
-                
+    valor(0);
+    paginacion();
+
+    if(prod.length == 0){
+        const resultado = document.querySelector('#resultado');
+        resultado.innerHTML += `
+        <h1 style="color: white">Producto no encontrado...</h1>
+        `
+    }  
         
-                if( (nombre.indexOf(texto) !== -1) || (precio.indexOf(texto) !== -1) || (cantidad.indexOf(texto) !== -1) || (modelo.indexOf(texto) !== -1) ){ 
-                    
-                    prod[prod.length] = { id: productos[i].id, nombre: productos[i].nombre, precio:productos[i].precio, cantidad: productos[i].cantidad, modelo: modelo, fecha_hora: productos[i].fecha_hora, imagen: productos[i].imagen};
-                   
-                    
-                }
-                    
-        } 
-
-        valor(0);
-		paginacion();
-		 
-
 }
      
 formulario1.addEventListener('keyup', filtrar1);
@@ -118,6 +124,11 @@ function abrir_compra(id, imagen, nombre, precio, modelo, cantidad){
 
     comprar.addEventListener('keyup', (e) => {
         let valorInput = e.target.value;
+
+        if(valorInput[0] == 0){
+           
+           valorInput= valorInput.replace(0, '');
+        }
     
         comprar.value = valorInput
 
@@ -140,6 +151,14 @@ var total_compra=0;
 var mult;
 function compra(id,nombre,precio,modelo,cantidad,imagen){
     comprar = document.getElementById("comprar").value;
+    if(comprar <= 0){
+        Swal.fire({
+            type: 'error',
+            title: 'Error',
+            text: 'El digito ingresado es incorrecto',   
+        })
+        return  false;
+    }
     if(comprar > cantidad){
         Swal.fire({
             type: 'error',
@@ -276,7 +295,7 @@ function carrito(){
     
 
     
-    formulario.addEventListener('keyup', filtrar2)
+    formulario.addEventListener('keyup', filtrar2);
 
     filtrar2();
     var intro = document.getElementById('tamaño2');
@@ -305,8 +324,8 @@ const filtrar2 = (llamar)=>{
             let total = (lista_comprar[i].cantidad*lista_comprar[i].precio).toString().toLowerCase();
         
             if( (cantidad.indexOf(texto) !== -1) || (nombre.indexOf(texto) !== -1) || (precio.indexOf(texto) !== -1) || (modelo.indexOf(texto) !== -1) || (total.indexOf(texto) !== -1) ){
-                prod2[n5] = { id: lista_comprar[i].id, nombre: lista_comprar[i].nombre, precio: lista_comprar[i].precio, modelo: lista_comprar[i].modelo, cantidad: lista_comprar[i].cantidad, imagen: lista_comprar[i].imagen, cant_disp: lista_comprar[i].cant_disp};
-                n5 +=1;
+                prod2[prod2.length] = { id: lista_comprar[i].id, nombre: lista_comprar[i].nombre, precio: lista_comprar[i].precio, modelo: lista_comprar[i].modelo, cantidad: lista_comprar[i].cantidad, imagen: lista_comprar[i].imagen, cant_disp: lista_comprar[i].cant_disp};
+                
             }        
     }
 
@@ -361,11 +380,11 @@ function lista_borrar(id,precio,cantidad){
     }).then((result) => {
     if (result.value) {
         lista1 = [];
-         n5= 0;
+        
         for(var n=0; n < lista_comprar.length; n++){
             if(lista_comprar[n].id != id){
-                lista1[n5]= { id: lista_comprar[n].id, nombre: lista_comprar[n].nombre, precio: lista_comprar[n].precio, modelo: lista_comprar[n].modelo, cantidad: lista_comprar[n].cantidad, imagen: lista_comprar[n].imagen, cant_disp: lista_comprar[n].cant_disp};
-                n5+=1; 
+                lista1[lista1.length]= { id: lista_comprar[n].id, nombre: lista_comprar[n].nombre, precio: lista_comprar[n].precio, modelo: lista_comprar[n].modelo, cantidad: lista_comprar[n].cantidad, imagen: lista_comprar[n].imagen, cant_disp: lista_comprar[n].cant_disp};
+                
             }
         }
        // console.log(lista1);
@@ -825,8 +844,11 @@ function abrir_imagen(imagen){
                 <input type="file" name="imagen" id="imagen"  required>
             </div>
         </div>
-                
-        
+         
+        <div class="contras">
+           <a class="btn btn-warning btn-block my-3" onclick="eliminacion_foto()">Eliminar Fotos</a>
+        </div>
+       
         <div class="row">
             <div class="bont">
 
@@ -982,7 +1004,22 @@ function cambiar_contrasena(){
     // });
 }
 
-function cambiar(datos){
+function eliminar_foto(){
+    $.ajax({
+        type:"POST",
+        url:"eliminar_foto",
+        async: false,
+        success:function(datos){
+            
+            cambiar(datos,1);
+            eliminado();    
+   
+        }
+        
+    });
+}
+
+function cambiar(datos,uno){
     const admin = document.querySelector('#admin');
     admin.innerHTML = `
     <li class="cursor"><a  onclick="abrir_imagen('${datos[0].imagen}')">Editar imagen</a></li>
@@ -995,6 +1032,8 @@ function cambiar(datos){
     link01.innerHTML = `
     <img src='/imagen1/${datos[0].imagen}' class='imgRedonda2'/>
     `
-    editado();
+    if(uno != 1){
+        editado();
+    }
     cerrar();
 }
