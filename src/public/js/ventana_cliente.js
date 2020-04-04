@@ -423,8 +423,7 @@ function lista_favoritos(id){
         Swal.fire({
             type: 'warning',
             title: 'Este producto ya estaba en la lista de favorito'
-            
-            
+             
         })
     
     }
@@ -615,13 +614,12 @@ function borrar_favorito(id){
 /////////////////////////////////////////////////////////  
 function pago(token){
     cerrar3();
-   // alert(token);
    var comprar = JSON.stringify(lista_comprar);
    
     $.ajax({
         type:"POST",
         url:"pago",
-        data: {stripeToken : token.id, comprar},
+        data: {stripeToken : token.id, total_compra: total_compra, comprar},
         async: false,
         success:function(producto){
 
@@ -643,7 +641,7 @@ function pago(token){
                 alert_compra();
             }
 
-            if(producto == 1){
+            if(producto == 1 || producto == 0){
 
                 $.ajax({
                     type:"POST",
@@ -652,7 +650,14 @@ function pago(token){
                     success:function(products){
                         productos=products;
                         filtrar1();
-                        alert_compra1();
+                        if(producto == 0){
+                            alert_compra0(); 
+                        }
+                        if(producto == 1){
+                            alert_compra1();
+                        }
+                        
+                       
                             
                
                     }
@@ -660,9 +665,7 @@ function pago(token){
                 });
                 
             }
-            
-            // paginacion();
-            // valor(0);     
+           
             
         }
         
@@ -972,36 +975,19 @@ function cambiar_contrasena(){
         success:function(opcion){
             
             if(opcion == 'confirmacion'){
-                editado();
+                cambio();
                 cerrar();
             }
 
             if(opcion == 'invalido'){
-                Swal.fire({
-                    type: 'error',
-                    title: 'Error',
-                    text: 'Contraseña actual incorrecto!', 
-                }) 
+                error("Contraseña actual incorrecto!");
                 return  false;
-            }
-            // cambiar(datos);    
+            }    
    
         }
         
     });
 
-    // $.ajax({
-    //     type:"POST",
-    //     url:"cambiar_contrasena",
-    //     data: datos,
-    //     async: false,
-    //     success:function(datos){
-            
-    //         cambiar(datos);    
-   
-    //     }
-        
-    // });
 }
 
 function eliminar_foto(){

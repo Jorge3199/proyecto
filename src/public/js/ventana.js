@@ -23,18 +23,37 @@ function span3(){
 
 function abrir3(opcion){
     if(opcion != 'true'){
-        const enviar = document.querySelector('#enviar');
-        enviar.innerHTML = `
-        <button class="btn btn-warning mx-1" align="center">RD$ ${total_compra.toFixed(2)} Pagar</button>
-        `
-        body3="true";
+        if(total_compra >= 25){
+            const enviar = document.querySelector('#enviar');
+            enviar.innerHTML = `
+            <button class="btn btn-warning mx-1" align="center">RD$ ${total_compra.toFixed(2)} Pagar</button>
+            `
+            body3="true";
+            modal3.style.display = "block";
+            body.style.position = "static";
+            body.style.height = "100%";
+            body.style.overflow = "hidden";
+        }
+
+        if(total_compra < 25){
+            Swal.fire({
+                type: 'error',
+                title: 'Error',
+                text: 'La total de compra tiene que ser mayor a RD$ 25.00, para haceder al pago'   
+            })
+        }
+        
+    }
+
+    if(opcion == 'true'){
+        modal3.style.display = "block";
+    
+        body.style.position = "static";
+        body.style.height = "100%";
+        body.style.overflow = "hidden";
     }
     
-    modal3.style.display = "block";
-    
-    body.style.position = "static";
-    body.style.height = "100%";
-    body.style.overflow = "hidden";
+   
 }
 
 function cerrar3(){

@@ -231,6 +231,8 @@ router.post('/pago', isLoggedIn1, async (req, res) => {
     var id_cliente = cliente.id;
     var lista_comprar = JSON.parse(comprar);
     var pedidos = [];
+    var guardar = [];
+    var guardar2 = [];
     var valor;
     var total=0;
     var encontrado=0;
@@ -247,24 +249,16 @@ router.post('/pago', isLoggedIn1, async (req, res) => {
         
             if(a >= lista_comprar[i].cantidad){
                 valor= (a - lista_comprar[i].cantidad);
-                await pool.query('UPDATE producto set cantidad=? WHERE id = ?', [valor, lista_comprar[i].id]);
+                
+                
                 var id_producto= parseInt(productos[0].id);
                 var unidad= parseInt(lista_comprar[i].cantidad);
                 var precio= parseInt(productos[0].precio);
                 var importe= unidad * precio;
                 total+= importe;
-                const newDetalle = {
-                    id_cliente,
-                    id_producto,
-                    unidad,
-                    precio,
-                    importe,
-                    fecha_hora
-                };
-            
-                await pool.query('INSERT INTO detalle set ?', [newDetalle]);
-                //console.log(total);
-                //console.log(productos);
+                guardar[guardar.length] = {id_cliente,id_producto,unidad,precio,importe,fecha_hora};
+                guardar2[guardar2.length] = {valor, id_producto}
+               
             
                 if(valor < 10){
                     pedidos[pedidos.length] = { id: productos[0].id, nombre: productos[0].nombre, modelo: productos[0].modelo, imagen: productos[0].imagen };
@@ -272,9 +266,17 @@ router.post('/pago', isLoggedIn1, async (req, res) => {
             }
             
             if(a < lista_comprar[i].cantidad){
-                await pool.query('UPDATE producto set cantidad=? WHERE id = ?', [0, lista_comprar[i].id]);
+                valor = 0;
+                var id_producto= parseInt(productos[0].id);
+                var unidad= parseInt(a);
+                var precio= parseInt(productos[0].precio);
+                var importe= unidad * precio;
+                total+= importe;
+                guardar[guardar.length] = {id_producto,unidad,precio,importe,fecha_hora};
+                guardar2[guardar2.length] = {valor, id_producto}
+
+               
                 pedidos[pedidos.length] = { id: productos[0].id, nombre: productos[0].nombre, modelo: productos[0].modelo, imagen: productos[0].imagen };
-                valor= (a - lista_comprar[i].cantidad);
 
             }
 
@@ -294,120 +296,135 @@ router.post('/pago', isLoggedIn1, async (req, res) => {
         }
 
     }
-    
-    var estado="P";
-    const newCompra = {
-        id_cliente,
-        total,
-        fecha_hora,
-        estado
-    };
 
-    await pool.query('INSERT INTO compra set ?', [newCompra]);
-    
-    var pagar = Math.round((total / 50) * 100);
- 
-
-    const customer = await stripe.customers.create({
-        email: cliente.correo,
-        source: req.body.stripeToken
-    });
-    const charge = await stripe.charges.create({
-        amount: pagar,
-        currency: 'usd',
-        customer: customer.id,
-        description: 'Compra De Producto'
-    });
-
-    // console.log(charge.id);
-    //res.redirect('/cliente');
-    var smtpTransport= nodemailer.createTransport({
-        service: 'gmail',
-        auth:{
-            type: 'login',
-            user: 'supergato3199@gmail.com',
-            pass: 'supergato2020'
-        }
-    });
-
-
-    contentHTML = `
-       <h1 style="color:black; text-align: center;">Super Gato</h1>
-       <p style="color:black; text-align: center;">Santo Domingo, Km 11/2</p>
-       <p style="color:black; text-align: center;">Tel(s):809-573-3711</p>
-       <p style="color:black; text-align: center;">RNC: 103003133</p>
-       <p style="color:black; text-align: center;">-----------------------------------</p>
-       <br/>
-       <table width="75%" align="center" style=" background: rgb(240, 239, 239);">
-         
-       <thead style="background-color:#FFC312; color:black;" align="center">
-         <tr>
-           <th>Cant.</th>  
-           <th>Nombre</th>
-           <th>Precio</th>
-           <th>Modelo</th>
-           <th>Importe</th>
-         </tr>
-       </thead>
+    if(total >= 25){
        
-
-    `;
-   contentHTML +=cuerpotHTML;
-
-    contentHTML += `
-    <tbody style="color:black; text-align: center;">
-      <th></th> <th></th> <th>Sub-Total:</th> <th>0.00</th>
-    </tbody>
-    <tbody style="color:black; text-align: center;">
-      <th></th> <th></th> <th>DESCUENTO:</th> <th>0.00</th>
-    </tbody>
-    <tbody style="color:black; text-align: center;">
-       <th></th> <th></th> <th>ITBIS:</th> <th>0.00</th>
-    </tbody>
-    <tbody style="color:black; text-align: center;">
-       <th></th> <th></th> <th>TOTAL:</th> <th>${total}</th>
-    </tbody>
+        
+        var pagar = Math.round((total / 50) * 100);
     
-    `;
+
+        const customer = await stripe.customers.create({
+            email: cliente.correo,
+            source: req.body.stripeToken
+        });
+        const charge = await stripe.charges.create({
+            amount: pagar,
+            currency: 'usd',
+            customer: customer.id,
+            description: 'Compra De Producto'
+        });
+
+        for(var n=0; n<guardar.length; n++){
+            await pool.query('INSERT INTO detalle set ?', [guardar[n]]);
+            await pool.query('UPDATE producto set cantidad=? WHERE id = ?', [guardar2[n].valor, guardar2[n].id_producto]);
+        }
+
+        var estado="P";
+        const newCompra = {
+            id_cliente,
+            total,
+            fecha_hora,
+            estado
+        };
+
+        await pool.query('INSERT INTO compra set ?', [newCompra]);
+
+        // console.log(charge.id);
+        //res.redirect('/cliente');
+        var smtpTransport= nodemailer.createTransport({
+            service: 'gmail',
+            auth:{
+                type: 'login',
+                user: 'supergato3199@gmail.com',
+                pass: 'supergato2020'
+            }
+        });
+
+
+        contentHTML = `
+        <h1 style="color:black; text-align: center;">Super Gato</h1>
+        <p style="color:black; text-align: center;">Santo Domingo, Km 11/2</p>
+        <p style="color:black; text-align: center;">Tel(s):809-573-3711</p>
+        <p style="color:black; text-align: center;">RNC: 103003133</p>
+        <p style="color:black; text-align: center;">-----------------------------------</p>
+        <br/>
+        <table width="75%" align="center" style=" background: rgb(240, 239, 239);">
+            
+        <thead style="background-color:#FFC312; color:black;" align="center">
+            <tr>
+            <th>Cant.</th>  
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Modelo</th>
+            <th>Importe</th>
+            </tr>
+        </thead>
+        
+
+        `;
+        contentHTML +=cuerpotHTML;
+
+        contentHTML += `
+        <tbody style="color:black; text-align: center;">
+        <th></th> <th></th> <th>Sub-Total:</th> <th>0.00</th>
+        </tbody>
+        <tbody style="color:black; text-align: center;">
+        <th></th> <th></th> <th>DESCUENTO:</th> <th>0.00</th>
+        </tbody>
+        <tbody style="color:black; text-align: center;">
+        <th></th> <th></th> <th>ITBIS:</th> <th>0.00</th>
+        </tbody>
+        <tbody style="color:black; text-align: center;">
+        <th></th> <th></th> <th>TOTAL:</th> <th>${total}</th>
+        </tbody>
+        
+        `;
+
+        
+    
+        contentHTML+=`
+        </table> 
+        <p style="color:black; text-align: center;">-----------------------------------</p>
+        `;  
+    
+        
+        var mailOptions={
+        from:'jose',
+        to: cliente.correo,
+        subject: 'Factura de producto',
+        text: 'Hola_Mundo',
+        html: contentHTML      
+        }
 
     
-  
-    contentHTML+=`
-    </table> 
-    <p style="color:black; text-align: center;">-----------------------------------</p>
-    `;  
-   
-    
-    var mailOptions={
-    from:'jose',
-    to: cliente.correo,
-    subject: 'Factura de producto',
-    text: 'Hola_Mundo',
-    html: contentHTML      
+        await smtpTransport.sendMail(mailOptions,function(error,res){
+            if(error){
+            console.log(error);
+            }else{
+            
+            res.send('Mensaje Enviado');
+            }
+        });
+        //res.render('cliente/mensaje');
+        // res.json('pago03');
+        
+        if(encontrado == 0){
+            var producto = await pool.query('SELECT * FROM producto WHERE estado="A" ');
+            for(var n=0; n<producto.length; n++){
+                producto[n].fecha_hora = (format(producto[n].fecha_hora, 'es_ES') );
+            }
+            res.json(producto);
+        }
+      
+
+        if(encontrado == 1){
+            res.json(encontrado);
+        }
+
     }
 
-  
-    await smtpTransport.sendMail(mailOptions,function(error,res){
-        if(error){
-        console.log(error);
-        }else{
-           
-           res.send('Mensaje Enviado');
-        }
-    });
-    //res.render('cliente/mensaje');
-    // res.json('pago03');
-    
-    if(encontrado == 0){
-        var producto = await pool.query('SELECT * FROM producto WHERE estado="A" ');
-        for(var n=0; n<producto.length; n++){
-            producto[n].fecha_hora = (format(producto[n].fecha_hora, 'es_ES') );
-        }
-        res.json(producto);
-    }
-
-    if(encontrado == 1){
-        res.json(encontrado);
+    if(total < 25){
+        res.json(0);
     }
    
     

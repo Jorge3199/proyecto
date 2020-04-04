@@ -431,7 +431,7 @@ Testimonials
 	padding: 0;
 }
 
-.testimonials{
+/* .testimonials{
 	background: 
 	url(../images/pattern-1.png) left top repeat,
 	url(../images/parallax/max.jpg) center center fixed;
@@ -454,7 +454,7 @@ Testimonials
 }
 .testimonial-slider li.t-slide h4:before{content: "\201c";}
 .testimonial-slider li.t-slide h4:after{content: "\201d";}
-.testimonial-slider li.t-slide:last-child:after{clear: both;}
+.testimonial-slider li.t-slide:last-child:after{clear: both;} */
 .t-slide p{
 	margin:32px auto;
 	font-size:16px;
@@ -938,7 +938,7 @@ ol.flex-control-paging li a.flex-active {
 Counter Section
 -------------------------------- */
 
-.counter{
+/* .counter{
 	background: 
 	url(../images/pattern-1.png) left top repeat,
 	url(../images/parallax/max8.jpg) center center fixed;
@@ -951,7 +951,7 @@ Counter Section
 .count h1, .count h5{
 	color: #fff;
 }
-.count h1{font-size: 56px;}
+.count h1{font-size: 56px;} */
 
 /* --------------------------------
 Pricing Tables

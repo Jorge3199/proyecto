@@ -1,3 +1,12 @@
+function error(texto){
+  Swal.fire({
+      type: 'error',
+      title: 'Error',
+      text: texto,
+      
+  })
+}
+
 function editado(){
     const Toast = Swal.mixin({
         toast: true,

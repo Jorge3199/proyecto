@@ -1,11 +1,3 @@
-function error(texto){
-    Swal.fire({
-        type: 'error',
-        title: 'Error',
-        text: texto,
-        
-    })
-}
 function validar_registro(opcion) {
     
     var nombre, apellido, sexo, nacimiento, direccion, telefono, correo, usuario, contrasena, confirmar, expresion;
@@ -292,27 +284,35 @@ function eliminacion_foto(id, opcion) {
 }
 ////////////////////////////CAMBIAR_CONTRASENA////////////////////////////////////
 function validar_contrasena(id, opcion) {
-    var actual, contrasena, confirmar;
+    var contrasena, confirmar;
 
-    actual = document.getElementById("actual").value;
     contrasena = document.getElementById("contrasena").value;
     confirmar = document.getElementById("confirmar").value;
 
-    if( (contrasena === "") || (confirmar === "") || (actual === "") ){
-        error("Todos los campo son obligatorios!"); 
-        return false;
+    if(opcion != 2){
+        if( (contrasena === "") || (confirmar === "") ){
+            error("Todos los campo son obligatorios!"); 
+            return false;
+        }
     }
 
-    if(contrasena != confirmar){ 
-        error("La contraseña no son iguales!"); 
-        return  false;
+    if(opcion == 2){
+        var actual = document.getElementById("actual").value;
+        if( (contrasena === "") || (confirmar === "") || (actual === "") ){
+            error("Todos los campo son obligatorios!"); 
+            return false;
+        }
     }
 
     if(contrasena.length < 8){
         error("La contraseña debe de tener por los menos 8 digitos!"); 
         return  false;
     }
-    
+
+    if(contrasena != confirmar){ 
+        error("La contraseña no son iguales!"); 
+        return  false;
+    }
     
     cambiar_contrasena(id, opcion);
     
