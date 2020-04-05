@@ -35,25 +35,18 @@
 		<div class="nav-container">
 
 			<!-- Site Logo -->
-			<a href="#home" class="site-logo scroll">Super Gato</a>
+			<a class="site-logo scroll">Super Gato</a>
 
 			<a class="mobile-nav-button"><i class="fa fa-bars"></i></a>
 
 			<!-- Navigation Menu -->
 			<div class="nav-menu">
 				<ul class="nav">
-					{{!-- <li><a href="#home" class="scroll link">Home</a></li>
-					<li><a href="#about" class="scroll link">About</a></li>
-					<li><a href="#services" class="scroll link">Services</a></li> --}}
-					<li><a href="#portfolio" class="scroll link">Producto</a></li>
-					<li><a href="#pricing" class="scroll link">Pricing</a></li>
-					<li><a href="#team" class="scroll link">Team</a></li>
-					<li><a href="#contact" class="scroll link">Contact</a></li>
+					
+					<li><a href="#portfolio" class="scroll link">Productos</a></li>
 					<li>
-						<a href="#blog" class="scroll link">Blog <i class="fa fa-chevron-down"></i></a>
+						<a class="scroll link">Blog <i class="fa fa-chevron-down"></i></a>
 						<ul>
-							{{!-- <li><a href="blog-main.html">Blog Main</a></li>
-							<li><a href="blog-single.html">Blog Single</a></li> --}}
 							<li class="cursor"><a  onclick="abrir_productos()">Agregar nuevo producto</a></li>
 							<li class="cursor"><a  onclick="abrir_modelo()">Agregar nuevo modelo</a></li>
 							<li class="cursor"><a onclick="abrir_cliente()">Agregar nuevo cliente</a></li>
@@ -61,14 +54,11 @@
 							<li class="cursor"><a onclick="abrir_lista_producto()">Lista de producto</a></li>
 							<li class="cursor"><a onclick="abrir_lista_venta()">Lista de venta</a></li>
 							<li class="cursor"><a onclick="abrir_lista_cliente()">Lista de Cliente</a></li>
-							<li class="cursor"><a href="/logout">Cerrar Sesion</a></li>
 						</ul>
 					</li>
 					<li>
-						<a href="#blog" id="link01" class="scroll link"><img src='/imagen1/{{user.imagen}}' class='imgRedonda2'/></a>
+						<a  id="link01" class="scroll link"><img src='/imagen1/{{user.imagen}}' class='imgRedonda2'/></a>
 						<ul>
-							{{!-- <li><a href="blog-main.html">Blog Main</a></li>
-							<li><a href="blog-single.html">Blog Single</a></li> --}}
 							
 							<li id="admin"><a  onclick="abrir_informacion({{user.id}},'{{user.nombre}}','{{user.apellido}}','{{user.sexo}}','{{user.nacimiento}}',
 							         '{{user.direccion}}','{{user.telefono}}','{{user.cedula}}','{{user.correo}}','{{user.imagen}}','2')">Editar informacion</a></li>
@@ -76,7 +66,6 @@
 							<li><a href="/logout">Cerrar Sesion</a></li>
 						</ul>
 					</li><!-- end drop down -->
-					<!--<li><a href="features.html" class="scroll link">Features</a></li>-->
 					
 				</ul>
 			</div><!-- end nav menu -->
@@ -86,8 +75,6 @@
 
 
 	<!-- Home Section -->
-	
-
 
 
 	<!-- About Section -->
@@ -101,9 +88,7 @@
    var productos = []
    var categoria = [];
 </script>   
-{{!-- <div id="resultado">
 
-</div> --}}
 {{#each categoria}}
       
          <script>
@@ -135,8 +120,8 @@
 	<section id="portfolio" class="section">
         
 		<div class="container" id="portfolio-title">
-			<h2 class="title">PRODUCTOS MAS VENDIDO</h2>
-			<h4 class="subtitle">ECHA UN VISTAZO A LA LISTA DE PRODUCTOS FAVORITOS.</h4>
+			<h2 class="title">PRODUCTOS DISPONIBLE</h2>
+			<h4 class="subtitle">ESTOs PRODUCTOS SON LOS QUE EL CLIENTE Podrá COMPRAR</h4>
 		</div><!-- end portfolio title container -->
 
 			<!-- Project Expander -->
@@ -149,173 +134,23 @@
 		
 		<div class="container" id="portfolio-container">
 
-			<!-- Portfolio Filters -->
-			{{!-- <div id="options" class="filter-menu">
-				<ul id="filters" class="option-set" data-option-key="filter">
-					<li><a href="#filter" data-option-value="*" class="selected">All</a></li>
-					<li><a href="#filter" data-option-value=".illustration">Illustration</a></li>
-					<li><a href="#filter" data-option-value=".photography">Photography</a></li>
-					<li><a href="#filter" data-option-value=".motion">Motion</a></li>
-					<li><a href="#filter" data-option-value=".web">Web</a></li>
-				</ul>
-			</div> --}}
-            
+			<div class="buscar">
+				<div class="row">
+					<div class="col-lg-3">
+					<h5 class="letra2" style="color:white; top:6px; text-align:right">Buscar:</h5>
+					
+					</div>
 
-           
-			<!-- Portfolio Items -->
-			{{!-- <div class="portfolio-items"> --}}
-                    {{!-- {{#each links}}  --}}
-
+					<div class="col-lg-3">
+						<input type="text" id="formulario" class="form-control ">
+					</div>
+				</div>
+			</div>
+		
+			<div id="resultado">
 				
-
-					      {{!-- <div id="resultado22">
-							 
-						  </div> --}}
-
-						    <div class="buscar">
-								<div class="row">
-									<div class="col-lg-3">
-									<h5 class="letra2" style="color:white; top:6px; text-align:right">Buscar:</h5>
-									
-									</div>
-
-									<div class="col-lg-3">
-										<input type="text" id="formulario" class="form-control ">
-									</div>
-								</div>
-					    	</div>
-					 
-						  <div id="resultado">
-							 
-						  </div>
-						
-					 
-					{{!-- <div class="ventana" id="vent" >
-						 	
-					</div> --}}
-					
-					{{!-- {{else}}
-						<div class="col-md-4 mx-auto">
-							<div class="card card-body text-center">
-								<a href="/img/logo.jpg"><img height="75" width="140" src="/img/logo.jpg"></a>
-								<h5>No hay ningun producto publicado todavia.</h5>
-								<a href="/links/add">!Crear uno!</a>
-							</div>
-						</div>
-					{{/each}} --}}
-
-
-                   
-
-					{{!-- <!-- Item 1 -->
-					<div class="item four columns illustration">
-						<a href="project-1.html" class="expander">
-							<img height="200" width="270" src="images/portfolio/project-1.jpg" alt="" />
-							<div class="mask"></div>
-							<h5>Poster Design</h5>
-						</a>
-					</div>
-					
-					<!-- Item 2 -->
-					<div class="item four columns photography">
-						<a href="project-2.html" class="expander">
-							<img height="200" width="270" src="images/portfolio/project-2.jpg" alt="" />
-							<div class="mask"></div>
-							<h5>Logo Illustration</h5>
-						</a>
-					</div>
-
-					<!-- Item 3 -->
-					<div class="item four columns web">
-						<a href="images/portfolio/project-3.jpg" data-rel="prettyPhoto">
-							<img height="200" width="270" src="images/portfolio/project-3.jpg" alt="" />
-							<div class="mask"></div>
-							<h5>Client Work</h5>
-						</a>
-					</div>
-
-					<!-- Item 4 -->
-					<div class="item four columns photography">
-						<a href="project-1.html" class="expander">
-							<img height="200" width="270" src="images/portfolio/project-4.jpg" alt="" />
-							<div class="mask"></div>
-							<h5>Personal Design</h5>
-						</a>
-					</div>
-
-					<!-- Item 5 -->
-					<div class="item four columns motion">
-						<a href="project-2.html" class="expander">
-							<img height="200" width="270" src="images/portfolio/project-5.jpg" alt="" />
-							<div class="mask"></div>
-							<h5>Poster Illustration</h5>
-						</a>
-					</div>
-
-					<!-- Item 6 -->
-					<div class="item four columns illustration">
-						<a href="images/portfolio/project-6.jpg" data-rel="prettyPhoto">
-							<img height="200" width="270" src="images/portfolio/project-6.jpg" alt="" />
-							<div class="mask"></div>
-							<h5>Logo Concept</h5>
-						</a>
-					</div>
-
-					<!-- Item 7 -->
-					<div class="item four columns web">
-						<a href="project-1.html" class="expander">
-							<img height="200" width="270" src="images/portfolio/project-7.jpg" alt="" />
-							<div class="mask"></div>
-							<h5>Lettering Work</h5>
-						</a>
-					</div>
-
-					<!-- Item 8 -->
-					<div class="item four columns illustration">
-						<a href="project-2.html" class="expander">
-							<img height="200" width="270" src="images/portfolio/project-8.jpg" alt="" />
-							<div class="mask"></div>
-							<h5>Personal Work</h5>
-						</a>
-					</div>
-
-					<!-- Item 9 -->
-					<div class="item four columns motion">
-						<a href="images/portfolio/project-9.jpg" data-rel="prettyPhoto">
-							<img height="200" width="270" src="images/portfolio/project-9.jpg" alt="" />
-							<div class="mask"></div>
-							<h5>Poster Illustration</h5>
-						</a>
-					</div>
-
-					<!-- Item 10 -->
-					<div class="item four columns illustration">
-						<a href="project-1.html" class="expander">
-							<img height="200" width="270" src="images/portfolio/project-10.jpg" alt="" />
-							<div class="mask"></div>
-							<h5>Logo Concept</h5>
-						</a>
-					</div>
-
-					<!-- Item 11 -->
-					<div class="item four columns web">
-						<a href="project-2.html" class="expander">
-							<img height="200" width="270" src="images/portfolio/project-11.jpg" alt="" />
-							<div class="mask"></div>
-							<h5>Lettering Work</h5>
-						</a>
-					</div>
-
-					<!-- Item 12 -->
-					<div class="item four columns illustration">
-						<a href="images/portfolio/project-12.jpg" data-rel="prettyPhoto">
-							<img height="200" width="270" src="images/portfolio/project-12.jpg" alt="" />
-							<div class="mask"></div>
-							<h5>Personal Work</h5>
-						</a>
-					</div> --}}
-
-			{{!-- </div><!-- end portfolio items --> --}}
+			</div>		 
+				
 		</div><!-- end container -->
 	</section><!-- end portfolio section -->
 
@@ -325,7 +160,7 @@
 		 <div id="options1" class="filter-menu">
 				<ul class="option-set" >
 					<ul id="paginacion" class="pagination pagination-md">
-			             {{!-- <a class="btn btn-warning btn-block" onclick="numero1(4)">Ver todo los producto</a> --}}
+			             
 					</ul>	
 				</ul>
 			</div>
@@ -333,267 +168,15 @@
 	</section>
 	
 
-   
-
-	<!-- Counter -->
-	<section  class="counter parallax3">
-
-	<!-- Callout Title -->
-	<section class="callout">
-		<div class="container">
-			<h3 class="animated" data-animate="fadeInDown" data-animate-delay="300">ANDARE POR LOS <span class="color">NÚMEROS!</span></h3>
-		</div><!-- end container -->
-	</section><!-- end callout title -->
-
-		<div class="container">
-
-				<!-- Counter Column -->
-				<div class="four columns">
-					<div class="icon-box"><i class="fa fa-flag-o fa-4x"></i></div>
-					<div class="count" data-to="354">
-						<h1 class="count-number"></h1>
-						<h5>PROYECTOS <span class="color">COMPLETADOS</span></h5>
-					</div><!-- end counter data -->
-				</div><!-- end counter column -->
-
-				<!-- Counter Column -->
-				<div class="four columns">
-					<div class="icon-box"><i class="fa fa-smile-o fa-4x"></i></div>
-					<div class="count" data-to="203">
-						<h1 class="count-number"></h1>
-						<h5><span class="color">CLIENTES</span> FELICES</h5>
-					</div><!-- end counter data -->
-				</div><!-- end counter column -->
-
-				<!-- Counter Column -->
-				<div class="four columns">
-					<div class="icon-box"><i class="fa fa-comments-o fa-4x"></i></div>
-					<div class="count" data-to="467">
-						<h1 class="count-number"></h1>
-						<h5><span class="color">SESIONES DE</span> LLUVIA DE IDEAS</h5>
-					</div><!-- end counter data -->
-				</div><!-- end counter column -->
-
-				<!-- Counter Column -->
-				<div class="four columns">
-					<div class="icon-box"><i class="fa fa-envelope-o fa-4x"></i></div>
-					<div class="count" data-to="647">
-						<h1 class="count-number"></h1>
-						<h5>CORREOS ELECTRÓNICOS <span class="color">INTERCAMBIADOS</span></h5>
-					</div><!-- end counter data -->
-				</div><!-- end counter column -->
-
-		</div><!-- end container -->
-	</section><!-- end counter -->
-
-
-
-	<!-- Pricing Section -->
-	<section id="pricing" class="section">
-		
-	</section><!-- end pricing section -->
-
-	<section id="accordion" class="section accordion parallax4" style="background-size: 100% 110%">
-		
-	</section><!-- end accordion section -->
-
-
-
-	<section id="team" class="section">
-		<div class="container">
-			<h2 class="title">NUESTRO EQUIPO CREATIVO</h2>
-			<h4 class="subtitle">DISEÑAMOS CÍRCULOS A NUESTRO ALREDEDOR</h4>
-
-			<div class="four columns team">
-				<div class="team-photo">
-					<img src="images/team-1.jpg" alt="" class="scale-with-grid">
-					<div class="mask"></div>
-					<h5>Connet with Jane</h5>
-					<ul class="team-social-links">
-						<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-						<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-						<li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-						<li><a href="#"><i class="fa fa-instagram"></i></a></li>
-						<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-					</ul>
-				</div><!-- end team photo -->
-
-				<h4>Jane Donaven</h4>
-				<h6>DESARROLLADOR UI</h6>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem, adipisci quasi quod fugiat obcaecati! Mollitia amet ducimus ipsa consequuntur similique.</p>
-
-				<div class="skillbar clearfix " data-percent="80%">
-					<div class="skillbar-title"><span>HTML5</span></div>
-					<div class="skillbar-bar"></div>
-					<div class="skill-bar-percent">80%</div>
-				</div> <!-- end skill bar -->
-
-				<div class="skillbar clearfix " data-percent="95%">
-					<div class="skillbar-title"><span>CSS3</span></div>
-					<div class="skillbar-bar"></div>
-					<div class="skill-bar-percent">95%</div>
-				</div> <!-- end skill bar -->
-
-				<div class="skillbar clearfix " data-percent="63%">
-					<div class="skillbar-title"><span>Photoshop</span></div>
-					<div class="skillbar-bar"></div>
-					<div class="skill-bar-percent">63%</div>
-				</div> <!-- end skill bar -->
-
-			</div><!-- end team column -->
-
-			<div class="four columns team">
-				<div class="team-photo">
-					<img src="images/team-2.jpg" alt="" class="scale-with-grid">
-					<div class="mask"></div>
-					<h5>Connect with Jonathan</h5>
-					<ul class="team-social-links">
-						<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-						<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-						<li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-						<li><a href="#"><i class="fa fa-instagram"></i></a></li>
-						<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-					</ul>
-				</div><!-- end team photo -->
-
-				<h4>Jonathan Smith</h4>
-				<h6>DISEÑADOR</h6>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem, adipisci quasi quod fugiat obcaecati! Mollitia amet ducimus ipsa consequuntur similique.</p>
-
-				<div class="skillbar clearfix " data-percent="60%">
-					<div class="skillbar-title"><span>HTML5</span></div>
-					<div class="skillbar-bar"></div>
-					<div class="skill-bar-percent">60%</div>
-				</div> <!-- end skill bar -->
-
-				<div class="skillbar clearfix " data-percent="75%">
-					<div class="skillbar-title"><span>CSS3</span></div>
-					<div class="skillbar-bar"></div>
-					<div class="skill-bar-percent">75%</div>
-				</div> <!-- end skill bar -->
-
-				<div class="skillbar clearfix " data-percent="84%">
-					<div class="skillbar-title"><span>Photoshop</span></div>
-					<div class="skillbar-bar"></div>
-					<div class="skill-bar-percent">84%</div>
-				</div> <!-- end skill bar -->
-
-			</div><!-- end team column -->
-
-			<div class="four columns team">
-				<div class="team-photo">
-					<img src="images/team-3.jpg" alt="" class="scale-with-grid">
-					<div class="mask"></div>
-					<h5>Connect with Sam</h5>
-					<ul class="team-social-links">
-						<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-						<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-						<li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-						<li><a href="#"><i class="fa fa-instagram"></i></a></li>
-						<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-					</ul>
-				</div><!-- end team photo -->
-
-				<h4>Sam Davidson</h4>
-				<h6>PROGRAMADOR</h6>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem, adipisci quasi quod fugiat obcaecati! Mollitia amet ducimus ipsa consequuntur similique.</p>
-
-				<div class="skillbar clearfix " data-percent="87%">
-					<div class="skillbar-title"><span>HTML5</span></div>
-					<div class="skillbar-bar"></div>
-					<div class="skill-bar-percent">87%</div>
-				</div> <!-- end skill bar -->
-
-				<div class="skillbar clearfix " data-percent="54%">
-					<div class="skillbar-title"><span>Javascript</span></div>
-					<div class="skillbar-bar"></div>
-					<div class="skill-bar-percent">54%</div>
-				</div> <!-- end skill bar -->
-
-				<div class="skillbar clearfix " data-percent="72%">
-					<div class="skillbar-title"><span>PHP</span></div>
-					<div class="skillbar-bar"></div>
-					<div class="skill-bar-percent">72%</div>
-				</div> <!-- end skill bar -->
-
-			</div><!-- end team column -->
-
-			<div class="four columns team">
-				<div class="team-photo">
-					<img src="images/team-4.jpg" alt="" class="scale-with-grid">
-					<div class="mask"></div>
-					<h5>Connect with Kelly</h5>
-					<ul class="team-social-links">
-						<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-						<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-						<li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-						<li><a href="#"><i class="fa fa-instagram"></i></a></li>
-						<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-					</ul>
-				</div><!-- end team photo -->
-
-				<h4>Kelly Johnson</h4>
-				<h6>DESARROLLADOR UX</h6>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem, adipisci quasi quod fugiat obcaecati! Mollitia amet ducimus ipsa consequuntur similique.</p>
-
-				<div class="skillbar clearfix " data-percent="54%">
-					<div class="skillbar-title"><span>HTML5</span></div>
-					<div class="skillbar-bar"></div>
-					<div class="skill-bar-percent">54%</div>
-				</div> <!-- end skill bar -->
-
-				<div class="skillbar clearfix " data-percent="62%">
-					<div class="skillbar-title"><span>CSS3</span></div>
-					<div class="skillbar-bar"></div>
-					<div class="skill-bar-percent">62%</div>
-				</div> <!-- end skill bar -->
-
-				<div class="skillbar clearfix " data-percent="63%">
-					<div class="skillbar-title"><span>Javascript</span></div>
-					<div class="skillbar-bar"></div>
-					<div class="skill-bar-percent">63%</div>
-				</div> <!-- end skill bar -->
-
-			</div><!-- end team column -->
-
-		</div><!-- end container -->
-	</section><!-- end team section -->
-
-
-
-	{{!-- <section id="video" class="full-video">
-		<div class="video-msg">
-			<h1>SOMOS INCREIBLES</h1>
-			<a href="#about" class="button scroll">AVERIGUA PORQUE</a>
-		</div><!-- end video message -->
-
-		<div id="P1" class="player video-container" data-property="{videoURL:'https://www.youtube.com/watch?v=xe3e5tv7xNM',containment:'#video', autoPlay:true, showControls:false, mute:true, startAt:0, opacity:1}"></div><!-- end video container -->
-	</section><!-- end video section --> --}}
-
-
-
-	<section id="footer-top" class="section">
-		<div class="container">
-			<ul class="social-links">
-					<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-					<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-					<li><a href="#"><i class="fa fa-vimeo-square"></i></a></li>
-					<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-					<li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-				</ul><!-- end social links -->
-			800.123.4567 | <a href="#">info@andaredomain.com</a><br />
-			123 East Main Austin, Texas 12345
-		</div><!-- end container -->
-	</section><!-- end footer top section -->
 
 	<section id="footer-bottom" class="section">
 		<div class="container">
 			<a href="#home" class="scroll button-to-top">
 					<i class="fa fa-angle-double-up"></i>
 				</a>
-			<h2>Andare</h2>
-			<p><span class="color">Hecho en los Estados Unidos.</span><br /> 
-				&copy; 2018 Todos los derechos reservados.</p>
+			<h2>AA MOTOR</h2>
+			<p><span class="color">Hecho en República Dominicana</span><br /> 
+				&copy; 2020 Todos los derechos reservados</p>
 		</div><!-- end container -->
 	</section><!-- end footer bottom section -->
 
@@ -633,26 +216,12 @@
 <script type="text/javascript" src="js/paginacion.js"></script>
 <script type="text/javascript" src="js/administrador.js"></script>
 <script type="text/javascript" src="js/ventana_administrador.js"></script>
-{{!-- <script src="js/signup.js"></script> --}}
 <script type="text/javascript" src="js/alerta.js"></script>
 <script type="text/javascript" src="js/ventana.js"></script>
 <script type="text/javascript" src="js/paginacion2.js"></script>
 <script type="text/javascript" src="js/paginacion3.js"></script>
 <script type="text/javascript" src="js/paginacion4.js"></script>
 <script type="text/javascript" src="js/paginacion5.js"></script>
-
-
-{{!-- <div id="btnModal" class="modalDialog">
-	<div id="tamaño">
-		<a href="#close12" title="Close" class="close">X</a>
-	
-
-	<div id="vent">
-		    
-	</div>
-
-	</div>
-</div> --}}
 {{!-- ///////////////////////////////////////////////////////////////////////////////////////// --}}
 
 

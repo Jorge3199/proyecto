@@ -333,7 +333,7 @@ function confirmar(id){
                    
     Swal.fire({
     title: '¿Estás seguro?',
-    text: "¡No podrás revertir esto!",
+    text: "¡Que quiere eliminar este producto!",
     type: 'warning',
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
@@ -395,7 +395,7 @@ function confirmar2(id){
                    
     Swal.fire({
     title: '¿Estás seguro?',
-    text: "¡No podrás revertir esto!",
+    text: "¡Que quiere activar este producto!",
     type: 'warning',
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
@@ -417,7 +417,7 @@ function confirmar4(id_cliente, fecha_hora){
                    
     Swal.fire({
     title: '¿Estás seguro?',
-    text: "¡No podrás revertir esto!",
+    text: "¡Que a despachado esta factura!",
     type: 'warning',
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
@@ -441,7 +441,7 @@ function confirmar04(id_cliente, fecha_hora){
                    
     Swal.fire({
     title: '¿Estás seguro?',
-    text: "¡No podrás revertir esto!",
+    text: "¡Que quiere activar esta factura!",
     type: 'warning',
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
@@ -465,7 +465,7 @@ function confirmar5(id){
                    
     Swal.fire({
     title: '¿Estás seguro?',
-    text: "¡No podrás revertir esto!",
+    text: "¡Que quiere eliminar este cliente!",
     type: 'warning',
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
@@ -487,7 +487,7 @@ function confirmar05(id){
                    
     Swal.fire({
     title: '¿Estás seguro?',
-    text: "¡No podrás revertir esto!",
+    text: "¡Que quiere activar este cliente!",
     type: 'warning',
     showCancelButton: true,
     confirmButtonColor: '#3085d6',

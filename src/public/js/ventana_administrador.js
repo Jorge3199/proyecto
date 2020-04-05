@@ -78,7 +78,7 @@ function abrir_productos(){
           
           
             <div class="col-md-12 col-lg-12">
-                <a><img height="75" width="100" src="/img/logo.png"><h2 style="position: absolute; top:-2px; left: 120px; color:black;">AGREGAR PRODUCTO</h2></a> 
+                <a><img height="75" width="100" src="/img/AA-Motor.png"><h2 style="position: absolute; top:-2px; left: 120px; color:black;">AGREGAR PRODUCTO</h2></a> 
             </div> 
             
         </div>
@@ -256,7 +256,7 @@ function abrir_editacion_productos(id, imagen, nombre, precio, modelo, cantidad,
           
           
             <div class="col-md-12 col-lg-12">
-                <a><img height="75" width="100" src="/img/logo.png"><h2 style="position: absolute; top:-2px; left: 120px; color:black;">EDITAR PRODUCTO</h2></a> 
+                <a><img height="75" width="100" src="/img/AA-Motor.png"><h2 style="position: absolute; top:-2px; left: 120px; color:black;">EDITAR PRODUCTO</h2></a> 
             </div> 
             
         </div>
@@ -1932,11 +1932,10 @@ function abrir_factura(id_cliente, nombre, apellido, direccion, telefono, total,
     let fecha_hora1 = fecha_hora.split(" ");
     const ventana = document.querySelector('#vent');
     ventana.innerHTML = `
-
     <div id="lppresults">
-    <h3 style="color:black; text-align: center;">Super Gato</h3>
+    <h3 class="titulo5">Compañia AA Motor</h3>
     <p class="encambezado">Santo Domingo, Km 11/2</p>
-    <p class="encambezado" style="top: -51px">Tel(s):809-573-3711</p>
+    <p class="encambezado" style="top: -49px">Tel(s):809-573-3711</p>
     <p class="encambezado" style="top: -72px">RNC: 103003133</p>
     <h5 class="datos" style="top: 170px; " >Nombre:</h5>
     <h5 class="datos" style="top: 189px; ">Direccion:</h5>

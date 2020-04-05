@@ -1692,6 +1692,15 @@ a.button-to-top:hover {color: #e74c3c;}
 	/* text-transform: lowercase; */
 }
 
+.titulo5{
+	color: black;
+	text-align: center;
+	font-size: 23px;
+	font-family: 'Franklin Gothic Heavy';
+	position: relative;
+	left: 6px;
+}
+
 .total5 {
 	font-weight:bold;
 	position: relative;
@@ -1774,4 +1783,10 @@ tbody img {
 
 }
 
+#link01,
+.link,
+#admin,
+#admin2{
+  cursor: pointer;
+}
 
