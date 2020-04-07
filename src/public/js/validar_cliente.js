@@ -29,7 +29,7 @@ function alert_compra(){
 function alert_compra1(){
   Swal.fire({
     type: 'warning',
-    title: 'Revise su factura por su correo electrónico!!',
+    title: 'Revise su factura!!',
     text: 'hubo algunos problema con algunos de los productos a la ahora pago!',
     
   })
@@ -157,5 +157,13 @@ function eliminacion_foto() {
           eliminar_foto();
       }
        
+  })
+}
+
+function alert_encontrado(){
+  Swal.fire({
+    type: 'warning',
+    title: 'Advertencia',
+    text: 'Este producto ya se encontraba en la lista de favorito'  
   })
 }

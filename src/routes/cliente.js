@@ -266,6 +266,7 @@ router.post('/pago', isLoggedIn1, async (req, res) => {
             }
             
             if(a < lista_comprar[i].cantidad){
+                encontrado=1;
                 valor = 0;
                 var id_producto= parseInt(productos[0].id);
                 var unidad= parseInt(a);

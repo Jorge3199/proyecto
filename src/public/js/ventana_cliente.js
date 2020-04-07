@@ -420,11 +420,7 @@ function lista_favoritos(id){
         
     }
     if(encontrado==1){
-        Swal.fire({
-            type: 'warning',
-            title: 'Este producto ya estaba en la lista de favorito'
-             
-        })
+       alert_encontrado();
     
     }
     if(encontrado==0){
