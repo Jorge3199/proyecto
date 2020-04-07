@@ -532,9 +532,9 @@ const filtrar3 = (llamar)=>{
         for (j=0;j<productos.length;j++) { 
             
             if(productos[j].id==favorito[i].id_producto){
-                let cantidad = productos[j].cantidad.toLowerCase();
+                let cantidad = productos[j].cantidad;
                 let nombre = productos[j].nombre.toLowerCase();
-                let precio = productos[j].precio.toLowerCase();
+                let precio = productos[j].precio;
                 for (n = 0; n < categoria.length; n++){
                     if(productos[j].id_modelo == categoria[n].id){
                          modelo = categoria[n].modelo.toLowerCase();
@@ -619,7 +619,7 @@ function pago(token){
     $.ajax({
         type:"POST",
         url:"pago",
-        data: {stripeToken : token.id, total_compra: total_compra, comprar},
+        data: {stripeToken : token.id, comprar},
         async: false,
         success:function(producto){
 
@@ -672,20 +672,6 @@ function pago(token){
     });
 }
 
-// function factura(){
-  
-//     $.ajax({
-//         type:"POST",
-//         url:"factura",
-//         async: false,
-//         success:function(pago){
-//                 console.log(pago);
-               
-            
-//         }
-        
-//     });
-// }
 
 function abrir_contrasena(imagen){
     
@@ -957,7 +943,17 @@ function editar_informacion(){
         async: false,
         success:function(datos){
             
-            cambiar(datos);    
+            if(datos != 1 && datos != 2){
+                cambiar(datos); 
+            }
+            
+            if(datos == 1){
+                error("El telefono ingresado, ya se encuentra registrado!");
+            } 
+
+            if(datos == 2){
+                error("El correo ingresado, ya se encuntra registrado!");
+            }
    
         }
         
@@ -1006,6 +1002,12 @@ function eliminar_foto(){
 }
 
 function cambiar(datos,uno){
+    const perfil_unico = document.querySelector('#perfil_unico');
+    perfil_unico.innerHTML = `
+    <a class="site-logo scroll" onclick="abrir_informacion('${datos[0].telefono}','${datos[0].correo}','${datos[0].imagen}')">
+       ${datos[0].nombre} ${datos[0].apellido}
+    </a>`
+    
     const admin = document.querySelector('#admin');
     admin.innerHTML = `
     <li class="cursor"><a  onclick="abrir_imagen('${datos[0].imagen}')">Editar imagen</a></li>

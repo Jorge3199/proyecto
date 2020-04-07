@@ -1790,3 +1790,14 @@ tbody img {
   cursor: pointer;
 }
 
+.modelo1{
+	position: absolute;
+	left: 200px;
+}
+
+#perfil_unico{
+	position: relative;
+	top: 23px;
+	cursor: pointer;
+}
+

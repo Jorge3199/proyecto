@@ -364,6 +364,11 @@ function abrir_editacion_productos(id, imagen, nombre, precio, modelo, cantidad,
     intro.style.width="75%";
     intro.style.top="-12%";
     // intro.style.height="78%";
+    if(typeof opcion === "undefined"){
+        prod2=[];
+        prod3=[];
+        prod03=[];
+     }
    
 
     $('#imagenPreview').html("<img src='/imagen1/"+imagen+"'  class='imagen'/>"); 
@@ -392,23 +397,28 @@ function abrir_editacion_productos(id, imagen, nombre, precio, modelo, cantidad,
 
 
 
-function abrir_modelo(){
+function abrir_modelo(opcion, mode, id){
+   
+    if(typeof mode === "undefined"){
+        mode='';
+    }
+   
     const ventana = document.querySelector('#vent');
     ventana.innerHTML = ` 
         <div class="row">
 
         <div class="col-lg-12 mx-auto">
         <div class="card text-center">
-            <div class="card-header">
-            <h3 style="color:black">Agregar Modelo</h3>
+            <div class="card-header" id="editar">
+               <h3 style="color:black">Agregar Modelo</h3>
             </div>
         
             <div class="card-header">
-            <form id="agregar_modelo" method="POST" onsubmit="return validar_correo();">
-                <img height="150" width="150" src="/images/super_gato.png" class="center ms">
+            <form id="agregar_modelo" method="POST">
+                <img height="200" width="250" src="/images/super_gato.png" class="center ms">
 
                 <div class="inputWithIcon jorge">
-                    <input type="text" id="modelo" name="modelo" placeholder="Ingrese el nuevo modelo" class="form-control" required autofocus>
+                    <input type="text" id="modelo" name="modelo" placeholder="Ingrese nuevo modelo" class="form-control" value="${mode}" required autofocus>
                     <i class="icon-cogs" aria-hidden="true"></i>
                 </div>
                 
@@ -416,10 +426,10 @@ function abrir_modelo(){
                 <div class="row" >
                     <div class="modelo">
                         <div class="col-lg-5" >
-                            <a class="btn btn-warning btn-block" onclick="modelo()"> Guardar </a>
+                            <a class="btn btn-warning btn-block" onclick="validar_modelo('${opcion}',${id})"> Guardar </a>
                         </div> 
                         <div class="col-lg-5">
-                            <a class="btn btn-danger btn-block" onclick="cerrar()">Cancelar</a>
+                            <a class="btn btn-danger btn-block" onclick="cerrar('${opcion}')">Cancelar</a>
                         </div>
                     </div>
                 </div>
@@ -430,12 +440,160 @@ function abrir_modelo(){
         </div>
     </div>
     `
+   
+    if(mode !== ""){
+        const titul = document.querySelector('#editar');
+        titul.innerHTML = `<h3 style="color:black">Editar Modelo</h3> `
+    }
 
     abrir();
 
     var intro = document.getElementById('tamaño');
      intro.style.width="40%";
      intro.style.top="-3%";
+}
+
+function abrir_lista_modelo(){
+
+    const tamano = document.querySelector('#tamaño');
+    tamano.innerHTML = `
+        <span class="close1" onclick="span('${"true"}')">×</span>
+
+        <div id="vent">
+            
+        </div>
+    `
+    const ventana = document.querySelector('#vent2');
+    ventana.innerHTML = `
+    <div class="row">
+        <div class="col-lg-6">
+            <h5 class="letra2">Lista De Modelo</h5>
+        </div>     
+        
+        <div class="modelo1">
+            <button class="btn btn-warning" onclick="abrir_modelo('${"opcion2"}')">Agregar modelo</button>
+        </div>
+       
+        <div class="col-lg-3">
+            <h5 class="letra2" style="text-align:right">Buscar:</h5>
+            
+        </div>
+
+        <div class="col-lg-3">
+            
+            <input type="text" id="form_mod" class="form-control ">
+
+        </div>
+
+    </div> 
+ 
+    <table class="table display DataTables" class="table table-bordered order-table" class="card-header" style="color: white">
+
+        <tbody style="background-color:#ddac1b; color:black" align="center">
+            <tr> 
+            <td>Nombre</td>
+            <td>Opciones</td>
+            <td>Nombre</td>
+            <td>Opciones</td>
+            </tr>
+        </tbody>
+
+        <tbody id="lista_modelo" style="color:black" align="center" class="card-header">
+
+        </tbody>
+         
+        
+
+    </table>
+    `
+
+    
+    form_mod.addEventListener('keyup', filtrar_modelo);
+    filtrar_modelo();
+   
+
+    var intro = document.getElementById('tamañ2');
+    
+    intro.style.width="50%";
+    intro.style.top="-15%";
+    body2='true';
+ 
+    abrir2();
+}  
+
+function filtrar_modelo(){
+    const modelo1 = document.querySelector('#lista_modelo');
+    modelo1.innerHTML = '';
+
+    const formulario =  document.querySelector('#form_mod');
+    const texto = formulario.value.toLowerCase();
+    var categoria1 = [];
+     
+    for(var n=0; n<categoria.length; n++){
+        let modelo = categoria[n].modelo.toLowerCase();
+
+        if(modelo.indexOf(texto) !== -1){ 
+
+            if(modelo.indexOf(texto) !== -1){
+                categoria1[categoria1.length]= categoria[n];
+            }
+
+        }
+    }  
+    
+    for(var n=1; n<=categoria1.length; n+=2){
+        if(n != categoria1.length){
+            modelo1.innerHTML += `
+            <td>${categoria1[n-1].modelo}</td> 
+            <td> 
+                <a class="btn btn-warning mx-1" onclick="abrir_modelo('${"opcion2"}','${categoria1[n-1].modelo}',${categoria1[n-1].id})">
+                <img height="25" width="20" src="/img/editar2.png"></a>  
+                
+            </td>
+            
+            <td>${categoria1[n].modelo}</td> 
+            <td> 
+                <a class="btn btn-warning mx-1" onclick="abrir_modelo('${"opcion2"}','${categoria1[n].modelo}',${categoria1[n].id})">
+                <img height="25" width="20" src="/img/editar2.png"></a>  
+                
+            </td>`
+        }
+
+        if(n == categoria1.length && categoria1.length%2 == 0){
+            modelo1.innerHTML += `
+            <td>${categoria1[n-1].modelo}</td> 
+            <td> 
+                <a class="btn btn-warning mx-1" onclick="abrir_modelo('${"opcion2"}','${categoria1[n-1].modelo}',${categoria1[n-1].id})">
+                <img height="25" width="20" src="/img/editar2.png"></a>  
+                
+            </td>
+            
+            <td>${categoria1[n].modelo}</td> 
+            <td> 
+                <a class="btn btn-warning mx-1" onclick="abrir_modelo('${"opcion2"}','${categoria1[n].modelo}',${categoria1[n].id})">
+                <img height="25" width="20" src="/img/editar2.png"></a>  
+                
+            </td>`
+        }
+
+        if(n == categoria1.length && categoria1.length%2 != 0){
+            modelo1.innerHTML += `
+            <td>${categoria1[n-1].modelo}</td> 
+            <td> 
+                <a class="btn btn-warning mx-1" onclick="abrir_modelo('${"opcion2"}','${categoria1[n-1].modelo}',${categoria1[n-1].id})">
+                <img height="25" width="20" src="/img/editar2.png"></a>  
+                
+            </td>
+            <td></td> 
+            <td></td>`
+            
+        } 
+    }
+
+    if(categoria1.length == 0){
+        modelo1.innerHTML += `
+        <td>Modelo no encontrado..</td>`
+    }  
 }
 ////////////////////////////////////////////////////
 function abrir_cliente(){
@@ -547,7 +705,7 @@ function abrir_cliente(){
                 <div class="row">
 
                     <div class="col-lg-6">
-                    <h3 class="negro">Cedula<span style="color:red">*</span></h3>
+                    <h3 class="negro">Cédula<span style="color:red">*</span></h3>
                     <div class="inputWithIcon jorge">
                         <input type="text" id="cedula" name="cedula" placeholder="Cedula" class="form-control" >
                         <i class="icon-contact_mail" aria-hidden="true"></i>
@@ -818,7 +976,7 @@ function abrir_administrador(){
                 <div class="row">
 
                     <div class="col-lg-6">
-                    <h3 class="negro">Cedula<span style="color:red">*</span></h3>
+                    <h3 class="negro">Cédula<span style="color:red">*</span></h3>
                     <div class="inputWithIcon jorge">
                         <input type="text" id="cedula" name="cedula" placeholder="Cedula" class="form-control" >
                         <i class="icon-contact_mail" aria-hidden="true"></i>
@@ -1058,7 +1216,7 @@ function abrir_informacion(id,nombre,apellido,sexo,nacimiento,direccion,telefono
                 <div class="row">
 
                     <div class="col-lg-6">
-                    <h3 class="negro">Cedula<span style="color:red">*</span></h3>
+                    <h3 class="negro">Cédula<span style="color:red">*</span></h3>
                     <div class="inputWithIcon jorge">
                         <input type="text" id="cedula" name="cedula" placeholder="Cedula" class="form-control" value="${cedula}" >
                         <i class="icon-contact_mail" aria-hidden="true"></i>
@@ -1214,9 +1372,10 @@ function validar_input(){
 
 var prod2 = [];
 var prod3 = [];
-var n5=0;
+var prod03 = [];
 function abrir_lista_producto(){
     prod3= [];
+    prod03 = [];
     const tamano = document.querySelector('#tamaño');
     tamano.innerHTML = `
         <span class="close1" onclick="span('${"true"}')">×</span>
@@ -1400,7 +1559,7 @@ function agregar_producto(){
 }
 
 var productos_eliminado=[];
-function producto_eliminado(opcion){
+function producto_eliminado(){
 
     $.ajax({
         type:"POST",
@@ -1420,6 +1579,7 @@ function producto_eliminado(opcion){
 
 function prod_eliminado(){
     prod2= [];
+    prod03= [];
     const tamano = document.querySelector('#tamaño');
     tamano.innerHTML = `
         <span class="close1" onclick="span('${"true"}')">×</span>
@@ -1603,29 +1763,75 @@ function editar_producto(id){
         producto_eliminado();
         filtrar3('edito');
     }
+
+    if(prod03.length != 0){
+       // producto_eliminado();
+        filtrar03('edito');
+    }
+
     filtrar('edito');
     
 }
 
-function modelo(){
+function agregar_modelo(opcion){
     var datos=$('#agregar_modelo').serialize();
-    // alert(datos);
-    // alert(id_administrador);
-  $(document).ready(function(){
-      $.ajax({
-          type:"POST",
-          url:"/administrador/agregar_modelo",
-          data: datos,
-          success:function(categoria1){
-              categoria=categoria1;
-          }
-      }); 
-     
-  });
+    
+    $(document).ready(function(){
+        $.ajax({
+            type:"POST",
+            url:"/administrador/agregar_modelo",
+            data: datos,
+            async: false,
+            success:function(categoria1){
+                categoria=categoria1;
+            }
+        }); 
+        
+    });
 
-  cerrar();
+  cerrar(opcion);
   guardado();
+
+  if(typeof opcion !== "undefined"){
+     filtrar_modelo();
+  }
   
+}
+
+function editar_modelo(id){
+    var datos=$('#agregar_modelo').serialize();
+    
+    $(document).ready(function(){
+        $.ajax({
+            type:"POST",
+            url:"/administrador/editar_modelo/"+id,
+            data: datos,
+            async: false,
+            success:function(categoria1){
+                categoria=categoria1;
+            }
+        }); 
+        
+    });
+
+    $.ajax({
+        type:"POST",
+        url:"/administrador/todos_producto",
+        async: false,
+        data: {id : id},
+        success:function(products1){
+              
+            productos = products1;
+               
+        }
+        
+    });
+
+    cerrar('opcion2');
+    filtrar('edito');
+    filtrar_modelo();
+    editado();
+ 
 }
 
 function eliminar_producto(id){
@@ -1680,7 +1886,7 @@ function consulta_Real_Modelo(sele_modelo){
    
 }
 
-function activar_producto(id){
+function activar_producto(id, opcion){
    
     $.ajax({
         type:"POST",
@@ -1694,7 +1900,7 @@ function activar_producto(id){
                 productos_eliminado = [];
                 var modelo;
                 for (var n = 0; n < producto.length; n++) {
-                    if(producto[n].estado == 'A'){
+                    if(producto[n].estado == 'A' || producto[n].estado == 'P'){
 
                         for (i = 0; i < categoria.length; i++){
                             if(producto[n].id_modelo == categoria[i].id){
@@ -1718,9 +1924,15 @@ function activar_producto(id){
     }); 
 
     activado();
-    filtrar3('activo');
-    // valor(0);
-    // paginacion();
+    if(typeof opcion !== "undefined"){
+        filtrar03('activo');
+    }
+  
+    if(typeof opcion === "undefined"){
+        filtrar3('activo');
+    }
+    
+  
 }
 
 
@@ -1908,7 +2120,7 @@ const filtrar4 = (llamar)=>{
     if(prod4.length == 0){
         const lista = document.querySelector('#lista');
         lista.innerHTML += `
-        <td>Producto no encontrado..</td>`
+        <td>Venta no encontrado..</td>`
     }  
 
 }
@@ -2220,7 +2432,7 @@ const filtrar04 = (llamar)=>{
     if(prod4.length == 0){
         const lista = document.querySelector('#lista');
         lista.innerHTML += `
-        <td>Producto no encontrado..</td>`
+        <td>Venta no encontrado..</td>`
     }  
 
 }
@@ -2421,7 +2633,7 @@ const filtrar5 = (llamar)=>{
     if(prod5.length == 0){
         const lista = document.querySelector('#lista');
         lista.innerHTML += `
-        <td>Producto no encontrado..</td>`
+        <td>Cliente no encontrado..</td>`
     }  
 
 }
@@ -2607,7 +2819,7 @@ const filtrar05 = (llamar)=>{
     if(prod5.length == 0){
         const lista = document.querySelector('#lista');
         lista.innerHTML += `
-        <td>Producto no encontrado..</td>`
+        <td>Cliente no encontrado..</td>`
     }  
 
 }
@@ -2713,6 +2925,11 @@ function editar_informacion(id, opcion){
             }
             
             if(opcion == 2){
+                const perfil_unico = document.querySelector('#perfil_unico');
+                perfil_unico.innerHTML = `
+                <a class="site-logo scroll" onclick="abrir_informacion(${datos[0].id},'${datos[0].nombre}','${datos[0].apellido}','${datos[0].sexo}','${datos[0].nacimiento}',
+                '${datos[0].direccion}','${datos[0].telefono}','${datos[0].cedula}','${datos[0].correo}','${datos[0].imagen}','2')">${datos[0].nombre} ${datos[0].apellido}</a>`
+               
                 const admin = document.querySelector('#admin');
                 admin.innerHTML = `
                 <a  onclick="abrir_informacion(${datos[0].id},'${datos[0].nombre}','${datos[0].apellido}','${datos[0].sexo}','${datos[0].nacimiento}',
@@ -2909,3 +3126,159 @@ function cambiar_contrasena(id,opcion){
     });
   
 }
+
+//////////////////////////////////////////////////
+function abrir_lista_pedido(){
+    prod2= [];
+    prod3= [];
+    const tamano = document.querySelector('#tamaño');
+    tamano.innerHTML = `
+        <span class="close1" onclick="span('${"true"}')">×</span>
+
+        <div id="vent">
+            
+        </div>
+    `
+
+    const ventana = document.querySelector('#vent2');
+    ventana.innerHTML = `
+    <div class="row">
+        <div class="col-lg-6">
+            <h5 class="letra2">Productos Pedido</h5>
+        </div>
+        
+        <div class="col-lg-3">
+            <h5 class="letra2" style="text-align:right">Buscar:</h5>
+            
+        </div>
+
+        <div class="col-lg-3">
+            
+            <input type="text" id="formulario3" class="form-control ">
+        </div>
+
+    </div> 
+
+    <div id="lppresults">
+    <table  class="table display DataTables" class="table table-bordered order-table" class="card-header" style="color: white">
+
+        <tbody style="background-color:#ddac1b; color:black" align="center">
+            <tr>  
+            <td>ID</td>
+            <td>Nombre</td>
+            <td>Precio</td>
+            <td>Cantidad</td>
+            <td>Modelo</td>
+            <td>Imagen</td>
+            <td>Opciones</td>
+            </tr>
+        </tbody>
+
+        <tbody id="lista" style="color:black" align="center" class="card-header">
+
+        </tbody>
+         
+        
+
+    </table>
+    </div>
+
+    <section class="paginacion">
+		 <div id="options3" class="filter-menu">
+				<ul class="option-set" >
+					<ul id="paginacion3" class="pagination pagination-md">
+			            
+					</ul>	
+				</ul>
+        </div>
+    
+    </section>
+    `
+    
+    formulario3.addEventListener('keyup', filtrar03);
+    filtrar03();
+    
+    var intro = document.getElementById('tamañ2');
+    
+    intro.style.width="65%";
+    intro.style.top="-15%";
+    body2='true';
+ 
+    abrir2();
+
+}
+
+var pedidos = [];
+const filtrar03 = (llamar)=>{
+    $.ajax({
+        type:"POST",
+        url:"/administrador/productos_pedido",
+        async: false,
+        success:function(producto){
+              
+            pedidos = producto;
+
+        }
+        
+    });
+
+    const lista = document.querySelector('#lista');
+
+    const formulario3 =  document.querySelector('#formulario3');
+        lista.innerHTML = '';
+        prod03 = [];
+        var modelo;
+
+        const texto = formulario3.value.toLowerCase();
+
+        for (var i=0; i<pedidos.length;i++) { 
+                
+                let id = pedidos[i].id.toString().toLowerCase();
+                let nombre = pedidos[i].nombre.toLowerCase();
+                let precio = pedidos[i].precio.toString().toLowerCase();
+                let cantidad = pedidos[i].cantidad.toString().toLowerCase();
+                for (n = 0; n < categoria.length; n++){
+                    if(pedidos[i].id_modelo == categoria[n].id){
+                         modelo = categoria[n].modelo.toLowerCase();
+                    }
+                }
+                
+        
+                if( (id.indexOf(texto) !== -1) || (nombre.indexOf(texto) !== -1) || (precio.indexOf(texto) !== -1) || (cantidad.indexOf(texto) !== -1) || (modelo.indexOf(texto) !== -1) ){ 
+                    
+                    prod03[prod03.length] = { id: pedidos[i].id, nombre: pedidos[i].nombre, precio:pedidos[i].precio, cantidad: pedidos[i].cantidad, modelo: modelo, imagen: pedidos[i].imagen};
+                    
+                }
+                    
+        } 
+        
+
+
+    if( (llamar != 'edito') && (llamar != 'activo') ){
+        valor03(0);
+		paginacion03();
+	}
+		
+
+
+    const id = [...document.querySelectorAll('#options3 .selected')].map(el => el.id);
+	if(llamar == 'edito'){
+		paginacion03();
+		paginacion_editar03(id); 
+	}
+
+	if(llamar == 'activo'){
+	    paginacion03();
+        paginacion_eliminar03(id);
+        valor(0);
+        paginacion();
+    }
+    
+    if(prod03.length == 0){
+        const lista = document.querySelector('#lista');
+        lista.innerHTML += `
+        <td>Pedido no encontrado..</td>`
+    }  
+
+}
+

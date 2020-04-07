@@ -24,7 +24,7 @@ app.use(session({
 app.use(flash());
 
 router.get('/', isLoggedIn1, async (req, res) => {
-    const productos = await pool.query('SELECT * FROM producto WHERE estado="A" ');  
+    const productos = await pool.query('SELECT * FROM producto WHERE estado="A" OR estado="P" ');  
     var cliente=req.user;
     const favorito = await pool.query('SELECT * FROM favorito WHERE id_cliente = ? and estado="A" ',[cliente.id]);     
     const categoria = await pool.query('SELECT * FROM categoria');   
@@ -209,7 +209,7 @@ router.post('/c_cambiar_contrasena/:aleatorio', isNotLoggedIn1, async (req, res)
 
 router.post('/todos_productos', isLoggedIn1, async (req, res) => {
      
-    const products= await pool.query('SELECT * FROM producto WHERE estado="A" ');
+    const products= await pool.query('SELECT * FROM producto WHERE estado="A" OR estado="P" ');
     for(var n=0; n<products.length; n++){
         products[n].fecha_hora = (format(products[n].fecha_hora, 'es_ES') );
     }
@@ -241,7 +241,7 @@ router.post('/pago', isLoggedIn1, async (req, res) => {
 
     for (var i=lista_comprar.length-1; i>=0;i--) { 
 
-        var productos = await pool.query('SELECT * FROM producto WHERE id=? AND estado="A" ', [lista_comprar[i].id]);
+        var productos = await pool.query('SELECT * FROM producto WHERE (estado="A" OR estado="P") AND id = ? ', [lista_comprar[i].id]);
        
         if(productos.length != 0){
            
@@ -316,7 +316,25 @@ router.post('/pago', isLoggedIn1, async (req, res) => {
 
         for(var n=0; n<guardar.length; n++){
             await pool.query('INSERT INTO detalle set ?', [guardar[n]]);
-            await pool.query('UPDATE producto set cantidad=? WHERE id = ?', [guardar2[n].valor, guardar2[n].id_producto]);
+           
+            if(guardar2[n].valor >= 10){
+                await pool.query('UPDATE producto set cantidad=? WHERE id = ?', [guardar2[n].valor, guardar2[n].id_producto]);
+            }
+
+            if(guardar2[n].valor == 0){
+                var cantidad = 0;
+                var estado = 'N';
+                var newPedido = { cantidad,  estado };
+                await pool.query('UPDATE producto set ? WHERE id = ?', [newPedido, guardar2[n].id_producto]);
+            }
+
+            if(guardar2[n].valor > 0 && guardar2[n].valor < 10){
+                var cantidad = guardar2[n].valor;
+                var estado = 'P';
+                var newPedido = { cantidad,  estado };
+                await pool.query('UPDATE producto set ? WHERE id = ?', [newPedido, guardar2[n].id_producto]);
+            }
+           
         }
 
         var estado="P";
@@ -409,7 +427,7 @@ router.post('/pago', isLoggedIn1, async (req, res) => {
         // res.json('pago03');
         
         if(encontrado == 0){
-            var producto = await pool.query('SELECT * FROM producto WHERE estado="A" ');
+            var producto = await pool.query('SELECT * FROM producto WHERE estado="A" OR estado="P" ');
             for(var n=0; n<producto.length; n++){
                 producto[n].fecha_hora = (format(producto[n].fecha_hora, 'es_ES') );
             }
@@ -447,16 +465,40 @@ router.post('/editar_informacion', isLoggedIn1, async (req, res) => {
     var { telefono, correo} = req.body;
     var cliente=req.user;
 
-    const newLink = {
-        telefono,
-        correo
-    };
+    const informacion = await pool.query('SELECT * FROM cliente');
+    var encontrado=0;
 
-    await pool.query('UPDATE cliente set ? WHERE id = ?', [newLink, cliente.id]);
+    for(var n=0; n<informacion.length; n++){
+           
+        if(cliente.id != informacion[n].id){
+            if(informacion[n].telefono == telefono){
+                encontrado=1;
+            }
 
-    const datos = await pool.query('SELECT * FROM cliente WHERE estado1="A" AND id = ? ', [cliente.id]);
+            if(informacion[n].correo == correo){
+               encontrado=2;
+            }
+        }
 
-    res.json(datos);
+    }
+
+    if(encontrado == 0){
+        const newLink = {
+            telefono,
+            correo
+        };
+    
+        await pool.query('UPDATE cliente set ? WHERE id = ?', [newLink, cliente.id]);
+    
+        const datos = await pool.query('SELECT * FROM cliente WHERE estado1="A" AND id = ? ', [cliente.id]);
+    
+        res.json(datos);
+    }
+
+    if(encontrado == 1 || encontrado == 2){
+        res.json(encontrado);
+    }
+
     
 });
 
@@ -488,4 +530,5 @@ router.post('/eliminar_foto', isLoggedIn1, async (req, res) => {
     res.json(datos);
     
 });
+
 module.exports = router;

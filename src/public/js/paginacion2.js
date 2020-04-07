@@ -195,7 +195,7 @@ function valor2(p){
             <td>${prod2[p].id}</td> <td>${prod2[p].nombre}</td> <td>${prod2[p].precio}</td> <td>${prod2[p].cantidad}</td> <td>${prod2[p].modelo}</td>
             <td> <a onclick="imagenes('${prod2[p].imagen}')"><img height="50" width="50" src="/imagen1/${prod2[p].imagen}"></a></td> 
             <td> 
-                <a class="btn btn-warning mx-1" onclick="abrir_editacion_productos(${prod2[p].id},'${prod2[p].imagen}','${prod2[p].nombre}',${prod2[p].precio},'${prod2[p].modelo}',${prod2[p].cantidad})">
+                <a class="btn btn-warning mx-1" onclick="abrir_editacion_productos(${prod2[p].id},'${prod2[p].imagen}','${prod2[p].nombre}',${prod2[p].precio},'${prod2[p].modelo}',${prod2[p].cantidad},'opcion2')">
                 <img height="25" width="20" src="/img/editar2.png"></a>  
 
                 <a class="btn btn-danger" onclick="confirmar(${prod2[p].id})"> 

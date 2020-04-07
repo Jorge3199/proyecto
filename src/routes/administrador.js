@@ -10,7 +10,7 @@ const { format } = require('timeago.js');
 
 router.get('/', isLoggedIn, async (req, res) => {
     
-    const productos = await pool.query('SELECT * FROM producto WHERE estado="A" ');
+    const productos = await pool.query('SELECT * FROM producto WHERE estado="A" OR estado="P" ');
     
     const categoria = await pool.query('SELECT * FROM categoria');
     res.render('administrador/administrador', { productos, categoria });
@@ -21,7 +21,7 @@ router.post('/delete', isLoggedIn, async (req, res) => {
     const { id } = req.body;
     await pool.query('UPDATE producto SET estado="I" WHERE id = ?', [id]);
     
-    const producto = await pool.query('SELECT * FROM producto WHERE estado="A" ');
+    const producto = await pool.query('SELECT * FROM producto WHERE estado="A" OR estado="P" ');
     for(var n=0; n<producto.length; n++){
         producto[n].fecha_hora = (format(producto[n].fecha_hora, 'es_ES') );
     }
@@ -46,7 +46,7 @@ router.post('/editar/:id', isLoggedIn, async (req, res) => {
 
     await pool.query('UPDATE producto set ? WHERE id = ?', [newLink, id]);
       
-    const producto = await pool.query('SELECT * FROM producto WHERE estado="A" ');
+    const producto = await pool.query('SELECT * FROM producto WHERE estado="A" OR estado="P" ');
     for(var n=0; n<producto.length; n++){
         producto[n].fecha_hora = (format(producto[n].fecha_hora, 'es_ES') );
     }
@@ -77,7 +77,7 @@ router.post('/add', isLoggedIn, async (req, res) => {
     
     await pool.query('INSERT INTO producto set ?', [newLink]);
 
-    const producto = await pool.query('SELECT * FROM producto WHERE estado="A" ');
+    const producto = await pool.query('SELECT * FROM producto WHERE estado="A" OR estado="P" ');
     for(var n=0; n<producto.length; n++){
         producto[n].fecha_hora = (format(producto[n].fecha_hora, 'es_ES') );
     }
@@ -104,12 +104,30 @@ router.post('/agregar_modelo', isLoggedIn, async (req, res) => {
   
 }); 
 
+router.post('/editar_modelo/:id', isLoggedIn, async (req, res) => {
+   
+    const { modelo } = req.body;
+    const { id } = req.params;
+    var administrador=req.user;
+    var id_administrador= administrador.id;
+
+    const newModelo = {
+        id_administrador,
+        modelo
+    };
+   
+    await pool.query('UPDATE categoria set ? WHERE id = ?', [newModelo, id]);
+
+    const categoria1 = await pool.query('SELECT * FROM categoria');
+    res.json(categoria1);
+  
+}); 
+
 router.post('/modelo', isLoggedIn, async (req, res) => {
     const modelo = await pool.query('SELECT modelo FROM categoria');
     // console.log(modelo);
     res.json(modelo);
-
-   
+  
 });
 
 router.post('/productos_eliminado', isLoggedIn, async (req, res) => {
@@ -138,11 +156,21 @@ router.post('/venta', isLoggedIn, async (req, res) => {
 });
 
 router.post('/todos_producto', isLoggedIn, async (req, res) => {
-     
-   
-    const products1= await pool.query('SELECT * FROM producto');
+    const { id } = req.body;
 
-    res.json(products1);
+    if(typeof id !== "undefined"){
+        const products1 = await pool.query('SELECT * FROM producto WHERE estado="A" OR estado="P" ');
+        for(var n=0; n<products1.length; n++){
+            products1[n].fecha_hora = (format(products1[n].fecha_hora, 'es_ES') );
+        }
+        res.json(products1);
+    }
+
+    if(typeof id === "undefined"){
+        const products1= await pool.query('SELECT * FROM producto');
+        res.json(products1);
+    }
+
 });
 
 router.post('/datos_factura', isLoggedIn, async (req, res) => {
@@ -177,6 +205,13 @@ router.post('/recuperar_venta', isLoggedIn, async (req, res) => {
      
     const venta2 = await pool.query('SELECT * FROM compra WHERE estado="D" ');
     res.json(venta2);
+});
+
+router.post('/productos_pedido', isLoggedIn, async (req, res) => {
+     
+    const producto = await pool.query('SELECT * FROM producto WHERE estado="P" OR estado="N" ');
+    
+    res.json(producto);
 });
 
 router.post('/lista_cliente', isLoggedIn, async (req, res) => {
@@ -321,7 +356,5 @@ router.post('/eliminar_foto', isLoggedIn, async (req, res) => {
     }
     
 });
-
-
 
 module.exports = router;

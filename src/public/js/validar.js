@@ -155,10 +155,46 @@ function validar_registro2(id, opcion) {
         return false;
     }
 
+    var nacimiento1 = nacimiento.split("-");
+    var hoy = new Date();
+    var anos= hoy.getUTCFullYear() - 18;
+   
+    
+    if(nacimiento1[0] >= anos){
+        if(nacimiento1[0] > anos){
+            error('No es mayor de edad!');
+            return false;
+        }
+        if(nacimiento1[0] == anos){
+            var mes = (hoy.getMonth() + 1);
+            if(nacimiento1[1] > mes){
+                error('No es mayor de edad!');
+                return false;
+            }
+    
+            if(nacimiento1[1] == mes){
+               var dia= hoy.getDate();
+               if(nacimiento1[2] > dia){
+                    error('No es mayor de edad!');
+                    return false;
+               }
+    
+            }
+    
+        }
+      
+    }
+
     if( (telefono.length < 14) || (telefono.length > 14)  ){
         error("El telefono no es numero valido!");
         return false;
         // (isNaN(telefono)) 
+    }
+
+    if((telefono.slice(0, 5) != '(829)') &&  (telefono.slice(0, 5) != '(809)') &&  (telefono.slice(0, 5) != '(849)') ){
+        error("El telefono no es numero valido!");
+        return false;
+
     }
 
     if(!expresion.test(correo)){
@@ -223,8 +259,13 @@ function validar_formulario() {
         return false;
     }
 
-    if( (isNaN(precio)) ){
+    if( (isNaN(precio)) || precio <= 0 ){
         error("El precio no es numero valido!");
+        return false;
+    }
+
+    if( (isNaN(cantidad)) || cantidad <= 0 ){
+        error("El cantidad no es numero valido!");
         return false;
     }
 
@@ -233,6 +274,30 @@ function validar_formulario() {
     agregar_producto();
 
       
+}
+//////////////////////////AGREGAR MODELO////////////////////////////////////////
+function validar_modelo(opcion, id){
+    var modelo = document.getElementById("modelo").value;
+    if(modelo == ''){
+        error('No a ingresado ningun modelo');
+        return false;
+    }
+
+    for(var n=0; n<categoria.length; n++){
+       if(modelo.toLowerCase() == categoria[n].modelo.toLowerCase() ){
+           error("Este modelo ya existe!!");
+           return false;
+       }
+    }  
+  
+    if(typeof id === "undefined"){
+        agregar_modelo(opcion);
+    }
+
+    if(typeof id !== "undefined"){
+       editar_modelo(id);
+    }
+   
 }
 /////////////////////////formulario de editar productos//////////////////////////
 function validar_formulario_editar(id, opcion) {
@@ -253,8 +318,13 @@ function validar_formulario_editar(id, opcion) {
         return false;
     }
 
-    if( (isNaN(precio)) ){
+    if( (isNaN(precio)) || precio <= 0 ){
         error("El precio no es numero valido!");
+        return false;
+    }
+
+    if( (isNaN(cantidad)) || cantidad <= 0 ){
+        error("El cantidad no es numero valido!");
         return false;
     }
     
@@ -391,7 +461,7 @@ function activado(){
 }
 
 
-function confirmar2(id){
+function confirmar2(id, opcion){
                    
     Swal.fire({
     title: '¿Estás seguro?',
@@ -405,7 +475,7 @@ function confirmar2(id){
     }).then((result) => {
     if (result.value) {
        
-        activar_producto(id);
+        activar_producto(id, opcion);
     }
      
     })

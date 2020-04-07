@@ -33,7 +33,11 @@
 		<div class="nav-container">
 
 			<!-- Site Logo -->
-			<a href="#home" class="site-logo scroll">Super Gato</a>
+			<div id="perfil_unico">
+				<a class="site-logo scroll" onclick="abrir_informacion('{{user.telefono}}','{{user.correo}}','{{user.imagen}}')">
+					{{user.nombre}} {{user.apellido}}
+				</a>
+		    </div>
 
 			<a class="mobile-nav-button"><i class="fa fa-bars"></i></a>
 

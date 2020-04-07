@@ -35,7 +35,12 @@
 		<div class="nav-container">
 
 			<!-- Site Logo -->
-			<a class="site-logo scroll">Super Gato</a>
+			
+			<div id="perfil_unico">
+				<a class="site-logo scroll" onclick="abrir_informacion({{user.id}},'{{user.nombre}}','{{user.apellido}}','{{user.sexo}}','{{user.nacimiento}}',
+				 '{{user.direccion}}','{{user.telefono}}','{{user.cedula}}','{{user.correo}}','{{user.imagen}}','2')">{{user.nombre}} {{user.apellido}}
+				</a>
+		    </div>
 
 			<a class="mobile-nav-button"><i class="fa fa-bars"></i></a>
 
@@ -45,15 +50,17 @@
 					
 					<li><a href="#portfolio" class="scroll link">Productos</a></li>
 					<li>
-						<a class="scroll link">Blog <i class="fa fa-chevron-down"></i></a>
+						<a class="scroll link">Opciones <i class="fa fa-chevron-down"></i></a>
 						<ul>
-							<li class="cursor"><a  onclick="abrir_productos()">Agregar nuevo producto</a></li>
 							<li class="cursor"><a  onclick="abrir_modelo()">Agregar nuevo modelo</a></li>
+							<li class="cursor"><a  onclick="abrir_productos()">Agregar nuevo producto</a></li>
 							<li class="cursor"><a onclick="abrir_cliente()">Agregar nuevo cliente</a></li>
 							<li class="cursor"><a onclick="abrir_administrador()">Agregar nuevo administrador</a></li>
+							<li class="cursor"><a onclick="abrir_lista_cliente()">Lista de Cliente</a></li>
+							<li class="cursor"><a onclick="abrir_lista_modelo()">Lista de modelo</a></li>
 							<li class="cursor"><a onclick="abrir_lista_producto()">Lista de producto</a></li>
 							<li class="cursor"><a onclick="abrir_lista_venta()">Lista de venta</a></li>
-							<li class="cursor"><a onclick="abrir_lista_cliente()">Lista de Cliente</a></li>
+							<li class="cursor"><a onclick="abrir_lista_pedido()">Lista de pedido</a></li>
 						</ul>
 					</li>
 					<li>
@@ -222,6 +229,7 @@
 <script type="text/javascript" src="js/paginacion3.js"></script>
 <script type="text/javascript" src="js/paginacion4.js"></script>
 <script type="text/javascript" src="js/paginacion5.js"></script>
+<script type="text/javascript" src="js/paginacion6.js"></script>
 {{!-- ///////////////////////////////////////////////////////////////////////////////////////// --}}
 
 
