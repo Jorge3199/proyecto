@@ -123,7 +123,7 @@ function validar_contrasena() {
   confirmar = document.getElementById("confirmar").value;
 
   if( (contrasena === "") || (confirmar === "") || (actual === "") ){
-    error("Todos los campo son obligatorios!");
+    error("Todos los campos son obligatorios!");
     return false;
   }
 

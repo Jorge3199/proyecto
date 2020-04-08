@@ -652,9 +652,7 @@ function pago(token){
                         if(producto == 1){
                             alert_compra1();
                         }
-                        
-                       
-                            
+                           
                
                     }
                     
@@ -799,6 +797,23 @@ function abrir_informacion(telefono,correo,imagen){
     intro.style.top="-5%";
     abrir();
 
+    const telefono1 = document.querySelector('#telefono');
+
+    telefono1.addEventListener('keyup', (e) => {
+        let valorInput = e.target.value;
+      
+        telefono1.value = valorInput
+         //Eliminamos espacios en blanco
+        .replace(/\s/g, '')
+         //Eliminar las letrar
+        .replace(/\D/g, '')
+        //Mascara
+        .replace(/^(\d{3})(\d{3})(\d{4}).*/, '($1) $2-$3');
+
+        // .trim();
+        
+    });
+
 }
 ////////////////////////////////////////////////////
 function abrir_imagen(imagen){
@@ -889,24 +904,6 @@ function abrir_imagen(imagen){
 
     intro.style.width="60%";
     intro.style.top="-15%";
-
-   
-    const telefono1 = document.querySelector('#telefono');
-
-    telefono1.addEventListener('keyup', (e) => {
-        let valorInput = e.target.value;
-      
-        telefono1.value = valorInput
-         //Eliminamos espacios en blanco
-        .replace(/\s/g, '')
-         //Eliminar las letrar
-        .replace(/\D/g, '')
-        //Mascara
-        .replace(/^(\d{3})(\d{3})(\d{4}).*/, '($1) $2-$3');
-
-        // .trim();
-        
-    });
 
 }
 
