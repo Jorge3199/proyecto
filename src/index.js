@@ -45,7 +45,7 @@ app.use(multer({
         cb("Error: Archivo debe ser una imagen valida " + filetypes);
         
       }
-}).single('imagen'));
+}).any('imagen'));
 
 
 app.engine('.hbs', exphbs({

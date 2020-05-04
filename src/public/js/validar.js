@@ -271,7 +271,7 @@ function validar_formulario() {
 
    
     cerrar();
-    agregar_producto();
+    agregar_producto(nombre, precio, modelo, cantidad);
 
       
 }
@@ -302,10 +302,11 @@ function validar_modelo(opcion, id){
 /////////////////////////formulario de editar productos//////////////////////////
 function validar_formulario_editar(id, opcion) {
 
-    var nombre, precio, cantidad;
+    var nombre, precio, modelo, cantidad;
 
     nombre = document.getElementById("nombre").value;
     precio = document.getElementById("precio").value;
+    modelo = document.getElementById("id_modelo").value;
     cantidad = document.getElementById("cantidad").value;
 
     if( (nombre === "") || (precio === "") || (cantidad === "") ){
@@ -328,8 +329,20 @@ function validar_formulario_editar(id, opcion) {
         return false;
     }
     
+    var img1 ='';
+    for (var n = 0; n < imagen.length; n++) {
+ 
+        img1 += imagen[n].nombre + ' ';
+ 
+    }
+    
+
+    imagen = img1;
+   
+    imagen = imagen.substring(0, imagen.length - 1);
+  
     cerrar(opcion);
-    editar_producto(id);
+    editar_producto(id, nombre, precio, modelo, cantidad);
 
       
 }
@@ -388,16 +401,16 @@ function validar_contrasena(id, opcion) {
     
 }
 
-function imagenes(imagen){
-    Swal.fire({
-        //title: 'Sweet!',
-        //text: 'Modal with a custom image.',
-        imageUrl: '/imagen1/'+imagen,
-        imageWidth: 400,
-        imageHeight: 300,
-        //imageAlt: 'Custom image',
-    })
-}
+// function imagenes(imagen){
+//     Swal.fire({
+//         //title: 'Sweet!',
+//         //text: 'Modal with a custom image.',
+//         imageUrl: '/imagen1/'+imagen,
+//         imageWidth: 400,
+//         imageHeight: 300,
+//         //imageAlt: 'Custom image',
+//     })
+// }
 
 function confirmar(id){
                    

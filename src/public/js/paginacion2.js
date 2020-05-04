@@ -190,10 +190,11 @@ function valor2(p){
 
     p = s - 1;
     if(s < 10){ 
+        let imagen = prod2[p].imagen.split(" ");
         for (var n = 0; n < s; n++) { 
             lista.innerHTML += `
             <td>${prod2[p].id}</td> <td>${prod2[p].nombre}</td> <td>${prod2[p].precio}</td> <td>${prod2[p].cantidad}</td> <td>${prod2[p].modelo}</td>
-            <td> <a onclick="imagenes('${prod2[p].imagen}')"><img height="50" width="50" src="/imagen1/${prod2[p].imagen}"></a></td> 
+            <td> <a onclick="abrir_imagenes('${prod2[p].imagen}')"><img height="50" width="50" src="/imagen1/${imagen[0]}"></a></td> 
             <td> 
                 <a class="btn btn-warning mx-1" onclick="abrir_editacion_productos(${prod2[p].id},'${prod2[p].imagen}','${prod2[p].nombre}',${prod2[p].precio},'${prod2[p].modelo}',${prod2[p].cantidad},'opcion2')">
                 <img height="25" width="20" src="/img/editar2.png"></a>  
@@ -208,9 +209,10 @@ function valor2(p){
     
     if(s >= 10){
         for (var n = 0; n < 10; n++) { 
+            let imagen = prod2[p].imagen.split(" ");
             lista.innerHTML += `
             <td>${prod2[p].id}</td> <td>${prod2[p].nombre}</td> <td>${prod2[p].precio}</td> <td>${prod2[p].cantidad}</td> <td>${prod2[p].modelo}</td>
-            <td> <a onclick="imagenes('${prod2[p].imagen}')"><img height="50" width="50" src="/imagen1/${prod2[p].imagen}"></a></td> 
+            <td> <a onclick="abrir_imagenes('${prod2[p].imagen}')"><img height="50" width="50" src="/imagen1/${imagen[0]}"></a></td> 
             <td> 
                 <a class="btn btn-warning mx-1" onclick="abrir_editacion_productos(${prod2[p].id},'${prod2[p].imagen}','${prod2[p].nombre}',${prod2[p].precio},'${prod2[p].modelo}',${prod2[p].cantidad},'opcion2')">
                 <img height="25" width="20" src="/img/editar2.png"></a>  

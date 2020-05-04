@@ -28,21 +28,23 @@ router.post('/delete', isLoggedIn, async (req, res) => {
     res.json(producto);
 });
 
-router.post('/editar/:id', isLoggedIn, async (req, res) => {
+router.post('/editar', isLoggedIn, async (req, res) => {
   
-    var { nombre, cantidad, precio, id_modelo } = req.body; 
-
-    const { id } = req.params;
-    var newLink;
-
-    if(typeof req.file !== "undefined"){
-        var imagen = (req.file['filename']);
-        newLink = { nombre, cantidad, precio, id_modelo,  imagen };
+    var {id, nombre, cantidad, precio, id_modelo, imagen } = req.body; 
+    
+    if(req.files.length !== 0){
+        for(var n=0; n<req.files.length; n++){
+            if(n == 0 && imagen != ''){
+                imagen += ' '; 
+            }
+            imagen += (req.files[n]['filename']);
+            if(n != req.files.length -1){
+               imagen += ' ';
+            }
+        }
     }
- 
-    if(typeof req.file === "undefined"){
-        newLink = { nombre, cantidad, precio, id_modelo };
-    }
+   
+    var newLink = { nombre, cantidad, precio, id_modelo, imagen};
 
     await pool.query('UPDATE producto set ? WHERE id = ?', [newLink, id]);
       
@@ -56,13 +58,21 @@ router.post('/editar/:id', isLoggedIn, async (req, res) => {
 
 
 router.post('/add', isLoggedIn, async (req, res) => {
-
-    var imagen = (req.file['filename']);
-   // console.log(req.file);
+//    console.log(req.files);
+  
+   var imagen= '';
+   for(var n=0; n<req.files.length; n++){
+     imagen += (req.files[n]['filename']);
+     if(n != req.files.length -1){
+        imagen += ' ';
+     }
+   }
+ 
    var administrador=req.user;
    var id_administrador= administrador.id;
     var estado='A';
     var { nombre, precio, id_modelo, cantidad} = req.body;
+   
     
     const newLink = {
         nombre,
@@ -74,7 +84,7 @@ router.post('/add', isLoggedIn, async (req, res) => {
         id_administrador
        
     };
-    
+    // console.log(newLink);
     await pool.query('INSERT INTO producto set ?', [newLink]);
 
     const producto = await pool.query('SELECT * FROM producto WHERE estado="A" OR estado="P" ');

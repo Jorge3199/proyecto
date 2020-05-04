@@ -18,6 +18,7 @@ function span3(){
     if(body3 == 'false'){
         body.style.overflow = "visible"; 
     }
+    vs=''; 
 
 }
 
@@ -64,7 +65,7 @@ function cerrar3(){
     if(body3 == 'false'){
         body.style.overflow = "visible"; 
     }
-
+    vs=''; 
 
 }
 /////////////////////////
@@ -185,6 +186,7 @@ window.onclick = function(event) {
         if(body3 == 'false'){
             body.style.overflow = "visible"; 
         }
+        vs='';
     }
 
     if (event.target == modal2) {

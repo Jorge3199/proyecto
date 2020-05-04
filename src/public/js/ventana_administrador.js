@@ -65,9 +65,65 @@ filtrar();
 
 
 /////////////////////////////////////////////////////////////////////
-
-function abrir_productos(){
+function abrir_imagenes(img){
+   const ventana = document.querySelector('#vent');
+    ventana.innerHTML = `
+    <div class="content-all" id="result">
+        
     
+    </div> 
+    <br /> <br />`
+
+    let imagen = img.split(" ");
+    const result = document.querySelector('#result');
+    for (n = 0; n < imagen.length; n++) {
+        if(n == 0){
+            result.innerHTML += `
+            <div class="content-img" id="img${n+1}">
+                <a href="#img${imagen.length}" class="icon-circle-left"></a>
+                <img src="imagen1/${imagen[n]}">
+                <a href="#img${n+2}" class="icon-circle-right"></a>
+            </div>`
+        }
+
+        if(n != 0 && n != (imagen.length -1) ){
+            result.innerHTML += `
+            <div class="content-img" id="img${n+1}">
+                <a href="#img${n}" class="icon-circle-left"></a>
+                <img src="imagen1/${imagen[n]}">
+                <a href="#img${n+2}" class="icon-circle-right"></a>
+            </div>`
+        }
+
+        if(n == (imagen.length -1) ){
+            result.innerHTML += `
+            <div class="content-img" id="img${n+1}">
+                <a href="#img${n}" class="icon-circle-left"></a>
+                <img src="imagen1/${imagen[n]}">
+                <a href="#img1" class="icon-circle-right"></a>
+            </div>`
+        }
+       
+    }
+    abrir();
+
+    var intro = document.getElementById('tamaño');
+    
+    intro.style.width="75%";
+    // intro.style.height="115%";
+    intro.style.top="-12%";
+    // intro.style.backgroundImage = "url('img/fondo.png')";
+}
+var vs='';
+var formData = new FormData();
+var imagen= '';
+var guardar= [];
+var contador=0;
+function abrir_productos(){
+    formData = new FormData();
+    imagen= '';
+    guardar= [];
+    contador=0;
     const ventana = document.querySelector('#vent');
     ventana.innerHTML = ` 
     <div class="row">
@@ -85,11 +141,21 @@ function abrir_productos(){
         
             <div class="card-body">
                 <form id="frmSubir"  enctype="multipart/form-data" >
+                     <div class="row">
+                        <div class="col-md-4">
+                            <h3 style="color:black">Codigo<span style="color:red">*</span></h3>
+                            <div class="inputWithIcon jorge">
+                            <input type="text" id="codigo" name="codigo" placeholder="Nombre del producto" class="form-control" required autofocus>
+                            <i class="icon-pencil" aria-hidden="true"></i>
+                            </div>
+                           
+                        </div>
+                     </div>
                   
                     <div class="row">
                     <hr color="black" size=3>
                     <br>
-                      
+
                          <div class="col-md-4">
                             <h3 style="color:black">Nombre<span style="color:red">*</span></h3>
                             <div class="inputWithIcon jorge">
@@ -123,29 +189,14 @@ function abrir_productos(){
                                 <i class="icon-cogs" aria-hidden="true"></i>
                             </div>
                         </div>
-
-                        <div class="col-md-2">
+                        
+                        <div id="imag">
                             
-                            <div id="div_file">
-                            <p id="texto"><i class="icon-camera" aria-hidden="true"></i>Add file</p>
-                                <input type="file" name="imagen" id="imagen"  required>
-                            </div>
-                            
+                          
                         </div>
 
                          
-                        <div class="col-md-4">
-                             <br>
-                               
-                            <table>
-                                <tr><td><div id="imagenPreview" class="imagen" style="width:461px; height:263px; border:dashed black" > </div></td></tr>
-                                
-                                
-                             
-
-                            </table> 
-                           
-                        </div>
+                       
 
                         </div>
 
@@ -221,31 +272,42 @@ function abrir_productos(){
     });
   
 
-
-    $('#imagenPreview').html("<img src='/img/camara1.png' class='imagen'/>"); 
-   (function(){
-       function filePreview(input){
-           if(input.files && input.files[0]){
-               var reader = new FileReader();
-
-               reader.onload = function(e){
-                   $('#imagenPreview').html("<img src='"+e.target.result+"' class='imagen'/>");
-               }
-
-               reader.readAsDataURL(input.files[0]);
-           }
-       }
-       $('#imagen').change(function(){
-          filePreview(this);
-       });
-   }) ();
-
    consulta_Real_Modelo();
+   llenar_imagen();
 
 }
+function llenar_imagen(){
+    const imag = document.querySelector('#imag');
+    // imag.innerHTML =``;
+    imag.innerHTML =`
+    <main>
+       <div class="row">
+            <div class="col-lg-4> 
+                <div class="container">
+                    <section id="Images" class="images-cards">
+                        <form action="upload.php" method="post" enctype="multipart/form-data">
+                            <div class="row">
+                                <div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-xs-12" id="add-photo-container">
+                                    <div class="add-new-photo first" id="add-photo">
+                                        <span><i class="icon-camera"></i></span>
+                                    </div>
+                                    <input type="file" multiple id="imagen" >
+                                </div>
+                            </div>
+                        </form> 
+                    </section>
+                </div>
+            </div>   
+        </div> 
+    </main>
+    `
+}
+
 //////////////////////////////////////////////////////////////////////////
-function abrir_editacion_productos(id, imagen, nombre, precio, modelo, cantidad, opcion){
-    
+function abrir_editacion_productos(id, imagen1, nombre, precio, modelo, cantidad, opcion){
+    formData = new FormData();
+    guardar= [];
+    contador=0;
     const ventana = document.querySelector('#vent');
     ventana.innerHTML = ` 
     <div class="row">
@@ -302,28 +364,12 @@ function abrir_editacion_productos(id, imagen, nombre, precio, modelo, cantidad,
                             </div>
                         </div>
 
-                        <div class="col-md-2">
-                            
-                            <div id="div_file">
-                            <p id="texto"><i class="icon-camera" aria-hidden="true"></i>Add file</p>
-                                <input type="file" name="imagen" id="imagen"  required>
-                            </div>
+                        <div id="imag">
+                           
                             
                         </div>
 
-                        
-                        <div class="col-md-4">
-                            <br>
-                            
-                            <table>
-                                <tr><td><div id="imagenPreview" class="imagen" style="width:461px; height:263px; border:dashed black" > </div></td></tr>
-                                
-                                
-                            
-
-                            </table> 
-                        
-                        </div>
+    
 
                         </div>
 
@@ -369,34 +415,68 @@ function abrir_editacion_productos(id, imagen, nombre, precio, modelo, cantidad,
         prod3=[];
         prod03=[];
      }
-   
-
-    $('#imagenPreview').html("<img src='/imagen1/"+imagen+"'  class='imagen'/>"); 
-   (function(){
-       function filePreview(input){
-           if(input.files && input.files[0]){
-               var reader = new FileReader();
-
-               reader.onload = function(e){
-                   $('#imagenPreview').html("<img src='"+e.target.result+"' class='imagen'/>");
-               }
-
-               reader.readAsDataURL(input.files[0]);
-           }
-       }
-       $('#imagen').change(function(){
-          filePreview(this);
-       });
-   }) ();
 
    consulta_Real_Modelo(modelo);
- 
+   llenar_imagen();
+   imagen = imagen1.split(" ");
+   for (var i = 0; i < imagen.length; i++) {
+        var a =  i.toString();
+        a+='M';
+        guardar[guardar.length] = { id: a, element: imagen[i]};
+        if(guardar.length <= 3){
+            createPreview1(a, imagen[i]);
+        } 
+        imagen[i] = { id: a, nombre: imagen[i]};
+   }
+   
 }
 //////////////////////////////////////////////////////
+function galeria_imagen(){
+
+    const ventana = document.querySelector('#vent3');
+    ventana.innerHTML = `
+    <h2 class="negro" align="center"> Galeria De Imagen </h2>
+    <main>
+       <div class="row">
+            <div class="col-lg-4> 
+                <div class="container">
+                    <section id="Images" class="images-cards">
+                        <form action="upload.php" method="post" enctype="multipart/form-data">
+                            <div class="row">
+                                <div class="col-xl-2 col-lg-3 col-md-3 col-sm-4 col-xs-12" id="add-photo-container1">
+                                    <div class="add-new-photo first" id="add-photo">
+                                        <span><i class="icon-camera"></i></span>
+                                    </div>
+                                    <input type="file" multiple id="imagen" >
+                                </div>
+                            </div>    
+                        </form> 
+                    </section>
+                </div>
+            </div>
+        </div>
+    </main>`
+
+    for(var n=0; n<guardar.length; n++){
+        var id =  guardar[n].id.toString();
+        var file = guardar[n].element;
+        galeria_Preview(id, file);
+        
+    }
+
+    var intro = document.getElementById('tamañ3');
+    vs="true";
+    intro.style.width="65%";
+    intro.style.top="-15%";
+ 
+    abrir3('true');
+ 
+    body3='true';
+  
+}
 
 
-
-
+////////////////////////////////////////////////////
 function abrir_modelo(opcion, mode, id){
    
     if(typeof mode === "undefined"){
@@ -1535,13 +1615,17 @@ const filtrar2 = (llamar)=>{
     
 
 
-function agregar_producto(){
-    // var file = e.target.files[0];
-    var form = new FormData(document.getElementById("frmSubir"));
+function agregar_producto(nombre, precio, modelo, cantidad){
+   
+    formData.append("nombre", nombre);
+    formData.append("precio", precio);
+    formData.append("id_modelo", modelo);
+    formData.append("cantidad", cantidad);
+    
     $.ajax({
         type:"POST",
         url:"/administrador/add",
-        data: form,
+        data: formData,
         async: true,
         processData: false,
         contentType: false,
@@ -1734,14 +1818,19 @@ const filtrar3 = (llamar)=>{
 
 }
 
-function editar_producto(id){
-  
+function editar_producto(id, nombre, precio, modelo, cantidad){
+    formData.append("id", id);
+    formData.append("nombre", nombre);
+    formData.append("precio", precio);
+    formData.append("id_modelo", modelo);
+    formData.append("cantidad", cantidad);
+    formData.append("imagen", imagen);
 
-    var datos = new FormData(document.getElementById("editar_producto"));
+    // var datos = new FormData(document.getElementById("editar_producto"));
     $.ajax({
         type:"POST",
-        url:"/administrador/editar/"+id,
-        data: datos,
+        url:"/administrador/editar",
+        data: formData,
         async: false,
         processData: false,
         contentType: false,

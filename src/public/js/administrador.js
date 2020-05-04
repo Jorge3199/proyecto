@@ -119,7 +119,7 @@ if(s < 8){
 				<img height="200" width="270" src="imagen1/${prod[p].imagen}" alt="" />
 				<div class="mask"></div>
 				<div class="icon">
-					<a class="btn btn-success mx-1" onclick="imagenes('${prod[p].imagen}')"> <img height="30" width="25" src="/img/imagen.png"></a>
+					<a class="btn btn-success mx-1" onclick="abrir_imagenes('${prod[p].imagen}')"> <img height="30" width="25" src="/img/imagen.png"></a>
 					<a class="btn btn-warning mx-1" onclick="abrir_editacion_productos(${prod[p].id},'${prod[p].imagen}','${prod[p].nombre}',${prod[p].precio},'${prod[p].modelo}',${prod[p].cantidad})"> <img height="30" width="25" src="/img/editar2.png"></a>
 					<a class="btn btn-danger" onclick="confirmar(${prod[p].id})"> <img height="30" width="25" src="/img/borrar.png"></a>
 				</div>
@@ -192,15 +192,16 @@ if(s < 8){
 if(s >= 8){
 	var n;
 	for (n = 0; n < 8; n++) {
-		
+		let imagen = prod[p].imagen.split(" ");
+	
 		resultado10.innerHTML += `
 		<div class="item four columns illustration" >
 		
 			<a class="expander">
-				<img height="200" width="270" src="imagen1/${prod[p].imagen}" alt="" />
+				<img height="200" width="270" src="imagen1/${imagen[0]}" alt="" />
 				<div class="mask"></div>
 				<div class="icon">
-					<a class="btn btn-success mx-1" onclick="imagenes('${prod[p].imagen}')"> <img height="30" width="25" src="/img/imagen.png"></a>
+					<a class="btn btn-success mx-1" onclick="abrir_imagenes('${prod[p].imagen}')"> <img height="30" width="25" src="/img/imagen.png"></a>
 					<a class="btn btn-warning mx-1" onclick="abrir_editacion_productos(${prod[p].id},'${prod[p].imagen}','${prod[p].nombre}',${prod[p].precio},'${prod[p].modelo}',${prod[p].cantidad})"> <img height="30" width="25" src="/img/editar2.png"></a>
 					<a class="btn btn-danger" onclick="confirmar(${prod[p].id})"> <img height="30" width="25" src="/img/borrar.png"></a>
 				</div>
